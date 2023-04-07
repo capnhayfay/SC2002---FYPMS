@@ -1,7 +1,7 @@
 package gui;
 import account.*;
-import command.customer.*;
-import system.SystemSettings;
+import command.student.*;
+// import system.SystemSettings;
 
 import java.util.Scanner;
 
@@ -32,17 +32,15 @@ public class StudentGUI implements Menu, Logout, GetCommand{
         System.out.println();
         System.out.println("Logged in as User: " + curAcc.getLoginId());
         System.out.println();
-        System.out.println("1. Search Movie");
-        System.out.println("2. List Movies");
-        System.out.println("3. List Shows");
-        System.out.println("4. View Seat Availability");
-        System.out.println("5. Book Tickets");
-        System.out.println("6. View Booking History");
-        System.out.println("7. Review Movie");
-        System.out.println("8. Top 5 Ranking");
-        System.out.println("9. Change Location");
-        System.out.println("10. Logout");
-        System.out.println("11. Exit");
+        System.out.println("1. View all available FYP");
+        System.out.println("2. Select FYP");
+        System.out.println("3. View your FYP");
+        System.out.println("4. Request to Change FYP title");
+        System.out.println("5. Request to deregister FYP ");
+        System.out.println("6. View Request Status and History");
+        System.out.println("7. Change Password");
+        System.out.println("8. Logout");
+        System.out.println("9. Exit");
         System.out.println("=========================================");
         System.out.println();
     }
@@ -71,7 +69,7 @@ public class StudentGUI implements Menu, Logout, GetCommand{
 	        System.out.println();
 	        System.out.println("=========================================");
 	        
-	        if (userCh == 11) {
+	        if (userCh == 9) {
 	            return 0;
 	        }
 
@@ -84,14 +82,10 @@ public class StudentGUI implements Menu, Logout, GetCommand{
                 break;
             case 3:
             	System.out.println();
-        		System.out.println("For cineplex location: " + cineplex.getBranchName());
-                new ListShowsCommand(cineplex).execute();
                 break;
             case 4:
-                new ShowSeatAvailabilityCommand(cineplex).execute();
                 break;
             case 5:
-                new BookTicketCommand(cineplex, curAcc).execute();
                 break;
             case 6:
                 new ViewBookingHistoryCommand(curAcc.getName()).execute();
@@ -100,51 +94,8 @@ public class StudentGUI implements Menu, Logout, GetCommand{
             case 7:
                 new ReviewMovieCommand().execute();
                 break;
-            case 8:
-                if(SystemSettings.getTop5MovieTicketsBool() && SystemSettings.getTop5MovieRatingsBool()){
-                    showTop5OptionsMenu();
-                    while(true) {
-	                    System.out.print("Please enter the option number: ");
-	                    if(scanner.hasNextInt() == false) {
-	        				
-	        				System.out.println("Invalid input format for option number. Please try again.");
-	        				scanner.nextLine();
-	        				System.out.println();
-	        				continue;
-	        			}
-	                    break;
-                    }
-                    userCh = scanner.nextInt();
-                    scanner.nextLine();
-                    if (userCh != 1  && userCh!=2){
-                    	System.out.println();
-                    	System.out.println("Option number out of range. Please try again.");
-                        break;
-                    }
-                    if (userCh == 1){
-                        new RankTicketSalesCommand().execute();
-                    }
-                    else{
-                        new RankReviewRatingsCommand().execute();
-                    }
-                }
-                else if (SystemSettings.getTop5MovieRatingsBool()){
-                    new RankReviewRatingsCommand().execute();
-                }
-                else if (SystemSettings.getTop5MovieTicketsBool()){
-                    new RankTicketSalesCommand().execute();
-                }
-                else{
-                    System.out.println("Data unavailable.");
-                }
-                break;
 
-            case 9:
-                ChangeLocationCommand CLC = new ChangeLocationCommand(cineplex);
-                CLC.execute();
-                cineplex = CLC.getCineplex();
-                break;
-            case 10:
+            case 8:
                 logout();
                 System.out.println();
                 System.out.println("Logged out successfully.");
@@ -160,17 +111,6 @@ public class StudentGUI implements Menu, Logout, GetCommand{
     }
 
     /**
-     * Prints possible options when SystemSettings enable showing of the top 5 movies ranked based on ticket sales or reviews
-     */
-    public void showTop5OptionsMenu(){
-        System.out.println();
-        System.out.println("============== Option Menu ==============");
-        System.out.println("1. Show Top 5 Movies by Ticket Sales");
-        System.out.println("2. Show Top 5 Movies by Reviews");
-        System.out.println("=========================================");
-        System.out.println();
-    }
-    /**
      * Logout from account by setting Customer Account to null
      */
     public void logout(){
@@ -184,12 +124,6 @@ public class StudentGUI implements Menu, Logout, GetCommand{
     public Account getAccount(){
         return this.curAcc;
     }
-    /**
-     * Returns Cineplex in CustomerGUI
-     * @return Cineplex
-     */
-    public Cineplex getCineplex(){
-        return this.cineplex;
-    }
+
 
 }

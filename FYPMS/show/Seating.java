@@ -1,6 +1,6 @@
 package moblima.show;
 
-/**
+/**sda
  * Represents the seating of a cinema for a particular show
  */
 public class Seating {

@@ -6,33 +6,30 @@ package account;
 public abstract class Account{
 	private String email;
 	private String name;
-	private String phoneNo;
-    private String loginId;
+    private String userId;
     private String password;
     private UserType userType;
     //0 for user, 1 for cineplexAdmin, 2 for companyAdmin
 
     /**
      * Creates an Account Object with given parameters
-     * @param loginId which is the login ID of user
+     * @param userId which is the login ID of user
      * @param password which is the password of user
      * @param userType which is the userType of user
      * @param emailAddress which is the email address of user
-     * @param phoneNo which is the phone number of user
      * @param name which is the name of user
      */
-    public Account(String loginId, String password, UserType userType, String emailAddress, String phoneNo, String name){
+    public Account(String userId, String password, UserType userType, String emailAddress, String name){
 
-        this.loginId = loginId;
+        this.userId = userId;
         this.password = password;
         this.userType = userType;
         this.name = name;
-        this.phoneNo = phoneNo;
         this.email = emailAddress;
     }
 
     public final String getLoginId(){
-        return loginId;
+        return userId;
     }
 
 
@@ -54,10 +51,6 @@ public abstract class Account{
     	return email;
     }
 
-    public final String getPhoneNo(){
-    	return phoneNo;
-    }
-
     /**
      * Converts Int to UserType
      * @param i which is an integer
@@ -66,11 +59,11 @@ public abstract class Account{
     public static UserType convertIntToUserType(int i){
         switch(i){
             case 0:
-                return UserType.User;
+                return UserType.Student;
             case 1:
-                return UserType.CineplexAdmin;
+                return UserType.Supervisor;
             default:
-                return UserType.CompanyAdmin;
+                return UserType.FYPCoordinator;
         }
     }
 
@@ -80,9 +73,9 @@ public abstract class Account{
      * @return integer corresponding to UserType
      */
     public static int convertUserTypeToInt(UserType userType){
-        if (userType == UserType.User) return 0;
-        else if (userType == UserType.CineplexAdmin) return 1;
+        if (userType == UserType.Student) return 0;
+        else if (userType == UserType.Supervisor) return 1;
         else return 0;
     }
-    public abstract UserType login(String loginId, String password);
+    public abstract UserType login(String userId, String password);
 }

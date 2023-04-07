@@ -132,7 +132,7 @@
 
 //                String[] attributes = line.split(",");
 //                Privilege privilege = Account.convertIntToPrivilege(Integer.parseInt(attributes[0]));
-//                String loginId = attributes[1];
+//                String userId = attributes[1];
 //                String password = attributes[2];
 //                String email = attributes[3];
 //                String mobile = attributes[4];
@@ -140,17 +140,17 @@
 //                String branchName = attributes[6];
 
 //                if (privilege == Privilege.User) { // user
-//                    // String loginId, String password, Privilege privilege,String emailAddress, String phoneNo, String name
-//                    CustomerAccount customerAccount = new CustomerAccount(loginId, password, privilege, email, mobile, name);
+//                    // String userId, String password, Privilege privilege,String emailAddress, String phoneNo, String name
+//                    CustomerAccount customerAccount = new CustomerAccount(userId, password, privilege, email, mobile, name);
 //                    accounts.add(customerAccount);
 //                } else if (privilege == Privilege.CineplexAdmin) { // cineplex admin
 //                    Cineplex cineplex = cineplexList.getCineplexByName(branchName );
-//                    //String loginId, String password, Privilege privilege, Cineplex cineplex, String emailAddress, String phoneNo, String name
-//                    CineplexAdminAccount cineplexAdminAccount = new CineplexAdminAccount(loginId, password, privilege, cineplex, email, mobile, name );
+//                    //String userId, String password, Privilege privilege, Cineplex cineplex, String emailAddress, String phoneNo, String name
+//                    CineplexAdminAccount cineplexAdminAccount = new CineplexAdminAccount(userId, password, privilege, cineplex, email, mobile, name );
 //                    accounts.add(cineplexAdminAccount);
 //                } else { // company admin
-//                    // String loginId, String password, Privilege privilege, String emailAddress, String phoneNo, String name
-//                    CompanyAdminAccount companyAdminAccount =  new CompanyAdminAccount(loginId, password, privilege, email, mobile, name);
+//                    // String userId, String password, Privilege privilege, String emailAddress, String phoneNo, String name
+//                    CompanyAdminAccount companyAdminAccount =  new CompanyAdminAccount(userId, password, privilege, email, mobile, name);
 //                    accounts.add(companyAdminAccount);
 //                }
 //                line = br.readLine();

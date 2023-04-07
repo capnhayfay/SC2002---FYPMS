@@ -15,7 +15,8 @@ public class StudentGUI implements Menu, Logout, GetCommand{
      * Creates a CustomerGui with the given Customer Account and Cineplex
      * @param curAcc which is the Account of the customer
      */
-    public CustomerGUI(Account curAcc){
+
+    public StudentGUI(Account curAcc){
         this.curAcc = curAcc;
     }
     /**

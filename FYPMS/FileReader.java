@@ -16,56 +16,56 @@ package FYPMS;
 // import moblima.booking.BookingHistory;
 // import system.SystemSettings;
 
+import java.io.*;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
-// import java.io.*;
-// import java.nio.charset.StandardCharsets;
-// import java.nio.file.Files;
-// import java.nio.file.Path;
-// import java.nio.file.Paths;
-// import java.time.LocalDateTime;
-// import java.time.format.DateTimeFormatter;
-// import java.util.ArrayList;
-// import java.util.Arrays;
-// import java.util.List;
+//import static moblima.cineplex.Cinema.convertToCinemaClass;
 
-// //import static moblima.cineplex.Cinema.convertToCinemaClass;
+//import static moblima.show.ticket.MovieTicket.checkCustomerAge;
 
-// //import static moblima.show.ticket.MovieTicket.checkCustomerAge;
+public class FileReader {
 
-// public class CSVReader{
+   public static void readProjectsFromCSV(String fileName) {
 
-//    public static void readMoviesFromCSV(String fileName) {
-//        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-//        Path pathToFile = Paths.get(fileName);
-//        MovieList movieList = SilverVillage.getMovieList();
-//        try (BufferedReader br = Files.newBufferedReader(pathToFile, StandardCharsets.UTF_8)) {
-//            String line = br.readLine();
+       DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+       Path pathToFile = Paths.get(fileName);
+
+       /*
+        creates a new object as an arraylist which holds the details
+       */
+       MovieList movieList = SilverVillage.getMovieList();
+
+       // into
 
 
-//            while (line != null) {
-//                //movieId,title,synopsis,director,casts,status,expiryDate
-//                String[] attributes = line.split(",");
-//                //String movieId = attributes[0];
-//                String title = attributes[1];
-//                String synopsis = attributes[2];
-//                String director = attributes[3];
-//                String castString = attributes[4]; // to change to list
-//                String[] casts = castString.split(";");
-//                List<String> castList = Arrays.asList(casts);
-//                MovieStatus status = Movie.convertToMovieStatus(attributes[5]);
-// //               String expiry = attributes[6];
-//                LocalDateTime expiryDate = LocalDateTime.parse(attributes[6],formatter);
+       try (BufferedReader br = Files.newBufferedReader(pathToFile, StandardCharsets.UTF_8)) {
+           String line = br.readLine();
 
-//                Movie movie = new Movie(title, status, synopsis, director, castList, expiryDate);
 
-//                movieList.addMovie(movie);
-//                line = br.readLine();
-//            }
+           while (line != null) {
+               //movieId,title,synopsis,director,casts,status,expiryDate
+               String[] attributes = line.split(",");
+               String name = attributes[0];
+               String email = attributes[1];
+               MovieStatus status = Movie.convertToMovieStatus(attributes[5]);
+//               String expiry = attributes[6];
+               LocalDateTime expiryDate = LocalDateTime.parse(attributes[6],formatter);
 
-//        } catch (IOException ioe) {
-//            ioe.printStackTrace();
-//        }
-//    }
+               Movie movie = new Movie(title, status, synopsis, director, castList, expiryDate);
+
+               movieList.addMovie(movie);
+               line = br.readLine();
+           }
+
+       } catch (IOException ioe) {
+           ioe.printStackTrace();
+       }
+   }
 
 //     public static void readCinemasFromCSV(String fileName) {
 

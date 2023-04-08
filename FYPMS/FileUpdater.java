@@ -19,7 +19,7 @@ import com.opencsv.CSVWriter;
 //  import moblima.cineplex.cinema.Cinema;
 //  import moblima.movie.Movie;
 //  import moblima.show.Show;
-//  import moblima.SilverVillage;
+//  import moblima.FYPMS;
 //  import system.SystemSettings;
 
 //  import java.nio.charset.StandardCharsets;
@@ -41,10 +41,10 @@ import com.opencsv.CSVWriter;
 //          CSVWriter writer = new CSVWriter(outputFile, ',', CSVWriter.NO_QUOTE_CHARACTER, CSVWriter.DEFAULT_ESCAPE_CHARACTER, CSVWriter.DEFAULT_LINE_END);
 //          int count=0;
 //          try {
-//              while (SilverVillage.getCineplexList().getCineplexByIndex(count) != null){
+//              while (FYPMS.getCineplexList().getCineplexByIndex(count) != null){
 //                  String[] input = new String[2];
-//                  input[0] = SilverVillage.getCineplexList().getCineplexByIndex(count).getBranchName();
-//                  input[1] = SilverVillage.getCineplexList().getCineplexByIndex(count++).getBranchAddress();
+//                  input[0] = FYPMS.getCineplexList().getCineplexByIndex(count).getBranchName();
+//                  input[1] = FYPMS.getCineplexList().getCineplexByIndex(count++).getBranchAddress();
 //                  writer.writeNext(input);
 //              }
 //              writer.close();
@@ -62,10 +62,10 @@ import com.opencsv.CSVWriter;
 //          CSVWriter writer = new CSVWriter(outputFile, ',', CSVWriter.NO_QUOTE_CHARACTER, CSVWriter.DEFAULT_ESCAPE_CHARACTER, CSVWriter.DEFAULT_LINE_END);
 //          int count=0;
 //          try {
-//              while (SilverVillage.getCineplexList().getCineplexByIndex(count) != null){
-//                  for (Cinema cinema: SilverVillage.getCineplexList().getCineplexByIndex(count).getCinemaList()){
+//              while (FYPMS.getCineplexList().getCineplexByIndex(count) != null){
+//                  for (Cinema cinema: FYPMS.getCineplexList().getCineplexByIndex(count).getCinemaList()){
 //                      String[] input = new String[3];
-//                      input[0] = SilverVillage.getCineplexList().getCineplexByIndex(count).getBranchName();
+//                      input[0] = FYPMS.getCineplexList().getCineplexByIndex(count).getBranchName();
 //                      input[1] = cinema.convertCinemaCodeToCurrentCode();
 //                      input[2] = cinema.getClassLevel().toString();
 //                      writer.writeNext(input);
@@ -87,8 +87,8 @@ import com.opencsv.CSVWriter;
 //          CSVWriter writer = new CSVWriter(outputFile, ',', CSVWriter.NO_QUOTE_CHARACTER, CSVWriter.DEFAULT_ESCAPE_CHARACTER, CSVWriter.DEFAULT_LINE_END);
 //          int count=0;
 //          try {
-//              while (SilverVillage.getBookingHistory().getBookingByIndex(count) != null){
-//                  Booking booking = SilverVillage.getBookingHistory().getBookingByIndex(count++);
+//              while (FYPMS.getBookingHistory().getBookingByIndex(count) != null){
+//                  Booking booking = FYPMS.getBookingHistory().getBookingByIndex(count++);
 //                  String[] input = new String[5];
 //                  input[0] = booking.convertTicketsToString();
 //                  input[1] = booking.getCustomerName();
@@ -141,8 +141,8 @@ import com.opencsv.CSVWriter;
 //          CSVWriter writer = new CSVWriter(outputFile, ',', CSVWriter.NO_QUOTE_CHARACTER, CSVWriter.DEFAULT_ESCAPE_CHARACTER, CSVWriter.DEFAULT_LINE_END);
 //          int count=0;
 //          try {
-//              while (SilverVillage.getMovieList().getMovieByIndex(count) != null){
-//                  Movie movie = SilverVillage.getMovieList().getMovieByIndex(count++);
+//              while (FYPMS.getMovieList().getMovieByIndex(count) != null){
+//                  Movie movie = FYPMS.getMovieList().getMovieByIndex(count++);
 //                  String[] input = new String[7];
 //                  input[0] = Integer.toString(movie.getMovieId());
 //                  input[1] = movie.getTitle();
@@ -169,14 +169,14 @@ import com.opencsv.CSVWriter;
 //          CSVWriter writer = new CSVWriter(outputFile, ',', CSVWriter.NO_QUOTE_CHARACTER, CSVWriter.DEFAULT_ESCAPE_CHARACTER, CSVWriter.DEFAULT_LINE_END);
 //          int count=0;
 //          try {
-//              while (SilverVillage.getCineplexList().getCineplexByIndex(count) != null){
-//                  Cineplex cineplex = SilverVillage.getCineplexList().getCineplexByIndex(count);
+//              while (FYPMS.getCineplexList().getCineplexByIndex(count) != null){
+//                  Cineplex cineplex = FYPMS.getCineplexList().getCineplexByIndex(count);
 //                  for (Show show: cineplex.getShowList().getShows()){
 //                      String[] input = new String[5];
 //                      input[0] = Integer.toString(show.getShowId());
 //                      String time = show.getShowTime().toString();
 //                      input[1] = time.substring(0,10) + " " + time.substring(11);
-//                      input[2] = SilverVillage.getCineplexList().getCineplexByIndex(count).getBranchName();
+//                      input[2] = FYPMS.getCineplexList().getCineplexByIndex(count).getBranchName();
 //                      input[3] = show.getCinema().getCinemaCode();
 //                      input[4] = Integer.toString(show.getMovie().getMovieId());
 //                      writer.writeNext(input);
@@ -196,8 +196,8 @@ import com.opencsv.CSVWriter;
 //          CSVWriter writer = new CSVWriter(outputFile, ',', CSVWriter.NO_QUOTE_CHARACTER, CSVWriter.DEFAULT_ESCAPE_CHARACTER, CSVWriter.DEFAULT_LINE_END);
 //          int count=0;
 //          try {
-//              while (SilverVillage.getBookingHistory().getBookingByIndex(count) != null){
-//                  Booking booking = SilverVillage.getBookingHistory().getBookingByIndex(count);
+//              while (FYPMS.getBookingHistory().getBookingByIndex(count) != null){
+//                  Booking booking = FYPMS.getBookingHistory().getBookingByIndex(count);
 //                  int ticketCount=0;
 //                  while (booking.getTicketByIndex(ticketCount) != null){
 //                      MovieTicket ticket = booking.getTicketByIndex(ticketCount);
@@ -226,8 +226,8 @@ import com.opencsv.CSVWriter;
 //          CSVWriter writer = new CSVWriter(outputFile, ',', CSVWriter.NO_QUOTE_CHARACTER, CSVWriter.DEFAULT_ESCAPE_CHARACTER, CSVWriter.DEFAULT_LINE_END);
 //          try {
 //              int count=0;
-//              while (SilverVillage.getMovieList().getMovieByIndex(count) != null){
-//                  Movie movie = SilverVillage.getMovieList().getMovieByIndex(count++);
+//              while (FYPMS.getMovieList().getMovieByIndex(count) != null){
+//                  Movie movie = FYPMS.getMovieList().getMovieByIndex(count++);
 //                  String[] input = new String[4];
 //                  input[0] = Integer.toString(movie.getMovieId());
 //                  input[1] = (movie.getReviews().convertRatingsToString() != null) ? movie.getReviews().convertRatingsToString() : "NA";

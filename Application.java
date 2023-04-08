@@ -1,9 +1,10 @@
+import FYPMS.*;
 import account.*;
 import gui.*;
 import gui.GreetUserMenu;
 import FYPMS.CSVReader;
 // import moblima.CSVUpdater;
-import FYPMS.SilverVillage;
+import FYPMS.FYPMS;
 import FYPMS.booking.ticket.MovieTicket;
 import FYPMS.cineplex.Cineplex;
 // import system.SystemSettings;
@@ -31,20 +32,20 @@ public class Application {
 		SystemSettings.addPublicHoliday(dateTime, "Halloween");
 
 
-		CSVReader.readMoviesFromCSV("src/database/movieDB.csv");
-		CSVReader.readCineplexFromCSV("src/database/CineplexDB.csv");
-		CSVReader.readReviewFromCsv("src/database/reviewListDB.csv");
-		CSVReader.readCinemasFromCSV("src/database/CinemaDB.csv");
-		CSVReader.readAccountsFromCSV("src/database/accountDB.csv", SilverVillage.getCineplexList());
-		CSVReader.readShowsFromCSV("src/database/showDB.csv");
-		ArrayList<MovieTicket> movieTicketArrayList =  CSVReader.readTicketsFromCSV("src/database/MovieTicketDB.csv");
-		CSVReader.readBookingsFromCSV("src/database/bookingDB.csv", movieTicketArrayList);
+		FileReader.readMoviesFromCSV("src/database/movieDB.csv");
+		FileReader.readCineplexFromCSV("src/database/CineplexDB.csv");
+		FileReader.readReviewFromCsv("src/database/reviewListDB.csv");
+		FileReader.readCinemasFromCSV("src/database/CinemaDB.csv");
+		FileReader.readAccountsFromCSV("src/database/accountDB.csv", FYPMS.getCineplexList());
+		FileReader.readShowsFromCSV("src/database/showDB.csv");
+		ArrayList<MovieTicket> movieTicketArrayList =  FileReader.readTicketsFromCSV("src/database/MovieTicketDB.csv");
+		FileReader.readBookingsFromCSV("src/database/bookingDB.csv", movieTicketArrayList);
 		// load in CSV
 		
 		// end of load in CSV
 
 		// Auto update expired movie status
-		SilverVillage.getMovieList().updateExpiredMovieStatus();
+		FYPMS.getMovieList().updateExpiredMovieStatus();
 		new GreetUserMenu().display();
 		Scanner scanner = new Scanner(System.in);
 		int userCh = 0;
@@ -53,7 +54,7 @@ public class Application {
 		Account curAcc = null;
 
 		System.out.println();
-		SilverVillage.getCineplexList().listCineplexes();
+		FYPMS.getCineplexList().listCineplexes();
 
 		while (true) {
 
@@ -67,7 +68,7 @@ public class Application {
 			}
 			int locationCh = scanner.nextInt();
 			scanner.nextLine();
-			cineplex = SilverVillage.getCineplexList().getCineplexByIndex(locationCh - 1);
+			cineplex = FYPMS.getCineplexList().getCineplexByIndex(locationCh - 1);
 			if (cineplex != null) break;
 			System.out.println("Option number out of range. Please try again.");
 		}

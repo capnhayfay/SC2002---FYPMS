@@ -1,8 +1,8 @@
 package FYPMS;
 
-import moblima.booking.BookingHistory;
-import moblima.cineplex.CineplexList;
-import moblima.movie.MovieList;
+import FYPMS.booking.BookingHistory;
+import FYPMS.cineplex.CineplexList;
+import FYPMS.project.FYPList;
 
 /**
  * Represents the company this application is created for
@@ -10,18 +10,18 @@ import moblima.movie.MovieList;
  */
 public class FYPMS {
 
-    private static final ProjectHistory projectHistory = new BookingHistory();
+    private static final BookingHistory bookingHistory = new BookingHistory();
 
-    private static final MovieList movieList = new MovieList();
+    private static final FYPList fypList = new FYPList();
+
+    public static FYPList getFypList() {
+        return fypList;
+    }
 
     private static final CineplexList cineplexList = new CineplexList();
 
     public static BookingHistory getBookingHistory() {
         return bookingHistory;
-    }
-    public static MovieList getMovieList() {
-
-        return movieList;
     }
     public static CineplexList getCineplexList() {
         return cineplexList;

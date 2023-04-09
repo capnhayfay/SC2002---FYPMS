@@ -9,10 +9,10 @@ public interface Logout {
     /**
      * Allows user to logout of their Account
      */
-    public void logout();
+    void logout();
     /**
      * Returns Account of user
      * @return Account
      */
-    public Account getAccount();
+    Account getAccount();
 }

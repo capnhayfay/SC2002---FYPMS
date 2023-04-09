@@ -4,11 +4,11 @@ package account;
  * Abstract class for Account
  */
 public abstract class Account{
-	private String email;
-	private String name;
-    private String userId;
-    private String password;
-    private UserType userType;
+	private final String email;
+	private final String name;
+    private final String userId;
+    private final String password;
+    private final UserType userType;
     //0 for user, 1 for cineplexAdmin, 2 for companyAdmin
 
     /**

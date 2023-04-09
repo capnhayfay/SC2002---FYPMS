@@ -10,7 +10,7 @@ public enum FYPStatus {
     REMOVED("PROJECT REMOVED");
 
     private final String toString;
-    private FYPStatus(String toString) {
+    FYPStatus(String toString) {
         this.toString = toString;
     }
 

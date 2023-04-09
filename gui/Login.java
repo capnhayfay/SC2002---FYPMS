@@ -11,11 +11,11 @@ public interface Login {
      * @param password which is Password provided by user
      * @return Account if login was successful, null if failed
      */
-    public Account login(String username, String password);
+    Account login(String username, String password);
 
     /**
      * Returns Account of user
      * @return Account
      */
-    public Account getAccount();
+    Account getAccount();
 }

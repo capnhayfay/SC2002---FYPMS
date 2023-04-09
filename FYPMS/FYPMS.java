@@ -1,8 +1,10 @@
 package FYPMS;
 
-import FYPMS.booking.BookingHistory;
-import FYPMS.cineplex.CineplexList;
+import FYPMS.faculty.coordinator.CoordinatorList;
+import FYPMS.faculty.supervisor.SupervisorList;
 import FYPMS.project.FYPList;
+import FYPMS.request.RequestList;
+import FYPMS.student.StudentList;
 
 /**
  * Represents the company this application is created for
@@ -10,21 +12,30 @@ import FYPMS.project.FYPList;
  */
 public class FYPMS {
 
-    private static final BookingHistory bookingHistory = new BookingHistory();
+    private static CoordinatorList coordinatorList = new CoordinatorList();
+    private static SupervisorList supervisorList = new SupervisorList();
+    private static StudentList studentList = new StudentList();
 
-    private static final FYPList fypList = new FYPList();
+    private static RequestList requestList = new RequestList();
+
+    private static FYPList fypList = new FYPList();
 
     public static FYPList getFypList() {
         return fypList;
     }
 
-    private static final CineplexList cineplexList = new CineplexList();
-
-    public static BookingHistory getBookingHistory() {
-        return bookingHistory;
-    }
-    public static CineplexList getCineplexList() {
-        return cineplexList;
+    public static SupervisorList getSupervisorList() {
+        return supervisorList;
     }
 
+    public static RequestList getRequestList() {
+        return requestList;
+    }
+
+    public static CoordinatorList getCoordinatorList() {return coordinatorList;
+    }
+
+    public static StudentList getStudentList() {
+        return studentList;
+    }
 }

@@ -5,8 +5,7 @@ import gui.GreetUserMenu;
 import FYPMS.CSVReader;
 // import moblima.CSVUpdater;
 import FYPMS.FYPMS;
-import FYPMS.booking.ticket.MovieTicket;
-import FYPMS.cineplex.Cineplex;
+import FYPMS.student.ticket.MovieTicket;
 // import system.SystemSettings;
 import java.io.IOException;
 import java.time.LocalDateTime;
@@ -61,7 +60,7 @@ public class Application {
 			System.out.println();
 			System.out.print("Please enter the cineplex location number: ");
 
-			if (scanner.hasNextInt() == false) {
+			if (!scanner.hasNextInt()) {
 				System.out.println("Invalid input format for location number. Please try again.");
 				scanner.nextLine();
 				continue;

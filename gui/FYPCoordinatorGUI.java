@@ -39,7 +39,7 @@ public class FYPCoordinatorGUI implements Menu,Logout,GetCommand {
         System.out.println("6. Exit");
         System.out.println("=========================================");
         System.out.println();
-    };
+    }
 
     /**
      * Gets input from Company Admin and executes the required instruction
@@ -50,7 +50,7 @@ public class FYPCoordinatorGUI implements Menu,Logout,GetCommand {
       //Error handling for invalid input 
         while(true)	{
         	System.out.print("Please enter the option number: ");
-	        if(scanner.hasNextInt() == false) {
+	        if(!scanner.hasNextInt()) {
 				
 				System.out.println("Invalid input format for option number. Please try again.");
 				scanner.nextLine();

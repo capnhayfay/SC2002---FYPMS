@@ -32,15 +32,15 @@ public class SupervisorAccountGUI implements Menu,Logout,GetCommand{
         System.out.println();
         System.out.println("Cineplex Branch: "+ cineplexAdmin.getCineplex().getBranchName());
         System.out.println();
-        System.out.println("1. Create cinema showtimes");
-        System.out.println("2. Update cinema showtimes");
-        System.out.println("3. Remove cinema showtimes");
+        System.out.println("1. Create request showtimes");
+        System.out.println("2. Update request showtimes");
+        System.out.println("3. Remove request showtimes");
         System.out.println("4. Logout");
         System.out.println("5. Exit");
         System.out.println("=========================================");
         System.out.println();
 
-    };
+    }
 
     /**
      * Gets input from Cineplex Admin and executes the required instruction
@@ -52,7 +52,7 @@ public class SupervisorAccountGUI implements Menu,Logout,GetCommand{
       //Error handling for invalid input 
         while(true)	{
         	
-	        if(scanner.hasNextInt() == false) {
+	        if(!scanner.hasNextInt()) {
 				
 				System.out.println("Invalid input format for option number. Please try again.");
 				scanner.nextLine();

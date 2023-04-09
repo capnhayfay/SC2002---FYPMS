@@ -55,7 +55,7 @@ public class StudentGUI implements Menu, Logout, GetCommand{
         
         System.out.print("Please enter the option number: ");
         while(true) {
-	        if(scanner.hasNextInt() == false) {
+	        if(!scanner.hasNextInt()) {
 				
 				System.out.println("Invalid input format for option number. Please try again.");
 				System.out.println();

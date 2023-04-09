@@ -8,5 +8,5 @@ public interface GetCommand {
      * Execute instruction chosen by user
      * @return 0 to exit program, 1 to continue
      */
-    public int execute();
+    int execute();
 }

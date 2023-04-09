@@ -8,26 +8,10 @@ import java.util.Collections;
 import java.util.Comparator;
 
 /**
- * Represents the list of movies the company has purchased and are entitled to show in their theatres
- */
-/**
  * Represents the list of Final Year Projects (FYPs) the department has approved and are entitled to supervise
  */
 public class FYPList {
     private final ArrayList<FYP> fyps = new ArrayList<>();
-
-    /**
-     * Updates FYP status to 'Completed' automatically (upon starting the application) when the FYP has passed its deadline
-     */
-    public void updateExpiredFYPStatus() {
-        for (FYP fyp : fyps) {
-            if (fyp.getDeadline().isBefore(LocalDateTime.now())) {
-                if (fyp.getStatus() != FYPStatus.COMPLETED) {
-                    fyp.setStatus(FYPStatus.COMPLETED);
-                }
-            }
-        }
-    }
 
     /**
      * Adds a FYP to the list of FYPs the department can supervise
@@ -39,15 +23,6 @@ public class FYPList {
     }
 
     /**
-     * Removes a FYP by setting its status to "Completed"
-     *
-     * @param fypId Id of FYP to be removed
-     */
-    public void removeFYP(int fypId) {
-        this.updateFYPStatus(fypId, FYPStatus.COMPLETED);
-    }
-
-    /**
      * Prints the available FYPs (Ongoing, Pending) for viewing by students
      */
     public void listAvailableFYPsForStudents() {
@@ -56,7 +31,7 @@ public class FYPList {
         System.out.println("List of Available Final Year Projects");
         System.out.println();
         for (FYP fyp : fyps) {
-            if (fyp.getStatus() != FYPStatus.COMPLETED) {
+            if (fyp.getStatus() != FYPStatus.ASSIGNED) {
                 System.out.println("============= FYP No. " + fypCount++ + " ==============");
                 fyp.printFYPDetails();
                 System.out.println();
@@ -111,17 +86,8 @@ public class FYPList {
         }
     }
 
-    /**
-     * Sorts FYPs by deadline date
-     *
-     * @param ascending Boolean value indicating if the FYPs should be sorted in ascending or descending order
-     */
-    public void sortFYPsByDeadline(boolean ascending) {
-        if (ascending) {
-            Collections.sort(fyps, Comparator.comparing(FYP::getDeadline));
-        } else {
-            Collections.sort(fyps, Comparator.comparing(FYP::getDeadline).reversed());
-        }
+    public ArrayList<FYP> getFYPs() {
+        return fyps;
     }
 }
 

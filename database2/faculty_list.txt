@@ -74,14 +74,3 @@ Zhang Jie,ZHANGJ@NTU.EDU.SG,0,0
 Zhang Tianwei,tianwei.zhang@ntu.edu.sg,0,0
 Zhao Jun,JUNZHAO@NTU.EDU.SG,0,0
 Zheng Jianmin,ASJMZHENG@NTU.EDU.SG,0,0
-,,,
-,,,
-,,,
-,,,
-,,,
-,,,
-,,,
-,,,
-,,,
-,,,
-,,,

@@ -87,13 +87,13 @@ public class FileReader{
 
         try (BufferedReader br = Files.newBufferedReader(pathToFile, StandardCharsets.UTF_8)) {
             String line = br.readLine();
-
+            line = line.trim();
             while (line != null) {
                 String[] attributes = line.split(",");
                 String name = attributes[0];
                 String email = attributes[1];
-                String project1 = attributes[2].equals("0") ? null : attributes[2];
-                String project2 = attributes[3].equals("0") ? null : attributes[3];
+                String project1 = attributes[2].equals("0") ? "0" : attributes[2];
+                String project2 = attributes[3].equals("0") ? "0" : attributes[3];
 
                 Supervisor supervisor = new Supervisor(name, email, project1, project2);
 

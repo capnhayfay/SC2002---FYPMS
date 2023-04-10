@@ -12,13 +12,13 @@ import FYPMS.student.StudentList;
  */
 public class FYPMS {
 
-    private static CoordinatorList coordinatorList = new CoordinatorList();
-    private static SupervisorList supervisorList = new SupervisorList();
-    private static StudentList studentList = new StudentList();
+    private static final CoordinatorList coordinatorList = new CoordinatorList();
+    private static final SupervisorList supervisorList = new SupervisorList();
+    private static final StudentList studentList = new StudentList();
 
-    private static RequestList requestList = new RequestList();
+    private static final RequestList requestList = new RequestList();
 
-    private static FYPList fypList = new FYPList();
+    private static final FYPList fypList = new FYPList();
 
     public static FYPList getFypList() {
         return fypList;

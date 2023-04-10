@@ -94,4 +94,7 @@ public class Request {
         return statusChangeTime;
     }
 
+    public RequestStatus getRequestStatus(){
+        return requestStatus;
+    }
 }

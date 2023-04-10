@@ -125,11 +125,93 @@
 // }
 
 import FYPMS.*;
+import FYPMS.faculty.supervisor.SupervisorList;
+import FYPMS.project.FYPList;
+import FYPMS.request.Request;
+import FYPMS.request.RequestList;
+import FYPMS.student.Student;
+import account.Account;
+import account.StudentAccount;
+import account.UserType;
+import command.ChangePassword;
+import command.FYPCoord.GenerateFilteredProjectDetailsCommand;
+import command.FYPCoord.ViewAllFYPCommand;
+import command.FYPCoord.ViewAllPendingRequestsCommand;
+import command.FYPCoord.ViewAllRequestHistoryCommand;
+import command.Student.RequestCoordDeregisterCommand;
+import command.Supervisor.CreateProjectCommand;
 
+import java.util.ArrayList;
+import java.util.List;
 
+import FYPMS.project.*;;
 
 public class Application {
 	public static void main(String[] args) {
-		FileReader.readSupervisorFromFile("./database2/faculty_list.txt");
+		// FileReader.readSupervisorFromFile("./database2/faculty_list.txt");
+		// SupervisorList sups = FYPMS.getSupervisorList();
+		// sups.listAllSupervisors();
+		FileReader.readFYPsFromFile("./database2/rollover project.csv");
+
+		// // To set all project status as available first
+		FYPList projects = FYPMS.getFypList();
+		ArrayList<FYP> fyps = projects.getFYPs();
+		// for (FYP proj : fyps) {
+		// 	proj.setStatus(FYPStatus.AVAILABLE);
+		// 	// System.out.println(proj.getSupervisorName());
+		// 	// proj.printFYPDetails();
+		// }
+
+		// projects.listAvailableFYPsForStudents();
+		// System.out.println(projects.getFYPs());
+		// projects.listAllFYPsForFaculty();
+
+		// GenerateFilteredProjectDetailsCommand ------------
+		// GenerateFilteredProjectDetailsCommand test = new GenerateFilteredProjectDetailsCommand(1,projects); // filter by status 
+		// GenerateFilteredProjectDetailsCommand test = new GenerateFilteredProjectDetailsCommand(2,projects); // filter by supervisor
+		// test.execute();
+
+		// ViewAllFYPCommand
+		// ViewAllFYPCommand test = new ViewAllFYPCommand(projects);
+		// test.execute();
+
+
+		//ViewAllPendingRequestsCommand
+		// RequestCoordDeregisterCommand test2 = new RequestCoordDeregisterCommand("zoey");
+		// test2.execute(); // Sample request
+		// ViewAllPendingRequestsCommand view = new ViewAllPendingRequestsCommand();
+		// view.execute();
+
+		//ViewAllRequestHistoryCommand
+		// RequestCoordDeregisterCommand test2 = new RequestCoordDeregisterCommand("zoey");
+		// test2.execute(); // Sample request
+		// ViewAllRequestHistoryCommand view = new ViewAllRequestHistoryCommand();
+		// view.execute();
+
+
+		// Change Password
+		// StudentAccount user = new StudentAccount("zoey", "12345", UserType.Student, "test@gmail.com", "Zoey Lam");
+		// System.out.println(user.getPassword());
+		// ChangePassword change = new ChangePassword(user);
+		// change.execute();
+		// System.out.println(user.getPassword());
+
+		// Create new project
+		// CreateProjectCommand test = new CreateProjectCommand("Bo An");
+		// test.execute();
+		// for (FYP proj : fyps) {
+		// 	proj.printFYPDetails();
+		// }
+
+		// // Deregistration request
+		// RequestList Requests = FYPMS.getRequestList();
+		// List<Request> requests = Requests.getRequests();
+		// RequestCoordDeregisterCommand test1 = new RequestCoordDeregisterCommand("jovin");
+		// test1.execute();
+		// RequestCoordDeregisterCommand test2 = new RequestCoordDeregisterCommand("zoey");
+		// test2.execute();
+		// for (Request request : requests) {
+		// 	request.printDetails();
+		// }
 	}
 }

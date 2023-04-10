@@ -4,11 +4,11 @@ package account;
  * Abstract class for Account
  */
 public abstract class Account{
-	private final String email;
-	private final String name;
-    private final String userId;
-    private final String password;
-    private final UserType userType;
+	private String email;
+	private String name;
+    private String userId;
+    private String password;
+    private UserType userType;
     //0 for user, 1 for cineplexAdmin, 2 for companyAdmin
 
     /**
@@ -37,6 +37,9 @@ public abstract class Account{
         return password;
     }
 
+    public final void setPassword(String newPass){
+        this.password = newPass;
+    }
 
     public final UserType getUserType(){
         return userType;

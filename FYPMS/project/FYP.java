@@ -9,25 +9,29 @@ import java.util.List;
 public class FYP {
 
     private static int currentId = 1;
-    private final int projectId;
-    private final String supervisorName;
-    private final String title;
+    private int projectId;
+    private String supervisorName;
+    private String title;
     private FYPStatus status;
-    private final String studentName;
-    private final List<String> requesterList;
-    private final LocalDateTime statusChangeDate;
+    private String studentName;
+    private List<String> requesterList;
+    private LocalDateTime statusChangeDate;
 
     /**
      * Creates an instance of the FYP class.
      *
      * @param supervisorName   The name of the project supervisor.
      * @param title            The title of the project.
-     * @param status           The status of the project: AVAILABLE, RESERVED, or ASSIGNED.
-     * @param studentName      The name of the student assigned to the project (if status is ASSIGNED). Defaults to null.
+     * @param status           The status of the project: AVAILABLE, RESERVED, or
+     *                         ASSIGNED.
+     * @param studentName      The name of the student assigned to the project (if
+     *                         status is ASSIGNED). Defaults to null.
      * @param requesterList    The list of students who have requested the project.
-     * @param statusChangeDate The date of the last change of the project status. The first date is constant.
+     * @param statusChangeDate The date of the last change of the project status.
+     *                         The first date is constant.
      */
-    public FYP(String supervisorName, String title, FYPStatus status, String studentName, List<String> requesterList, LocalDateTime statusChangeDate) {
+    public FYP(String supervisorName, String title, FYPStatus status, String studentName, List<String> requesterList,
+            LocalDateTime statusChangeDate) {
         this.projectId = currentId++;
         this.supervisorName = supervisorName;
         this.title = title;
@@ -86,11 +90,13 @@ public class FYP {
     }
 
     /**
-     * Helper function to convert FYP status in string form to FYPStatus enum, for CSV storage
+     * Helper function to convert FYP status in string form to FYPStatus enum, for
+     * CSV storage
+     * 
      * @param fypStatus FYP status in string form
      * @return FYPStatus enum
      */
-    public static FYPStatus convertToFYPStatus(String fypStatus){
+    public static FYPStatus convertToFYPStatus(String fypStatus) {
         return switch (fypStatus.toLowerCase()) {
             case "available" -> FYPStatus.AVAILABLE;
             case "reserved" -> FYPStatus.RESERVED;

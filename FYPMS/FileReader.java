@@ -19,11 +19,13 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.List;
+import FYPMS.project.FYP;
 
-public class FileReader{
+public class FileReader {
 
     /**
      * Reads FYPs from file and adds them to the FYPList
+     * 
      * @param fileName the name of the CSV file to read from
      */
     public static void readFYPsFromFile(String fileName) {
@@ -40,10 +42,9 @@ public class FileReader{
                 String title = attributes[1];
                 FYPStatus status = FYP.convertToFYPStatus(attributes[2]);
                 String studentName = attributes[3];
-                List <String> requestorList = List.of(attributes[4].split(";"));
+                List<String> requestorList = List.of(attributes[4].split(";"));
                 LocalDateTime statusChangeDate = LocalDateTime.now();
-                FYP fyp;
-                fyp = new FYP(supervisor, title, status, studentName, requestorList, statusChangeDate);
+                FYP fyp = new FYP(supervisor, title, status, studentName, requestorList, statusChangeDate);
                 fypList.addFYP(fyp);
                 line = br.readLine();
             }
@@ -52,6 +53,7 @@ public class FileReader{
             ioe.printStackTrace();
         }
     }
+
     public static void readRequestsFromFile(String fileName) {
         Path pathToFile = Paths.get(fileName);
         RequestList requests = FYPMS.getRequestList();

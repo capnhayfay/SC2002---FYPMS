@@ -20,6 +20,7 @@ public class RequestList implements Iterable<Request> {
 
     /**
      * Adds a request to the RequestList
+     * 
      * @param request The request to add
      */
     public void add(Request request) {
@@ -45,6 +46,7 @@ public class RequestList implements Iterable<Request> {
 
     /**
      * Returns whether there is another request to iterate over
+     * 
      * @param iterator The iterator being used
      * @return true if there is another request to iterate over, false otherwise
      */
@@ -54,10 +56,16 @@ public class RequestList implements Iterable<Request> {
 
     /**
      * Returns the next request to iterate over
+     * 
      * @param iterator The iterator being used
      * @return the next request to iterate over
      */
     public Request next(Iterator<Request> iterator) {
         return iterator.next();
     }
+
+    public List<Request> getRequests() {
+        return requests;
+    }
+
 }

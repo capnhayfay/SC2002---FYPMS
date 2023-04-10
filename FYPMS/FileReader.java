@@ -65,7 +65,9 @@ public class FileReader{
                 String requesterName = attributes[0];
                 RequestType requestType = Request.convertToRequestType(attributes[1]);
                 LocalDateTime statusChangeTime = LocalDateTime.now();
-                Request request = new Request(requesterName, requestType, statusChangeTime);
+                String requestee = attributes[3];
+                RequestStatus requestStatus = Request.convertToRequestStatus(attributes[4]);
+                Request request = new Request(requesterName, requestType, statusChangeTime, requestee, requestStatus);
                 requests.add(request);
             }
 

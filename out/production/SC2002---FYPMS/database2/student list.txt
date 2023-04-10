@@ -1,0 +1,12 @@
+Name,Email,Projects Requested
+CHERN ,YCHERN@e.ntu.edu.sg;,0;0;0
+KOH ,KOH1@e.ntu.edu.sg;,0;0;0
+BRANDON ,BR015@e.ntu.edu.sg;,0;0;0
+CALVIN ,CT113@e.ntu.edu.sg;,0;0;0
+CHAN,YCN019@e.ntu.edu.sg;,0;0;0
+DENISE,DL007@e.ntu.edu.sg;,0;0;0
+DONG,DON84@e.ntu.edu.sg;,0;0;0
+ERNEST,ELI34@e.ntu.edu.sg;,0;0;0
+LEE ,LE51@e.ntu.edu.sg;,0;0;0
+LIU ,SL22@e.ntu.edu.sg;,0;0;0
+RAWAL,AKY013@e.ntu.edu.sg;,0;0;0

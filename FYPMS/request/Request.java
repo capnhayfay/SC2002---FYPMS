@@ -10,20 +10,35 @@ public class Request {
     private static final int currentCode=1;
     private final String requesterName;
     private final RequestType requestType; // enum
-
     private final LocalDateTime statusChangeTime;
+    private final String requestee;
+    private final RequestStatus requestStatus; // enum
+
 
     /**
      * Creates a request object for FYPMS requests
      *
-     * @param requesterName Name of requester
-     * @param requestType Request Type
+     * @param requesterName    Name of requester
+     * @param requestType      Request Type
      * @param statusChangeTime Time of Request
+     * @param requestee
+     * @param requestStatus
      */
-    public Request(String requesterName, RequestType requestType, LocalDateTime statusChangeTime) {
+    public Request(String requesterName, RequestType requestType, LocalDateTime statusChangeTime, String requestee, RequestStatus requestStatus) {
         this.requesterName = requesterName;
         this.requestType = requestType;
         this.statusChangeTime = statusChangeTime;
+        this.requestee = requestee;
+        this.requestStatus = requestStatus;
+    }
+
+    public static RequestStatus convertToRequestStatus(String classLevel){
+        return switch (classLevel.toLowerCase()) {
+            case "pending" -> RequestStatus.PENDING;
+            case "approved" -> RequestStatus.APPROVED;
+            case "rejected" -> RequestStatus.REJECTED;
+            default -> null;
+        };
     }
 
     /**

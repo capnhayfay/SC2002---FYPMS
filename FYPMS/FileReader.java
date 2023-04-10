@@ -33,9 +33,8 @@ public class FileReader{
 
         try (BufferedReader br = Files.newBufferedReader(pathToFile, StandardCharsets.UTF_8)) {
             String line = br.readLine();
-
+            line = br.readLine();
             while (line != null) {
-                line = br.readLine();
                 String[] attributes = line.split(",");
                 String supervisor = attributes[0];
                 String title = attributes[1];
@@ -60,9 +59,8 @@ public class FileReader{
 
         try (BufferedReader br = Files.newBufferedReader(pathToFile, StandardCharsets.UTF_8)) {
             String line = br.readLine(); // skip header
-
+            line = br.readLine();
             while (line != null) {
-                line = br.readLine();
                 String[] attributes = line.split(",");
                 String requesterName = attributes[0];
                 RequestType requestType = Request.convertToRequestType(attributes[1]);
@@ -88,9 +86,9 @@ public class FileReader{
 
         try (BufferedReader br = Files.newBufferedReader(pathToFile, StandardCharsets.UTF_8)) {
             String line = br.readLine();
-            line = line.trim();
+            line = br.readLine();
             while (line != null) {
-                line = br.readLine();
+                line = line.trim();
                 String[] attributes = line.split(",");
                 String name = attributes[0];
                 String email = attributes[1];
@@ -115,9 +113,8 @@ public class FileReader{
 
         try (BufferedReader br = Files.newBufferedReader(pathToFile, StandardCharsets.UTF_8)) {
             String line = br.readLine();
-
+            line = br.readLine();
             while (line != null) {
-                line = br.readLine();
                 String[] attributes = line.split(",");
                 String name = attributes[0];
                 String email = attributes[1];
@@ -140,9 +137,8 @@ public class FileReader{
 
         try (BufferedReader br = Files.newBufferedReader(pathToFile, StandardCharsets.UTF_8)) {
             String line = br.readLine();
-
+            line = br.readLine();
             while (line != null) {
-                line = br.readLine();
                 String[] attributes = line.split(",");
                 String name = attributes[0];
                 String email = attributes[1];

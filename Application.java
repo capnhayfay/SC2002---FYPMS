@@ -139,7 +139,9 @@ import command.FYPCoord.ViewAllFYPCommand;
 import command.FYPCoord.ViewAllPendingRequestsCommand;
 import command.FYPCoord.ViewAllRequestHistoryCommand;
 import command.Student.RequestCoordDeregisterCommand;
+import command.Student.ViewSelfRequestRecordsCommand;
 import command.Supervisor.CreateProjectCommand;
+import command.Supervisor.ViewSubmittedFYPCommand;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -156,41 +158,44 @@ public class Application {
 		// // To set all project status as available first
 		FYPList projects = FYPMS.getFypList();
 		ArrayList<FYP> fyps = projects.getFYPs();
-		// for (FYP proj : fyps) {
-		// 	proj.setStatus(FYPStatus.AVAILABLE);
-		// 	// System.out.println(proj.getSupervisorName());
-		// 	// proj.printFYPDetails();
-		// }
+		for (FYP proj : fyps) {
+			proj.setStatus(FYPStatus.AVAILABLE);
+			// System.out.println(proj.getSupervisorName());
+			// proj.printFYPDetails();
+		}
 
 		// projects.listAvailableFYPsForStudents();
 		// System.out.println(projects.getFYPs());
 		// projects.listAllFYPsForFaculty();
 
 		// GenerateFilteredProjectDetailsCommand ------------
-		// GenerateFilteredProjectDetailsCommand test = new GenerateFilteredProjectDetailsCommand(1,projects); // filter by status 
-		// GenerateFilteredProjectDetailsCommand test = new GenerateFilteredProjectDetailsCommand(2,projects); // filter by supervisor
+		// GenerateFilteredProjectDetailsCommand test = new
+		// GenerateFilteredProjectDetailsCommand(1,projects); // filter by status
+		// GenerateFilteredProjectDetailsCommand test = new
+		// GenerateFilteredProjectDetailsCommand(2,projects); // filter by supervisor
 		// test.execute();
 
 		// ViewAllFYPCommand
 		// ViewAllFYPCommand test = new ViewAllFYPCommand(projects);
 		// test.execute();
 
-
-		//ViewAllPendingRequestsCommand
-		// RequestCoordDeregisterCommand test2 = new RequestCoordDeregisterCommand("zoey");
+		// ViewAllPendingRequestsCommand
+		// RequestCoordDeregisterCommand test2 = new
+		// RequestCoordDeregisterCommand("zoey");
 		// test2.execute(); // Sample request
 		// ViewAllPendingRequestsCommand view = new ViewAllPendingRequestsCommand();
 		// view.execute();
 
-		//ViewAllRequestHistoryCommand
-		// RequestCoordDeregisterCommand test2 = new RequestCoordDeregisterCommand("zoey");
+		// ViewAllRequestHistoryCommand
+		// RequestCoordDeregisterCommand test2 = new
+		// RequestCoordDeregisterCommand("zoey");
 		// test2.execute(); // Sample request
 		// ViewAllRequestHistoryCommand view = new ViewAllRequestHistoryCommand();
 		// view.execute();
 
-
 		// Change Password
-		// StudentAccount user = new StudentAccount("zoey", "12345", UserType.Student, "test@gmail.com", "Zoey Lam");
+		// StudentAccount user = new StudentAccount("zoey", "12345", UserType.Student,
+		// "test@gmail.com", "Zoey Lam");
 		// System.out.println(user.getPassword());
 		// ChangePassword change = new ChangePassword(user);
 		// change.execute();
@@ -200,7 +205,7 @@ public class Application {
 		// CreateProjectCommand test = new CreateProjectCommand("Bo An");
 		// test.execute();
 		// for (FYP proj : fyps) {
-		// 	proj.printFYPDetails();
+		// proj.printFYPDetails();
 		// }
 
 		// // Deregistration request
@@ -211,7 +216,23 @@ public class Application {
 		// RequestCoordDeregisterCommand test2 = new RequestCoordDeregisterCommand("zoey");
 		// test2.execute();
 		// for (Request request : requests) {
-		// 	request.printDetails();
+		// request.printDetails();
 		// }
+
+		// View Submitted FYPs
+		// ViewSubmittedFYPCommand test = new ViewSubmittedFYPCommand("Bo An", projects);
+		// test.execute();
+
+		// View Own Requests
+		// RequestList Requests = FYPMS.getRequestList();
+		// RequestCoordDeregisterCommand test1 = new RequestCoordDeregisterCommand("jovin");
+		// test1.execute();
+		// RequestCoordDeregisterCommand test2 = new RequestCoordDeregisterCommand("zoey");
+		// test2.execute();
+		// RequestCoordDeregisterCommand test3 = new RequestCoordDeregisterCommand("jovin");
+		// test3.execute();
+		// ViewSelfRequestRecordsCommand test = new ViewSelfRequestRecordsCommand("jovin", Requests);
+		// test.execute();
+
 	}
 }

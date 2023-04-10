@@ -14,7 +14,7 @@ public class FYP {
     private String title;
     private FYPStatus status;
     private String studentName;
-    private List<String> requesterList;
+    private String requester;
     private LocalDateTime statusChangeDate;
 
     /**
@@ -26,18 +26,18 @@ public class FYP {
      *                         ASSIGNED.
      * @param studentName      The name of the student assigned to the project (if
      *                         status is ASSIGNED). Defaults to null.
-     * @param requesterList    The list of students who have requested the project.
+     * @param requester        The name of students who have requested the project.
      * @param statusChangeDate The date of the last change of the project status.
      *                         The first date is constant.
      */
-    public FYP(String supervisorName, String title, FYPStatus status, String studentName, List<String> requesterList,
+    public FYP(String supervisorName, String title, FYPStatus status, String studentName, String requester,
             LocalDateTime statusChangeDate) {
         this.projectId = currentId++;
         this.supervisorName = supervisorName;
         this.title = title;
         this.status = status;
         this.studentName = studentName;
-        this.requesterList = requesterList;
+        this.requester = requester;
         this.statusChangeDate = statusChangeDate;
     }
 
@@ -57,16 +57,24 @@ public class FYP {
         return status;
     }
 
+    public void setSupervisorName(String supervisorName) {
+        this.supervisorName = supervisorName;
+    }
+
     public String getSupervisorName() {
         return supervisorName;
+    }
+
+    public void setStudentName(String studentName) {
+        this.studentName = studentName;
     }
 
     public String getStudentName() {
         return studentName;
     }
 
-    public List<String> getRequesterList() {
-        return requesterList;
+    public String getRequesterList() {
+        return requester;
     }
 
     public LocalDateTime getStatusChangeDate() {
@@ -77,14 +85,12 @@ public class FYP {
      * Prints the details of the instance of FYP.
      */
     public void printFYPDetails() {
-        String commaSeparatedRequestors = String.join(", ", requesterList);
         System.out.println();
         System.out.println("Project ID: " + projectId);
         System.out.println("Title: " + title);
         System.out.println("Status: " + status);
         System.out.println("Project Coordinator: " + supervisorName);
         System.out.println("Assigned Student: " + studentName);
-        System.out.println("Requestors: " + commaSeparatedRequestors);
         System.out.println("Last Status Change Date: " + statusChangeDate);
         System.out.println("-----------------------------------------");
     }

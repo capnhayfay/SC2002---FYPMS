@@ -4,7 +4,8 @@ import java.util.ArrayList;
 import java.util.Comparator;
 
 /**
- * Represents the list of supervisors who are responsible for managing Final Year Projects (FYPs)
+ * Represents the list of supervisors who are responsible for managing Final
+ * Year Projects (FYPs)
  */
 public class SupervisorList {
     private final ArrayList<Supervisor> supervisors = new ArrayList<>();
@@ -72,9 +73,24 @@ public class SupervisorList {
     }
 
     /**
+     * Returns a supervisor using a Name inputted by users
+     *
+     * @param name Name used to search for a supervisor
+     */
+    public Supervisor getSupervisor(String name) {
+        for (Supervisor supervisor : supervisors) {
+            if (supervisor.getName().equals(name)) {
+                return supervisor;
+            }
+        }
+        return null;
+    }
+
+    /**
      * Sorts supervisors by their name
      *
-     * @param ascending Boolean value indicating if the supervisors should be sorted in ascending or descending order
+     * @param ascending Boolean value indicating if the supervisors should be sorted
+     *                  in ascending or descending order
      */
     public void sortSupervisorsByName(boolean ascending) {
         if (ascending) {
@@ -84,7 +100,7 @@ public class SupervisorList {
         }
     }
 
-    public ArrayList<Supervisor> getSupervisors(){
+    public ArrayList<Supervisor> getSupervisors() {
         return supervisors;
     }
 }

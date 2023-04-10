@@ -5,13 +5,15 @@ package FYPMS.faculty.supervisor;
  */
 public class Supervisor {
 
-    private final String name;
-    private final String email;
-    private final String proj_1;
-    private final String proj_2;
+    private String name;
+    private String email;
+    private String supervisorId;
+    private String proj_1;
+    private String proj_2;
 
     /**
-     * Creates a Coordinator object for Final Year Projects with a Maximum of 2 Projects
+     * Creates a Coordinator object for Final Year Projects with a Maximum of 2
+     * Projects
      *
      * @param name  Name of the Coordinator
      * @param email Email of the Coordinator
@@ -21,6 +23,8 @@ public class Supervisor {
     public Supervisor(String name, String email, String proj1, String proj2) {
         this.name = name;
         this.email = email;
+        int atIndex = email.indexOf("@");
+        this.supervisorId = email.substring(0, atIndex);
         this.proj_1 = proj1;
         this.proj_2 = proj2;
     }
@@ -42,6 +46,7 @@ public class Supervisor {
         }
         System.out.println();
     }
+
     public String getName() {
         return name;
     }
@@ -50,8 +55,20 @@ public class Supervisor {
         return email;
     }
 
+    public String getSupervisorId() {
+        return supervisorId;
+    }
+
+    public void setProj_1(String proj1) {
+        this.proj_1 = proj1;
+    }
+
     public String getProj_1() {
         return proj_1;
+    }
+
+    public void setProj_2(String proj2) {
+        this.proj_2 = proj2;
     }
 
     public String getProj_2() {

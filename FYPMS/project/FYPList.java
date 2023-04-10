@@ -8,7 +8,8 @@ import java.util.Collections;
 import java.util.Comparator;
 
 /**
- * Represents the list of Final Year Projects (FYPs) the department has approved and are entitled to supervise
+ * Represents the list of Final Year Projects (FYPs) the department has approved
+ * and are entitled to supervise
  */
 public class FYPList {
     private final ArrayList<FYP> fyps = new ArrayList<>();
@@ -59,6 +60,20 @@ public class FYPList {
     }
 
     /**
+     * Returns a FYP using the projectId inputted
+     *
+     * @param FYPId
+     */
+    public FYP getFYPById(int FYPId) {
+        for (FYP fyp : fyps) {
+            if (fyp.getProjectId() == FYPId) {
+                return fyp;
+            }
+        }
+        return null;
+    }
+
+    /**
      * Searches for a FYP using a keyword inputted by users
      *
      * @param keyword Keyword used to search for a FYP title
@@ -90,5 +105,3 @@ public class FYPList {
         return fyps;
     }
 }
-
-

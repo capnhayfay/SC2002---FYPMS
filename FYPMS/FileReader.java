@@ -1,5 +1,4 @@
 package FYPMS;
-// package moblima;
 
 import FYPMS.faculty.coordinator.Coordinator;
 import FYPMS.faculty.coordinator.CoordinatorList;
@@ -36,13 +35,14 @@ public class FileReader{
             String line = br.readLine();
 
             while (line != null) {
+                line = br.readLine();
                 String[] attributes = line.split(",");
                 String supervisor = attributes[0];
                 String title = attributes[1];
                 FYPStatus status = FYP.convertToFYPStatus(attributes[2]);
                 String studentName = attributes[3];
                 List <String> requestorList = List.of(attributes[4].split(";"));
-                LocalDateTime statusChangeDate = LocalDateTime.parse(attributes[5], formatter);
+                LocalDateTime statusChangeDate = LocalDateTime.now();
                 FYP fyp;
                 fyp = new FYP(supervisor, title, status, studentName, requestorList, statusChangeDate);
                 fypList.addFYP(fyp);
@@ -62,10 +62,11 @@ public class FileReader{
             String line = br.readLine(); // skip header
 
             while (line != null) {
+                line = br.readLine();
                 String[] attributes = line.split(",");
                 String requesterName = attributes[0];
                 RequestType requestType = Request.convertToRequestType(attributes[1]);
-                LocalDateTime statusChangeTime = LocalDateTime.parse(attributes[2], formatter);
+                LocalDateTime statusChangeTime = LocalDateTime.now();
                 Request request = new Request(requesterName, requestType, statusChangeTime);
                 requests.add(request);
             }
@@ -89,6 +90,7 @@ public class FileReader{
             String line = br.readLine();
             line = line.trim();
             while (line != null) {
+                line = br.readLine();
                 String[] attributes = line.split(",");
                 String name = attributes[0];
                 String email = attributes[1];
@@ -115,6 +117,7 @@ public class FileReader{
             String line = br.readLine();
 
             while (line != null) {
+                line = br.readLine();
                 String[] attributes = line.split(",");
                 String name = attributes[0];
                 String email = attributes[1];
@@ -139,6 +142,7 @@ public class FileReader{
             String line = br.readLine();
 
             while (line != null) {
+                line = br.readLine();
                 String[] attributes = line.split(",");
                 String name = attributes[0];
                 String email = attributes[1];

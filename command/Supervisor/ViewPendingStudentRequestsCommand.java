@@ -1,5 +1,8 @@
 package command.Supervisor;
 
-public class ViewPendingStudentRequestsCommand {
+import command.Command;
 
+public class ViewPendingStudentRequestsCommand implements Command {
+    public void execute() {
+    }
 }

@@ -1,5 +1,8 @@
 package command.Supervisor;
 
-public class ModifySubmittedFYPTitleCommand {
+import command.Command;
 
+public class ModifySubmittedFYPTitleCommand implements Command {
+    public void execute() {
+    }
 }

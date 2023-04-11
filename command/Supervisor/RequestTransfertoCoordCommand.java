@@ -1,5 +1,8 @@
 package command.Supervisor;
 
-public class RequestTransfertoCoordCommand {
+import command.Command;
 
+public class RequestTransfertoCoordCommand implements Command {
+    public void execute() {
+    }
 }

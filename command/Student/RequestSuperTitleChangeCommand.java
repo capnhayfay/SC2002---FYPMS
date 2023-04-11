@@ -1,5 +1,8 @@
 package command.Student;
 
-public class RequestSuperTitleChangeCommand {
+import command.Command;
 
+public class RequestSuperTitleChangeCommand implements Command {
+    public void execute() {
+    }
 }

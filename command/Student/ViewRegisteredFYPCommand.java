@@ -1,5 +1,8 @@
 package command.Student;
 
-public class ViewRegisteredFYPCommand {
+import command.Command;
 
+public class ViewRegisteredFYPCommand implements Command {
+    public void execute() {
+    }
 }

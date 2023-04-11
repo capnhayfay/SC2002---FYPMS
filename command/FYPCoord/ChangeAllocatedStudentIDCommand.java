@@ -1,5 +1,10 @@
 package command.FYPCoord;
 
-public class ChangeAllocatedStudentIDCommand {
+import command.Command;
+
+public class ChangeAllocatedStudentIDCommand implements Command {
+    public void execute() {
+
+    }
 
 }

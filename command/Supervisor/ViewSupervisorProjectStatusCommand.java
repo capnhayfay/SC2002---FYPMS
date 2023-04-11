@@ -1,5 +1,8 @@
 package command.Supervisor;
 
-public class ViewSupervisorProjectStatusCommand {
+import command.Command;
 
+public class ViewSupervisorProjectStatusCommand implements Command {
+    public void execute() {
+    }
 }

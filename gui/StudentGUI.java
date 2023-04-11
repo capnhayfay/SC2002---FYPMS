@@ -1,34 +1,38 @@
 package gui;
+
 import account.*;
-import command.student.*;
+import command.ChangePassword;
+import command.Student.*;
 // import system.SystemSettings;
 
 import java.util.Scanner;
 
 /**
- * GUI which is shown to the Customer
+ * GUI which is shown to the Student
  */
-public class StudentGUI implements Menu, Logout, GetCommand{
+public class StudentGUI implements Menu, Logout, GetCommand {
     private Account curAcc;
 
     /**
-     * Creates a CustomerGui with the given Customer Account and Cineplex
+     * Creates a StudentGui with the given Student Account
+     * 
      * @param curAcc which is the Account of the customer
      */
 
-    public StudentGUI(Account curAcc){
+    public StudentGUI(Account curAcc) {
         this.curAcc = curAcc;
     }
+
     /**
-     * Prints list of possible actions that can be performed by Customer
+     * Prints list of possible actions that can be performed by Student
      */
-    public void display(){
-    	System.out.println();
-        //System.out.println("-----------------------------------------");
+    public void display() {
+        System.out.println();
+        // System.out.println("-----------------------------------------");
         System.out.println("=========================================");
         System.out.println("               Student Menu             ");
         System.out.println("=========================================");
-        //System.out.println("-----------------------------------------");
+        // System.out.println("-----------------------------------------");
         System.out.println();
         System.out.println("Logged in as User: " + curAcc.getLoginId());
         System.out.println();
@@ -44,86 +48,90 @@ public class StudentGUI implements Menu, Logout, GetCommand{
         System.out.println("=========================================");
         System.out.println();
     }
+
     /**
      * Gets input from Customer and executes the required instruction
+     * 
      * @return 0 to exit the program entirely, 1 to continue program
      */
-    public int execute(){
+    public int execute() {
         Scanner scanner = new Scanner(System.in);
-        //System.out.print("Please enter the option number: ");
-      //Error handling for invalid input 
-        
+        // System.out.print("Please enter the option number: ");
+        // Error handling for invalid input
+
         System.out.print("Please enter the option number: ");
-        while(true) {
-	        if(!scanner.hasNextInt()) {
-				
-				System.out.println("Invalid input format for option number. Please try again.");
-				System.out.println();
-				System.out.print("Please enter option number again: ");
-				scanner.nextLine();
-				continue;
-			}
-       
-	        int userCh = scanner.nextInt();
-	        scanner.nextLine();
-	        System.out.println();
-	        System.out.println("=========================================");
-	        
-	        if (userCh == 9) {
-	            return 0;
-	        }
+        while (true) {
+            if (!scanner.hasNextInt()) {
 
-        switch (userCh) {
-            case 1:
-                new UserSearchMovieCommand().execute();
-                break;
-            case 2:
-                new UserListMoviesCommand().execute();
-                break;
-            case 3:
-            	System.out.println();
-                break;
-            case 4:
-                break;
-            case 5:
-                break;
-            case 6:
-                new ViewBookingHistoryCommand(curAcc.getName()).execute();
-                break;
-
-            case 7:
-                new ReviewMovieCommand().execute();
-                break;
-
-            case 8:
-                logout();
+                System.out.println("Invalid input format for option number. Please try again.");
                 System.out.println();
-                System.out.println("Logged out successfully.");
-                break;
+                System.out.print("Please enter option number again: ");
+                scanner.nextLine();
+                continue;
+            }
 
-            default:
-                System.out.println();
-                System.out.println("Option number out of range. Please try again.");
-                break;
+            int userCh = scanner.nextInt();
+            scanner.nextLine();
+            System.out.println();
+            System.out.println("=========================================");
+
+            if (userCh == 9) {
+                return 0;
+            }
+
+            switch (userCh) {
+                case 1:
+                    new ViewAllAvailableFYPCommand().execute();
+                    break;
+                case 2:
+                    new RequestCoordFYPCommand().execute();
+                    break;
+                case 3:
+                    new RequestSuperTitleChangeCommand().execute();
+                    break;
+                case 4:
+                    new RequestCoordDeregisterCommand(curAcc.getName()).execute();
+                    break;
+                case 5:
+                    new ViewRegisteredFYPCommand().execute();
+                    break;
+                case 6:
+                    new ViewSelfRequestRecordsCommand(curAcc.getName());
+                    break;
+
+                case 7:
+                    new ChangePassword(curAcc).execute();
+                    break;
+
+                case 8:
+                    logout();
+                    System.out.println();
+                    System.out.println("Logged out successfully.");
+                    break;
+
+                default:
+                    System.out.println();
+                    System.out.println("Option number out of range. Please try again.");
+                    break;
+            }
+            return 1;
         }
-        return 1;
-       }
     }
 
     /**
      * Logout from account by setting Customer Account to null
      */
-    public void logout(){
+    public void logout() {
         this.curAcc = null;
     }
 
     /**
      * Returns Account in CustomerGUI
+     * 
      * @return Account
      */
-    public Account getAccount(){
+    public Account getAccount() {
         return this.curAcc;
     }
-
 
 }

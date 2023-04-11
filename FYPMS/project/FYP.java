@@ -48,6 +48,9 @@ public class FYP {
     public String getTitle() {
         return title;
     }
+    public void setTitle(String title) {
+        this.title = title;
+    }
 
     public void setStatus(FYPStatus status) {
         this.status = status;

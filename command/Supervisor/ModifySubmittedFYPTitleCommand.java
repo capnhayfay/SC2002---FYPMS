@@ -14,6 +14,7 @@ public class ModifySubmittedFYPTitleCommand implements Command {
     }
 
     public void execute() {
+        
         System.out.println();
         project.setTitle(newtitle);
         System.out.println("Title has been change to : "+ newtitle);

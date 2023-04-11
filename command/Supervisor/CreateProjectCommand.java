@@ -26,9 +26,9 @@ public class CreateProjectCommand implements Command {
         String title = sc.nextLine();
         FYPStatus status = FYPStatus.AVAILABLE;
         String studentName = " ";
-        List<String> requestorList = Collections.<String>emptyList();
+        String requester = " ";
         LocalDateTime statusChangeDate = LocalDateTime.now();
-        FYP fyp = new FYP(supervisor, title, status, studentName, requestorList, statusChangeDate);
+        FYP fyp = new FYP(supervisor, title, status, studentName, requester, statusChangeDate);
         fypList.addFYP(fyp);
     }
 }

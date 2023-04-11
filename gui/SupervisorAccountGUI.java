@@ -2,18 +2,18 @@ package gui;
 
 import account.*;
 import java.util.Scanner;
-import command.admin.*;
+import command.Supervisor.*;
 
 /**
- * GUI which is shown to the Cineplex Admin
+ * GUI which is shown to the Supervisor Account
  */
 public class SupervisorAccountGUI implements Menu, Logout, GetCommand {
     private SupervisorAccount supervisor;
 
     /**
-     * Creates a CineplexAdminGui with the given Cineplex Admin Account
+     * Creates a SupervisorGui with the given Supervisor Account
      * 
-     * @param cineplexAdmin which is the Cineplex Admin account
+     * @param supervisor which is the Supervisor account
      */
     public SupervisorAccountGUI(SupervisorAccount supervisor) {
         this.supervisor = supervisor;
@@ -51,7 +51,7 @@ public class SupervisorAccountGUI implements Menu, Logout, GetCommand {
     }
 
     /**
-     * Gets input from Cineplex Admin and executes the required instruction
+     * Gets input from Supervisor and executes the required instruction
      * 
      * @return 0 to exit the program entirely, 1 to continue program
      */
@@ -79,16 +79,48 @@ public class SupervisorAccountGUI implements Menu, Logout, GetCommand {
             }
             switch (userCh) {
                 case 1:
-                    new CreateShowCommand(cineplexAdmin.getCineplex()).execute();
+                    System.out.println("Please input a choie from Create, Update, View");
+                    System.out.println("1. Create Project");
+                    System.out.println("2. Update Project Title");
+                    System.out.println("3. View Projects");
+                    if (!scanner.hasNextInt()) {
+
+                        System.out.println("Invalid input format for option number. Please try again.");
+                        scanner.nextLine();
+                        System.out.println();
+                        System.out.print("Please enter the option number: ");
+                        continue;
+                    }
+                    int selectedChoice = scanner.nextInt();
+                    scanner.nextLine();
+                    switch (selectedChoice) {
+                        case 1:
+                            new CreateProjectCommand(supervisor.getName()).execute();
+                            break;
+                        case 2:
+                            new ModifySubmittedFYPTitleCommand().execute();
+                            break;
+                        case 3:
+                            new ViewSupervisorProjectStatusCommand().execute();
+                            break;
+                    }
                     break;
                 case 2:
-                    new UpdateShowCommand(cineplexAdmin.getCineplex()).execute();
+                    new ViewPendingStudentRequestsCommand().execute();
                     break;
                 case 3:
-                    new DeleteShowCommand(cineplexAdmin.getCineplex()).execute();
+                    // new approveRequest();
                     break;
-
                 case 4:
+                    // new rejectRequest();
+                    break;
+                case 5:
+                    // new viewRequestHistory()
+                    break;
+                case 6:
+                    new RequestTransfertoCoordCommand().execute();
+                    break;
+                case 7:
                     logout();
                     break;
                 default:
@@ -101,18 +133,18 @@ public class SupervisorAccountGUI implements Menu, Logout, GetCommand {
     }
 
     /**
-     * Logout from account by setting Cineplex Admin Account to null
+     * Logout from account by setting Supervisor Account to null
      */
     public void logout() {
-        cineplexAdmin = null;
+        supervisor = null;
     }
 
     /**
-     * Returns Account in CineplexAdminGUI
+     * Returns Account in SupervisorAccountGUI
      * 
      * @return Account
      */
     public Account getAccount() {
-        return this.cineplexAdmin;
+        return this.supervisor;
     }
 }

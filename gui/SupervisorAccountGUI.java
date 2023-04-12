@@ -2,6 +2,8 @@ package gui;
 
 import account.*;
 import java.util.Scanner;
+
+import command.ChangePassword;
 import command.Supervisor.*;
 
 /**
@@ -33,18 +35,16 @@ public class SupervisorAccountGUI implements Menu, Logout, GetCommand {
         System.out.println("Logged in as Supervisor: " + supervisor.getLoginId());
         System.out.println();
         System.out.println("1. Create, update or view projects");
-        if (ViewPendingStudentRequestsCommand.checkUpdates() == 1) {
-            System.out.println("2. View student pending requests (NEW)");
+        if (new ViewPendingStudentRequestsCommand(supervisor.getName()).checkUpdates() == 1) {
+            System.out.println("2. View student pending requests ");
         } else {
             System.out.println("2. View student pending requests");
         }
-        System.out.println("3. Approve request");
-        System.out.println("4. Reject Request");
-        System.out.println("5. Request to transfer student");
-        System.out.println("6. View Request History");
-        System.out.println("7. Change Password");
-        System.out.println("8. Logout");
-        System.out.println("9. Exit");
+        System.out.println("3. Request to transfer student");
+        System.out.println("4. View Request History");
+        System.out.println("5. Change Password");
+        System.out.println("6. Logout");
+        System.out.println("7. Exit");
         System.out.println("=========================================");
         System.out.println();
 
@@ -74,7 +74,7 @@ public class SupervisorAccountGUI implements Menu, Logout, GetCommand {
             System.out.println();
             System.out.println("=========================================");
 
-            if (userCh == 5) {
+            if (userCh == 7) {
                 return 0;
             }
             switch (userCh) {
@@ -107,21 +107,39 @@ public class SupervisorAccountGUI implements Menu, Logout, GetCommand {
                     break;
                 case 2:
                     new ViewPendingStudentRequestsCommand(supervisor.getName()).execute();
+                    System.out.println("Please select your choice");
+                    System.out.println("1. Approve Request");
+                    System.out.println("2. Reject Request");
+                    System.out.println("3. Return to Main Page");
+                    if (!scanner.hasNextInt()) {
+                        System.out.println("Invalid input format for option number. Please try again.");
+                        scanner.nextLine();
+                        System.out.println();
+                        System.out.print("Please enter the option number: ");
+                        continue;
+                    }
+                    int choice2 = scanner.nextInt();
+                    scanner.nextLine();
+                    switch (choice2) {
+                        case 1:
+                            // new approveRequest();
+                            break;
+                        case 2:
+                            // new rejectRequest();
+                            break;
+                        case 3:
+                            break;
+                    }
                     break;
                 case 3:
-                    // new approveRequest();
-                    break;
-                case 4:
-                    // new rejectRequest();
-                    break;
-                case 5:
                     new RequestTransfertoCoordCommand(supervisor.getName()).execute();
                     break;
-                case 6:
+                case 4:
                     // new viewRequestHistory()
-
                     break;
-                case 7:
+                case 5: 
+                    new ChangePassword(supervisor.getName()).execute();
+                case 6:
                     logout();
                     break;
                 default:

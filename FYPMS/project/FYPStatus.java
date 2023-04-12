@@ -5,20 +5,21 @@ package FYPMS.project;
  */
 public enum FYPStatus {
     AVAILABLE("AVAILABLE"),
+    UNAVAILABLE("UNAVAILABLE"),
     RESERVED("RESERVED"),
-    ASSIGNED("ASSIGNED"),
-    REMOVED("PROJECT REMOVED");
+    ASSIGNED("ASSIGNED");
 
     private final String toString;
+
     FYPStatus(String toString) {
         this.toString = toString;
     }
 
-    public static FYPStatus intToEnum(int num){
+    public static FYPStatus intToEnum(int num) {
         return switch (num) {
-            case 1 -> RESERVED;
-            case 2 -> ASSIGNED;
-            case 3 -> REMOVED;
+            case 1 -> UNAVAILABLE;
+            case 2 -> RESERVED;
+            case 3 -> ASSIGNED;
             default -> AVAILABLE;
         };
 

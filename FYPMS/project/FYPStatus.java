@@ -5,9 +5,9 @@ package FYPMS.project;
  */
 public enum FYPStatus {
     AVAILABLE("AVAILABLE"),
-    UNAVAILABLE("UNAVAILABLE"),
     RESERVED("RESERVED"),
-    ASSIGNED("ASSIGNED");
+    UNAVAILABLE("UNAVAILABLE"),
+    ALLOCATED("ALLOCATED");
 
     private final String toString;
 
@@ -17,9 +17,9 @@ public enum FYPStatus {
 
     public static FYPStatus intToEnum(int num) {
         return switch (num) {
-            case 1 -> UNAVAILABLE;
-            case 2 -> RESERVED;
-            case 3 -> ASSIGNED;
+            case 1 -> RESERVED;
+            case 2 -> UNAVAILABLE;
+            case 3 -> ALLOCATED;
             default -> AVAILABLE;
         };
 

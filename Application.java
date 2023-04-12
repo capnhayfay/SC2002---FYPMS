@@ -1,238 +1,113 @@
-// import FYPMS.*;
-// import account.*;
-// import gui.*;
-// import gui.GreetUserMenu;
-// import FYPMS.CSVReader;
-// // import moblima.CSVUpdater;
-// import FYPMS.FYPMS;
-// import FYPMS.student.ticket.MovieTicket;
-// // import system.SystemSettings;
-// import java.io.IOException;
-// import java.time.LocalDateTime;
-// import java.time.format.DateTimeFormatter;
-// import java.util.ArrayList;
-// import java.util.Scanner;
-//
-//
-// public class Application {
-//
-//
-// 	public static void main(String[] args) throws IOException {
-// 		new Application().run();
-// 	}
-//
-// 	public void run() throws IOException {
-//
-// 		SystemSettings ss = new SystemSettings();
-// 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-// 		LocalDateTime dateTime = LocalDateTime.parse("2022-12-25 00:00", formatter);
-// 		SystemSettings.addPublicHoliday(dateTime,"Christmas");
-// 		dateTime = LocalDateTime.parse("2022-10-31 00:00", formatter);
-// 		SystemSettings.addPublicHoliday(dateTime, "Halloween");
-//
-//
-// 		FileReader.readMoviesFromCSV("src/database/movieDB.csv");
-// 		FileReader.readCineplexFromCSV("src/database/CineplexDB.csv");
-// 		FileReader.readReviewFromCsv("src/database/reviewListDB.csv");
-// 		FileReader.readCinemasFromCSV("src/database/CinemaDB.csv");
-// 		FileReader.readAccountsFromCSV("src/database/accountDB.csv", FYPMS.getCineplexList());
-// 		FileReader.readShowsFromCSV("src/database/showDB.csv");
-// 		ArrayList<MovieTicket> movieTicketArrayList =  FileReader.readTicketsFromCSV("src/database/MovieTicketDB.csv");
-// 		FileReader.readBookingsFromCSV("src/database/bookingDB.csv", movieTicketArrayList);
-// 		// load in CSV
-//
-// 		// end of load in CSV
-//
-// 		// Auto update expired movie status
-// 		FYPMS.getMovieList().updateExpiredMovieStatus();
-// 		new GreetUserMenu().display();
-// 		Scanner scanner = new Scanner(System.in);
-// 		int userCh = 0;
-// 		Privilege privilege;
-// 		Cineplex cineplex = null;
-// 		Account curAcc = null;
-//
-// 		System.out.println();
-// 		FYPMS.getCineplexList().listCineplexes();
-//
-// 		while (true) {
-//
-// 			System.out.println();
-// 			System.out.print("Please enter the cineplex location number: ");
-//
-// 			if (!scanner.hasNextInt()) {
-// 				System.out.println("Invalid input format for location number. Please try again.");
-// 				scanner.nextLine();
-// 				continue;
-// 			}
-// 			int locationCh = scanner.nextInt();
-// 			scanner.nextLine();
-// 			cineplex = FYPMS.getCineplexList().getCineplexByIndex(locationCh - 1);
-// 			if (cineplex != null) break;
-// 			System.out.println("Option number out of range. Please try again.");
-// 		}
-//
-// 		System.out.println();
-// 		System.out.println("The location you have chosen is: " + cineplex.getBranchName());
-//
-// 		while (true) {
-// 			if (curAcc == null) {
-// 				GuestGUI guestGUI = new GuestGUI(cineplex, curAcc);
-// 				guestGUI.display();
-// 				if (guestGUI.execute() == 0) {
-// 					break;
-// 				}
-// 				curAcc = guestGUI.getAccount();
-// 				cineplex = guestGUI.getCineplex();
-// 			} else if (curAcc.getPrivilege() == Privilege.User) {
-// 				CustomerGUI customerGUI = new CustomerGUI(cineplex, curAcc);
-// 				customerGUI.display();
-// 				if (customerGUI.execute() == 0) {
-// 					break;
-// 				}
-// 				curAcc = customerGUI.getAccount();
-// 				cineplex = customerGUI.getCineplex();
-// 			} else if (curAcc.getPrivilege() == Privilege.CineplexAdmin) {
-// 				CineplexAdminAccount cineplexAdmin = (CineplexAdminAccount) curAcc;
-// 				CineplexAdminGUI cineplexAdminGUI = new CineplexAdminGUI(cineplexAdmin);
-// 				cineplexAdminGUI.display();
-// 				if(cineplexAdminGUI.execute()==0){
-// 					break;
-// 				}
-// 				curAcc = cineplexAdminGUI.getAccount();
-//
-// 			} else if (curAcc.getPrivilege() == Privilege.CompanyAdmin) {
-// 				CompanyAdminGUI companyAdminGUI = new CompanyAdminGUI(curAcc);
-// 				companyAdminGUI.display();
-// 				if(companyAdminGUI.execute()==0){
-// 					break;
-// 				}
-// 				curAcc = companyAdminGUI.getAccount();
-// 			}
-// 		}
-// 		new EndProgramMenu().display();
-//
-// 		CSVUpdater.updateMovies("src/database/movieDB.csv");
-// 		CSVUpdater.updateCineplex("src/database/CineplexDB.csv");
-// 		CSVUpdater.updateReviewList("src/database/reviewListDB.csv");
-// 		CSVUpdater.updateCinema("src/database/CinemaDB.csv");
-// 		CSVUpdater.updateShows("src/database/showDB.csv");
-// 		CSVUpdater.updateTickets("src/database/MovieTicketDB.csv");
-// 		CSVUpdater.updateBooking("src/database/bookingDB.csv");
-//
-// 	}
-//
-// }
-
+import account.*;
+import gui.*;
 import FYPMS.*;
-import FYPMS.faculty.supervisor.SupervisorList;
-import FYPMS.project.FYPList;
-import FYPMS.request.Request;
-import FYPMS.request.RequestList;
-import FYPMS.student.Student;
-import account.Account;
-import account.StudentAccount;
-import account.UserType;
-import command.ChangePassword;
-import command.FYPCoord.GenerateFilteredProjectDetailsCommand;
-import command.FYPCoord.ViewAllFYPCommand;
-import command.FYPCoord.ViewAllPendingRequestsCommand;
-import command.FYPCoord.ViewAllRequestHistoryCommand;
-import command.Student.RequestCoordDeregisterCommand;
-import command.Student.ViewSelfRequestRecordsCommand;
-import command.Supervisor.CreateProjectCommand;
-import command.Supervisor.ViewSubmittedFYPCommand;
 
+import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Scanner;
 
-import FYPMS.project.*;;
+import FYPMS.FileReader;
+import FYPMS.project.FYP;
+import FYPMS.student.Student;
 
 public class Application {
-	public static void main(String[] args) {
-		// FileReader.readSupervisorFromFile("./database2/faculty_list.txt");
-		// SupervisorList sups = FYPMS.getSupervisorList();
-		// sups.listAllSupervisors();
-		FileReader.readFYPsFromFile("./database2/rollover project.csv");
+	public static void main(String[] args) throws IOException {
+		new Application().run();
+	}
 
-		// // To set all project status as available first
-		// FYPList projects = FYPMS.getFypList();
-		// ArrayList<FYP> fyps = projects.getFYPs();
-		// for (FYP proj : fyps) {
-		// 	proj.setStatus(FYPStatus.AVAILABLE);
-		// 	// System.out.println(proj.getSupervisorName());
-		// 	// proj.printFYPDetails();
-		// }
+	public void run() throws IOException {
 
-		// projects.listAvailableFYPsForStudents();
-		// System.out.println(projects.getFYPs());
-		// projects.listAllFYPsForFaculty();
+		FYPMS fypms = new FYPMS();
 
-		// GenerateFilteredProjectDetailsCommand ------------
-		// GenerateFilteredProjectDetailsCommand test = new
-		// GenerateFilteredProjectDetailsCommand(1,projects); // filter by status
-		// GenerateFilteredProjectDetailsCommand test = new
-		// GenerateFilteredProjectDetailsCommand(2,projects); // filter by supervisor
-		// test.execute();
+		// load in CSV
 
-		// ViewAllFYPCommand
-		// ViewAllFYPCommand test = new ViewAllFYPCommand();
-		// test.execute();
+		FileReader.readSupervisorsFromFile("./database/Modified/faculty_list.txt");
+		FileReader.readCoordinatorsFromFile("./database/Modified/FYP coordinator.txt");
+		FileReader.readStudentsFromFile("./database/Modified/student list.txt");
+		FileReader.readFYPsFromFile("./database/Modified/rollover project.txt");
+		// FileReader.readRequestsFromFile("src/database/Modified/faculty_list.txt");
+		// end of load in CSV
+		Scanner scanner = new Scanner(System.in);
+		String loggedInUserType = "";
+		StudentAccount studentAccount = null;
+		SupervisorAccount supervisorAccount = null;
+		FYPCoordinatorAccount fypCoordinatorAccount = null;
 
-		// ViewAllPendingRequestsCommand
-		// RequestCoordDeregisterCommand test2 = new
-		// RequestCoordDeregisterCommand("zoey");
-		// test2.execute(); // Sample request
-		// ViewAllPendingRequestsCommand view = new ViewAllPendingRequestsCommand();
-		// view.execute();
+		new GreetUserMenu().display();
+		System.out.println();
+		while (true) {
+			if (loggedInUserType == "") {
+				System.out.print("Which type of user are you? ");
+				System.out.println();
+				System.out.println("1. Student");
+				System.out.println("2. Supervisor");
+				System.out.println("3. FYP Coordinator");
+				int choice = scanner.nextInt();
+				switch (choice) {
+					case 1:
+						LoginUserMenu loginStudentUserMenu = new LoginUserMenu(studentAccount);
+						loginStudentUserMenu.display();
+						studentAccount = loginStudentUserMenu.getStudentAccount();
+						if (studentAccount != null) {
+							loggedInUserType = "Student";
+						}
+						break;
+					case 2:
+						LoginUserMenu loginSupervisorUserMenu = new LoginUserMenu(supervisorAccount);
+						loginSupervisorUserMenu.display();
+						supervisorAccount = loginSupervisorUserMenu.getSupervisorAccount();
+						if (supervisorAccount != null) {
+							loggedInUserType = "Supervisor";
+						}
+						break;
+					case 3:
+						LoginUserMenu loginFYPCoordUserMenu = new LoginUserMenu(fypCoordinatorAccount);
+						loginFYPCoordUserMenu.display();
+						fypCoordinatorAccount = loginFYPCoordUserMenu.getFYPCoordinatorAccount();
+						if (fypCoordinatorAccount != null) {
+							loggedInUserType = "FYP Coordinator";
+						}
+						break;
+					default:
+						System.out.println("Invalid choice. Please try again.");
+				}
+			} else if (loggedInUserType == "Student") {
+				StudentGUI studentGUI = new StudentGUI(studentAccount, loggedInUserType);
+				studentGUI.display();
+				if (studentGUI.execute() == 0) {
+					break;
+				}
+				loggedInUserType = studentGUI.getUserType();
+			} else if (loggedInUserType == "Supervisor") {
+				SupervisorAccountGUI supervisorAccountGUI = new SupervisorAccountGUI(supervisorAccount,
+						loggedInUserType);
+				supervisorAccountGUI.display();
+				if (supervisorAccountGUI.execute() == 0) {
+					break;
+				}
+				loggedInUserType = supervisorAccountGUI.getUserType();
+			} else if (loggedInUserType == "FYP Coordinator") {
+				FYPCoordinatorGUI fypCoordinatorGUI = new FYPCoordinatorGUI(fypCoordinatorAccount,
+						loggedInUserType);
+				fypCoordinatorGUI.display();
+				if (fypCoordinatorGUI.execute() == 0) {
+					break;
+				}
+				loggedInUserType = fypCoordinatorGUI.getUserType();
+			}
+		}
+		new EndProgramMenu().display();
 
-		// ViewAllRequestHistoryCommand
-		// RequestCoordDeregisterCommand test2 = new
-		// RequestCoordDeregisterCommand("zoey");
-		// test2.execute(); // Sample request
-		// ViewAllRequestHistoryCommand view = new ViewAllRequestHistoryCommand();
-		// view.execute();
-
-		// Change Password
-		// StudentAccount user = new StudentAccount("zoey", "12345", UserType.Student,
-		// "test@gmail.com", "Zoey Lam");
-		// System.out.println(user.getPassword());
-		// ChangePassword change = new ChangePassword(user);
-		// change.execute();
-		// System.out.println(user.getPassword());
-
-		// Create new project
-		// CreateProjectCommand test = new CreateProjectCommand("Bo An");
-		// test.execute();
-		// for (FYP proj : fyps) {
-		// proj.printFYPDetails();
-		// }
-
-		// // Deregistration request
-		// RequestList Requests = FYPMS.getRequestList();
-		// List<Request> requests = Requests.getRequests();
-		// RequestCoordDeregisterCommand test1 = new RequestCoordDeregisterCommand("jovin");
-		// test1.execute();
-		// RequestCoordDeregisterCommand test2 = new RequestCoordDeregisterCommand("zoey");
-		// test2.execute();
-		// for (Request request : requests) {
-		// request.printDetails();
-		// }
-
-		// View Submitted FYPs
-		// ViewSubmittedFYPCommand test = new ViewSubmittedFYPCommand("Bo An", projects);
-		// test.execute();
-
-		// View Own Requests
-		// RequestList Requests = FYPMS.getRequestList();
-		// RequestCoordDeregisterCommand test1 = new RequestCoordDeregisterCommand("jovin");
-		// test1.execute();
-		// RequestCoordDeregisterCommand test2 = new RequestCoordDeregisterCommand("zoey");
-		// test2.execute();
-		// RequestCoordDeregisterCommand test3 = new RequestCoordDeregisterCommand("jovin");
-		// test3.execute();
-		// ViewSelfRequestRecordsCommand test = new ViewSelfRequestRecordsCommand("jovin", Requests);
-		// test.execute();
+		// CSVUpdater.updateMovies("src/database/movieDB.csv");
+		// CSVUpdater.updateCineplex("src/database/CineplexDB.csv");
+		// CSVUpdater.updateReviewList("src/database/reviewListDB.csv");
+		// CSVUpdater.updateCinema("src/database/CinemaDB.csv");
+		// CSVUpdater.updateShows("src/database/showDB.csv");
+		// CSVUpdater.updateTickets("src/database/MovieTicketDB.csv");
+		// CSVUpdater.updateBooking("src/database/bookingDB.csv");
 
 	}
+
 }

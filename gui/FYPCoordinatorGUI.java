@@ -16,14 +16,16 @@ import java.util.Scanner;
  */
 public class FYPCoordinatorGUI implements Menu, Logout, GetCommand {
     private FYPCoordinatorAccount FYPCoordinator;
+    private String UserType;
 
     /**
      * Creates a CompanyAdminGui with the given Company Admin Account
      * 
      * @param curAcc which is the Company Admin Account
      */
-    public FYPCoordinatorGUI(FYPCoordinatorAccount FYPCoordinator) {
+    public FYPCoordinatorGUI(FYPCoordinatorAccount FYPCoordinator, String UserType) {
         this.FYPCoordinator = FYPCoordinator;
+        this.UserType = UserType;
     }
 
     /**
@@ -213,7 +215,7 @@ public class FYPCoordinatorGUI implements Menu, Logout, GetCommand {
                     }
                     break;
                 case 6:
-                    //new ChangePassword().execute();
+                    // new ChangePassword().execute();
                     break;
                 case 7:
                     logout();
@@ -230,7 +232,8 @@ public class FYPCoordinatorGUI implements Menu, Logout, GetCommand {
      * Logout from account by setting FYP Coordinator Account to null
      */
     public void logout() {
-        FYPCoordinator = null;
+        this.FYPCoordinator = null;
+        this.UserType = null;
     }
 
     /**
@@ -240,5 +243,9 @@ public class FYPCoordinatorGUI implements Menu, Logout, GetCommand {
      */
     public Account getAccount() {
         return FYPCoordinator;
+    }
+
+    public String getUserType() {
+        return UserType;
     }
 }

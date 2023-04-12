@@ -3,7 +3,6 @@ package gui;
 import account.*;
 import java.util.Scanner;
 
-import command.ChangePassword;
 import command.Supervisor.*;
 
 /**
@@ -11,14 +10,16 @@ import command.Supervisor.*;
  */
 public class SupervisorAccountGUI implements Menu, Logout, GetCommand {
     private SupervisorAccount supervisor;
+    private String UserType;
 
     /**
      * Creates a SupervisorGui with the given Supervisor Account
      * 
      * @param supervisor which is the Supervisor account
      */
-    public SupervisorAccountGUI(SupervisorAccount supervisor) {
+    public SupervisorAccountGUI(SupervisorAccount supervisor, String UserType) {
         this.supervisor = supervisor;
+        this.UserType = UserType;
     }
 
     /**
@@ -137,8 +138,8 @@ public class SupervisorAccountGUI implements Menu, Logout, GetCommand {
                 case 4:
                     // new viewRequestHistory()
                     break;
-                case 5: 
-                    //new ChangePassword().execute();
+                case 5:
+                    // new ChangePassword().execute();
                     break;
                 case 6:
                     logout();
@@ -157,6 +158,7 @@ public class SupervisorAccountGUI implements Menu, Logout, GetCommand {
      */
     public void logout() {
         supervisor = null;
+        this.UserType = null;
     }
 
     /**
@@ -166,5 +168,9 @@ public class SupervisorAccountGUI implements Menu, Logout, GetCommand {
      */
     public Account getAccount() {
         return this.supervisor;
+    }
+
+    public String getUserType() {
+        return UserType;
     }
 }

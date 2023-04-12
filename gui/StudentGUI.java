@@ -13,7 +13,8 @@ import FYPMS.student.Student;
  * GUI which is shown to the Student
  */
 public class StudentGUI implements Menu, Logout, GetCommand {
-    private Account curAcc;
+    private StudentAccount curAcc;
+    private String UserType;
 
     /**
      * Creates a StudentGui with the given Student Account
@@ -21,8 +22,9 @@ public class StudentGUI implements Menu, Logout, GetCommand {
      * @param curAcc which is the Account of the customer
      */
 
-    public StudentGUI(Account curAcc) {
+    public StudentGUI(StudentAccount curAcc, String UserType) {
         this.curAcc = curAcc;
+        this.UserType = UserType;
     }
 
     /**
@@ -89,8 +91,8 @@ public class StudentGUI implements Menu, Logout, GetCommand {
                     if (!(curAcc instanceof StudentAccount))
                         break;
                     else {
-                        //how  Student student = new Student(curAcc.getName(),curAcc.getEmail());
-                        //new RequestCoordFYPCommand(student.getStatus()).execute();
+                        // how Student student = new Student(curAcc.getName(),curAcc.getEmail());
+                        // new RequestCoordFYPCommand(student.getStatus()).execute();
                         break;
                     }
                 case 3:
@@ -114,7 +116,8 @@ public class StudentGUI implements Menu, Logout, GetCommand {
                     logout();
                     System.out.println();
                     System.out.println("Logged out successfully.");
-                    break;
+                    System.out.println();
+                    return 1;
 
                 default:
                     System.out.println();
@@ -130,6 +133,7 @@ public class StudentGUI implements Menu, Logout, GetCommand {
      */
     public void logout() {
         this.curAcc = null;
+        this.UserType = "";
     }
 
     /**
@@ -139,6 +143,10 @@ public class StudentGUI implements Menu, Logout, GetCommand {
      */
     public Account getAccount() {
         return this.curAcc;
+    }
+
+    public String getUserType() {
+        return UserType;
     }
 
 }

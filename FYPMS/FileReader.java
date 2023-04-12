@@ -89,10 +89,10 @@ public class FileReader {
         }
     }
 
-    public static void readSupervisorFromFile(String fileName) {
+    public static void readSupervisorsFromFile(String fileName) {
         Path pathToFile = Paths.get(fileName);
 
-        ArrayList<SupervisorAccount> studentList = FYPMS.getSupervisorList();
+        ArrayList<SupervisorAccount> supervisorList = FYPMS.getSupervisorList();
 
         try (BufferedReader br = Files.newBufferedReader(pathToFile, StandardCharsets.UTF_8)) {
             String line = br.readLine();
@@ -103,14 +103,14 @@ public class FileReader {
                 String name = attributes[0];
                 String email = attributes[1];
                 String password = "password";
-                if (!attributes[2].isEmpty()) {
+                if (attributes.length > 2) {
                     password = attributes[2];
                 }
                 int atIndex = email.indexOf("@");
                 String userId = email.substring(0, atIndex);
                 SupervisorAccount student = new SupervisorAccount(userId, password, userType, email, name);
 
-                studentList.add(student);
+                supervisorList.add(student);
                 line = br.readLine();
             }
 
@@ -119,10 +119,10 @@ public class FileReader {
         }
     }
 
-    public static void readCoordinatorFromFile(String fileName) {
+    public static void readCoordinatorsFromFile(String fileName) {
         Path pathToFile = Paths.get(fileName);
 
-        ArrayList<FYPCoordinatorAccount> studentList = FYPMS.getCoordinatorList();
+        ArrayList<FYPCoordinatorAccount> fypCoordinatorList = FYPMS.getCoordinatorList();
 
         try (BufferedReader br = Files.newBufferedReader(pathToFile, StandardCharsets.UTF_8)) {
             String line = br.readLine();
@@ -133,14 +133,14 @@ public class FileReader {
                 String name = attributes[0];
                 String email = attributes[1];
                 String password = "password";
-                if (!attributes[2].isEmpty()) {
+                if (attributes.length > 2) {
                     password = attributes[2];
                 }
                 int atIndex = email.indexOf("@");
                 String userId = email.substring(0, atIndex);
                 FYPCoordinatorAccount student = new FYPCoordinatorAccount(userId, password, userType, email, name);
 
-                studentList.add(student);
+                fypCoordinatorList.add(student);
                 line = br.readLine();
             }
 
@@ -149,7 +149,7 @@ public class FileReader {
         }
     }
 
-    public static void readStudentFromFile(String fileName) {
+    public static void readStudentsFromFile(String fileName) {
         Path pathToFile = Paths.get(fileName);
 
         ArrayList<StudentAccount> studentList = FYPMS.getStudentList();
@@ -163,7 +163,7 @@ public class FileReader {
                 String name = attributes[0];
                 String email = attributes[1];
                 String password = "password";
-                if (!attributes[2].isEmpty()) {
+                if (attributes.length > 2) {
                     password = attributes[2];
                 }
                 int atIndex = email.indexOf("@");

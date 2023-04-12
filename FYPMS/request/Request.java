@@ -90,11 +90,15 @@ public class Request {
         return requesterName;
     }
 
+    public String getRequesteeName() {
+        return requestee;
+    }
+
     public LocalDateTime getStatusChangeTime() {
         return statusChangeTime;
     }
 
-    public RequestStatus getRequestStatus(){
+    public RequestStatus getRequestStatus() {
         return requestStatus;
     }
 }

@@ -1,5 +1,6 @@
 package command.FYPCoord;
 
+import FYPMS.FYPMS;
 import FYPMS.project.*;
 import command.Command;
 
@@ -9,13 +10,11 @@ import java.util.Map;
 import java.util.Scanner;
 import java.util.TreeMap;
 
-public class GenerateFilteredProjectDetailsCommand implements Command{
+public class GenerateFilteredProjectDetailsCommand implements Command {
     private FYPStatus filter;
-    private FYPList projects;
     private int filterType;
 
-    public GenerateFilteredProjectDetailsCommand(int filterType, FYPList projects) {
-        this.projects = projects;
+    public GenerateFilteredProjectDetailsCommand(int filterType) {
         this.filterType = filterType;
     }
 
@@ -24,6 +23,7 @@ public class GenerateFilteredProjectDetailsCommand implements Command{
         int selection;
         Scanner sc = new Scanner(System.in);
         int fypCount = 1;
+        FYPList projects = FYPMS.getFypList();
         ArrayList<FYP> fyps = projects.getFYPs();
         switch (filterType) {
             // Filter by status
@@ -39,28 +39,27 @@ public class GenerateFilteredProjectDetailsCommand implements Command{
                 System.out.println("Enter the number of your choice:");
                 System.out.println("==================================");
 
-
-                while(!validInput){
+                while (!validInput) {
                     try {
                         selection = sc.nextInt();
-                        if (selection < 5 & selection >= 1){
+                        if (selection < 5 & selection >= 1) {
                             validInput = true;
-                            switch (selection){
-                                case 1: 
-                                    this.filter = FYPStatus.RESERVED; 
+                            switch (selection) {
+                                case 1:
+                                    this.filter = FYPStatus.RESERVED;
                                     break;
                                 case 2:
-                                    this.filter = FYPStatus.ASSIGNED; 
+                                    this.filter = FYPStatus.ASSIGNED;
                                     break;
                                 case 3:
-                                    this.filter = FYPStatus.REMOVED; 
+                                    this.filter = FYPStatus.REMOVED;
                                     break;
                                 case 4:
-                                    this.filter = FYPStatus.AVAILABLE; 
+                                    this.filter = FYPStatus.AVAILABLE;
                                     break;
                             }
                         }
-                    } catch (InputMismatchException e){
+                    } catch (InputMismatchException e) {
                         System.out.print("Your selection can only be an integer!");
                     }
                 }
@@ -89,12 +88,12 @@ public class GenerateFilteredProjectDetailsCommand implements Command{
                 Map<Integer, String> supervisorMapIdx = new TreeMap<>();
                 // Map<String, Integer> supervisorMapIdx= new HashMap<>();
                 for (FYP fyp : fyps) {
-                    if (!supervisorMapIdx.containsValue(fyp.getSupervisorName())){
+                    if (!supervisorMapIdx.containsValue(fyp.getSupervisorName())) {
                         supervisorMapIdx.put(i, fyp.getSupervisorName());
                         i++;
                     }
                 }
- 
+
                 for (Map.Entry<Integer, String> pair : supervisorMapIdx.entrySet()) {
                     System.out.print("(" + pair.getKey() + ") ");
                     System.out.println(pair.getValue());
@@ -102,18 +101,18 @@ public class GenerateFilteredProjectDetailsCommand implements Command{
                 System.out.println();
                 System.out.println("Enter the number of your choice:");
                 System.out.println("==================================");
-                while(!validInput){
+                while (!validInput) {
                     try {
                         selection = sc.nextInt();
-                        if (selection < i & selection >= 1){
+                        if (selection < i & selection >= 1) {
                             validInput = true;
-                            for(Map.Entry<Integer, String> pair : supervisorMapIdx.entrySet()){
-                                if(pair.getKey() == selection){
+                            for (Map.Entry<Integer, String> pair : supervisorMapIdx.entrySet()) {
+                                if (pair.getKey() == selection) {
                                     supervisorName = pair.getValue();
                                 }
                             }
                         }
-                    } catch (InputMismatchException e){
+                    } catch (InputMismatchException e) {
                         System.out.print("Your selection can only be an integer!");
                     }
                 }

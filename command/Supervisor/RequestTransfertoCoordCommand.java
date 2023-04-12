@@ -3,8 +3,6 @@ package command.Supervisor;
 import java.time.LocalDateTime;
 import command.Command;
 import FYPMS.FYPMS;
-import FYPMS.project.*;
-import FYPMS.faculty.supervisor.*;
 import FYPMS.request.*;
 
 public class RequestTransfertoCoordCommand implements Command {

@@ -93,7 +93,7 @@ public class StudentGUI implements Menu, Logout, GetCommand {
                     new RequestCoordDeregisterCommand(curAcc.getName()).execute();
                     break;
                 case 5:
-                    new ViewRegisteredFYPCommand().execute();
+                    new ViewRegisteredFYPCommand(curAcc.getName()).execute();
                     break;
                 case 6:
                     new ViewSelfRequestRecordsCommand(curAcc.getName());

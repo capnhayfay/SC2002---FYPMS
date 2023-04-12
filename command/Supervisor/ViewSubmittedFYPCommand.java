@@ -2,21 +2,21 @@ package command.Supervisor;
 
 import java.util.ArrayList;
 
+import FYPMS.FYPMS;
 import FYPMS.project.FYP;
 import FYPMS.project.FYPList;
 import command.Command;
 
 public class ViewSubmittedFYPCommand implements Command {
     private String Supervisor;
-    private FYPList projects;
 
-    public ViewSubmittedFYPCommand(String Supervisor, FYPList projects) {
+    public ViewSubmittedFYPCommand(String Supervisor) {
         this.Supervisor = Supervisor;
-        this.projects = projects;
     }
 
     public void execute() {
         int fypCount = 1;
+        FYPList projects = FYPMS.getFypList();
         ArrayList<FYP> fyps = projects.getFYPs();
         System.out.println();
         System.out.println("List of all Final Year Projects");

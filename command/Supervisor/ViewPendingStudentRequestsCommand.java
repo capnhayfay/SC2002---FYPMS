@@ -1,17 +1,15 @@
 package command.Supervisor;
 
 import command.Command;
-import java.util.ArrayList;
 
+import FYPMS.FYPMS;
 import FYPMS.request.*;
 
 public class ViewPendingStudentRequestsCommand implements Command {
     private String Supervisor;
-    private RequestList requests;
 
-    public ViewPendingStudentRequestsCommand(String Supervisor, RequestList requests){
+    public ViewPendingStudentRequestsCommand(String Supervisor) {
         this.Supervisor = Supervisor;
-        this.requests = requests;
     }
 
     public void execute() {
@@ -21,7 +19,7 @@ public class ViewPendingStudentRequestsCommand implements Command {
         System.out.println("Pending Request");
         System.out.println();
         for (Request request : requests) {
-            if () {
+            if (request.getRequesteeName().equals(Supervisor)) {
                 System.out.println("============= Request No. " + RequestCount++ + " ==============");
                 request.printDetails();
                 System.out.println();

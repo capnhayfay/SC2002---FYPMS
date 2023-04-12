@@ -79,7 +79,7 @@ public class SupervisorAccountGUI implements Menu, Logout, GetCommand {
             }
             switch (userCh) {
                 case 1:
-                    System.out.println("Please input a choice from Create, Update, View");
+                    System.out.println("Please input a choice from Create, Update, and View Projects");
                     System.out.println("1. Create Project");
                     System.out.println("2. Update Project Title");
                     System.out.println("3. View Projects");
@@ -101,12 +101,12 @@ public class SupervisorAccountGUI implements Menu, Logout, GetCommand {
                             new ModifySubmittedFYPTitleCommand().execute();
                             break;
                         case 3:
-                            new ViewSupervisorProjectStatusCommand(supervisor.getName(),).execute();
+                            new ViewSubmittedFYPCommand(supervisor.getName()).execute();
                             break;
                     }
                     break;
                 case 2:
-                    new ViewPendingStudentRequestsCommand().execute();
+                    new ViewPendingStudentRequestsCommand(supervisor.getName()).execute();
                     break;
                 case 3:
                     // new approveRequest();
@@ -115,7 +115,7 @@ public class SupervisorAccountGUI implements Menu, Logout, GetCommand {
                     // new rejectRequest();
                     break;
                 case 5:
-                    new RequestTransfertoCoordCommand().execute();
+                    new RequestTransfertoCoordCommand(supervisor.getName()).execute();
                     break;
                 case 6:
                     // new viewRequestHistory()

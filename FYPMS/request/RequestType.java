@@ -1,10 +1,8 @@
 package FYPMS.request;
 
-/**
- * Represents the class level of a request hall
- */
 public enum RequestType {
-    STUDENTSupervisor,
-    STUDENTCoordinator,
-    SUPERVISORCoordinator
+    REGISTER_PROJECT,
+    DEREGISTER_PROJECT,
+    CHANGE_TITLE,
+    TRANSFER_SUPERVISOR,
 }

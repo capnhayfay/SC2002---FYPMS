@@ -93,7 +93,7 @@ public class FileReader {
             while (line != null) {
                 String[] attributes = line.split("\\t");
                 String requesterName = attributes[0];
-                RequestType requestType = Request.convertToRequestType(attributes[1]);
+                RequestRelationship requestType = Request.convertToRequestType(attributes[1]);
                 LocalDateTime statusChangeTime = LocalDateTime.now();
                 String requestee = attributes[3];
                 RequestStatus requestStatus = Request.convertToRequestStatus(attributes[4]);

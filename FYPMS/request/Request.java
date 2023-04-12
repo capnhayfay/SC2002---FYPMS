@@ -7,12 +7,11 @@ import java.time.LocalDateTime;
  */
 public class Request {
 
-    private static final int currentCode = 1;
-    private final String requesterName;
-    private final RequestType requestType; // enum
-    private final LocalDateTime statusChangeTime;
-    private final String requestee;
-    private final RequestStatus requestStatus; // enum
+    private final String requesterID;
+    private final String requesteeID;
+    private final RequestStatus requestStatus;
+    private final RequestRelationship requestRelationship; // enum
+    private final RequestType requestType;
 
     /**
      * Creates a request object for FYPMS requests
@@ -23,13 +22,13 @@ public class Request {
      * @param requestee
      * @param requestStatus
      */
-    public Request(String requesterName, RequestType requestType, LocalDateTime statusChangeTime, String requestee,
-            RequestStatus requestStatus) {
-        this.requesterName = requesterName;
-        this.requestType = requestType;
-        this.statusChangeTime = statusChangeTime;
-        this.requestee = requestee;
+    public Request(String requesterID, String requesteeID,
+            RequestStatus requestStatus, RequestRelationship requestRelationship, RequestType requestType) {
+        this.requesterID = requesterID;
+        this.requesteeID = requesteeID;
         this.requestStatus = requestStatus;
+        this.requestRelationship = requestRelationship;
+        this.requestType = requestType;
     }
 
     public static RequestStatus convertToRequestStatus(String classLevel) {
@@ -45,9 +44,9 @@ public class Request {
      * Prints the details of this instance of the request
      */
     public void printDetails() {
-        System.out.println("Requester: " + requesterName);
-        System.out.println("Request Class: " + requestType);
-        System.out.println("Time of Last Update: " + statusChangeTime);
+        System.out.println("Requester: " + requesterID);
+        System.out.println("Requestee: " + requesteeID);
+        System.out.println("Request Type: " + requestType);
         System.out.println("Request Status: " + requestStatus);
         System.out.println();
     }
@@ -58,11 +57,11 @@ public class Request {
      * @param classLevel Class of request in string form
      * @return RequestType enum
      */
-    public static RequestType convertToRequestType(String classLevel) {
+    public static RequestRelationship convertToRequestType(String classLevel) {
         return switch (classLevel.toLowerCase()) {
-            case "studentcoord" -> RequestType.STUDENTCoordinator;
-            case "studentsupervisor" -> RequestType.STUDENTSupervisor;
-            case "supervisorcoordinator" -> RequestType.SUPERVISORCoordinator;
+            case "studentcoord" -> RequestRelationship.STUDENTCoordinator;
+            case "studentsupervisor" -> RequestRelationship.STUDENTSupervisor;
+            case "supervisorcoordinator" -> RequestRelationship.SUPERVISORCoordinator;
             default -> null;
         };
     }
@@ -73,7 +72,7 @@ public class Request {
      * @param requestType RequestType enum
      * @return Class of request in string form
      */
-    public static String convertRequestTypeToString(RequestType requestType) {
+    public static String convertRequestTypeToString(RequestRelationship requestType) {
         return switch (requestType) {
             case STUDENTSupervisor -> "StudentSupervisor";
             case STUDENTCoordinator -> "StudentCoordinator";
@@ -82,20 +81,16 @@ public class Request {
         };
     }
 
-    public RequestType getRequestType() {
-        return requestType;
+    public RequestRelationship getRequestRelationship() {
+        return requestRelationship;
     }
 
-    public String getRequesterName() {
-        return requesterName;
+    public String getRequesterID() {
+        return requesterID;
     }
 
-    public String getRequesteeName() {
-        return requestee;
-    }
-
-    public LocalDateTime getStatusChangeTime() {
-        return statusChangeTime;
+    public String getRequesteeID() {
+        return requesteeID;
     }
 
     public RequestStatus getRequestStatus() {

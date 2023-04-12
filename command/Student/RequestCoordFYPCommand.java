@@ -7,7 +7,7 @@ import FYPMS.FYPMS;
 import FYPMS.request.Request;
 import FYPMS.request.RequestList;
 import FYPMS.request.RequestStatus;
-import FYPMS.request.RequestType;
+import FYPMS.request.RequestRelationship;
 import FYPMS.student.Student;
 import FYPMS.student.StudentStatus;
 import command.Command;
@@ -37,7 +37,7 @@ public class RequestCoordFYPCommand implements Command {
         System.out.println("Input project ID: ");
         int ID = sc.nextInt();
         LocalDateTime statusChangeTime = LocalDateTime.now();
-        Request request = new Request(student.getName(), RequestType.STUDENTCoordinator, statusChangeTime,
+        Request request = new Request(student.getName(), RequestRelationship.STUDENTCoordinator, statusChangeTime,
                 "FYP Coordinator", RequestStatus.PENDING);
         RequestList.add(request);
         // where to input project id for request lmao

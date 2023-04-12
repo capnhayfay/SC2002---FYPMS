@@ -6,7 +6,7 @@ import FYPMS.FYPMS;
 import FYPMS.request.Request;
 import FYPMS.request.RequestList;
 import FYPMS.request.RequestStatus;
-import FYPMS.request.RequestType;
+import FYPMS.request.RequestRelationship;
 import command.Command;
 
 public class RequestCoordDeregisterCommand implements Command {
@@ -20,7 +20,7 @@ public class RequestCoordDeregisterCommand implements Command {
 
     public void execute() {
         LocalDateTime statusChangeTime = LocalDateTime.now();
-        Request request = new Request(requesterName, RequestType.STUDENTCoordinator, statusChangeTime,
+        Request request = new Request(requesterName, RequestRelationship.STUDENTCoordinator, statusChangeTime,
                 "FYP Coordinator", RequestStatus.PENDING);
         RequestList.add(request);
     }

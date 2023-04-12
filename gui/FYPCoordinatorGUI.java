@@ -39,10 +39,10 @@ public class FYPCoordinatorGUI implements Menu, Logout, GetCommand {
         System.out.println("Logged in as FYP Coordinator: " + FYPCoordinator.getLoginId());
         System.out.println();
         System.out.println("1. Create, update or view projects");
-        if (true) {
-            System.out.println("2. View pending requests");
-        } else {
+        if (ViewPendingStudentRequestsCommand.checkUpdates() == 1) {
             System.out.println("2. View student pending requests (NEW)");
+        } else {
+            System.out.println("2. View student pending requests");
         }
         System.out.println("3. Request to transfer student");
         System.out.println("4. View Request History");

@@ -19,12 +19,21 @@ public class ViewPendingStudentRequestsCommand implements Command {
         System.out.println("Pending Request");
         System.out.println();
         for (Request request : requests) {
-            if (request.getRequesteeName().equals(Supervisor)) {
+            if (request.getRequesteeName().equals(Supervisor) && request.getRequestStatus() == RequestStatus.PENDING) {
                 System.out.println("============= Request No. " + RequestCount++ + " ==============");
                 request.printDetails();
                 System.out.println();
             }
         }
+    }
 
+    public static int checkUpdates() {
+        RequestList requests = FYPMS.getRequestList();
+        for (Request request : requests) {
+            if (request.getRequesteeName().equals(Supervisor) && request.getRequestStatus() == RequestStatus.PENDING) {
+                return 1;
+            }
+        }
+        return 0;
     }
 }

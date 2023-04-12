@@ -11,10 +11,10 @@ import FYPMS.request.RequestStatus;
 public class ViewAllPendingRequestsCommand implements Command {
 
     public void execute(){
-        RequestList test0 = FYPMS.getRequestList();
-		for (Request tes : test0) {
-			if(tes.getRequestStatus() == RequestStatus.PENDING)
-                tes.printDetails();
+        RequestList requests = FYPMS.getRequestList();
+		for (Request request : requests) {
+			if(request.getRequestStatus() == RequestStatus.PENDING)
+                request.printDetails();
 		}
     }
 }

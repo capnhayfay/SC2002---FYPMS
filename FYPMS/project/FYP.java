@@ -26,7 +26,7 @@ public class FYP {
      *                         ASSIGNED.
      * @param studentName      The name of the student assigned to the project (if
      *                         status is ASSIGNED). Defaults to null.
-     * @param requester        The name of students who have requested the project.
+     * @param requestorList        The name of students who have requested the project.
      * @param statusChangeDate The date of the last change of the project status.
      *                         The first date is constant.
      */

@@ -42,7 +42,7 @@ public class FileReader {
                 String title = attributes[1];
                 FYPStatus status = FYP.convertToFYPStatus(attributes[2]);
                 String studentName = attributes[3];
-                List<String> requestorList = List.of(attributes[4].split(";"));
+                String requestorList = attributes[4];
                 LocalDateTime statusChangeDate = LocalDateTime.now();
                 FYP fyp = new FYP(supervisor, title, status, studentName, requestorList, statusChangeDate);
                 fypList.addFYP(fyp);

@@ -10,9 +10,9 @@ public class ViewAllRequestHistoryCommand implements Command{
 
     }
     public void execute(){
-        RequestList test0 = FYPMS.getRequestList();
-		for (Request tes : test0) {
-			tes.printDetails();
+        RequestList requests = FYPMS.getRequestList();
+		for (Request request : requests) {
+			request.printDetails();
 		}
     }
 }

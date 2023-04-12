@@ -2,19 +2,18 @@ package command.FYPCoord;
 
 import FYPMS.project.*;
 import command.Command;
+import FYPMS.FYPMS;
 
 public class ViewAllFYPCommand implements Command{
-    private FYPList projects;
 
-    public ViewAllFYPCommand(FYPList projects) {
-        this.projects = projects;
-    }
+    public ViewAllFYPCommand() {}
 
     public void execute() {
         // Available Projects
 
         //
         // int fypCount = 1;
+        FYPList projects = FYPMS.getFypList();
         projects.listAllFYPsForFaculty();
         // ArrayList<FYP> fyps = projects.getFYPs();
         // System.out.println();

@@ -156,13 +156,13 @@ public class Application {
 		FileReader.readFYPsFromFile("./database2/rollover project.csv");
 
 		// // To set all project status as available first
-		FYPList projects = FYPMS.getFypList();
-		ArrayList<FYP> fyps = projects.getFYPs();
-		for (FYP proj : fyps) {
-			proj.setStatus(FYPStatus.AVAILABLE);
-			// System.out.println(proj.getSupervisorName());
-			// proj.printFYPDetails();
-		}
+		// FYPList projects = FYPMS.getFypList();
+		// ArrayList<FYP> fyps = projects.getFYPs();
+		// for (FYP proj : fyps) {
+		// 	proj.setStatus(FYPStatus.AVAILABLE);
+		// 	// System.out.println(proj.getSupervisorName());
+		// 	// proj.printFYPDetails();
+		// }
 
 		// projects.listAvailableFYPsForStudents();
 		// System.out.println(projects.getFYPs());
@@ -176,7 +176,7 @@ public class Application {
 		// test.execute();
 
 		// ViewAllFYPCommand
-		// ViewAllFYPCommand test = new ViewAllFYPCommand(projects);
+		// ViewAllFYPCommand test = new ViewAllFYPCommand();
 		// test.execute();
 
 		// ViewAllPendingRequestsCommand

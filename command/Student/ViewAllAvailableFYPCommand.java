@@ -5,7 +5,7 @@ import FYPMS.FYPMS;
 import command.Command;
 
 public class ViewAllAvailableFYPCommand implements Command {
-    public ViewAllAvailableFYPCommand() { // what constructor
+    public ViewAllAvailableFYPCommand() {
 
     }
 

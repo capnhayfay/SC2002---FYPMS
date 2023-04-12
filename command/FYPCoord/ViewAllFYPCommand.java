@@ -1,12 +1,14 @@
 package command.FYPCoord;
 
+import FYPMS.FYPMS;
 import FYPMS.project.*;
 import command.Command;
 import FYPMS.FYPMS;
 
-public class ViewAllFYPCommand implements Command{
+public class ViewAllFYPCommand implements Command {
 
-    public ViewAllFYPCommand() {}
+    public ViewAllFYPCommand() {
+    }
 
     public void execute() {
         // Available Projects
@@ -17,16 +19,19 @@ public class ViewAllFYPCommand implements Command{
         projects.listAllFYPsForFaculty();
         // ArrayList<FYP> fyps = projects.getFYPs();
         // System.out.println();
-        // System.out.println("List of " + filter.toString().toLowerCase() + " Final Year Projects");
+        // System.out.println("List of " + filter.toString().toLowerCase() + " Final
+        // Year Projects");
         // System.out.println();
         // for (FYP fyp : fyps) {
-        //     if (fyp.getStatus() == filter) {
-        //         System.out.println("============= FYP No. " + fypCount++ + " ==============");
-        //         fyp.printFYPDetails();
-        //         System.out.println();
-        //     }
+        // if (fyp.getStatus() == filter) {
+        // System.out.println("============= FYP No. " + fypCount++ + "
+        // ==============");
+        // fyp.printFYPDetails();
+        // System.out.println();
         // }
-        // System.out.println("===== There are " + (fypCount - 1) + " Final Year Projects "
-        //         + filter.toString().toLowerCase() + "! =====");
+        // }
+        // System.out.println("===== There are " + (fypCount - 1) + " Final Year
+        // Projects "
+        // + filter.toString().toLowerCase() + "! =====");
     }
 }

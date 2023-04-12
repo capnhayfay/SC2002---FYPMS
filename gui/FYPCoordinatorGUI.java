@@ -2,6 +2,7 @@ package gui;
 
 import account.*;
 import command.FYPCoord.GenerateFilteredProjectDetailsCommand;
+import command.FYPCoord.ViewAllFYPCommand;
 import command.FYPCoord.ViewAllRequestHistoryCommand;
 import command.Supervisor.CreateProjectCommand;
 import command.Supervisor.ModifySubmittedFYPTitleCommand;
@@ -39,7 +40,7 @@ public class FYPCoordinatorGUI implements Menu, Logout, GetCommand {
         System.out.println("Logged in as FYP Coordinator: " + FYPCoordinator.getLoginId());
         System.out.println();
         System.out.println("1. Create, update or view projects");
-        if (ViewPendingStudentRequestsCommand.checkUpdates() == 1) {
+        if (new ViewPendingStudentRequestsCommand(FYPCoordinator.getName()).checkUpdates() == 1) {
             System.out.println("2. View student pending requests (NEW)");
         } else {
             System.out.println("2. View student pending requests");
@@ -86,7 +87,8 @@ public class FYPCoordinatorGUI implements Menu, Logout, GetCommand {
                     System.out.println("Please input a choice from Create, Update, and View Projects");
                     System.out.println("1. Create Project");
                     System.out.println("2. Update Project Title");
-                    System.out.println("3. View Projects");
+                    System.out.println("3. View own Projects");
+                    System.out.println("3. View all Projects");
                     if (!scanner.hasNextInt()) {
 
                         System.out.println("Invalid input format for option number. Please try again.");
@@ -106,6 +108,9 @@ public class FYPCoordinatorGUI implements Menu, Logout, GetCommand {
                             break;
                         case 3:
                             new ViewSubmittedFYPCommand(FYPCoordinator.getName()).execute();
+                            break;
+                        case 4:
+                            new ViewAllFYPCommand().execute();
                             break;
                     }
                     break;
@@ -207,6 +212,7 @@ public class FYPCoordinatorGUI implements Menu, Logout, GetCommand {
                             break;
                     }
                     break;
+                
                 default:
                     break;
             }

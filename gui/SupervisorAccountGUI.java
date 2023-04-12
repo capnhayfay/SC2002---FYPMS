@@ -32,7 +32,7 @@ public class SupervisorAccountGUI implements Menu, Logout, GetCommand {
         System.out.println();
         System.out.println("Logged in as Supervisor: " + supervisor.getLoginId());
         System.out.println();
-        System.out.println("1. Create/update/view projects");
+        System.out.println("1. Create, update or view projects");
         if (true) {
             System.out.println("2. View student pending requests");
         } else {
@@ -79,7 +79,7 @@ public class SupervisorAccountGUI implements Menu, Logout, GetCommand {
             }
             switch (userCh) {
                 case 1:
-                    System.out.println("Please input a choie from Create, Update, View");
+                    System.out.println("Please input a choice from Create, Update, View");
                     System.out.println("1. Create Project");
                     System.out.println("2. Update Project Title");
                     System.out.println("3. View Projects");
@@ -101,7 +101,7 @@ public class SupervisorAccountGUI implements Menu, Logout, GetCommand {
                             new ModifySubmittedFYPTitleCommand().execute();
                             break;
                         case 3:
-                            new ViewSupervisorProjectStatusCommand().execute();
+                            new ViewSupervisorProjectStatusCommand(supervisor.getName(),).execute();
                             break;
                     }
                     break;
@@ -115,10 +115,11 @@ public class SupervisorAccountGUI implements Menu, Logout, GetCommand {
                     // new rejectRequest();
                     break;
                 case 5:
-                    // new viewRequestHistory()
+                    new RequestTransfertoCoordCommand().execute();
                     break;
                 case 6:
-                    new RequestTransfertoCoordCommand().execute();
+                    // new viewRequestHistory()
+
                     break;
                 case 7:
                     logout();

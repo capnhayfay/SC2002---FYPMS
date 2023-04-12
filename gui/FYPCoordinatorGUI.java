@@ -1,6 +1,7 @@
 package gui;
 
 import account.*;
+import command.Supervisor.ModifySubmittedFYPTitleCommand;
 import command.admin.*;
 import moblima.SilverVillage;
 import system.SystemSettings;
@@ -35,12 +36,18 @@ public class FYPCoordinatorGUI implements Menu, Logout, GetCommand {
         System.out.println();
         System.out.println("Logged in as FYP Coordinator: " + FYPCoordinator.getLoginId());
         System.out.println();
-        System.out.println("1. Create movie listing");
-        System.out.println("2. Update movie listing");
-        System.out.println("3. Remove movie listing");
-        System.out.println("4. Configure system settings");
-        System.out.println("5. Logout");
-        System.out.println("6. Exit");
+        System.out.println("1. Create, update or view projects");
+        if (true) {
+            System.out.println("2. View pending requests");
+        } else {
+            System.out.println("2. View student pending requests (NEW)");
+        }
+        System.out.println("3. Request to transfer student");
+        System.out.println("4. View Request History");
+        System.out.println("5. View Project by Filters");
+        System.out.println("6. Change Password");
+        System.out.println("7. Logout");
+        System.out.println("8. Exit");
         System.out.println("=========================================");
         System.out.println();
     }
@@ -60,6 +67,7 @@ public class FYPCoordinatorGUI implements Menu, Logout, GetCommand {
                 System.out.println("Invalid input format for option number. Please try again.");
                 scanner.nextLine();
                 System.out.println();
+                System.out.print("Please enter the option number: ");
                 continue;
             }
 
@@ -68,40 +76,94 @@ public class FYPCoordinatorGUI implements Menu, Logout, GetCommand {
             System.out.println();
             System.out.println("=========================================");
 
-            if (userCh == 6) {
+            if (userCh == 8) {
                 return 0;
             }
             switch (userCh) {
                 case 1:
-                    new CreateMovieListingCommand().execute();
-                    SilverVillage.getMovieList().listMoviesForAdmin();
+                    System.out.println("Please input a choice from Create, Update, View");
+                    System.out.println("1. Create Project");
+                    System.out.println("2. Update Project Title");
+                    System.out.println("3. View Projects");
+                    if (!scanner.hasNextInt()) {
+
+                        System.out.println("Invalid input format for option number. Please try again.");
+                        scanner.nextLine();
+                        System.out.println();
+                        System.out.print("Please enter the option number: ");
+                        continue;
+                    }
+                    int selectedChoice = scanner.nextInt();
+                    scanner.nextLine();
+                    switch (selectedChoice) {
+                        case 1:
+                            new CreateProjectCommand(FYPCoordinator.getName()).execute();
+                            break;
+                        case 2:
+                            new ModifySubmittedFYPTitleCommand().execute();
+                            break;
+                        case 3:
+                            new ViewSupervisorProjectStatusCommand().execute();
+                            break;
+                    }
                     break;
                 case 2:
-                    new UpdateMovieListingCommand().execute();
+                    new ViewPendingStudentRequestsCommand().execute();
+                    System.out.println("Please select your choice");
+                    System.out.println("1. Approve Request");
+                    System.out.println("2. Reject Request");
+                    System.out.println("3. Return to Main Page");
+                    if (!scanner.hasNextInt()) {
+                        System.out.println("Invalid input format for option number. Please try again.");
+                        scanner.nextLine();
+                        System.out.println();
+                        System.out.print("Please enter the option number: ");
+                        continue;
+                    }
+                    int choice2 = scanner.nextInt();
+                    scanner.nextLine();
+                    switch (choice2) {
+                        case 1:
+                            // new approveRequest();
+                            break;
+                        case 2:
+                            // new rejectRequest();
+                            break;
+                        case 3:
+                            break;
+                    }
                     break;
-
                 case 3:
-                    new DeleteMovieListingCommand().execute();
-
+                    new RequestTransfertoCoordCommand().execute();
                     break;
 
                 case 4:
-                    System.out.println();
-                    SystemSettings.printSettings();
-                    CompanySettingsGUI companySettingsGUI = new CompanySettingsGUI();
-                    companySettingsGUI.display();
-                    companySettingsGUI.execute();
+                    // new viewRequestHistory()
                     break;
 
                 case 5:
-                    curAcc = null;
-                    System.out.println();
-                    System.out.println("Logged out successfully.");
+                    System.out.println("Please select your choice");
+                    System.out.println("1. Filter by Supervisor");
+                    System.out.println("2. Filter by Status");
+                    if (!scanner.hasNextInt()) {
+                        System.out.println("Invalid input format for option number. Please try again.");
+                        scanner.nextLine();
+                        System.out.println();
+                        System.out.print("Please enter the option number: ");
+                        continue;
+                    }
+                    int FilterChoice = scanner.nextInt();
+                    scanner.nextLine();
+                    switch (FilterChoice) {
+                        case 1:
+                            GenerateFilteredProjectDetailsCommand(1, projects); // filter by status
+                            break;
+                        case 2:
+                            GenerateFilteredProjectDetailsCommand(2, projects); // filter by supervisor
+                            break;
+                    }
                     break;
-
                 default:
-                    System.out.println();
-                    System.out.println("Option number out of range. Please try again.");
                     break;
             }
             return 1;
@@ -109,18 +171,18 @@ public class FYPCoordinatorGUI implements Menu, Logout, GetCommand {
     }
 
     /**
-     * Logout from account by setting Cineplex Admin Account to null
+     * Logout from account by setting FYP Coordinator Account to null
      */
     public void logout() {
-        curAcc = null;
+        FYPCoordinator = null;
     }
 
     /**
-     * Returns Account in CompanyAdminGUI
+     * Returns Account in FYP Coordinator
      * 
      * @return Account
      */
     public Account getAccount() {
-        return curAcc;
+        return FYPCoordinator;
     }
 }

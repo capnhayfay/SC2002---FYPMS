@@ -27,7 +27,7 @@ public class ViewPendingStudentRequestsCommand implements Command {
         }
     }
 
-    public static int checkUpdates() {
+    public int checkUpdates() {
         RequestList requests = FYPMS.getRequestList();
         for (Request request : requests) {
             if (request.getRequesteeName().equals(Supervisor) && request.getRequestStatus() == RequestStatus.PENDING) {

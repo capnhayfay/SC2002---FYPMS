@@ -31,10 +31,10 @@ public class GenerateFilteredProjectDetailsCommand implements Command {
                 System.out.println();
                 System.out.println("==================================");
                 System.out.println("Filter by:");
-                System.out.println("(1) Reserved");
-                System.out.println("(2) Assigned");
-                System.out.println("(3) Removed");
-                System.out.println("(4) Available");
+                System.out.println("(1) Available");
+                System.out.println("(2) Reserved");
+                System.out.println("(3) Unavailable");
+                System.out.println("(4) Allocated");
                 System.out.println();
                 System.out.println("Enter the number of your choice:");
                 System.out.println("==================================");
@@ -46,16 +46,16 @@ public class GenerateFilteredProjectDetailsCommand implements Command {
                             validInput = true;
                             switch (selection) {
                                 case 1:
-                                    this.filter = FYPStatus.RESERVED;
+                                    this.filter = FYPStatus.AVAILABLE;
                                     break;
                                 case 2:
-                                    this.filter = FYPStatus.ASSIGNED;
+                                    this.filter = FYPStatus.RESERVED;
                                     break;
                                 case 3:
-                                    this.filter = FYPStatus.REMOVED;
+                                    this.filter = FYPStatus.UNAVAILABLE;
                                     break;
                                 case 4:
-                                    this.filter = FYPStatus.AVAILABLE;
+                                    this.filter = FYPStatus.ALLOCATED;
                                     break;
                             }
                         }

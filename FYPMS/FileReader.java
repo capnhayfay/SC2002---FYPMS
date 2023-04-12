@@ -44,14 +44,36 @@ public class FileReader {
             String line = br.readLine();
             line = br.readLine();
             while (line != null) {
+                FYP fyp = null;
                 String[] attributes = line.split("\\t");
-                String supervisor = attributes[0];
-                String title = attributes[1];
-                FYPStatus status = FYP.convertToFYPStatus(attributes[2]);
-                String studentName = attributes[3];
-                String requestorList = attributes[4];
-                LocalDateTime statusChangeDate = LocalDateTime.now();
-                FYP fyp = new FYP(supervisor, title, status, studentName, requestorList, statusChangeDate);
+                int projectId = Integer.parseInt(attributes[0]);
+                String supervisor = attributes[1];
+                String supervisorEmail = "";
+                for (SupervisorAccount s : FYPMS.getSupervisorList()) {
+                    if (s.getName().equals(supervisor)) {
+                        supervisorEmail = s.getEmail();
+                        break;
+                    }
+                }
+                String title = attributes[2];
+                FYPStatus status = FYP.convertToFYPStatus("");
+
+                if (attributes.length > 3) {
+                    status = FYP.convertToFYPStatus(attributes[3]);
+                    if (attributes.length > 4) {
+                        String student = attributes[4];
+                        String studentEmail = "";
+                        for (StudentAccount s : FYPMS.getStudentList()) {
+                            if (s.getName().equals(student)) {
+                                studentEmail = s.getEmail();
+                                break;
+                            }
+                        }
+                        fyp = new FYP(projectId, supervisor, supervisorEmail, student, studentEmail, title, status);
+                    }
+                } else {
+                    fyp = new FYP(projectId, supervisor, supervisorEmail, title, status);
+                }
                 fypList.addFYP(fyp);
                 line = br.readLine();
             }

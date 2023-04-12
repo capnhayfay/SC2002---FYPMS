@@ -8,14 +8,13 @@ import java.util.List;
  */
 public class FYP {
 
-    private static int currentId = 1;
     private int projectId;
     private String supervisorName;
-    private String title;
-    private FYPStatus status;
+    private String supervisorEmail;
+    private String projecTitle;
     private String studentName;
-    private String requester;
-    private LocalDateTime statusChangeDate;
+    private String studentEmail;
+    private FYPStatus status;
 
     /**
      * Creates an instance of the FYP class.
@@ -26,19 +25,27 @@ public class FYP {
      *                         ASSIGNED.
      * @param studentName      The name of the student assigned to the project (if
      *                         status is ASSIGNED). Defaults to null.
-     * @param requestorList        The name of students who have requested the project.
+     * @param requestorList    The name of students who have requested the project.
      * @param statusChangeDate The date of the last change of the project status.
      *                         The first date is constant.
      */
-    public FYP(String supervisorName, String title, FYPStatus status, String studentName, String requester,
-            LocalDateTime statusChangeDate) {
-        this.projectId = currentId++;
+    public FYP(int projectId, String supervisorName, String supervisorEmail, String projecTitle, FYPStatus status) {
+        this.projectId = projectId;
         this.supervisorName = supervisorName;
-        this.title = title;
+        this.supervisorEmail = supervisorEmail;
+        this.projecTitle = projecTitle;
         this.status = status;
+    }
+
+    public FYP(int projectId, String supervisorName, String supervisorEmail, String studentName, String studentEmail,
+            String projecTitle, FYPStatus status) {
+        this.projectId = projectId;
+        this.supervisorName = supervisorName;
+        this.supervisorEmail = supervisorEmail;
         this.studentName = studentName;
-        this.requester = requester;
-        this.statusChangeDate = statusChangeDate;
+        this.studentEmail = studentEmail;
+        this.projecTitle = projecTitle;
+        this.status = status;
     }
 
     public int getProjectId() {
@@ -46,10 +53,11 @@ public class FYP {
     }
 
     public String getTitle() {
-        return title;
+        return projecTitle;
     }
+
     public void setTitle(String title) {
-        this.title = title;
+        this.projecTitle = projecTitle;
     }
 
     public void setStatus(FYPStatus status) {
@@ -76,13 +84,13 @@ public class FYP {
         return studentName;
     }
 
-    public String getRequesterList() {
-        return requester;
-    }
+    // public String getRequesterList() {
+    // return requester;
+    // }
 
-    public LocalDateTime getStatusChangeDate() {
-        return statusChangeDate;
-    }
+    // public LocalDateTime getStatusChangeDate() {
+    // return statusChangeDate;
+    // }
 
     /**
      * Prints the details of the instance of FYP.
@@ -90,11 +98,10 @@ public class FYP {
     public void printFYPDetails() {
         System.out.println();
         System.out.println("Project ID: " + projectId);
-        System.out.println("Title: " + title);
+        System.out.println("Supervisor Name: " + supervisorName);
+        System.out.println("Supervisor Email: " + supervisorEmail);
+        System.out.println("Project Title: " + projecTitle);
         System.out.println("Status: " + status);
-        System.out.println("Project Coordinator: " + supervisorName);
-        System.out.println("Assigned Student: " + studentName);
-        System.out.println("Last Status Change Date: " + statusChangeDate);
         System.out.println("-----------------------------------------");
     }
 
@@ -107,10 +114,10 @@ public class FYP {
      */
     public static FYPStatus convertToFYPStatus(String fypStatus) {
         return switch (fypStatus.toLowerCase()) {
-            case "available" -> FYPStatus.AVAILABLE;
             case "reserved" -> FYPStatus.RESERVED;
-            case "assigned" -> FYPStatus.ASSIGNED;
-            default -> null;
+            case "unavailable" -> FYPStatus.UNAVAILABLE;
+            case "allocated" -> FYPStatus.ALLOCATED;
+            default -> FYPStatus.AVAILABLE;
         };
     }
 }

@@ -138,7 +138,8 @@ public class SupervisorAccountGUI implements Menu, Logout, GetCommand {
                     // new viewRequestHistory()
                     break;
                 case 5: 
-                    new ChangePassword(supervisor.getName()).execute();
+                    //new ChangePassword().execute();
+                    break;
                 case 6:
                     logout();
                     break;

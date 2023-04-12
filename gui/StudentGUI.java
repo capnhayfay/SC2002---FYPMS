@@ -7,6 +7,8 @@ import command.Student.*;
 
 import java.util.Scanner;
 
+import FYPMS.student.Student;
+
 /**
  * GUI which is shown to the Student
  */
@@ -84,10 +86,15 @@ public class StudentGUI implements Menu, Logout, GetCommand {
                     new ViewAllAvailableFYPCommand().execute();
                     break;
                 case 2:
-                    new RequestCoordFYPCommand().execute();
-                    break;
+                    if (!(curAcc instanceof StudentAccount))
+                        break;
+                    else {
+                        //how  Student student = new Student(curAcc.getName(),curAcc.getEmail());
+                        //new RequestCoordFYPCommand(student.getStatus()).execute();
+                        break;
+                    }
                 case 3:
-                    new RequestSuperTitleChangeCommand().execute();
+                    // new RequestSuperTitleChangeCommand(curAcc.getName()).execute();
                     break;
                 case 4:
                     new RequestCoordDeregisterCommand(curAcc.getName()).execute();

@@ -212,7 +212,12 @@ public class FYPCoordinatorGUI implements Menu, Logout, GetCommand {
                             break;
                     }
                     break;
-                
+                case 6:
+                    //new ChangePassword().execute();
+                    break;
+                case 7:
+                    logout();
+                    break;
                 default:
                     break;
             }

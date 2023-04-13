@@ -109,6 +109,7 @@ public class StudentGUI implements Menu, Logout, GetCommand {
 
                 case 7:
                     new ChangePassword(curAcc).execute();
+                    logout();
                     break;
 
                 case 8:

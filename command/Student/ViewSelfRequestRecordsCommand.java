@@ -26,5 +26,8 @@ public class ViewSelfRequestRecordsCommand implements Command {
                 System.out.println();
             }
         }
+        if(RequestCount == 1){
+            System.out.println("You have no requests.");
+        }
     }
 }

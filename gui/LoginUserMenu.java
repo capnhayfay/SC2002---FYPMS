@@ -43,7 +43,6 @@ public class LoginUserMenu implements Menu, Login {
             String password = scanner.nextLine();
             if (userType == UserType.Student) {
                 studentAccount = loginStudent(userLogin, password);
-                System.out.println("student account is " + studentAccount);
                 if (studentAccount == null) {
                     System.out.println("Invalid Details. Please try again.");
                     continue;

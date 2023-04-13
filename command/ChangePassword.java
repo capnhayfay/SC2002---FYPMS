@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 import account.Account;
 
-public class ChangePassword implements Command {
+public class ChangePassword implements Command{
     private Account user;
 
     public ChangePassword(Account user) {

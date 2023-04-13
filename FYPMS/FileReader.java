@@ -45,8 +45,12 @@ public class FileReader {
                 int projectId = Integer.parseInt(attributes[0]);
                 String supervisor = attributes[1];
                 String title = attributes[2];
-                FYPStatus status = FYP.convertToFYPStatus(attributes[3]);
-                String studentID = attributes[4];
+                FYPStatus status = FYPStatus.StringtoStatus(attributes[3]);
+                String studentID = null;
+                if(attributes[4].length() > 4){
+                    studentID = attributes[4];
+                }  
+
                 fyp = new FYP(projectId, supervisor, studentID, title, status);
                 fypList.addFYP(fyp);
                 line = br.readLine();

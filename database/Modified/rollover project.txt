@@ -1,17 +1,17 @@
 ProjectID	Supervisor	Title	Status	Student
-1	A S Madhukumar	Machine Learning-based Interference Mitigation in a Multi-tier Networks		
-2	A S Madhukumar	Deep Learning-Driven Edge Caching for 5G-and-Beyond Industrial IoT Networks		
-3	Alexei Sourin	Sonification of geometry 1		
-4	Arvind Easwaran	Edge/Cloud Resource Management for Time-Sensitive Applications (2)		
-5	Bo An	Deep Reinforcement Learning for Complex Environment		
-6	Bo An	Build Software Agents for Power Trading Agent Competition		
-7	Bo An	Designing Negotiation Agents to Parcitipate in International Competition		
-8	Cai Wentong	Creation of Meta-model for Agent-based Simulation Using Machine Learning Approach		
-9	Chen Change Loy	Encoding Images to Text Prompts with CLIP		
-10	Chia Liang Tien	Smart Monitor for Studio Photographer		
-11	Cong Gao	Developing a demonstration system for spatial data exploration and visualization 		
-12	Cong Gao	Deep Learning Supported Location-aware Keyword Query		
-13	Douglas Leslie Maskell	An AI based Li-ion fast battery charger for power tools		
-14	Douglas Leslie Maskell	A Li-ion fast battery charger		
-15	Dusit Niyato	Metaverse for virtual education 1		
-16	"Ke Yiping, Kelly"	Graph-based Deep Models for Image Semantic Segmentation		
+1	A S Madhukumar	Machine Learning-based Interference Mitigation in a Multi-tier Networks	AVAILABLE	0
+2	A S Madhukumar	Deep Learning-Driven Edge Caching for 5G-and-Beyond Industrial IoT Networks	AVAILABLE	0
+3	Alexei Sourin	Sonification of geometry 1	AVAILABLE	0
+4	Arvind Easwaran	Edge/Cloud Resource Management for Time-Sensitive Applications (2)	AVAILABLE	0
+5	Bo An	Deep Reinforcement Learning for Complex Environment	AVAILABLE	0
+6	Bo An	Build Software Agents for Power Trading Agent Competition	AVAILABLE	0
+7	Bo An	Designing Negotiation Agents to Parcitipate in International Competition	AVAILABLE	0
+8	Cai Wentong	Creation of Meta-model for Agent-based Simulation Using Machine Learning Approach	AVAILABLE	0
+9	Chen Change Loy	Encoding Images to Text Prompts with CLIP	AVAILABLE	0
+10	Chia Liang Tien	Smart Monitor for Studio Photographer	AVAILABLE	0
+11	Cong Gao	Developing a demonstration system for spatial data exploration and visualization 	AVAILABLE	0
+12	Cong Gao	Deep Learning Supported Location-aware Keyword Query	AVAILABLE	0
+13	Douglas Leslie Maskell	An AI based Li-ion fast battery charger for power tools	AVAILABLE	0
+14	Douglas Leslie Maskell	A Li-ion fast battery charger	AVAILABLE	0
+15	Dusit Niyato	Metaverse for virtual education 1	AVAILABLE	0
+16	"Ke Yiping, Kelly"	Graph-based Deep Models for Image Semantic Segmentation	AVAILABLE	0

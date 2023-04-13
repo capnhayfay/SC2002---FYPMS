@@ -20,7 +20,6 @@ public class ViewRegisteredFYPCommand implements Command {
         FYPList projects = FYPMS1.getFypList();
         ArrayList<FYP> fyps = projects.getFYPs();
         System.out.println();
-        System.out.println(studentAccount.getStatus());
         if (studentAccount.getStatus() == StudentStatus.NO_PROJECT) {
             System.out.println("Error: You are not registered for any FYP.");
             return;

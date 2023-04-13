@@ -95,13 +95,13 @@ public class StudentGUI implements Menu, Logout, GetCommand {
                         break;
                     }
                 case 3:
-                    // new RequestSuperTitleChangeCommand(curAcc.getName()).execute();
+                    new ViewRegisteredFYPCommand(curAcc).execute();
                     break;
                 case 4:
-                    new RequestCoordDeregisterCommand(curAcc).execute();
+                    new RequestSuperTitleChangeCommand(curAcc).execute();
                     break;
                 case 5:
-                    new ViewRegisteredFYPCommand(curAcc).execute();
+                    new RequestCoordDeregisterCommand(curAcc).execute();
                     break;
                 case 6:
                     new ViewSelfRequestRecordsCommand(curAcc).execute();

@@ -4,15 +4,6 @@ import account.Account;
 import account.UserType;
 
 public class StudentAccount extends Account {
-    /**
-     * Creates CustomerAccount with given parameters
-     * @param userId which is the login ID of Customer
-     * @param password which is the password of Customer
-     * @param userType which is the UserType of Customer
-     * @param emailAddress which is the email address of Customer
-     * @param name which is the name of Customer
-     */
-
 
     public StudentAccount(String userId, String password, UserType userType, String emailAddress, String name, int assignedProject, StudentStatus studentStatus){
         super(userId, password,userType,emailAddress,name);

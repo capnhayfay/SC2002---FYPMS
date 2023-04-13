@@ -15,7 +15,7 @@ import command.Command;
 public class RequestSuperTitleChangeCommand implements Command {
     private StudentAccount student;
 
-    RequestSuperTitleChangeCommand(StudentAccount currentAcc) {
+    public RequestSuperTitleChangeCommand(StudentAccount currentAcc) {
         this.student = currentAcc;
     }
 

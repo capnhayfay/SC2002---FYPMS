@@ -1,4 +1,4 @@
-package FYPMS.student;
+package account.student;
 
 /**
  * Represents the status of studnent
@@ -17,13 +17,13 @@ public enum StudentStatus {
         this.toString = toString;
     }
 
-    public static StudentStatus intToEnum(int num) {
-        return switch (num) {
-            case 1 -> ASSIGNED_PROJECT;
-            case 2 -> REQUESTED_PROJECT;
-            case 3 -> REQUESTED_CHANGE;
-            case 4 -> REQUESTED_DEREGISTER;
-            case 5 -> DEREGISTERED_PROJECT;
+    public static StudentStatus StudentStatusToEnum(String status) {
+        return switch (status) {
+            case "ASSIGNED_PROJECT" -> ASSIGNED_PROJECT;
+            case "REQUESTED_PROJECT" -> REQUESTED_PROJECT;
+            case "REQUESTED_CHANGE" -> REQUESTED_CHANGE;
+            case "REQUESTED_DEREGISTER" -> REQUESTED_DEREGISTER;
+            case "DEREGISTERED_PROJECT" -> DEREGISTERED_PROJECT;
             default -> NO_PROJECT;
         };
 

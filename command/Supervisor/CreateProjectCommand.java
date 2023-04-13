@@ -1,11 +1,9 @@
 package command.Supervisor;
 
 import java.time.LocalDateTime;
-import java.util.Collections;
-import java.util.List;
 import java.util.Scanner;
 
-import FYPMS.FYPMS;
+import FYPMS.FYPMS1;
 import FYPMS.project.FYP;
 import FYPMS.project.FYPList;
 import FYPMS.project.FYPStatus;
@@ -18,7 +16,7 @@ public class CreateProjectCommand implements Command {
         this.supervisor = supervisor;
     }
 
-    FYPList fypList = FYPMS.getFypList();
+    FYPList fypList = FYPMS1.getFypList();
 
     public void execute() {
         Scanner sc = new Scanner(System.in);
@@ -28,7 +26,7 @@ public class CreateProjectCommand implements Command {
         String studentName = " ";
         String requester = " ";
         LocalDateTime statusChangeDate = LocalDateTime.now();
-        FYP fyp = new FYP(supervisor, title, status, studentName, requester, statusChangeDate);
+        FYP fyp = new FYP(fypList.getFYPs().size()+1, supervisor, , status, , requester, statusChangeDate);
         fypList.addFYP(fyp);
     }
 }

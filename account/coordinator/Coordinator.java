@@ -1,4 +1,4 @@
-package FYPMS.faculty.coordinator;
+package account.coordinator;
 
 /**
  * Represents a Coordinator for Final Year Projects
@@ -19,19 +19,5 @@ public class Coordinator {
         this.email = email;
     }
 
-    /**
-     * Prints the details of this instance of the Coordinator
-     */
-    public void printDetails() {
-        System.out.println("Coordinator name: " + name);
-        System.out.println("Email: " + email);
-        System.out.println();
-    }
-    public String getName() {
-        return name;
-    }
 
-    public String getEmail() {
-        return email;
-    }
 }

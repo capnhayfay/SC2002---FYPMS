@@ -2,7 +2,7 @@ package command.Supervisor;
 
 import java.time.LocalDateTime;
 import command.Command;
-import FYPMS.FYPMS;
+import FYPMS.FYPMS1;
 import FYPMS.request.*;
 
 public class RequestTransfertoCoordCommand implements Command {
@@ -12,7 +12,7 @@ public class RequestTransfertoCoordCommand implements Command {
         this.requester = requester;
     }
 
-    RequestList RequestList = FYPMS.getRequestList();
+    RequestList RequestList = FYPMS1.getRequestList();
 
     public void execute() {
         LocalDateTime statusChangeTime = LocalDateTime.now();

@@ -1,6 +1,7 @@
 package gui;
 
 import account.*;
+import account.coordinator.FYPCoordinatorAccount;
 import command.FYPCoord.GenerateFilteredProjectDetailsCommand;
 import command.FYPCoord.ViewAllFYPCommand;
 import command.FYPCoord.ViewAllRequestHistoryCommand;

@@ -9,7 +9,7 @@ public class EndProgramMenu implements Menu {
      */
     public void display() {
         System.out.println();
-        System.out.println("Thank you for using FYPMS. Have a nice day!");
+        System.out.println("Thank you for using FYPMS1. Have a nice day!");
         System.out.println();
         System.out.println("=========================================");
     }

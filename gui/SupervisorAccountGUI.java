@@ -3,6 +3,7 @@ package gui;
 import account.*;
 import java.util.Scanner;
 
+import account.supervisor.SupervisorAccount;
 import command.Supervisor.*;
 
 /**

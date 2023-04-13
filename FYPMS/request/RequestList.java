@@ -23,7 +23,7 @@ public class RequestList implements Iterable<Request> {
      * 
      * @param request The request to add
      */
-    public void add(Request request) {
+    public static void add(Request request) {
         requests.add(request);
     }
 

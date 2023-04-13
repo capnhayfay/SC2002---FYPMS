@@ -1,11 +1,11 @@
-// import FYPMS.*;
+// import FYPMS1.*;
 // import account.*;
 // import gui.*;
 // import gui.GreetUserMenu;
-// import FYPMS.CSVReader;
+// import FYPMS1.CSVReader;
 // // import moblima.CSVUpdater;
-// import FYPMS.FYPMS;
-// import FYPMS.student.ticket.MovieTicket;
+// import FYPMS1.FYPMS1;
+// import FYPMS1.student.ticket.MovieTicket;
 // // import system.SystemSettings;
 // import java.io.IOException;
 // import java.time.LocalDateTime;
@@ -35,7 +35,7 @@
 // 		FileReader.readCineplexFromCSV("src/database/CineplexDB.csv");
 // 		FileReader.readReviewFromCsv("src/database/reviewListDB.csv");
 // 		FileReader.readCinemasFromCSV("src/database/CinemaDB.csv");
-// 		FileReader.readAccountsFromCSV("src/database/accountDB.csv", FYPMS.getCineplexList());
+// 		FileReader.readAccountsFromCSV("src/database/accountDB.csv", FYPMS1.getCineplexList());
 // 		FileReader.readShowsFromCSV("src/database/showDB.csv");
 // 		ArrayList<MovieTicket> movieTicketArrayList =  FileReader.readTicketsFromCSV("src/database/MovieTicketDB.csv");
 // 		FileReader.readBookingsFromCSV("src/database/bookingDB.csv", movieTicketArrayList);
@@ -44,7 +44,7 @@
 // 		// end of load in CSV
 //
 // 		// Auto update expired movie status
-// 		FYPMS.getMovieList().updateExpiredMovieStatus();
+// 		FYPMS1.getMovieList().updateExpiredMovieStatus();
 // 		new GreetUserMenu().display();
 // 		Scanner scanner = new Scanner(System.in);
 // 		int userCh = 0;
@@ -53,7 +53,7 @@
 // 		Account curAcc = null;
 //
 // 		System.out.println();
-// 		FYPMS.getCineplexList().listCineplexes();
+// 		FYPMS1.getCineplexList().listCineplexes();
 //
 // 		while (true) {
 //
@@ -67,7 +67,7 @@
 // 			}
 // 			int locationCh = scanner.nextInt();
 // 			scanner.nextLine();
-// 			cineplex = FYPMS.getCineplexList().getCineplexByIndex(locationCh - 1);
+// 			cineplex = FYPMS1.getCineplexList().getCineplexByIndex(locationCh - 1);
 // 			if (cineplex != null) break;
 // 			System.out.println("Option number out of range. Please try again.");
 // 		}
@@ -125,38 +125,18 @@
 // }
 
 import FYPMS.*;
-import FYPMS.faculty.supervisor.SupervisorList;
-import FYPMS.project.FYPList;
-import FYPMS.request.Request;
-import FYPMS.request.RequestList;
-import FYPMS.student.Student;
-import account.Account;
-import account.StudentAccount;
-import account.UserType;
-import command.ChangePassword;
-import command.FYPCoord.GenerateFilteredProjectDetailsCommand;
-import command.FYPCoord.ViewAllFYPCommand;
-import command.FYPCoord.ViewAllPendingRequestsCommand;
-import command.FYPCoord.ViewAllRequestHistoryCommand;
-import command.Student.RequestCoordDeregisterCommand;
-import command.Student.ViewSelfRequestRecordsCommand;
-import command.Supervisor.CreateProjectCommand;
-import command.Supervisor.ViewSubmittedFYPCommand;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import FYPMS.project.*;;
+;
 
 public class ApplicationTest {
 	public static void main(String[] args) {
 		// FileReader.readSupervisorFromFile("./database2/faculty_list.txt");
-		// SupervisorList sups = FYPMS.getSupervisorList();
+		// SupervisorList sups = FYPMS1.getSupervisorList();
 		// sups.listAllSupervisors();
 		FileReader.readFYPsFromFile("./database2/rollover project.csv");
 
 		// // To set all project status as available first
-		// FYPList projects = FYPMS.getFypList();
+		// FYPList projects = FYPMS1.getFypList();
 		// ArrayList<FYP> fyps = projects.getFYPs();
 		// for (FYP proj : fyps) {
 		// proj.setStatus(FYPStatus.AVAILABLE);
@@ -194,7 +174,7 @@ public class ApplicationTest {
 		// view.execute();
 
 		// Change Password
-		// StudentAccount user = new StudentAccount("zoey", "12345", UserType.Student,
+		// StudentAccount user = new StudentAccount("zoey", "12345", UserType.StudentAccount,
 		// "test@gmail.com", "Zoey Lam");
 		// System.out.println(user.getPassword());
 		// ChangePassword change = new ChangePassword(user);
@@ -209,7 +189,7 @@ public class ApplicationTest {
 		// }
 
 		// // Deregistration request
-		// RequestList Requests = FYPMS.getRequestList();
+		// RequestList Requests = FYPMS1.getRequestList();
 		// List<Request> requests = Requests.getRequests();
 		// RequestCoordDeregisterCommand test1 = new
 		// RequestCoordDeregisterCommand("jovin");
@@ -227,7 +207,7 @@ public class ApplicationTest {
 		// test.execute();
 
 		// View Own Requests
-		// RequestList Requests = FYPMS.getRequestList();
+		// RequestList Requests = FYPMS1.getRequestList();
 		// RequestCoordDeregisterCommand test1 = new
 		// RequestCoordDeregisterCommand("jovin");
 		// test1.execute();

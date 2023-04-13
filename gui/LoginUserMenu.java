@@ -2,13 +2,12 @@ package gui;
 
 import java.util.Scanner;
 
+import FYPMS.FYPMS1;
 import account.Account;
-import account.StudentAccount;
-import account.FYPCoordinatorAccount;
-import account.SupervisorAccount;
+import account.student.StudentAccount;
+import account.coordinator.FYPCoordinatorAccount;
+import account.supervisor.SupervisorAccount;
 import account.UserType;
-
-import FYPMS.FYPMS;
 
 /**
  * Displayed at start of program
@@ -80,7 +79,7 @@ public class LoginUserMenu implements Menu, Login {
      * @return Account if login successful, null if not successful
      */
     public StudentAccount loginStudent(String username, String password) {
-        return FYPMS.loginStudent(username, password);
+        return FYPMS1.loginStudent(username, password);
     }
 
     /**
@@ -92,7 +91,7 @@ public class LoginUserMenu implements Menu, Login {
      * @return Account if login successful, null if not successful
      */
     public SupervisorAccount loginSupervisorAccount(String username, String password) {
-        return FYPMS.loginSupervisorAccount(username, password);
+        return FYPMS1.loginSupervisorAccount(username, password);
     }
 
     /**
@@ -104,7 +103,7 @@ public class LoginUserMenu implements Menu, Login {
      * @return Account if login successful, null if not successful
      */
     public FYPCoordinatorAccount loginFypCoordinatorAccount(String username, String password) {
-        return FYPMS.loginFypCoordinatorAccount(username, password);
+        return FYPMS1.loginFypCoordinatorAccount(username, password);
     }
 
     /**

@@ -1,14 +1,11 @@
 package FYPMS;
 
-import account.StudentAccount;
-import account.FYPCoordinatorAccount;
-import account.SupervisorAccount;
+import account.coordinator.FYPCoordinatorAccount;
+import account.supervisor.SupervisorAccount;
 
-import FYPMS.faculty.coordinator.CoordinatorList;
-import FYPMS.faculty.supervisor.SupervisorList;
 import FYPMS.project.FYPList;
 import FYPMS.request.RequestList;
-import FYPMS.student.StudentList;
+import account.student.StudentAccount;
 
 import java.util.ArrayList;
 
@@ -16,12 +13,12 @@ import java.util.ArrayList;
  * Represents the company this application is created for
  * Contains all bookings, movies and cineplexes the company owns
  */
-public class FYPMS {
+public class FYPMS1 {
 
     // private static final CoordinatorList coordinatorList = new CoordinatorList();
     // private static final SupervisorList supervisorList = new SupervisorList();
     // private static final StudentList studentList = new StudentList();
-    private static ArrayList<StudentAccount> StudentAccounts = new ArrayList<StudentAccount>();
+    private static ArrayList<StudentAccount> StudentAccount = new ArrayList<StudentAccount>();
     private static ArrayList<FYPCoordinatorAccount> FYPCoordinatorAccounts = new ArrayList<FYPCoordinatorAccount>();
     private static ArrayList<SupervisorAccount> SupervisorAccounts = new ArrayList<SupervisorAccount>();
 
@@ -45,11 +42,11 @@ public class FYPMS {
     }
 
     public static ArrayList<StudentAccount> getStudentList() {
-        return StudentAccounts;
+        return StudentAccount;
     }
 
     public static StudentAccount loginStudent(String loginId, String password) {
-        for (StudentAccount account : StudentAccounts) {
+        for (StudentAccount account : StudentAccount) {
             if (account.getLoginId().equals(loginId) && account.login(loginId, password) != null) {
                 return account;
             }
@@ -76,7 +73,7 @@ public class FYPMS {
     }
 
     public void printStudentList() {
-        for (StudentAccount account : StudentAccounts) {
+        for (StudentAccount account : StudentAccount) {
             System.out.println(account.getLoginId() + "+");
             System.out.println(account.getPassword());
         }

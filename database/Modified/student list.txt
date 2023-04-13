@@ -1,12 +1,12 @@
-Name	Email
-CHERN 	YCHERN@e.ntu.edu.sg;
-KOH 	KOH1@e.ntu.edu.sg;
-BRANDON 	BR015@e.ntu.edu.sg;
-CALVIN 	CT113@e.ntu.edu.sg;
-CHAN	YCN019@e.ntu.edu.sg;
-DENISE	DL007@e.ntu.edu.sg;
-DONG	DON84@e.ntu.edu.sg;
-ERNEST	ELI34@e.ntu.edu.sg;
-LEE 	LE51@e.ntu.edu.sg;
-LIU 	SL22@e.ntu.edu.sg;
-RAWAL	AKY013@e.ntu.edu.sg;
+Name	Email   Password    ProjectID   Status
+CHERN 	YCHERN@e.ntu.edu.sg;    password    0  NO_PROJECT
+KOH 	KOH1@e.ntu.edu.sg;      password    0  NO_PROJECT
+BRANDON 	BR015@e.ntu.edu.sg; password    0  NO_PROJECT
+CALVIN 	CT113@e.ntu.edu.sg;     password    0  NO_PROJECT
+CHAN	YCN019@e.ntu.edu.sg;    password    0  NO_PROJECT
+DENISE	DL007@e.ntu.edu.sg;     password    0  NO_PROJECT
+DONG	DON84@e.ntu.edu.sg;     password    0  NO_PROJECT
+ERNEST	ELI34@e.ntu.edu.sg;     password    0  NO_PROJECT
+LEE 	LE51@e.ntu.edu.sg;      password    0  NO_PROJECT
+LIU 	SL22@e.ntu.edu.sg;      password    0  NO_PROJECT
+RAWAL	AKY013@e.ntu.edu.sg;    password    0  NO_PROJECT

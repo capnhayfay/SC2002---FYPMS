@@ -1,23 +1,22 @@
 package gui;
 
 import account.*;
+import account.student.StudentAccount;
 import command.ChangePassword;
 import command.Student.*;
 // import system.SystemSettings;
 
 import java.util.Scanner;
 
-import FYPMS.student.Student;
-
 /**
- * GUI which is shown to the Student
+ * GUI which is shown to the StudentAccount
  */
 public class StudentGUI implements Menu, Logout, GetCommand {
     private StudentAccount curAcc;
     private String UserType;
 
     /**
-     * Creates a StudentGui with the given Student Account
+     * Creates a StudentGui with the given StudentAccount Account
      * 
      * @param curAcc which is the Account of the customer
      */
@@ -28,13 +27,13 @@ public class StudentGUI implements Menu, Logout, GetCommand {
     }
 
     /**
-     * Prints list of possible actions that can be performed by Student
+     * Prints list of possible actions that can be performed by StudentAccount
      */
     public void display() {
         System.out.println();
         // System.out.println("-----------------------------------------");
         System.out.println("=========================================");
-        System.out.println("               Student Menu             ");
+        System.out.println("               StudentAccount Menu             ");
         System.out.println("=========================================");
         // System.out.println("-----------------------------------------");
         System.out.println();
@@ -91,7 +90,7 @@ public class StudentGUI implements Menu, Logout, GetCommand {
                     if (!(curAcc instanceof StudentAccount))
                         break;
                     else {
-                        // how Student student = new Student(curAcc.getName(),curAcc.getEmail());
+                        // how StudentAccount student = new StudentAccount(curAcc.getName(),curAcc.getEmail());
                         // new RequestCoordFYPCommand(student.getStatus()).execute();
                         break;
                     }
@@ -99,13 +98,13 @@ public class StudentGUI implements Menu, Logout, GetCommand {
                     // new RequestSuperTitleChangeCommand(curAcc.getName()).execute();
                     break;
                 case 4:
-                    new RequestCoordDeregisterCommand(curAcc.getName()).execute();
+                    new RequestCoordDeregisterCommand(curAcc).execute();
                     break;
                 case 5:
-                    new ViewRegisteredFYPCommand(curAcc.getName()).execute();
+                    new ViewRegisteredFYPCommand(curAcc).execute();
                     break;
                 case 6:
-                    new ViewSelfRequestRecordsCommand(curAcc.getName());
+                    new ViewSelfRequestRecordsCommand(curAcc).execute();
                     break;
 
                 case 7:

@@ -11,16 +11,13 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
-import FYPMS.faculty.coordinator.Coordinator;
-import FYPMS.faculty.coordinator.CoordinatorList;
+import account.coordinator.Coordinator;
 import FYPMS.faculty.supervisor.Supervisor;
 import FYPMS.faculty.supervisor.SupervisorList;
 import FYPMS.project.FYP;
 import FYPMS.project.FYPList;
 import FYPMS.request.Request;
 import FYPMS.request.RequestList;
-import FYPMS.student.Student;
-import FYPMS.student.StudentList;
 
 public class FileUpdater {
     /**
@@ -29,20 +26,20 @@ public class FileUpdater {
      * @param fileName the name of the CSV file to write to
      */
     public static void writeFYPsToFile(String fileName) {
-        FYPList fypList = FYPMS.getFypList();
+        FYPList fypList = FYPMS1.getFypList();
         Path pathToFile = Paths.get(fileName);
 
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(fileName))) {
 
             // Write the header
-            bw.write("Supervisor,Title,Status,Student Name,Requestors,Status Change Date\n");
+            bw.write("Supervisor,Title,Status,StudentAccount Name,Requestors,Status Change Date\n");
 
             // Write each FYP
             for (FYP fyp : fypList.getFYPs()) {
                 String supervisor = fyp.getSupervisorName();
                 String title = fyp.getTitle();
                 String status = fyp.getStatus().toString();
-                String studentName = fyp.getStudentName();
+                String studentName = fyp.getStudentID();
                 List<String> requestorList = fyp.getRequesterList();
                 LocalDateTime statusChangeDate = fyp.getStatusChangeDate();
                 String requestorString = String.join(";", requestorList);
@@ -61,7 +58,7 @@ public class FileUpdater {
      * @param fileName the name of the CSV file to write to
      */
     public static void writeRequestsToFile(String fileName) {
-        RequestList requestList = FYPMS.getRequestList();
+        RequestList requestList = FYPMS1.getRequestList();
         Path pathToFile = Paths.get(fileName);
 
         try (BufferedWriter bw = Files.newBufferedWriter(pathToFile, StandardCharsets.UTF_8)) {
@@ -88,7 +85,7 @@ public class FileUpdater {
      * @param fileName the name of the CSV file to write to
      */
     public static void writeSupervisorToFile(String fileName) {
-        SupervisorList supervisorList = FYPMS.getSupervisorList();
+        SupervisorList supervisorList = FYPMS1.getSupervisorList();
         Path pathToFile = Paths.get(fileName);
 
         try (BufferedWriter bw = Files.newBufferedWriter(pathToFile, StandardCharsets.UTF_8)) {
@@ -103,7 +100,7 @@ public class FileUpdater {
     }
 
     public static void writeCoordinatorToFile(String fileName) {
-        CoordinatorList coordinatorList = FYPMS.getCoordinatorList();
+        CoordinatorList coordinatorList = FYPMS1.getCoordinatorList();
         Path pathToFile = Paths.get(fileName);
 
         try (BufferedWriter bw = Files.newBufferedWriter(pathToFile, StandardCharsets.UTF_8)) {
@@ -124,12 +121,12 @@ public class FileUpdater {
     public static void writeStudentToFile(String fileName) {
         Path pathToFile = Paths.get(fileName);
 
-        StudentList studentList = FYPMS.getStudentList();
+        StudentList studentList = FYPMS1.getStudentList();
 
         try (BufferedWriter bw = Files.newBufferedWriter(pathToFile, StandardCharsets.UTF_8)) {
-            for (Student student : studentList.getStudentList()) {
-                bw.write(student.getName() + "," + student.getEmail() + ",");
-                int[] projectRequests = student.getProjectsRequested();
+            for (StudentAccount studentAccount : studentList.getStudentList()) {
+                bw.write(studentAccount.getName() + "," + studentAccount.getEmail() + ",");
+                int[] projectRequests = studentAccount.getProjectsRequested();
                 for (int i = 0; i < projectRequests.length; i++) {
                     bw.write(projectRequests[i] + ";");
                     if (i < projectRequests.length - 1) {

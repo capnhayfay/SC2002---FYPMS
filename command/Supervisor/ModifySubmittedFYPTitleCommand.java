@@ -5,7 +5,7 @@ import command.Command;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import FYPMS.FYPMS;
+import FYPMS.FYPMS1;
 import FYPMS.project.*;
 
 public class ModifySubmittedFYPTitleCommand implements Command {
@@ -20,7 +20,7 @@ public class ModifySubmittedFYPTitleCommand implements Command {
         System.out.println("Input new project title: ");
         String newtitle = sc.nextLine();
 
-        FYPList fyplist = FYPMS.getFypList();
+        FYPList fyplist = FYPMS1.getFypList();
         ArrayList<FYP> fyps = fyplist.getFYPs();
         for (FYP fyp : fyps) {
             if (fyp.getProjectId() == ID) {

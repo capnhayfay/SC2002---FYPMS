@@ -4,21 +4,18 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import FYPMS.FYPMS;
+import FYPMS.FYPMS1;
 import FYPMS.project.FYP;
 import FYPMS.project.FYPList;
-import FYPMS.request.Request;
-import FYPMS.request.RequestStatus;
-import FYPMS.request.RequestType;
-import FYPMS.student.StudentStatus;
+import FYPMS.request.*;
+import account.student.StudentAccount;
+import account.student.StudentStatus;
 import command.Command;
 
 public class RequestSuperTitleChangeCommand implements Command {
-    private String Student;
-    private Student student;
+    private StudentAccount student;
 
-    RequestSuperTitleChangeCommand(String Student, Student currentAcc) {
-        this.Student = Student;
+    RequestSuperTitleChangeCommand(StudentAccount currentAcc) {
         this.student = currentAcc;
     }
 
@@ -33,21 +30,18 @@ public class RequestSuperTitleChangeCommand implements Command {
             System.out.println("Error: Your registration is still pending.");
             return;
         }
-        
-        FYPList fyplist = FYPMS.getFypList();
+
+        FYPList fyplist = FYPMS1.getFypList();
         ArrayList<FYP> fyps = fyplist.getFYPs();
         for (FYP fyp : fyps) {
-            if (fyp.getStudentName().equals(Student) {
+            if (fyp.getStudentID().equals(student.getLoginId())){
                 Scanner sc = new Scanner(System.in);
                 System.out.println("Input new project title: ");
                 String newtitle = sc.nextLine();
                 String supervisor = fyp.getSupervisorName();
 
-                LocalDateTime statusChangeTime = LocalDateTime.now();
-                Request request = new Request(Student, RequestType.STUDENTSupervisor, statusChangeTime, supervisor, RequestStatus.PENDING);
-                // where to submit title
-                // RequestList.add(request);
-                return;
+                RequestChangeTitle request = new RequestChangeTitle(student.getLoginId(), supervisor,RequestStatus.PENDING, RequestRelationship.STUDENTSupervisor,RequestType.CHANGE_TITLE, student.getAssignedProject(), newtitle);
+                RequestList.add(request);
                 System.out.println("Request for title change submitted.");
             }
         }

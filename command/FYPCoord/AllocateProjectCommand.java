@@ -14,8 +14,8 @@ public class AllocateProjectCommand implements Command {
 
     public void execute() {
         System.out.println();
-        project.setStatus(FYPStatus.ASSIGNED);
-        project.setStudentName(studentName);
+        project.setStatus(FYPStatus.ALLOCATED);
+        project.setStudentID(studentName);
         System.out.println("Allocated project " + project.getTitle() + " to " + studentName);
     }
 

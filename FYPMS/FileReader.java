@@ -1,17 +1,13 @@
 package FYPMS;
 
-import FYPMS.faculty.coordinator.Coordinator;
-import FYPMS.faculty.coordinator.CoordinatorList;
-import FYPMS.faculty.supervisor.Supervisor;
-import FYPMS.faculty.supervisor.SupervisorList;
-// import FYPMS.student.Student;
-import FYPMS.student.StudentList;
+// import FYPMS1.student.StudentAccount;
 import FYPMS.request.*;
 
 import account.UserType;
-import account.StudentAccount;
-import account.FYPCoordinatorAccount;
-import account.SupervisorAccount;
+import account.student.StudentAccount;
+import account.coordinator.FYPCoordinatorAccount;
+import account.student.StudentStatus;
+import account.supervisor.SupervisorAccount;
 
 import FYPMS.project.*;
 
@@ -21,11 +17,11 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import FYPMS.project.FYP;
+        import java.util.ArrayList;
+
+        import FYPMS.project.FYP;
+
+import static account.student.StudentStatus.StudentStatusToEnum;
 
 public class FileReader {
 
@@ -38,7 +34,7 @@ public class FileReader {
         // DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd
         // HH:mm");
         Path pathToFile = Paths.get(fileName);
-        FYPList fypList = FYPMS.getFypList();
+        FYPList fypList = FYPMS1.getFypList();
 
         try (BufferedReader br = Files.newBufferedReader(pathToFile, StandardCharsets.UTF_8)) {
             String line = br.readLine();
@@ -48,32 +44,10 @@ public class FileReader {
                 String[] attributes = line.split("\\t");
                 int projectId = Integer.parseInt(attributes[0]);
                 String supervisor = attributes[1];
-                String supervisorEmail = "";
-                for (SupervisorAccount s : FYPMS.getSupervisorList()) {
-                    if (s.getName().equals(supervisor)) {
-                        supervisorEmail = s.getEmail();
-                        break;
-                    }
-                }
                 String title = attributes[2];
-                FYPStatus status = FYP.convertToFYPStatus("");
-
-                if (attributes.length > 3) {
-                    status = FYP.convertToFYPStatus(attributes[3]);
-                    if (attributes.length > 4) {
-                        String student = attributes[4];
-                        String studentEmail = "";
-                        for (StudentAccount s : FYPMS.getStudentList()) {
-                            if (s.getName().equals(student)) {
-                                studentEmail = s.getEmail();
-                                break;
-                            }
-                        }
-                        fyp = new FYP(projectId, supervisor, supervisorEmail, student, studentEmail, title, status);
-                    }
-                } else {
-                    fyp = new FYP(projectId, supervisor, supervisorEmail, title, status);
-                }
+                FYPStatus status = FYP.convertToFYPStatus(attributes[3]);
+                String studentID = attributes[4];
+                fyp = new FYP(projectId, supervisor, studentID, title, status);
                 fypList.addFYP(fyp);
                 line = br.readLine();
             }
@@ -85,7 +59,7 @@ public class FileReader {
 
     public static void readRequestsFromFile(String fileName) {
         Path pathToFile = Paths.get(fileName);
-        RequestList requests = FYPMS.getRequestList();
+        RequestList requests = FYPMS1.getRequestList();
 
         try (BufferedReader br = Files.newBufferedReader(pathToFile, StandardCharsets.UTF_8)) {
             String line = br.readLine(); // skip header
@@ -97,7 +71,7 @@ public class FileReader {
                 LocalDateTime statusChangeTime = LocalDateTime.now();
                 String requestee = attributes[3];
                 RequestStatus requestStatus = Request.convertToRequestStatus(attributes[4]);
-                Request request = new Request(requesterName, requestType, statusChangeTime, requestee, requestStatus);
+                Request request = new Request(requesterName, requestee, requestType, statusChangeTime, requestee, requestStatus);
                 requests.add(request);
             }
 
@@ -114,7 +88,7 @@ public class FileReader {
     public static void readSupervisorsFromFile(String fileName) {
         Path pathToFile = Paths.get(fileName);
 
-        ArrayList<SupervisorAccount> supervisorList = FYPMS.getSupervisorList();
+        ArrayList<SupervisorAccount> supervisorList = FYPMS1.getSupervisorList();
 
         try (BufferedReader br = Files.newBufferedReader(pathToFile, StandardCharsets.UTF_8)) {
             String line = br.readLine();
@@ -144,7 +118,7 @@ public class FileReader {
     public static void readCoordinatorsFromFile(String fileName) {
         Path pathToFile = Paths.get(fileName);
 
-        ArrayList<FYPCoordinatorAccount> fypCoordinatorList = FYPMS.getCoordinatorList();
+        ArrayList<FYPCoordinatorAccount> fypCoordinatorList = FYPMS1.getCoordinatorList();
 
         try (BufferedReader br = Files.newBufferedReader(pathToFile, StandardCharsets.UTF_8)) {
             String line = br.readLine();
@@ -174,7 +148,7 @@ public class FileReader {
     public static void readStudentsFromFile(String fileName) {
         Path pathToFile = Paths.get(fileName);
 
-        ArrayList<StudentAccount> studentList = FYPMS.getStudentList();
+        ArrayList<StudentAccount> studentList = FYPMS1.getStudentList();
 
         try (BufferedReader br = Files.newBufferedReader(pathToFile, StandardCharsets.UTF_8)) {
             String line = br.readLine();
@@ -184,13 +158,13 @@ public class FileReader {
                 String[] attributes = line.split("\\t");
                 String name = attributes[0];
                 String email = attributes[1];
-                String password = "password";
-                if (attributes.length > 2) {
-                    password = attributes[2];
-                }
+                String password = attributes[2];
+                int fypID = Integer.parseInt(attributes[3]);
+                StudentStatus studentStatus = StudentStatusToEnum(attributes[4]);
                 int atIndex = email.indexOf("@");
                 String userId = email.substring(0, atIndex);
-                StudentAccount student = new StudentAccount(userId, password, userType, email, name);
+
+                StudentAccount student = new StudentAccount(userId, password, userType, email, name, fypID,studentStatus);
 
                 studentList.add(student);
                 line = br.readLine();

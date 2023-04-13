@@ -1,8 +1,8 @@
 package command.Supervisor;
 
+import FYPMS.FYPMS1;
 import command.Command;
 
-import FYPMS.FYPMS;
 import FYPMS.request.*;
 
 public class ViewPendingStudentRequestsCommand implements Command {
@@ -14,7 +14,7 @@ public class ViewPendingStudentRequestsCommand implements Command {
 
     public void execute() {
         int RequestCount = 1;
-        RequestList requests = FYPMS.getRequestList();
+        RequestList requests = FYPMS1.getRequestList();
         System.out.println();
         System.out.println("Pending Request");
         System.out.println();
@@ -28,7 +28,7 @@ public class ViewPendingStudentRequestsCommand implements Command {
     }
 
     public int checkUpdates() {
-        RequestList requests = FYPMS.getRequestList();
+        RequestList requests = FYPMS1.getRequestList();
         for (Request request : requests) {
             if (request.getRequesteeName().equals(Supervisor) && request.getRequestStatus() == RequestStatus.PENDING) {
                 return 1;

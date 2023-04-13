@@ -14,7 +14,7 @@ public class Request {
     private final RequestType requestType;
 
     /**
-     * Creates a request object for FYPMS requests
+     * Creates a request object for FYPMS1 requests
      *
      * @param requesterName    Name of requester
      * @param requestType      Request Type

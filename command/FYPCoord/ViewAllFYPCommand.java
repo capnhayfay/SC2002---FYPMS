@@ -1,9 +1,8 @@
 package command.FYPCoord;
 
-import FYPMS.FYPMS;
+import FYPMS.FYPMS1;
 import FYPMS.project.*;
 import command.Command;
-import FYPMS.FYPMS;
 
 public class ViewAllFYPCommand implements Command {
 
@@ -15,7 +14,7 @@ public class ViewAllFYPCommand implements Command {
 
         //
         // int fypCount = 1;
-        FYPList projects = FYPMS.getFypList();
+        FYPList projects = FYPMS1.getFypList();
         projects.listAllFYPsForFaculty();
         // ArrayList<FYP> fyps = projects.getFYPs();
         // System.out.println();

@@ -1,16 +1,13 @@
-import account.*;
+import account.supervisor.SupervisorAccount;
+import account.coordinator.FYPCoordinatorAccount;
+import account.student.StudentAccount;
 import gui.*;
 import FYPMS.*;
 
 import java.io.IOException;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 import FYPMS.FileReader;
-import FYPMS.project.FYP;
-import FYPMS.student.Student;
 
 public class Application {
 	public static void main(String[] args) throws IOException {
@@ -19,7 +16,7 @@ public class Application {
 
 	public void run() throws IOException {
 
-		FYPMS fypms = new FYPMS();
+		FYPMS1 fypms = new FYPMS1();
 
 		// load in CSV
 
@@ -41,7 +38,7 @@ public class Application {
 			if (loggedInUserType == "") {
 				System.out.print("Which type of user are you? ");
 				System.out.println();
-				System.out.println("1. Student");
+				System.out.println("1. StudentAccount");
 				System.out.println("2. Supervisor");
 				System.out.println("3. FYP Coordinator");
 				int choice = scanner.nextInt();
@@ -51,7 +48,7 @@ public class Application {
 						loginStudentUserMenu.display();
 						studentAccount = loginStudentUserMenu.getStudentAccount();
 						if (studentAccount != null) {
-							loggedInUserType = "Student";
+							loggedInUserType = "StudentAccount";
 						}
 						break;
 					case 2:
@@ -73,7 +70,7 @@ public class Application {
 					default:
 						System.out.println("Invalid choice. Please try again.");
 				}
-			} else if (loggedInUserType == "Student") {
+			} else if (loggedInUserType == "StudentAccount") {
 				StudentGUI studentGUI = new StudentGUI(studentAccount, loggedInUserType);
 				studentGUI.display();
 				if (studentGUI.execute() == 0) {

@@ -14,7 +14,7 @@ public class GreetUserMenu implements Menu {
         System.out.println("|  __|   | |   |  ___//| |    | |____) |");
         System.out.println("|_|      |_|   |_|     |_|    |_|____/ ");
 
-        System.out.println("Welcome to Final Year Project Management System (FYPMS)");
+        System.out.println("Welcome to Final Year Project Management System (FYPMS1)");
     }
 
 }

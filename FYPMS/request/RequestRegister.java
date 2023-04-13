@@ -1,5 +1,6 @@
 package FYPMS.request;
 
+import FYPMS.FYPMS1;
 import FYPMS.project.FYP;
 
 public class RequestRegister extends Request {
@@ -12,7 +13,7 @@ public class RequestRegister extends Request {
 
     public RequestRegister(String requesterID, String requesteeID,
             RequestStatus requestStatus, RequestRelationship requestRelationship, RequestType requestType, int fypID) {
-        super(requesterID, requesteeID, requestStatus, requestRelationship, requestType);
+        super(requesterID, FYPMS1.getCoordinatorList().get(0).getLoginId(), requestStatus, requestRelationship, requestType);
         this.fypID = fypID;
     }
 

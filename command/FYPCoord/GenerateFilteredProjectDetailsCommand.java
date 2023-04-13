@@ -1,6 +1,6 @@
 package command.FYPCoord;
 
-import FYPMS.FYPMS;
+import FYPMS.FYPMS1;
 import FYPMS.project.*;
 import command.Command;
 
@@ -23,7 +23,7 @@ public class GenerateFilteredProjectDetailsCommand implements Command {
         int selection;
         Scanner sc = new Scanner(System.in);
         int fypCount = 1;
-        FYPList projects = FYPMS.getFypList();
+        FYPList projects = FYPMS1.getFypList();
         ArrayList<FYP> fyps = projects.getFYPs();
         switch (filterType) {
             // Filter by status

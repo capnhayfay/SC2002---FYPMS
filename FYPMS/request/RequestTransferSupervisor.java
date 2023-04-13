@@ -1,5 +1,6 @@
 package FYPMS.request;
 
+import FYPMS.FYPMS1;
 import FYPMS.project.FYP;
 
 public class RequestTransferSupervisor extends Request {
@@ -13,7 +14,7 @@ public class RequestTransferSupervisor extends Request {
 
     public RequestTransferSupervisor(String requesterID, String requesteeID,
             RequestStatus requestStatus, RequestRelationship requestRelationship, RequestType requestType, int fypID) {
-        super(requesterID, requesteeID, requestStatus, requestRelationship, requestType);
+        super(requesterID, FYPMS1.getCoordinatorList().get(0).getLoginId(), requestStatus, requestRelationship, requestType);
         this.fypID = fypID;
     }
 

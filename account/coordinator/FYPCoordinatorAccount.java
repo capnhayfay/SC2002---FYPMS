@@ -1,9 +1,12 @@
-package account;
+package account.coordinator;
+
+import account.Account;
+import account.UserType;
 
 /**
  * Account for Company Admin
  */
-public class FYPCoordinatorAccount extends Account{
+public class FYPCoordinatorAccount extends Account {
     /**
      * Creates FYPCoordinatorAccount with given parameters
      * @param loginId which is the login ID of FYPCoordinatorAccount
@@ -12,7 +15,7 @@ public class FYPCoordinatorAccount extends Account{
      * @param emailAddress which is the email address of FYPCoordinatorAccount
      * @param name which is the name of FYPCoordinatorAccount
      */
-    public FYPCoordinatorAccount(String loginId, String password, UserType userType,String emailAddress, String name){
+    public FYPCoordinatorAccount(String loginId, String password, UserType userType, String emailAddress, String name){
         super(loginId, password,userType,emailAddress,name);
     
     }
@@ -27,5 +30,14 @@ public class FYPCoordinatorAccount extends Account{
             return this.getUserType();
         }
         return null;
+    }
+
+    /**
+     * Prints the details of this instance of the Coordinator
+     */
+    public void printDetails() {
+        System.out.println("Coordinator name: " + getName());
+        System.out.println("Email: " + getEmail());
+        System.out.println();
     }
 }

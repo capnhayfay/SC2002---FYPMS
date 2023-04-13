@@ -16,8 +16,8 @@ public class DeregisterStudentCommand implements Command {
     public void execute() {
         System.out.println();
         project.setStatus(FYPStatus.AVAILABLE);
-        project.setStudentName("");
-        System.out.println("Student " + studentName + " has been deregistered");
+        project.setStudentID("");
+        System.out.println("StudentAccount " + studentName + " has been deregistered");
     }
 
 }

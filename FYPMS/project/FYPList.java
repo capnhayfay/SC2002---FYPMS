@@ -1,11 +1,6 @@
 package FYPMS.project;
 
-import FYPMS.FYPMS;
-
-import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 
 /**
  * Represents the list of Final Year Projects (FYPs) the department has approved
@@ -32,7 +27,7 @@ public class FYPList {
         System.out.println("List of Available Final Year Projects");
         System.out.println();
         for (FYP fyp : fyps) {
-            if (fyp.getStatus() != FYPStatus.ASSIGNED) {
+            if (fyp.getStatus() != FYPStatus.ALLOCATED && fyp.getStatus() != FYPStatus.UNAVAILABLE) {
                 System.out.println("============= FYP No. " + fypCount++ + " ==============");
                 fyp.printFYPDetails();
                 System.out.println();
@@ -78,7 +73,7 @@ public class FYPList {
      *
      * @param keyword Keyword used to search for a FYP title
      */
-    public void searchFYPByTitle(String keyword) {
+    public void searchFYPSByKeyword(String keyword) {
         int numOfResults = 0;
 
         System.out.println();
@@ -99,6 +94,18 @@ public class FYPList {
         } else {
             System.out.println("===== " + numOfResults + " Final Year Projects found! =====");
         }
+    }
+
+    public ArrayList<FYP> searchFYPSByKeywordWithReturn(String keyword) {
+        int numOfResults = 0;
+        ArrayList<FYP> fypSearchResults = new ArrayList<>();
+
+        for (FYP fyp : fyps) {
+            if (fyp.getTitle().toLowerCase().contains(keyword.toLowerCase())) {
+                fypSearchResults.add(fyp);
+            }
+        }
+        return fypSearchResults;
     }
 
     public ArrayList<FYP> getFYPs() {

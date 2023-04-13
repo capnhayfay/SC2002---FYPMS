@@ -1,5 +1,5 @@
 import account.supervisor.SupervisorAccount;
-import account.coordinator.FYPCoordinatorAccount;
+import account.supervisor.FYPCoordinatorAccount;
 import account.student.StudentAccount;
 import gui.*;
 import FYPMS.*;
@@ -20,11 +20,11 @@ public class Application {
 
 		// load in CSV
 
-		// FileReader.readSupervisorsFromFile("./database/Modified/faculty_list.txt");
-		// FileReader.readCoordinatorsFromFile("./database/Modified/FYP coordinator.txt");
+		FileReader.readSupervisorsFromFile("./database/Modified/faculty_list.txt");
+		FileReader.readCoordinatorsFromFile("./database/Modified/FYP coordinator.txt");
 		FileReader.readStudentsFromFile("./database/Modified/student list.txt");
 		FileReader.readFYPsFromFile("./database/Modified/rollover project.txt");
-		// FileReader.readRequestsFromFile("src/database/Modified/faculty_list.txt");
+		FileReader.readRequestsFromFile("./database/Modified/0requestChangeTitle.txt","./database/Modified/1requestDeregister.txt","./database/Modified/2requestRegister.txt","src/database/Modified/3requestTransferSupervisor.txt");
 		// end of load in CSV
 		Scanner scanner = new Scanner(System.in);
 		String loggedInUserType = "";
@@ -78,7 +78,7 @@ public class Application {
 				}
 				loggedInUserType = studentGUI.getUserType();
 			} else if (loggedInUserType == "Supervisor") {
-				SupervisorAccountGUI supervisorAccountGUI = new SupervisorAccountGUI(supervisorAccount,
+				SupervisorGUI supervisorAccountGUI = new SupervisorGUI(supervisorAccount,
 						loggedInUserType);
 				supervisorAccountGUI.display();
 				if (supervisorAccountGUI.execute() == 0) {

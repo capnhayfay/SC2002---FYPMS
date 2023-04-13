@@ -1,14 +1,12 @@
 package command.Student;
 
-import java.time.LocalDateTime;
 import java.util.Scanner;
-
+import java.util.ArrayList;
 import FYPMS.request.*;
 import account.student.*;
 import FYPMS.FYPMS1;
 import account.student.StudentStatus;
 import command.Command;
-import account.student.*;
 public class RequestCoordFYPCommand implements Command {
     private StudentAccount studentAccount;
 
@@ -16,7 +14,7 @@ public class RequestCoordFYPCommand implements Command {
         this.studentAccount = currentAcc;
     }
 
-    RequestList RequestList = FYPMS1.getRequestList();
+    ArrayList<ArrayList <Object>>  requests = FYPMS1.getRequestList();
 
     public void execute() {
         if (studentAccount.getStatus() == StudentStatus.ASSIGNED_PROJECT) {
@@ -33,8 +31,9 @@ public class RequestCoordFYPCommand implements Command {
         Scanner sc = new Scanner(System.in);
         System.out.println("Input project ID: ");
         int fypID = sc.nextInt();
-        RequestRegister registerRequest = new RequestRegister(studentAccount.getLoginId(),FYPMS1.getCoordinatorList().get(0).getLoginId(),RequestStatus.PENDING,RequestRelationship.STUDENTCoordinator,RequestType.REGISTER_PROJECT, fypID);
-        FYPMS.request.RequestList.add(registerRequest);
+        
+        RequestRegister registerRequest = new RequestRegister(requests.get(2).size()+2000, studentAccount.getLoginId(),RequestStatus.PENDING, fypID);
+        requests.get(2).add(registerRequest);           
     }
 
 }

@@ -5,7 +5,7 @@ import java.util.Scanner;
 import FYPMS.FYPMS1;
 import account.Account;
 import account.student.StudentAccount;
-import account.coordinator.FYPCoordinatorAccount;
+import account.supervisor.FYPCoordinatorAccount;
 import account.supervisor.SupervisorAccount;
 import account.UserType;
 

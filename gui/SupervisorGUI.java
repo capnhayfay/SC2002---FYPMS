@@ -9,7 +9,7 @@ import command.Supervisor.*;
 /**
  * GUI which is shown to the Supervisor Account
  */
-public class SupervisorAccountGUI implements Menu, Logout, GetCommand {
+public class SupervisorGUI implements Menu, Logout, GetCommand {
     private SupervisorAccount supervisor;
     private String UserType;
 
@@ -17,8 +17,9 @@ public class SupervisorAccountGUI implements Menu, Logout, GetCommand {
      * Creates a SupervisorGui with the given Supervisor Account
      * 
      * @param supervisor which is the Supervisor account
+     * @return 
      */
-    public SupervisorAccountGUI(SupervisorAccount supervisor, String UserType) {
+    public SupervisorGUI(SupervisorAccount supervisor, String UserType) {
         this.supervisor = supervisor;
         this.UserType = UserType;
     }
@@ -97,7 +98,7 @@ public class SupervisorAccountGUI implements Menu, Logout, GetCommand {
                     scanner.nextLine();
                     switch (selectedChoice) {
                         case 1:
-                            new CreateProjectCommand(supervisor.getName()).execute();
+                            new CreateProjectCommand(supervisor).execute();
                             break;
                         case 2:
                             new ModifySubmittedFYPTitleCommand().execute();
@@ -134,7 +135,7 @@ public class SupervisorAccountGUI implements Menu, Logout, GetCommand {
                     }
                     break;
                 case 3:
-                    new RequestTransfertoCoordCommand(supervisor.getName()).execute();
+                    new RequestTransfertoCoordCommand(supervisor).execute();
                     break;
                 case 4:
                     // new viewRequestHistory()

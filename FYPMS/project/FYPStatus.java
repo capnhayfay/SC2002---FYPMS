@@ -1,7 +1,7 @@
 package FYPMS.project;
 
 /**
- * Represents the status of movies
+ * Represents the status of the FYP
  */
 public enum FYPStatus {
     AVAILABLE("AVAILABLE"),

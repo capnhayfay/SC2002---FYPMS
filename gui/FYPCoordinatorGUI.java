@@ -1,7 +1,7 @@
 package gui;
 
 import account.*;
-import account.coordinator.FYPCoordinatorAccount;
+import account.supervisor.FYPCoordinatorAccount;
 import command.FYPCoord.GenerateFilteredProjectDetailsCommand;
 import command.FYPCoord.ViewAllFYPCommand;
 import command.FYPCoord.ViewAllRequestHistoryCommand;
@@ -104,7 +104,7 @@ public class FYPCoordinatorGUI implements Menu, Logout, GetCommand {
                     scanner.nextLine();
                     switch (selectedChoice) {
                         case 1:
-                            new CreateProjectCommand(FYPCoordinator.getName()).execute();
+                            new CreateProjectCommand(FYPCoordinator).execute();
                             break;
                         case 2:
                             new ModifySubmittedFYPTitleCommand().execute();
@@ -186,7 +186,7 @@ public class FYPCoordinatorGUI implements Menu, Logout, GetCommand {
                     }
                     break;
                 case 3:
-                    new RequestTransfertoCoordCommand(FYPCoordinator.getName()).execute();
+                    new RequestTransfertoCoordCommand(FYPCoordinator).execute();
                     break;
 
                 case 4:

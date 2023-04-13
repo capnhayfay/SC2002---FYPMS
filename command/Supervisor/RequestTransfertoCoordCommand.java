@@ -1,23 +1,29 @@
 package command.Supervisor;
 
-import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Scanner;
+
 import command.Command;
 import FYPMS.FYPMS1;
 import FYPMS.request.*;
+import account.supervisor.SupervisorAccount;
 
 public class RequestTransfertoCoordCommand implements Command {
-    private String requester;
+    private SupervisorAccount supervisorAccount;
 
-    public RequestTransfertoCoordCommand(String requester) {
-        this.requester = requester;
+    public RequestTransfertoCoordCommand(SupervisorAccount supervisorAccount) {
+        this.supervisorAccount = supervisorAccount;
     }
 
-    RequestList RequestList = FYPMS1.getRequestList();
-
+    ArrayList<ArrayList <Object>>  requests = FYPMS1.getRequestList();
+    
     public void execute() {
-        LocalDateTime statusChangeTime = LocalDateTime.now();
-        Request request = new Request(requester, RequestRelationship.SUPERVISORCoordinator, statusChangeTime,
-                "FYP Coordinator", RequestStatus.PENDING);
-        RequestList.add(request);
+        System.out.println("Input project ID to transfer: ");
+        Scanner sc = new Scanner(System.in);
+        int fypId = sc.nextInt();
+        System.out.println("Input new supervisor ID: ");
+        String newSupervisorID = sc.next();
+        RequestTransferSupervisor request = new RequestTransferSupervisor(requests.get(3).size()+3000, supervisorAccount.getLoginId(), RequestStatus.PENDING, fypId, newSupervisorID);
+        requests.get(3).add(request);
     }
 }

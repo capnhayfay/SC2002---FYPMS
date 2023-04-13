@@ -2,9 +2,9 @@ package command.Student;
 
 import FYPMS.FYPMS1;
 import FYPMS.request.Request;
-import FYPMS.request.RequestList;
 import account.student.StudentAccount;
 import command.Command;
+import java.util.ArrayList;
 
 public class ViewSelfRequestRecordsCommand implements Command {
     private StudentAccount student;
@@ -14,20 +14,31 @@ public class ViewSelfRequestRecordsCommand implements Command {
     }
 
     public void execute() {
-        int RequestCount = 1;
-        RequestList requests = FYPMS1.getRequestList();
+        int RequestCount = 0;
+        // RequestList requests = FYPMS1.getRequestList();
         System.out.println();
         System.out.println("Request History");
         System.out.println();
-        for (Request request : requests) {
-            if (request.getRequesterID().equals(student.getLoginId())) {
-                System.out.println("============= Request No. " + RequestCount++ + " ==============");
-                request.printDetails();
-                System.out.println();
+        int idx = 0;
+        ArrayList<ArrayList <Object>> requests =  FYPMS1.getRequestList();
+        for (ArrayList <Object> request : requests) {
+            for (Object indivRequest : request){
+                Request indivCastedRequest = (Request) indivRequest;
+                if (indivCastedRequest.getRequesterID().equals(student.getLoginId())) {
+                    System.out.println("============= Request ID " + indivCastedRequest.getRequestID() + " ==============");
+                    indivCastedRequest.printDetails();
+                    System.out.println();
+                    RequestCount++;
+                }
             }
         }
-        if(RequestCount == 1){
+
+
+        if(RequestCount == 0){
             System.out.println("You have no requests.");
+        }
+        else{
+            System.out.print("You have "+ RequestCount + " requests.");
         }
     }
 }

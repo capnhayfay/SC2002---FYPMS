@@ -91,7 +91,7 @@ public class StudentGUI implements Menu, Logout, GetCommand {
                         break;
                     else {
                         // how StudentAccount student = new StudentAccount(curAcc.getName(),curAcc.getEmail());
-                        // new RequestCoordFYPCommand(student.getStatus()).execute();
+                        new RequestCoordFYPCommand(curAcc).execute();
                         break;
                     }
                 case 3:

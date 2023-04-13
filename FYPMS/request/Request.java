@@ -1,7 +1,5 @@
 package FYPMS.request;
 
-import java.time.LocalDateTime;
-
 /**
  * Represents a Request List
  */
@@ -9,9 +7,11 @@ public class Request {
 
     private final String requesterID;
     private final String requesteeID;
-    private final RequestStatus requestStatus;
+    private RequestStatus requestStatus;
     private final RequestRelationship requestRelationship; // enum
     private final RequestType requestType;
+    private final int requestID;
+    private int fypID;
 
     /**
      * Creates a request object for FYPMS1 requests
@@ -22,8 +22,9 @@ public class Request {
      * @param requestee
      * @param requestStatus
      */
-    public Request(String requesterID, String requesteeID,
-            RequestStatus requestStatus, RequestRelationship requestRelationship, RequestType requestType) {
+    public Request(int requestID, String requesterID,String requesteeID, RequestStatus requestStatus, RequestRelationship requestRelationship, RequestType requestType, int fypID) {
+        this.fypID = fypID;
+        this.requestID = requestID;
         this.requesterID = requesterID;
         this.requesteeID = requesteeID;
         this.requestStatus = requestStatus;
@@ -31,23 +32,16 @@ public class Request {
         this.requestType = requestType;
     }
 
-    public static RequestStatus convertToRequestStatus(String classLevel) {
-        return switch (classLevel.toLowerCase()) {
-            case "pending" -> RequestStatus.PENDING;
-            case "approved" -> RequestStatus.APPROVED;
-            case "rejected" -> RequestStatus.REJECTED;
-            default -> null;
-        };
-    }
-
     /**
      * Prints the details of this instance of the request
      */
     public void printDetails() {
-        System.out.println("Requester: " + requesterID);
-        System.out.println("Requestee: " + requesteeID);
-        System.out.println("Request Type: " + requestType);
-        System.out.println("Request Status: " + requestStatus);
+        System.out.println("Requester: " + getRequesterID());
+        System.out.println("Requestee: " + getRequesteeID());
+        System.out.println("Request Type: " + getRequestType() );
+        System.out.println("Request Status: " + getRequestStatus());
+        System.out.println("Request Relationship: " + getRequestRelationship());
+        System.out.println("FYP ID: " + getFypID());
         System.out.println();
     }
 
@@ -57,14 +51,6 @@ public class Request {
      * @param classLevel Class of request in string form
      * @return RequestType enum
      */
-    public static RequestRelationship convertToRequestType(String classLevel) {
-        return switch (classLevel.toLowerCase()) {
-            case "studentcoord" -> RequestRelationship.STUDENTCoordinator;
-            case "studentsupervisor" -> RequestRelationship.STUDENTSupervisor;
-            case "supervisorcoordinator" -> RequestRelationship.SUPERVISORCoordinator;
-            default -> null;
-        };
-    }
 
     /**
      * Helper function to convert RequestType enum to string, for CSV storage
@@ -72,14 +58,7 @@ public class Request {
      * @param requestType RequestType enum
      * @return Class of request in string form
      */
-    public static String convertRequestTypeToString(RequestRelationship requestType) {
-        return switch (requestType) {
-            case STUDENTSupervisor -> "StudentSupervisor";
-            case STUDENTCoordinator -> "StudentCoordinator";
-            case SUPERVISORCoordinator -> "SupervisorCoordinator";
-            default -> null;
-        };
-    }
+    
 
     public RequestRelationship getRequestRelationship() {
         return requestRelationship;
@@ -95,5 +74,21 @@ public class Request {
 
     public RequestStatus getRequestStatus() {
         return requestStatus;
+    }
+
+    public int getFypID(){
+        return fypID;
+    }
+
+    public int getRequestID(){
+        return requestID;
+    }
+
+    public RequestType getRequestType(){
+        return requestType;
+    }
+
+    public void setStatus(RequestStatus requestStatus){
+        this.requestStatus = requestStatus;
     }
 }

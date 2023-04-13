@@ -1,6 +1,6 @@
 package FYPMS;
 
-import account.coordinator.FYPCoordinatorAccount;
+import account.supervisor.FYPCoordinatorAccount;
 import account.supervisor.SupervisorAccount;
 
 import FYPMS.project.FYPList;
@@ -22,15 +22,17 @@ public class FYPMS1 {
     private static ArrayList<FYPCoordinatorAccount> FYPCoordinatorAccounts = new ArrayList<FYPCoordinatorAccount>();
     private static ArrayList<SupervisorAccount> SupervisorAccounts = new ArrayList<SupervisorAccount>();
 
-    private static final RequestList requestList = new RequestList();
+    static ArrayList<ArrayList<Object>> requests = new ArrayList<ArrayList<Object>>();
+    
+
     private static final FYPList fypList = new FYPList();
 
     public static FYPList getFypList() {
         return fypList;
     }
 
-    public static RequestList getRequestList() {
-        return requestList;
+    public static ArrayList<ArrayList<Object>> getRequestList() {
+        return requests;
     }
 
     public static ArrayList<SupervisorAccount> getSupervisorList() {
@@ -77,5 +79,53 @@ public class FYPMS1 {
             System.out.println(account.getLoginId() + "+");
             System.out.println(account.getPassword());
         }
+    }
+
+    public static String getStudentEmail(String studentID)
+    {
+        for (StudentAccount account : StudentAccount)
+        {
+            if (account.getLoginId().equals(studentID))
+            {
+                return account.getEmail();
+            }
+        }
+        return null;
+    }
+
+    public static String getStudentName(String studentID)
+    {
+        for (StudentAccount account : StudentAccount)
+        {
+            if (account.getLoginId().equals(studentID))
+            {
+                return account.getName();
+            }
+        }
+        return null;
+    }
+
+    public static String getSupervisorName(String supervisorID)
+    {
+        for (SupervisorAccount account : SupervisorAccounts)
+        {
+            if (account.getLoginId().equals(supervisorID))
+            {
+                return account.getName();
+            }
+        }
+        return null;
+    }
+
+    public static String getSupervisorEmail(String supervisorID)
+    {
+        for (SupervisorAccount account : SupervisorAccounts)
+        {
+            if (account.getLoginId().equals(supervisorID))
+            {
+                return account.getEmail();
+            }
+        }
+        return null;
     }
 }

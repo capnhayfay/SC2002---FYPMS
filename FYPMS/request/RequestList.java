@@ -9,7 +9,7 @@ import java.util.List;
  */
 public class RequestList implements Iterable<Request> {
 
-    private final List<Request> requests;
+    private static List<Request> requests;
 
     /**
      * Creates a new, empty RequestList

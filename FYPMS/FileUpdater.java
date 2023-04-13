@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
-import account.coordinator.Coordinator;
+import account.supervisor.FYPCoordinatorAccount;
 import FYPMS.faculty.supervisor.Supervisor;
 import FYPMS.faculty.supervisor.SupervisorList;
 import FYPMS.project.FYP;

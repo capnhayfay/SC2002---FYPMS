@@ -1,6 +1,6 @@
 package command.Student;
 
-import java.time.LocalDateTime;
+import java.util.ArrayList;
 
 import FYPMS.FYPMS1;
 import FYPMS.request.*;
@@ -14,6 +14,8 @@ public class RequestCoordDeregisterCommand implements Command {
     public RequestCoordDeregisterCommand(StudentAccount studentAccount) {
         this.studentAccount = studentAccount;
     }
+    ArrayList<ArrayList <Object>>  requests = FYPMS1.getRequestList();
+
     public void execute() {
         if (studentAccount.getStatus() == StudentStatus.NO_PROJECT) {
             System.out.println("Error: You have not registered for an FYP.");
@@ -25,9 +27,8 @@ public class RequestCoordDeregisterCommand implements Command {
             System.out.println("Error: You have a pending registration.");
             return;
         }
-
-        RequestDeregister request = new RequestDeregister(studentAccount.getLoginId(), FYPMS1.getCoordinatorList().get(0).getLoginId(), RequestStatus.PENDING,
-                RequestRelationship.STUDENTCoordinator, RequestType.DEREGISTER_PROJECT, 0);
-        RequestList.add(request);
+        // Temporary requestID = 1
+        RequestDeregister request = new RequestDeregister(requests.get(1).size()+1000,studentAccount.getLoginId(), RequestStatus.PENDING,studentAccount.getAssignedProject());
+        requests.get(1).add(request);
     }
 }

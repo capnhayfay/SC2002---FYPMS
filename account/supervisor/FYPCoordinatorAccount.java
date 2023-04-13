@@ -1,12 +1,11 @@
-package account.coordinator;
+package account.supervisor;
 
-import account.Account;
 import account.UserType;
 
 /**
  * Account for Company Admin
  */
-public class FYPCoordinatorAccount extends Account {
+public class FYPCoordinatorAccount extends SupervisorAccount {
     /**
      * Creates FYPCoordinatorAccount with given parameters
      * @param loginId which is the login ID of FYPCoordinatorAccount

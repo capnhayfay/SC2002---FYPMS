@@ -1,5 +1,7 @@
 package command.FYPCoord;
 
+import java.util.ArrayList;
+
 import FYPMS.FYPMS1;
 import FYPMS.request.Request;
 import FYPMS.request.RequestList;
@@ -10,9 +12,12 @@ public class ViewAllRequestHistoryCommand implements Command{
 
     }
     public void execute(){
-        RequestList requests = FYPMS1.getRequestList();
-		for (Request request : requests) {
-			request.printDetails();
-		}
+        ArrayList<ArrayList <Object>>  requests = FYPMS1.getRequestList();
+        for (ArrayList <Object> request : requests) {
+            for (Object indivRequest : request){
+                Request indivCastedRequest = (Request) indivRequest;
+			    indivCastedRequest.printDetails();
+		    }
+        }
     }
 }

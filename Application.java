@@ -20,10 +20,10 @@ public class Application {
 
 		// load in CSV
 
-		FileReader.readSupervisorsFromFile("./database/Modified/faculty_list.txt");
-		FileReader.readCoordinatorsFromFile("./database/Modified/FYP coordinator.txt");
+		// FileReader.readSupervisorsFromFile("./database/Modified/faculty_list.txt");
+		// FileReader.readCoordinatorsFromFile("./database/Modified/FYP coordinator.txt");
 		FileReader.readStudentsFromFile("./database/Modified/student list.txt");
-		FileReader.readFYPsFromFile("./database/Modified/rollover project.txt");
+		// FileReader.readFYPsFromFile("./database/Modified/rollover project.txt");
 		// FileReader.readRequestsFromFile("src/database/Modified/faculty_list.txt");
 		// end of load in CSV
 		Scanner scanner = new Scanner(System.in);

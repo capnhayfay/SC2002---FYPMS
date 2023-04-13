@@ -15,11 +15,11 @@ public enum FYPStatus {
         this.toString = toString;
     }
 
-    public static FYPStatus intToEnum(int num) {
-        return switch (num) {
-            case 1 -> RESERVED;
-            case 2 -> UNAVAILABLE;
-            case 3 -> ALLOCATED;
+    public static FYPStatus StringtoStatus(String status) {
+        return switch (status) {
+            case "RESERVED" -> RESERVED;
+            case "UNAVAILABLE" -> UNAVAILABLE;
+            case "ALLOCATED" -> ALLOCATED;
             default -> AVAILABLE;
         };
 

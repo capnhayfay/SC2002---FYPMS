@@ -20,7 +20,7 @@ public class Application {
 
 		// load in CSV
 		FileReader.readSupervisorsFromFile("./database/Modified/faculty_list.txt");
-		FileReader.readCoordinatorsFromFile("./database/Modified/FYPcoordinator.txt");
+		FileReader.readCoordinatorsFromFile("./database/Modified/FYP coordinator.txt");
 		FileReader.readStudentsFromFile("./database/Modified/student list.txt");
 		FileReader.readFYPsFromFile("./database/Modified/rollover project.txt");
 		FileReader.readRequestsFromFile("./database/Modified/0requestChangeTitle.txt",
@@ -29,21 +29,23 @@ public class Application {
 				"./database/Modified/3requestTransferSupervisor.txt");
 		// end of load in CSV
 
-		// load in CSV
-		FileReader.readSupervisorsFromFile("./database/test/faculty_list.txt");
-		FileReader.readCoordinatorsFromFile("./database/test/FYP coordinator.txt");
-		FileReader.readStudentsFromFile("./database/test/student list.txt");
-		FileReader.readFYPsFromFile("./database/test/rollover project.txt");
-		FileReader.readRequestsFromFile("./database/test/0requestChangeTitle.txt",
-				"./database/test/1requestDeregister.txt", "./database/test/2requestRegister.txt",
-				"./database/test/3requestTransferSupervisor.txt");
-		// end of load in CSV
+		// // load in CSV
+		// FileReader.readSupervisorsFromFile("./database/test/faculty_list.txt");
+		// FileReader.readCoordinatorsFromFile("./database/test/FYP coordinator.txt");
+		// FileReader.readStudentsFromFile("./database/test/student list.txt");
+		// FileReader.readFYPsFromFile("./database/test/rollover project.txt");
+		// FileReader.readRequestsFromFile("./database/test/0requestChangeTitle.txt",
+		// "./database/test/1requestDeregister.txt",
+		// "./database/test/2requestRegister.txt",
+		// "./database/test/3requestTransferSupervisor.txt");
+		// // end of load in CSV
 
 		Scanner scanner = new Scanner(System.in);
 		String loggedInUserType = "";
 		StudentAccount studentAccount = null;
 		SupervisorAccount supervisorAccount = null;
 		FYPCoordinatorAccount fypCoordinatorAccount = null;
+		int logout = 0;
 
 		new GreetUserMenu().display();
 		System.out.println();
@@ -53,9 +55,13 @@ public class Application {
 				System.out.println("1. StudentAccount");
 				System.out.println("2. Supervisor");
 				System.out.println("3. FYP Coordinator");
+				System.out.println("0. Exit");
 				System.out.println();
 				int choice = scanner.nextInt();
 				switch (choice) {
+					case 0:
+						logout = 1;
+						break;
 					case 1:
 						LoginUserMenu loginStudentUserMenu = new LoginUserMenu(studentAccount);
 						loginStudentUserMenu.display();
@@ -82,6 +88,9 @@ public class Application {
 						break;
 					default:
 						System.out.println("Invalid choice. Please try again.");
+				}
+				if (logout == 1) {
+					break;
 				}
 			} else if (loggedInUserType == "StudentAccount") {
 				StudentGUI studentGUI = new StudentGUI(studentAccount, loggedInUserType);

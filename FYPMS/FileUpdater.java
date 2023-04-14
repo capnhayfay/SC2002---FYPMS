@@ -35,10 +35,10 @@ public class FileUpdater {
 
             // Write each FYP
             for (FYP fyp : fypList.getFYPs()) {
+                bw.newLine();
                 bw.write(fyp.getProjectId() + "\t" + fyp.getSupervisorName() + "\t" + fyp.getSupervisorEmail() + "\t"
                         + fyp.getTitle() + "\t" + fyp.getStatus() + "\t" + fyp.getStudentID() + "\t"
                         + fyp.getStudentName() + "\t" + fyp.getStudentEmail());
-                bw.newLine();
             }
 
         } catch (IOException ioe) {
@@ -130,11 +130,11 @@ public class FileUpdater {
         Path pathToFile = Paths.get(fileName);
 
         try (BufferedWriter bw = Files.newBufferedWriter(pathToFile, StandardCharsets.UTF_8)) {
-            bw.write("Name\tEmail\tPassword\tProject 1\tProject 2\n");
+            bw.write("Name\tEmail\tPassword\tProject 1\tProject 2");
             for (SupervisorAccount supervisor : supervisorList) {
+                bw.newLine();
                 bw.write(supervisor.getName() + "\t" + supervisor.getEmail() + "\t" + supervisor.getPassword() + "\t"
                         + supervisor.getProj_1() + "\t" + supervisor.getProj_2());
-                bw.newLine();
             }
             System.out.println("Supervisors successfully written to " + fileName);
         } catch (IOException e) {
@@ -147,12 +147,12 @@ public class FileUpdater {
         Path pathToFile = Paths.get(fileName);
 
         try (BufferedWriter bw = Files.newBufferedWriter(pathToFile, StandardCharsets.UTF_8)) {
-            bw.write("Name\tEmail\tPassword\tProject 1\tProject 2\n");
+            bw.write("Name\tEmail\tPassword\tProject 1\tProject 2");
 
             for (FYPCoordinatorAccount coordinator : coordinatorList) {
+                bw.newLine();
                 bw.write(coordinator.getName() + "\t" + coordinator.getEmail() + "\t" + coordinator.getPassword() + "\t"
                         + coordinator.getProj_1() + "\t" + coordinator.getProj_2());
-                bw.newLine();
             }
         } catch (IOException ioe) {
             ioe.printStackTrace();
@@ -165,12 +165,12 @@ public class FileUpdater {
         ArrayList<StudentAccount> studentList = FYPMS1.getStudentList();
 
         try (BufferedWriter bw = Files.newBufferedWriter(pathToFile, StandardCharsets.UTF_8)) {
-            bw.write("Name\tEmail\tPassword\tProjectID\tStatus\n");
+            bw.write("Name\tEmail\tPassword\tProjectID\tStatus");
 
             for (StudentAccount student : studentList) {
+                bw.newLine();
                 bw.write(student.getName() + "\t" + student.getEmail() + "\t" + student.getPassword() + "\t"
                         + student.getAssignedProject() + "\t" + student.getStatus());
-                bw.newLine();
             }
             System.out.println("Students successfully written to " + fileName);
         } catch (IOException ioe) {

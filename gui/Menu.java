@@ -1,7 +1,7 @@
 package gui;
 
 /**
- * Menu for the respective GUIs
+ * Interface menu for the respective GUIs
  */
 public interface Menu {
     /**

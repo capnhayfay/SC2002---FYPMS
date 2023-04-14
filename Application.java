@@ -1,3 +1,22 @@
+
+/**
+    * The Application class represents the main entry point of the FYPMS application.
+    * It initializes the system, loads data from CSV files, and starts the user interface by prompting the user to select their userType.
+    * Then, it prompts the user to log in.
+    * After the user logs in, the appropriate GUI (StudentGUI, SupervisorGUI or FYPCoordinatorGUI) is displayed and the user can interact with the system.
+    * Once the user is done, they can log out and the application will save any changes made to the data files.
+    * This class contains a main method that initializes a new instance of the Application class and invokes the run method.
+    * The run method initializes the FYPMS system, loads data from CSV files, prompts the user to log in and displays the appropriate GUI depending on the user type (student, supervisor or FYP coordinator). 
+    @see StudentGUI
+    @see SupervisorGUI
+    @see FYPCoordinatorGUI
+    @see LoginUserMenu
+    @see FileReader
+    @see StudentAccount
+    @see SupervisorAccount
+    @see FYPCoordinatorAccount
+*/
+
 import account.supervisor.SupervisorAccount;
 import account.supervisor.FYPCoordinatorAccount;
 import account.student.StudentAccount;
@@ -9,15 +28,33 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import FYPMS.FileReader;
+import FYPMS.FileUpdater;
 
 public class Application {
+	/**
+	 * The main method initializes a new instance of the Application class and
+	 * invokes the run method.
+	 * 
+	 * @throws IOException If there is an I/O error reading the CSV files.
+	 */
 	public static void main(String[] args) throws IOException {
 		new Application().run();
 	}
 
+	/**
+	 * The run method initializes the FYPMS system, loads data from CSV files,
+	 * prompts the user to log in and
+	 * displays the appropriate GUI depending on the user type (student, supervisor
+	 * or FYP coordinator).
+	 * Once the user is done interacting with the system, any changes made are saved
+	 * to the data files.
+	 * 
+	 * @throws IOException If there is an I/O error reading or writing the CSV
+	 *                     files.
+	 */
 	public void run() throws IOException {
 
-		new FYPMS1();
+		FYPMS1 fypms = new FYPMS1();
 
 		// load in CSV
 		FileReader.readFYPsFromFile("./database/Modified/rollover project.txt");
@@ -29,17 +66,6 @@ public class Application {
 				"./database/Modified/2requestRegister.txt",
 				"./database/Modified/3requestTransferSupervisor.txt");
 		// end of load in CSV
-
-		// // load in CSV
-		// FileReader.readSupervisorsFromFile("./database/test/faculty_list.txt");
-		// FileReader.readCoordinatorsFromFile("./database/test/FYP coordinator.txt");
-		// FileReader.readStudentsFromFile("./database/test/student list.txt");
-		// FileReader.readFYPsFromFile("./database/test/rollover project.txt");
-		// FileReader.readRequestsFromFile("./database/test/0requestChangeTitle.txt",
-		// "./database/test/1requestDeregister.txt",
-		// "./database/test/2requestRegister.txt",
-		// "./database/test/3requestTransferSupervisor.txt");
-		// // end of load in CSV
 
 		Scanner scanner = new Scanner(System.in);
 		String loggedInUserType = "";
@@ -105,7 +131,9 @@ public class Application {
 						}
 						break;
 					default:
+						System.out.println();
 						System.out.println("Invalid choice. Please try again.");
+						System.out.println();
 				}
 				if (logout == 1) {
 					break;
@@ -145,6 +173,8 @@ public class Application {
 			}
 		}
 
+		new EndProgramMenu().display();
+
 		FileUpdater.writeSupervisorToFile("./database/test/faculty_list.txt");
 		FileUpdater.writeCoordinatorToFile("./database/test/FYP coordinator.txt");
 		FileUpdater.writeStudentToFile("./database/test/student list.txt");
@@ -152,8 +182,6 @@ public class Application {
 		FileUpdater.writeRequestsToFile("./database/test/0requestChangeTitle.txt",
 				"./database/test/1requestDeregister.txt", "./database/test/2requestRegister.txt",
 				"./database/test/3requestTransferSupervisor.txt");
-
-		new EndProgramMenu().display();
 	}
 
 }

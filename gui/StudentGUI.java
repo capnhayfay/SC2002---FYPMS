@@ -10,25 +10,40 @@ import command.Student.*;
 import java.util.Scanner;
 
 /**
- * GUI which is shown to the StudentAccount
+ * 
+ * The StudentGUI class represents the graphical user interface shown to the
+ * student account.
+ * It implements the Menu, Logout, and GetCommand interfaces. The class displays
+ * a list of actions
+ * that can be performed by the student account, and executes the chosen action
+ * based on the user's
+ * input. The class also allows the student account to logout and get their
+ * account details.
  */
+
 public class StudentGUI implements Menu, Logout, GetCommand {
     private StudentAccount curAcc;
     private String UserType;
 
     /**
-     * Creates a StudentGui with the given StudentAccount Account
+     * Constructs a StudentGUI object with the given student account and user type.
      * 
-     * @param curAcc which is the Account of the customer
+     * @param curAcc   the student account of the user
+     * @param UserType the user type of the student account
      */
-
     public StudentGUI(StudentAccount curAcc, String UserType) {
         this.curAcc = curAcc;
         this.UserType = UserType;
     }
 
     /**
-     * Prints list of possible actions that can be performed by StudentAccount
+     * Displays a list of actions that can be performed by the student account,
+     * including
+     * viewing available FYPs, registering FYPs, viewing registered FYPs, requesting
+     * to
+     * change FYP title, requesting to deregister FYPs, viewing request status and
+     * history,
+     * changing password, logging out, and exiting the program.
      */
     public void display() {
         System.out.println();
@@ -51,9 +66,11 @@ public class StudentGUI implements Menu, Logout, GetCommand {
     }
 
     /**
-     * Gets input from Customer and executes the required instruction
+     * Executes the chosen action based on the user's input. Returns 0 to exit the
+     * program
+     * entirely, 1 to continue the program.
      * 
-     * @return 0 to exit the program entirely, 1 to continue program
+     * @return 0 to exit the program entirely, 1 to continue the program
      */
     public int execute() {
         Scanner scanner = new Scanner(System.in);
@@ -122,7 +139,8 @@ public class StudentGUI implements Menu, Logout, GetCommand {
     }
 
     /**
-     * Logout from account by setting Customer Account to null
+     * Logs out from the student account by setting the account and user type to
+     * null.
      */
     public void logout() {
         this.curAcc = null;
@@ -130,14 +148,19 @@ public class StudentGUI implements Menu, Logout, GetCommand {
     }
 
     /**
-     * Returns Account in CustomerGUI
+     * Returns the current student account.
      * 
-     * @return Account
+     * @return the current student account
      */
     public Account getAccount() {
         return this.curAcc;
     }
 
+    /**
+     * Returns the user type of the student account.
+     * 
+     * @return the user type of the student account
+     */
     public String getUserType() {
         return UserType;
     }

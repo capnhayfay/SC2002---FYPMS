@@ -31,16 +31,20 @@ import FYPMS.request.RequestRegister;
 import FYPMS.request.RequestTransferSupervisor;
 
 /**
- * GUI which is shown to the Company Admin
+ * GUI which is shown to FYP Coordinator
  */
 public class FYPCoordinatorGUI implements Menu, Logout, GetCommand {
+    /** The FYPCoordinator account of the user */
     private FYPCoordinatorAccount FYPCoordinator;
+    /** The user type of the user */
     private String UserType;
 
     /**
-     * Creates a CompanyAdminGui with the given Company Admin Account
+     * Constructs a FYPCoordinatorGUI with the given FYPCoordinator account and user
+     * type
      * 
-     * @param curAcc which is the Company Admin Account
+     * @param FYPCoordinator the FYPCoordinator account of the user
+     * @param UserType       the user type of the user
      */
     public FYPCoordinatorGUI(FYPCoordinatorAccount FYPCoordinator, String UserType) {
         this.FYPCoordinator = FYPCoordinator;
@@ -48,15 +52,14 @@ public class FYPCoordinatorGUI implements Menu, Logout, GetCommand {
     }
 
     /**
-     * Prints list of possible actions that can be performed by Company Admin
+     * Displays the options available for FYPCoordinators
      */
+    @Override
     public void display() {
         System.out.println();
-        // System.out.println("-----------------------------------------");
         System.out.println("=========================================");
         System.out.println("           FYP Coordinator Menu          ");
         System.out.println("=========================================");
-        // System.out.println("-----------------------------------------");
         System.out.println();
         System.out.println("Logged in as FYP Coordinator: " + FYPCoordinator.getName());
         System.out.println();
@@ -78,9 +81,9 @@ public class FYPCoordinatorGUI implements Menu, Logout, GetCommand {
     }
 
     /**
-     * Gets input from Company Admin and executes the required instruction
+     * Gets the user input and executes the required command
      * 
-     * @return 0 to exit the program entirely, 1 to continue program
+     * @return
      */
     public int execute() {
         Scanner scanner = new Scanner(System.in);
@@ -166,9 +169,14 @@ public class FYPCoordinatorGUI implements Menu, Logout, GetCommand {
                             case 1:
                                 System.out.println("Input request ID: ");
                                 reqID = scanner.nextInt();
+                                System.out.println("=========================================");
                                 if (reqID / 1000 == 0) {
                                     // requestitlechange
                                     RequestChangeTitle titleRequest = FYPMS1.getRequestChangeTitle(reqID);
+                                    if (!titleRequest.getRequesteeID().equals(FYPCoordinator.getLoginId())) {
+                                        System.out.println("Invalid Input. Returning to Main Page...");
+                                        break;
+                                    }
                                     projID = titleRequest.getFypID();
                                     selectedProj = FYPList.getFYPById(projID);
                                     new ModifySubmittedFYPTitleCommand(selectedProj, titleRequest).execute();
@@ -307,6 +315,11 @@ public class FYPCoordinatorGUI implements Menu, Logout, GetCommand {
         return FYPCoordinator;
     }
 
+    /**
+     * Returns UserType in FYP Coordinato
+     * 
+     * @return UserType
+     */
     public String getUserType() {
         return UserType;
     }

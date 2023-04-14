@@ -1,8 +1,12 @@
+/**
+ * The AllocateProjectCommand class represents a command for the FYP Coordinator to allocate a project to a student.
+ * It implements the Command interface and contains an execute method to carry out the allocation process.
+ * The class takes in a FYP object and a RequestRegister object in its constructor.
+ */
 package command.FYPCoord;
 
 import FYPMS.project.*;
 
-import java.util.ArrayList;
 import java.util.Scanner;
 
 import FYPMS.FYPMS1;
@@ -13,6 +17,13 @@ import account.student.StudentStatus;
 import account.supervisor.SupervisorAccount;
 import command.Command;
 
+/**
+ * Constructs a new AllocateProjectCommand object with the specified FYP project
+ * and RequestRegister object.
+ * 
+ * @param project         the FYP project to be allocated
+ * @param registerRequest the request for the project registration
+ */
 public class AllocateProjectCommand implements Command {
     private FYP project;
     private RequestRegister registerRequest;
@@ -23,6 +34,14 @@ public class AllocateProjectCommand implements Command {
         this.registerRequest = registerRequest;
     }
 
+    /**
+     * Executes the command to allocate the FYP project to a student.
+     * The method prompts the user to either accept or reject the registration
+     * request.
+     * It then updates the FYP, student, supervisor, project, and request status
+     * accordingly.
+     * It also updates the student and supervisor status and project lists.
+     */
     public void execute() {
         Scanner sc = new Scanner(System.in);
         System.out.println();
@@ -32,7 +51,9 @@ public class AllocateProjectCommand implements Command {
         System.out.println("1. Accept registration request");
         System.out.println("2. Reject registration request");
         System.out.println();
-        switch (sc.nextInt()) {
+        int requestAction = sc.nextInt();
+        System.out.println("=========================================");
+        switch (requestAction) {
             case 1:
                 String StudentName = FYPMS1.getStudentName(registerRequest.getRequesterID());
                 String StudentEmail = FYPMS1.getStudentEmail(registerRequest.getRequesterID());

@@ -1,3 +1,8 @@
+/**
+ * The RequestCoordDeregisterCommand class implements the Command interface and 
+ * allows a student to make a request to a coordinator to deregister from their 
+ * current project.
+*/
 package command.Student;
 
 import java.util.ArrayList;
@@ -11,12 +16,21 @@ import command.Command;
 public class RequestCoordDeregisterCommand implements Command {
     private StudentAccount studentAccount;
 
+    /**
+     * The studentAccount object to hold student account information.
+     */
     public RequestCoordDeregisterCommand(StudentAccount studentAccount) {
         this.studentAccount = studentAccount;
     }
 
+    /**
+     * The list of requests for the system.
+     */
     ArrayList<ArrayList<Object>> requests = FYPMS1.getRequestList();
 
+    /**
+     * Executes the request for deregistration.
+     */
     public void execute() {
         if (studentAccount.getStatus() == StudentStatus.NO_PROJECT) {
             System.out.println("Error: You have not registered for an FYP.");
@@ -29,6 +43,15 @@ public class RequestCoordDeregisterCommand implements Command {
             return;
         }
         // Temporary requestID = 1
+        for (Object indivRequest : requests.get(1)) {
+            Request indivCastedRequest = (Request) indivRequest;
+            if (indivCastedRequest.getRequesterID().equals(studentAccount.getLoginId())) {
+                System.out.println();
+                System.out.println("You have already requested to deregister.");
+                return;
+            }
+
+        }
 
         RequestDeregister request = new RequestDeregister(requests.get(1).size() + 1000, studentAccount.getLoginId(),
                 RequestStatus.PENDING, studentAccount.getAssignedProject());

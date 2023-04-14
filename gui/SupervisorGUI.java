@@ -149,6 +149,10 @@ public class SupervisorGUI implements Menu, Logout, GetCommand {
                                 if (reqID / 1000 == 0) {
                                     // Request Title Change
                                     RequestChangeTitle titleRequest = FYPMS1.getRequestChangeTitle(reqID);
+                                    if (!titleRequest.getRequesteeID().equals(supervisor.getLoginId())) {
+                                        System.out.println("Invalid Input. Returning to Main Page...");
+                                        break;
+                                    }
                                     projID = titleRequest.getFypID();
                                     selectedProj = FYPList.getFYPById(projID);
                                     new ModifySubmittedFYPTitleCommand(selectedProj, titleRequest).execute();

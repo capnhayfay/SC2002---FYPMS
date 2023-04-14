@@ -1,3 +1,7 @@
+/**
+ * This class represents a command that allows a supervisor to modify the title of a submitted FYP project.
+ * The command contains a reference to the project to be modified, and a request to change the title of the project.
+*/
 package command.Supervisor;
 
 import command.Command;
@@ -9,21 +13,33 @@ import FYPMS.request.RequestChangeTitle;
 import FYPMS.request.RequestStatus;
 
 public class ModifySubmittedFYPTitleCommand implements Command {
+
     private FYP project;
     private RequestChangeTitle titleRequest;
 
+    /**
+     * Constructor for the ModifySubmittedFYPTitleCommand class.
+     * 
+     * @param project      The FYP project to be modified.
+     * @param titleRequest The request to change the title of the FYP project.
+     */
     public ModifySubmittedFYPTitleCommand(FYP project, RequestChangeTitle titleRequest) {
         this.project = project;
         this.titleRequest = titleRequest;
     }
 
+    /**
+     * Executes the command to modify the title of a submitted FYP project.
+     */
     public void execute() {
         Scanner sc = new Scanner(System.in);
         System.out.println();
         System.out.println("Select option:");
         System.out.println("1. Accept Title request");
         System.out.println("2. Reject Title request");
-        switch (sc.nextInt()) {
+        int requestAction = sc.nextInt();
+        System.out.println("=========================================");
+        switch (requestAction) {
             case 1:
                 project.setTitle(titleRequest.getNewTitle());
                 titleRequest.setStatus(RequestStatus.APPROVED);

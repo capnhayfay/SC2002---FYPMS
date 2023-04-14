@@ -1,3 +1,7 @@
+/**
+This class represents a command to generate filtered details from the FYPMS.
+It implements the Command interface.
+*/
 package command.FYPCoord;
 
 import FYPMS.FYPMS1;
@@ -14,10 +18,19 @@ public class GenerateFilteredProjectDetailsCommand implements Command {
     private FYPStatus filter;
     private int filterType;
 
+    /**
+     * Constructor for the GenerateFilteredProjectDetailsCommand class.
+     * 
+     * @param filterType the type of filter to be applied (1: Filter by status, 2:
+     *                   Filter by supervisor)
+     */
     public GenerateFilteredProjectDetailsCommand(int filterType) {
         this.filterType = filterType;
     }
 
+    /**
+     * Executes the command to generate filtered details from the FYPMS.
+     */
     public void execute() {
         boolean validInput = false;
         int selection;

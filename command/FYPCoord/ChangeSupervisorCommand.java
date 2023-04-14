@@ -1,3 +1,8 @@
+/**
+
+    A class that represents a command to change the supervisor of a project
+    already allocated to a student.
+    */
 package command.FYPCoord;
 
 import FYPMS.FYPMS1;
@@ -13,6 +18,11 @@ import java.util.Scanner;
 public class ChangeSupervisorCommand implements Command {
     private RequestTransferSupervisor transferRequest;
 
+    /**
+     * Constructor for the ChangeSupervisorCommand class.
+     * 
+     * @param transferRequest the transfer request for the change of supervisor
+     */
     public ChangeSupervisorCommand(RequestTransferSupervisor transferRequest) {
         this.transferRequest = transferRequest;
     }
@@ -25,7 +35,9 @@ public class ChangeSupervisorCommand implements Command {
         System.out.println("Select option:");
         System.out.println("1. Accept transfer request");
         System.out.println("2. Reject transfer request");
-        switch (sc.nextInt()) {
+        int requestAction = sc.nextInt();
+        System.out.println("=========================================");
+        switch (requestAction) {
             case 1:
                 int FYPId = transferRequest.getFypID();
                 String newSupervisorName = transferRequest.getNewSupervisorID();

@@ -1,6 +1,5 @@
 package FYPMS;
 
-// import FYPMS1.student.StudentAccount;
 import FYPMS.request.*;
 
 import account.UserType;
@@ -24,11 +23,9 @@ import static account.student.StudentStatus.StudentStatusToEnum;
 
 public class FileReader {
 
-    private static final FYP[] FYPList = null;
-
     /**
-     * Reads FYPs from file and adds them to the FYPList
-     * 
+     * Reads supervisors from a CSV file and adds them to the FYPList.
+     *
      * @param fileName the name of the CSV file to read from
      */
     public static void readSupervisorsFromFile(String fileName) {
@@ -61,6 +58,11 @@ public class FileReader {
         }
     }
 
+    /**
+     * Reads FYP coordinators from file and adds them to the FYPCoordinatorList
+     *
+     * @param fileName the name of the CSV file to read from
+     */
     public static void readCoordinatorsFromFile(String fileName) {
         Path pathToFile = Paths.get(fileName);
 
@@ -92,6 +94,11 @@ public class FileReader {
         }
     }
 
+    /**
+     * Reads FYP coordinators from file and adds them to the FYPCoordinatorList
+     *
+     * @param fileName the name of the CSV file to read from
+     */
     public static void readStudentsFromFile(String fileName) {
         Path pathToFile = Paths.get(fileName);
 
@@ -123,12 +130,15 @@ public class FileReader {
         }
     }
 
+    /**
+     * Reads FYPs from file and adds them to the FYPList
+     * 
+     * @param fileName the name of the CSV file to read from
+     */
     public static void readFYPsFromFile(String fileName) {
-        // DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd
-        // HH:mm");
+
         Path pathToFile = Paths.get(fileName);
         FYPList fypList = FYPMS1.getFypList();
-
         try (BufferedReader br = Files.newBufferedReader(pathToFile, StandardCharsets.UTF_8)) {
             String line = br.readLine();
             line = br.readLine();
@@ -159,6 +169,21 @@ public class FileReader {
             ioe.printStackTrace();
         }
     }
+
+    /**
+     * 
+     * Reads requests from files and populates the corresponding request lists.
+     * 
+     * @param fileName  the name of the file containing the RequestChangeTitle
+     *                  requests.
+     * @param fileName1 the name of the file containing the RequestDeregister
+     *                  requests.
+     * @param fileName2 the name of the file containing the RequestRegister
+     *                  requests.
+     * @param fileName3 the name of the file containing the
+     *                  RequestTransferSupervisor requests.
+     * @throws IOException if there is an error reading the files.
+     */
 
     public static void readRequestsFromFile(String fileName, String fileName1, String fileName2, String fileName3) {
         Path pathToFile = Paths.get(fileName);
@@ -249,6 +274,14 @@ public class FileReader {
         }
     }
 
+    /**
+     * 
+     * Returns a list of FYP titles allocated to a specific supervisor.
+     * 
+     * @param supervisorName the name of the supervisor to get the FYPs for
+     * @return an ArrayList of Strings representing the titles of the FYPs allocated
+     *         to the specified supervisor
+     */
     public static ArrayList<String> getSupervisorFYPs(String supervisorName) {
         ArrayList<String> supervisorFYPs = new ArrayList<String>();
         for (FYP fyp : FYPMS1.getFypList().getFYPs()) {

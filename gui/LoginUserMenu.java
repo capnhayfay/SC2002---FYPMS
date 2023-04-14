@@ -10,7 +10,8 @@ import account.supervisor.SupervisorAccount;
 import account.UserType;
 
 /**
- * Displayed at start of program
+ * A menu that allows users to login and access their respective accounts.
+ * Implements the Menu and Login interfaces.
  */
 public class LoginUserMenu implements Menu, Login {
     private StudentAccount studentAccount;
@@ -18,21 +19,40 @@ public class LoginUserMenu implements Menu, Login {
     private SupervisorAccount supervisorAccount;
     UserType userType;
 
+    /**
+     * Creates a new instance of LoginUserMenu for a StudentAccount.
+     * 
+     * @param studentAccount the StudentAccount to be logged in
+     */
     public LoginUserMenu(StudentAccount studentAccount) {
         this.studentAccount = studentAccount;
         userType = UserType.Student;
     }
 
+    /**
+     * Creates a new instance of LoginUserMenu for a FYPCoordinatorAccount.
+     * 
+     * @param fypCoordinatorAccount the FYPCoordinatorAccount to be logged in
+     */
     public LoginUserMenu(FYPCoordinatorAccount fypCoordinatorAccount) {
         this.fypCoordinatorAccount = fypCoordinatorAccount;
         userType = UserType.FYPCoordinator;
     }
 
+    /**
+     * Creates a new instance of LoginUserMenu for a SupervisorAccount.
+     * 
+     * @param supervisorAccount the SupervisorAccount to be logged in
+     */
     public LoginUserMenu(SupervisorAccount supervisorAccount) {
         this.supervisorAccount = supervisorAccount;
         userType = UserType.Supervisor;
     }
 
+    /**
+     * Displays the login menu and allows users to login.
+     * Depending on the userType, it will call the respective login method.
+     */
     public void display() {
         Scanner scanner = new Scanner(System.in);
         while (true) {
@@ -44,22 +64,28 @@ public class LoginUserMenu implements Menu, Login {
             if (userType == UserType.Student) {
                 studentAccount = loginStudent(userLogin, password);
                 if (studentAccount == null) {
+                    System.out.println();
                     System.out.println("Invalid Details. Please try again.");
-                    continue;
+                    System.out.println();
+                    break;
                 } else
                     break;
             } else if (userType == UserType.FYPCoordinator) {
                 fypCoordinatorAccount = loginFypCoordinatorAccount(userLogin, password);
                 if (fypCoordinatorAccount == null) {
+                    System.out.println();
                     System.out.println("Invalid Details. Please try again.");
-                    continue;
+                    System.out.println();
+                    break;
                 } else
                     break;
             } else if (userType == UserType.Supervisor) {
                 supervisorAccount = loginSupervisorAccount(userLogin, password);
                 if (supervisorAccount == null) {
+                    System.out.println();
                     System.out.println("Invalid Details. Please try again.");
-                    continue;
+                    System.out.println();
+                    break;
                 } else
                     break;
             }
@@ -70,69 +96,67 @@ public class LoginUserMenu implements Menu, Login {
     }
 
     /**
+     * Authenticates the login details of a StudentAccount.
      * 
-     * Authenticates username and password
-     * 
-     * @param username which is username entered by Guest
-     * @param password which is password entered by Guest
-     * @return Account if login successful, null if not successful
+     * @param username the username entered by the user
+     * @param password the password entered by the user
+     * @return the StudentAccount if the login is successful, null if not successful
      */
     public StudentAccount loginStudent(String username, String password) {
         return FYPMS1.loginStudent(username, password);
     }
 
     /**
+     * Authenticates the login details of a SupervisorAccount.
      * 
-     * Authenticates username and password
-     * 
-     * @param username which is username entered by Guest
-     * @param password which is password entered by Guest
-     * @return Account if login successful, null if not successful
+     * @param username the username entered by the user
+     * @param password the password entered by the user
+     * @return the SupervisorAccount if login is successful, null otherwise
      */
     public SupervisorAccount loginSupervisorAccount(String username, String password) {
         return FYPMS1.loginSupervisorAccount(username, password);
     }
 
     /**
+     * Authenticates the login details of a FYPCoordinatorAccount.
      * 
-     * Authenticates username and password
-     * 
-     * @param username which is username entered by Guest
-     * @param password which is password entered by Guest
-     * @return Account if login successful, null if not successful
+     * @param username the username entered by the user
+     * @param password the password entered by the user
+     * @return the FYPCoordinatorAccount if login is successful, null otherwise
      */
     public FYPCoordinatorAccount loginFypCoordinatorAccount(String username, String password) {
         return FYPMS1.loginFypCoordinatorAccount(username, password);
     }
 
     /**
-     * Authenticates username and password
-     * 
-     * @param username which is username entered by Guest
-     * @param password which is password entered by Guest
-     * @return Account if login successful, null if not successful
+     * @param username which is username entered by user
+     * @param password which is password entered by user
      */
     public Account login(String username, String password) {
         return null;
     }
 
-    /**
-     * Returns Account in GuestGUI
-     * 
-     * @return Account
-     */
     public Account getAccount() {
         return null;
     }
 
+    /**
+     * @return StudentAccount in LoginUserMenu
+     */
     public StudentAccount getStudentAccount() {
         return studentAccount;
     }
 
+    /**
+     * @return SupervisorAccount in LoginUserMenu
+     */
     public SupervisorAccount getSupervisorAccount() {
         return supervisorAccount;
     }
 
+    /**
+     * @return FYPCoordinatorAccount in LoginUserMenu
+     */
     public FYPCoordinatorAccount getFYPCoordinatorAccount() {
         return fypCoordinatorAccount;
     }

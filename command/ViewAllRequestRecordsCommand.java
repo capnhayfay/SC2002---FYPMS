@@ -5,13 +5,25 @@ import FYPMS.request.Request;
 import account.Account;
 import java.util.ArrayList;
 
+/**
+ * 
+ * This command class is used to view all request records of a user.
+ */
 public class ViewAllRequestRecordsCommand implements Command {
     private Account account;
 
+    /**
+     * Constructor for the ViewAllRequestRecordsCommand class.
+     *
+     * @param account the account whose request records will be viewed
+     */
     public ViewAllRequestRecordsCommand(Account account) {
         this.account = account;
     }
 
+    /**
+     * Executes the command to view all request records.
+     */
     public void execute() {
         int RequestCount = 0;
         System.out.println();

@@ -1,7 +1,7 @@
 package gui;
 
 /**
- * Responsible for logging out of Account
+ * Interface responsible for logging out of Account
  */
 public interface Logout {
     /**

@@ -134,12 +134,16 @@ public class FileUpdater {
                 bw.newLine();
                 bw.write(supervisor.getName() + "\t" + supervisor.getEmail() + "\t" + supervisor.getPassword());
             }
-            System.out.println("Supervisors successfully written to " + fileName);
         } catch (IOException e) {
             System.err.format("IOException: %s%n", e);
         }
     }
 
+    /**
+     * Writes the FYP coordinator list to file
+     *
+     * @param fileName the name of the CSV file to write to
+     */
     public static void writeCoordinatorToFile(String fileName) {
         ArrayList<FYPCoordinatorAccount> coordinatorList = FYPMS1.getCoordinatorList();
         Path pathToFile = Paths.get(fileName);
@@ -156,6 +160,11 @@ public class FileUpdater {
         }
     }
 
+    /**
+     * Writes the Student list to file
+     *
+     * @param fileName the name of the CSV file to write to
+     */
     public static void writeStudentToFile(String fileName) {
         Path pathToFile = Paths.get(fileName);
 
@@ -169,7 +178,6 @@ public class FileUpdater {
                 bw.write(student.getName() + "\t" + student.getEmail() + "\t" + student.getPassword() + "\t"
                         + student.getAssignedProject() + "\t" + student.getStatus());
             }
-            System.out.println("Students successfully written to " + fileName);
         } catch (IOException ioe) {
             ioe.printStackTrace();
         }

@@ -7,6 +7,7 @@ import java.util.Scanner;
 import FYPMS.FYPMS1;
 import FYPMS.request.RequestRegister;
 import FYPMS.request.RequestStatus;
+import account.student.StudentStatus;
 import command.Command;
 
 public class AllocateProjectCommand implements Command {
@@ -32,11 +33,13 @@ public class AllocateProjectCommand implements Command {
                 project.setStudentID(registerRequest.getRequesterID());
                 project.setStudentEmail(StudentEmail);
                 project.setStudentName(StudentName);
-                registerRequest.setStatus(RequestStatus.APPROVED);              
+                registerRequest.setStatus(RequestStatus.APPROVED); 
+                FYPMS1.setStudentStatus(registerRequest.getRequesterID(), StudentStatus.ASSIGNED_PROJECT);             
                 System.out.println("Allocated project " + project.getTitle() + " to " + StudentName); 
                 break;
             case 2:
                 registerRequest.setStatus(RequestStatus.REJECTED);
+                FYPMS1.setStudentStatus(registerRequest.getRequesterID(), StudentStatus.NO_PROJECT); 
                 System.out.println("Rejected "+registerRequest.getRequesterID()+ " for "  + project.getTitle());
                 break;
             default:

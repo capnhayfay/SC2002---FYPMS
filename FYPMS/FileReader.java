@@ -234,10 +234,9 @@ public class FileReader {
         RequestTransferSupervisor request = new RequestTransferSupervisor(requestId, requesterID, requestStatus, fypID, newSupervisorId);
         requestTransferSupervisorList.add(request);
         }
-        requests.add(requestRegisterList);
+        requests.add(requestTransferSupervisorList);
         } catch (IOException ioe) {
             ioe.printStackTrace();
         }
-        requests.add(requestTransferSupervisorList);
     }
 }

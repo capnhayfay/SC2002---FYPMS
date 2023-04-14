@@ -3,6 +3,7 @@ package gui;
 import account.*;
 import account.student.StudentAccount;
 import command.ChangePassword;
+import command.ViewOwnRequestRecordsCommand;
 import command.Student.*;
 // import system.SystemSettings;
 
@@ -84,16 +85,11 @@ public class StudentGUI implements Menu, Logout, GetCommand {
 
             switch (userCh) {
                 case 1:
-                    new ViewAllAvailableFYPCommand().execute();
+                    new ViewAllAvailableFYPCommand(curAcc).execute();
                     break;
                 case 2:
-                    if (!(curAcc instanceof StudentAccount))
-                        break;
-                    else {
-                        // how StudentAccount student = new StudentAccount(curAcc.getName(),curAcc.getEmail());
-                        new RequestCoordFYPCommand(curAcc).execute();
-                        break;
-                    }
+                    new RequestCoordFYPCommand(curAcc).execute();
+                    break;
                 case 3:
                     new ViewRegisteredFYPCommand(curAcc).execute();
                     break;
@@ -104,7 +100,7 @@ public class StudentGUI implements Menu, Logout, GetCommand {
                     new RequestCoordDeregisterCommand(curAcc).execute();
                     break;
                 case 6:
-                    new ViewSelfRequestRecordsCommand(curAcc).execute();
+                    new ViewOwnRequestRecordsCommand(curAcc).execute();
                     break;
 
                 case 7:

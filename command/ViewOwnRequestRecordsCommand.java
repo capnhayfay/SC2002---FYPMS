@@ -1,36 +1,35 @@
-package command.Student;
+package command;
 
 import FYPMS.FYPMS1;
 import FYPMS.request.Request;
-import account.student.StudentAccount;
-import command.Command;
+import account.Account;
 import java.util.ArrayList;
 
-public class ViewSelfRequestRecordsCommand implements Command {
-    private StudentAccount student;
+public class ViewOwnRequestRecordsCommand implements Command {
+    private Account account;
 
-    public ViewSelfRequestRecordsCommand(StudentAccount student) {
-        this.student = student;
+    public ViewOwnRequestRecordsCommand(Account account) {
+        this.account = account;
     }
 
     public void execute() {
         int RequestCount = 0;
-        // RequestList requests = FYPMS1.getRequestList();
         System.out.println();
         System.out.println("Request History");
         System.out.println();
-        int idx = 0;
         ArrayList<ArrayList <Object>> requests =  FYPMS1.getRequestList();
         for (ArrayList <Object> request : requests) {
             for (Object indivRequest : request){
                 Request indivCastedRequest = (Request) indivRequest;
-                if (indivCastedRequest.getRequesterID().equals(student.getLoginId())) {
+                if (indivCastedRequest.getRequesterID().equals(account.getLoginId())) {
                     System.out.println("============= Request ID " + indivCastedRequest.getRequestID() + " ==============");
                     indivCastedRequest.printDetails();
                     System.out.println();
                     RequestCount++;
                 }
-            }
+
+            }  
+
         }
 
 

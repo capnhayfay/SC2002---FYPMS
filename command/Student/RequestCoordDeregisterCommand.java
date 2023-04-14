@@ -31,4 +31,6 @@ public class RequestCoordDeregisterCommand implements Command {
         RequestDeregister request = new RequestDeregister(requests.get(1).size()+1000,studentAccount.getLoginId(), RequestStatus.PENDING,studentAccount.getAssignedProject());
         requests.get(1).add(request);
     }
+
+
 }

@@ -31,10 +31,12 @@ public class ViewRegisteredFYPCommand implements Command {
             return;
         }
         for (FYP fyp : fyps) {
-            if (fyp.getStudentID().equals(studentAccount.getLoginId())) {
+            if (fyp.getStudentID() != null){
+                if (fyp.getStudentID().equals(studentAccount.getLoginId())) {
                 fyp.printFYPDetails();
                 System.out.println();
                 break;
+            }
             }
         }
     }

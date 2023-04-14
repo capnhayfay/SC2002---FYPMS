@@ -24,7 +24,7 @@ public class Application {
 		FileReader.readCoordinatorsFromFile("./database/Modified/FYP coordinator.txt");
 		FileReader.readStudentsFromFile("./database/Modified/student list.txt");
 		FileReader.readFYPsFromFile("./database/Modified/rollover project.txt");
-		FileReader.readRequestsFromFile("./database/Modified/0requestChangeTitle.txt","./database/Modified/1requestDeregister.txt","./database/Modified/2requestRegister.txt","src/database/Modified/3requestTransferSupervisor.txt");
+		FileReader.readRequestsFromFile("./database/Modified/0requestChangeTitle.txt","./database/Modified/1requestDeregister.txt","./database/Modified/2requestRegister.txt","./database/Modified/3requestTransferSupervisor.txt");
 		// end of load in CSV
 		Scanner scanner = new Scanner(System.in);
 		String loggedInUserType = "";
@@ -95,16 +95,10 @@ public class Application {
 				loggedInUserType = fypCoordinatorGUI.getUserType();
 			}
 		}
+
+		FileUpdater.writeRequestsToFile("./database/test/0requestChangeTitle.txt","./database/test/1requestDeregister.txt","./database/test/2requestRegister.txt","./database/test/3requestTransferSupervisor.txt");
+
 		new EndProgramMenu().display();
-
-		// CSVUpdater.updateMovies("src/database/movieDB.csv");
-		// CSVUpdater.updateCineplex("src/database/CineplexDB.csv");
-		// CSVUpdater.updateReviewList("src/database/reviewListDB.csv");
-		// CSVUpdater.updateCinema("src/database/CinemaDB.csv");
-		// CSVUpdater.updateShows("src/database/showDB.csv");
-		// CSVUpdater.updateTickets("src/database/MovieTicketDB.csv");
-		// CSVUpdater.updateBooking("src/database/bookingDB.csv");
-
 	}
 
 }

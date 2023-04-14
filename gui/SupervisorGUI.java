@@ -3,8 +3,15 @@ package gui;
 import account.*;
 import java.util.Scanner;
 
+import FYPMS.project.FYP;
+import FYPMS.project.FYPList;
+import FYPMS.request.RequestChangeTitle;
 import account.supervisor.SupervisorAccount;
+import command.ChangePassword;
+import command.ViewOwnRequestRecordsCommand;
+import command.FYPCoord.AllocateProjectCommand;
 import command.Supervisor.*;
+import FYPMS.FYPMS1;
 
 /**
  * GUI which is shown to the Supervisor Account
@@ -39,7 +46,7 @@ public class SupervisorGUI implements Menu, Logout, GetCommand {
         System.out.println();
         System.out.println("1. Create, update or view projects");
         if (new ViewPendingStudentRequestsCommand(supervisor.getName()).checkUpdates() == 1) {
-            System.out.println("2. View student pending requests ");
+            System.out.println("2. View student pending requests (NEW)");
         } else {
             System.out.println("2. View student pending requests");
         }
@@ -98,10 +105,17 @@ public class SupervisorGUI implements Menu, Logout, GetCommand {
                     scanner.nextLine();
                     switch (selectedChoice) {
                         case 1:
-                            new CreateProjectCommand(supervisor).execute();
+                            if(!supervisor.getProj_2().equals("0")){
+                                System.out.println();
+                                System.out.println("You have reach the maximum allocated project capacity.");
+                                break;
+                            }
+                            else{
+                                new CreateProjectCommand(supervisor).execute();    
+                            }
                             break;
                         case 2:
-                            new ModifySubmittedFYPTitleCommand().execute();
+                            new ModifyFYPTitle().execute();
                             break;
                         case 3:
                             new ViewSubmittedFYPCommand(supervisor.getName()).execute();
@@ -109,11 +123,10 @@ public class SupervisorGUI implements Menu, Logout, GetCommand {
                     }
                     break;
                 case 2:
-                    new ViewPendingStudentRequestsCommand(supervisor.getName()).execute();
+                    new ViewPendingStudentRequestsCommand(supervisor.getLoginId()).execute();
                     System.out.println("Please select your choice");
-                    System.out.println("1. Approve Request");
-                    System.out.println("2. Reject Request");
-                    System.out.println("3. Return to Main Page");
+                    System.out.println("1. Approve or Reject Request");
+                    System.out.println("2. Return to Main Page");
                     if (!scanner.hasNextInt()) {
                         System.out.println("Invalid input format for option number. Please try again.");
                         scanner.nextLine();
@@ -123,14 +136,26 @@ public class SupervisorGUI implements Menu, Logout, GetCommand {
                     }
                     int choice2 = scanner.nextInt();
                     scanner.nextLine();
+                    int reqID;
+                    int projID;
+                    FYP selectedProj;
                     switch (choice2) {
                         case 1:
-                            // new approveRequest();
+                            System.out.println("Input project ID: ");
+                            projID = scanner.nextInt();
+                            selectedProj = FYPList.getFYPById(projID);
+                            System.out.println("Input request ID: ");
+                            reqID = scanner.nextInt();
+                            if (reqID / 1000 == 0){
+                                // requestitlechange
+                                RequestChangeTitle titleRequest = FYPMS1.getRequestChangeTitle(reqID);
+                                new ModifySubmittedFYPTitleCommand(selectedProj, titleRequest).execute();
+                            }
+                            else if (reqID / 1000 != 0){
+                                System.out.println("Wrong input");
+                            }
                             break;
                         case 2:
-                            // new rejectRequest();
-                            break;
-                        case 3:
                             break;
                     }
                     break;
@@ -138,14 +163,18 @@ public class SupervisorGUI implements Menu, Logout, GetCommand {
                     new RequestTransfertoCoordCommand(supervisor).execute();
                     break;
                 case 4:
-                    // new viewRequestHistory()
+                    new ViewOwnRequestRecordsCommand(supervisor).execute();
                     break;
                 case 5:
-                    // new ChangePassword().execute();
+                    new ChangePassword(supervisor).execute();
+                    logout();
                     break;
                 case 6:
                     logout();
-                    break;
+                    System.out.println();
+                    System.out.println("Logged out successfully.");
+                    System.out.println();
+                    return 1;
                 default:
                     System.out.println();
                     System.out.println("Option number out of range. Please try again.");
@@ -159,8 +188,8 @@ public class SupervisorGUI implements Menu, Logout, GetCommand {
      * Logout from account by setting Supervisor Account to null
      */
     public void logout() {
-        supervisor = null;
-        this.UserType = null;
+        this.supervisor = null;
+        this.UserType = "";
     }
 
     /**

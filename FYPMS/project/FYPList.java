@@ -7,7 +7,7 @@ import java.util.ArrayList;
  * and are entitled to supervise
  */
 public class FYPList {
-    private final ArrayList<FYP> fyps = new ArrayList<>();
+    private final static ArrayList<FYP> fyps = new ArrayList<>();
 
     /**
      * Adds a FYP to the list of FYPs the department can supervise
@@ -59,7 +59,7 @@ public class FYPList {
      *
      * @param FYPId
      */
-    public FYP getFYPById(int FYPId) {
+    public static FYP getFYPById(int FYPId) {
         for (FYP fyp : fyps) {
             if (fyp.getProjectId() == FYPId) {
                 return fyp;

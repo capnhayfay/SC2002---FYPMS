@@ -25,11 +25,11 @@ public class FYP {
     }
 
     public int getProjectId() {
-        return projectId;
+        return this.projectId;
     }
 
     public String getTitle() {
-        return projectTitle;
+        return this.projectTitle;
     }
 
     public void setTitle(String projectTitle) {
@@ -41,7 +41,7 @@ public class FYP {
     }
 
     public FYPStatus getStatus() {
-        return status;
+        return this.status;
     }
 
     public void setSupervisorName(String supervisorName) {
@@ -49,7 +49,7 @@ public class FYP {
     }
 
     public String getSupervisorName() {
-        return supervisorName;
+        return this.supervisorName;
     }
 
     public void setSupervisorEmail(String supervisorEmail) {
@@ -57,7 +57,7 @@ public class FYP {
     }
 
     public String getSupervisorEmail() {
-        return supervisorEmail;
+        return this.supervisorEmail;
     }
 
     public void setStudentID(String studentID) {
@@ -65,7 +65,7 @@ public class FYP {
     }
 
     public String getStudentID() {
-        return studentID;
+        return this.studentID;
     }
 
     public void setStudentName(String studentName) {
@@ -73,7 +73,7 @@ public class FYP {
     }
 
     public String getStudentName() {
-        return studentName;
+        return this.studentName;
     }
 
     public void setStudentEmail(String studentEmail) {
@@ -81,7 +81,7 @@ public class FYP {
     }
 
     public String getStudentEmail() {
-        return studentEmail;
+        return this.studentEmail;
     }
 
 

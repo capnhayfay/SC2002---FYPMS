@@ -3,9 +3,16 @@ package FYPMS;
 import account.supervisor.FYPCoordinatorAccount;
 import account.supervisor.SupervisorAccount;
 
+import FYPMS.project.FYP;
 import FYPMS.project.FYPList;
+import FYPMS.request.Request;
+import FYPMS.request.RequestChangeTitle;
+import FYPMS.request.RequestDeregister;
 import FYPMS.request.RequestList;
+import FYPMS.request.RequestRegister;
+import FYPMS.request.RequestTransferSupervisor;
 import account.student.StudentAccount;
+import account.student.StudentStatus;
 
 import java.util.ArrayList;
 
@@ -33,6 +40,54 @@ public class FYPMS1 {
 
     public static ArrayList<ArrayList<Object>> getRequestList() {
         return requests;
+    }
+
+    public static RequestChangeTitle getRequestChangeTitle(int requestID)
+    {
+            for (Object indivRequest : requests.get(0))
+            {
+                RequestChangeTitle indivCastedRequest = (RequestChangeTitle) indivRequest;
+                if (indivCastedRequest.getRequestID() == requestID) {
+                    return indivCastedRequest;
+             }
+            }
+        return null;
+    }
+
+    public static RequestDeregister getRequestDeregister(int requestID)
+    {
+            for (Object indivRequest : requests.get(1))
+            {
+                RequestDeregister indivCastedRequest = (RequestDeregister) indivRequest;
+                if (indivCastedRequest.getRequestID() == requestID) {
+                    return indivCastedRequest;
+             }
+            }
+        return null;
+    }
+
+    public static RequestRegister getRequestRegister(int requestID)
+    {
+            for (Object indivRequest : requests.get(2))
+            {
+                RequestRegister indivCastedRequest = (RequestRegister) indivRequest;
+                if (indivCastedRequest.getRequestID() == requestID) {
+                    return indivCastedRequest;
+             }
+            }
+        return null;
+    }
+
+    public static RequestTransferSupervisor getRequestTransferSupervisor(int requestID)
+    {
+            for (Object indivRequest : requests.get(3))
+            {
+                RequestTransferSupervisor indivCastedRequest = (RequestTransferSupervisor) indivRequest;
+                if (indivCastedRequest.getRequestID() == requestID) {
+                    return indivCastedRequest;
+             }
+            }
+        return null;
     }
 
     public static ArrayList<SupervisorAccount> getSupervisorList() {
@@ -127,5 +182,16 @@ public class FYPMS1 {
             }
         }
         return null;
+    }
+
+    public static void setStudentStatus(String studentID, StudentStatus studentStatus)
+    {
+        for (StudentAccount account : StudentAccount)
+        {
+            if (account.getLoginId().equals(studentID))
+            {
+                account.setStatus(studentStatus);;
+            }
+        }
     }
 }

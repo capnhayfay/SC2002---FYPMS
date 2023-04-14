@@ -2,15 +2,29 @@ package gui;
 
 import account.*;
 import account.supervisor.FYPCoordinatorAccount;
+import command.FYPCoord.AllocateProjectCommand;
+import command.FYPCoord.ChangeSupervisorCommand;
+import command.FYPCoord.DeregisterStudentCommand;
 import command.FYPCoord.GenerateFilteredProjectDetailsCommand;
 import command.FYPCoord.ViewAllFYPCommand;
 import command.FYPCoord.ViewAllRequestHistoryCommand;
 import command.Supervisor.CreateProjectCommand;
+import command.Supervisor.ModifyFYPTitle;
 import command.Supervisor.ModifySubmittedFYPTitleCommand;
 import command.Supervisor.RequestTransfertoCoordCommand;
 import command.Supervisor.ViewPendingStudentRequestsCommand;
 import command.Supervisor.ViewSubmittedFYPCommand;
+import command.ChangePassword;
+import command.ViewOwnRequestRecordsCommand;
 import java.util.Scanner;
+
+import FYPMS.FYPMS1;
+import FYPMS.project.FYP;
+import FYPMS.project.FYPList;
+import FYPMS.request.RequestChangeTitle;
+import FYPMS.request.RequestDeregister;
+import FYPMS.request.RequestRegister;
+import FYPMS.request.RequestTransferSupervisor;
 
 /**
  * GUI which is shown to the Company Admin
@@ -49,11 +63,12 @@ public class FYPCoordinatorGUI implements Menu, Logout, GetCommand {
             System.out.println("2. View student pending requests");
         }
         System.out.println("3. Request to transfer student");
-        System.out.println("4. View Request History");
-        System.out.println("5. View Project by Filters");
-        System.out.println("6. Change Password");
-        System.out.println("7. Logout");
-        System.out.println("8. Exit");
+        System.out.println("4. View Own Request History");
+        System.out.println("5. View all Requests");
+        System.out.println("6. View Project by Filters");
+        System.out.println("7. Change Password");
+        System.out.println("8. Logout");
+        System.out.println("9. Exit");
         System.out.println("=========================================");
         System.out.println();
     }
@@ -82,7 +97,7 @@ public class FYPCoordinatorGUI implements Menu, Logout, GetCommand {
             System.out.println();
             System.out.println("=========================================");
 
-            if (userCh == 8) {
+            if (userCh == 9) {
                 return 0;
             }
             switch (userCh) {
@@ -90,8 +105,7 @@ public class FYPCoordinatorGUI implements Menu, Logout, GetCommand {
                     System.out.println("Please input a choice from Create, Update, and View Projects");
                     System.out.println("1. Create Project");
                     System.out.println("2. Update Project Title");
-                    System.out.println("3. View own Projects");
-                    System.out.println("3. View all Projects");
+                    System.out.println("3. View Projects");
                     if (!scanner.hasNextInt()) {
 
                         System.out.println("Invalid input format for option number. Please try again.");
@@ -104,24 +118,29 @@ public class FYPCoordinatorGUI implements Menu, Logout, GetCommand {
                     scanner.nextLine();
                     switch (selectedChoice) {
                         case 1:
-                            new CreateProjectCommand(FYPCoordinator).execute();
+                            if(!FYPCoordinator.getProj_2().equals("0")){
+                                System.out.println();
+                                System.out.println("You have reach the maximum allocated project capacity.");
+                                break;
+                            }
+                            else{
+                                new CreateProjectCommand(FYPCoordinator).execute();    
+                            }
                             break;
                         case 2:
-                            new ModifySubmittedFYPTitleCommand().execute();
+                            new ModifyFYPTitle().execute();
                             break;
                         case 3:
                             new ViewSubmittedFYPCommand(FYPCoordinator.getName()).execute();
                             break;
-                        case 4:
-                            new ViewAllFYPCommand().execute();
-                            break;
                     }
                     break;
                 case 2:
+                    new ViewPendingStudentRequestsCommand(FYPCoordinator.getLoginId()).execute();
+                    System.out.println("=========================================");
                     System.out.println("Please select your choice");
-                    System.out.println("1. View all pending requests");
-                    System.out.println("2. View own pending requests");
-                    System.out.println("3. Return to Main Page");
+                    System.out.println("1. Approve or Reject Request");
+                    System.out.println("2. Return to Main Page");
                     if (!scanner.hasNextInt()) {
                         System.out.println("Invalid input format for option number. Please try again.");
                         scanner.nextLine();
@@ -129,60 +148,41 @@ public class FYPCoordinatorGUI implements Menu, Logout, GetCommand {
                         System.out.print("Please enter the option number: ");
                         continue;
                     }
-                    int RequestChoice = scanner.nextInt();
+                    int choice2 = scanner.nextInt();
                     scanner.nextLine();
-                    switch (RequestChoice) {
+                    int reqID;
+                    int projID;
+                    FYP selectedProj;
+                    switch (choice2) {
                         case 1:
-                            new ViewAllRequestHistoryCommand().execute();
-                            System.out.println("Please select your choice");
-                            System.out.println("1. Approve Request");
-                            System.out.println("2. Reject Request");
-                            System.out.println("3. Return to Main Page");
-                            if (!scanner.hasNextInt()) {
-                                System.out.println("Invalid input format for option number. Please try again.");
-                                scanner.nextLine();
-                                System.out.println();
-                                System.out.print("Please enter the option number: ");
-                                continue;
+                            System.out.println("Input project ID: ");
+                            projID = scanner.nextInt();
+                            selectedProj = FYPList.getFYPById(projID);
+                            System.out.println("Input request ID: ");
+                            reqID = scanner.nextInt();
+                            if (reqID/1000 == 0){
+                                // requestitlechange
+                                RequestChangeTitle titleRequest = FYPMS1.getRequestChangeTitle(reqID);
+                                new ModifySubmittedFYPTitleCommand(selectedProj, titleRequest).execute();
                             }
-                            int choice2 = scanner.nextInt();
-                            scanner.nextLine();
-                            switch (choice2) {
-                                case 1:
-                                    // new approveRequest();
-                                    break;
-                                case 2:
-                                    // new rejectRequest();
-                                    break;
-                                case 3:
-                                    break;
+                            else if (reqID/1000 == 1){
+                                RequestDeregister deregistrationRequest = FYPMS1.getRequestDeregister(reqID);
+                                new DeregisterStudentCommand(selectedProj,deregistrationRequest).execute();
+                            }
+                            else if (reqID/1000 == 2){
+                                RequestRegister registrationRequest = FYPMS1.getRequestRegister(reqID);
+                                new AllocateProjectCommand(selectedProj, registrationRequest).execute();
+                            }
+                            else if (reqID/1000 == 3){
+                                RequestTransferSupervisor transferSupervisorRequest = FYPMS1.getRequestTransferSupervisor(reqID);
+                                new ChangeSupervisorCommand(projID, transferSupervisorRequest.getNewSupervisorID()).execute();
+                            }
+                            else {
+                                System.out.println("Wrong input");
                             }
                             break;
                         case 2:
-                            new ViewPendingStudentRequestsCommand(FYPCoordinator.getName()).execute();
-                            System.out.println("Please select your choice");
-                            System.out.println("1. Approve Request");
-                            System.out.println("2. Reject Request");
-                            System.out.println("3. Return to Main Page");
-                            if (!scanner.hasNextInt()) {
-                                System.out.println("Invalid input format for option number. Please try again.");
-                                scanner.nextLine();
-                                System.out.println();
-                                System.out.print("Please enter the option number: ");
-                                continue;
-                            }
-                            int choice3 = scanner.nextInt();
-                            scanner.nextLine();
-                            switch (choice3) {
-                                case 1:
-                                    // new approveRequest();
-                                    break;
-                                case 2:
-                                    // new rejectRequest();
-                                    break;
-                                case 3:
-                                    break;
-                            }
+                            break;
                     }
                     break;
                 case 3:
@@ -190,10 +190,12 @@ public class FYPCoordinatorGUI implements Menu, Logout, GetCommand {
                     break;
 
                 case 4:
-                    // new viewRequestHistory()
+                    new ViewOwnRequestRecordsCommand(FYPCoordinator).execute();
                     break;
-
                 case 5:
+                    new ViewAllRequestHistoryCommand().execute();
+                    break;
+                case 6:
                     System.out.println("Please select your choice");
                     System.out.println("1. Filter by Supervisor");
                     System.out.println("2. Filter by Status");
@@ -215,12 +217,13 @@ public class FYPCoordinatorGUI implements Menu, Logout, GetCommand {
                             break;
                     }
                     break;
-                case 6:
-                    // new ChangePassword().execute();
-                    break;
                 case 7:
+                    new ChangePassword(FYPCoordinator).execute();
                     logout();
                     break;
+                case 8:
+                    logout();
+                    return 1;
                 default:
                     break;
             }
@@ -234,7 +237,7 @@ public class FYPCoordinatorGUI implements Menu, Logout, GetCommand {
      */
     public void logout() {
         this.FYPCoordinator = null;
-        this.UserType = null;
+        this.UserType = "";
     }
 
     /**

@@ -4,6 +4,7 @@ import FYPMS.FYPMS1;
 import FYPMS.project.*;
 import FYPMS.request.RequestDeregister;
 import FYPMS.request.RequestStatus;
+import account.student.StudentStatus;
 import command.Command;
 import java.util.Scanner;
 
@@ -30,11 +31,13 @@ public class DeregisterStudentCommand implements Command {
                 project.setStudentID(requestDeregister.getRequesterID());
                 project.setStudentEmail(StudentEmail);
                 project.setStudentName(StudentName);
-                requestDeregister.setStatus(RequestStatus.APPROVED);              
+                requestDeregister.setStatus(RequestStatus.APPROVED);    
+                FYPMS1.setStudentStatus(requestDeregister.getRequesterID(), StudentStatus.DEREGISTERED_PROJECT);            
                 System.out.println("Deregistered project " + project.getTitle() + " to " + StudentName); 
                 break;
             case 2:
                 requestDeregister.setStatus(RequestStatus.REJECTED);
+                FYPMS1.setStudentStatus(requestDeregister.getRequesterID(), StudentStatus.ASSIGNED_PROJECT);    
                 System.out.println("Rejected "+ requestDeregister.getRequesterID()+ " for "  + project.getTitle());
                 break;
             default:

@@ -9,15 +9,22 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 
+import account.student.StudentAccount;
 import account.supervisor.FYPCoordinatorAccount;
+import account.supervisor.SupervisorAccount;
 import FYPMS.faculty.supervisor.Supervisor;
 import FYPMS.faculty.supervisor.SupervisorList;
 import FYPMS.project.FYP;
 import FYPMS.project.FYPList;
 import FYPMS.request.Request;
+import FYPMS.request.RequestChangeTitle;
+import FYPMS.request.RequestDeregister;
 import FYPMS.request.RequestList;
+import FYPMS.request.RequestRegister;
+import FYPMS.request.RequestTransferSupervisor;
 
 public class FileUpdater {
     /**
@@ -32,19 +39,12 @@ public class FileUpdater {
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(fileName))) {
 
             // Write the header
-            bw.write("Supervisor,Title,Status,StudentAccount Name,Requestors,Status Change Date\n");
-
+            bw.write("ProjectID\tSupervisorName\tSupervisorEmail\tTitle\tStatus\tStudentID\tStudentName\tStudentEmail");
+    
             // Write each FYP
             for (FYP fyp : fypList.getFYPs()) {
-                String supervisor = fyp.getSupervisorName();
-                String title = fyp.getTitle();
-                String status = fyp.getStatus().toString();
-                String studentName = fyp.getStudentID();
-                List<String> requestorList = fyp.getRequesterList();
-                LocalDateTime statusChangeDate = fyp.getStatusChangeDate();
-                String requestorString = String.join(";", requestorList);
-
-                bw.write(String.format("%s,%s,%s,%s,%s,%s,%s\n", supervisor, title, status, studentName, requestorString, statusChangeDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"))));
+                bw.write(fyp.getProjectId()+"\t"+fyp.getSupervisorName()+"\t"+fyp.getSupervisorEmail()+"\t"+fyp.getTitle()+"\t"+fyp.getStatus()+"\t"+fyp.getStudentID()+"\t"+fyp.getStudentName()+"\t"+fyp.getStudentEmail());
+                bw.newLine();
             }
 
         } catch (IOException ioe) {
@@ -57,23 +57,57 @@ public class FileUpdater {
      *
      * @param fileName the name of the CSV file to write to
      */
-    public static void writeRequestsToFile(String fileName) {
-        RequestList requestList = FYPMS1.getRequestList();
+    public static void writeRequestsToFile(String fileName, String filename1, String filename2, String filename3) {
+        ArrayList<ArrayList<Object>> requestList = FYPMS1.getRequestList();
         Path pathToFile = Paths.get(fileName);
 
         try (BufferedWriter bw = Files.newBufferedWriter(pathToFile, StandardCharsets.UTF_8)) {
-
             // Write the header
-            bw.write("Requester Name,Request Type,Status Change Time\n");
-
+            bw.write("requestID\trequesterID\trequesteeID\trequestStatus\tfypID\tnewTitle\n");
             // Write each request
-            for (Request request : requestList) {
-                String requesterName = request.getRequesterName();
-                String requestType = request.getRequestType().toString();
-                LocalDateTime statusChangeTime = request.getStatusChangeTime();
-                bw.write(String.format("%s,%s,%s\n", requesterName, requestType, statusChangeTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"))));
+            for (Object request : requestList.get(0)) {
+                RequestChangeTitle indivCastedRequest = (RequestChangeTitle) request;
+                bw.write(indivCastedRequest.getRequestID() + "\t" + indivCastedRequest.getRequesterID() + "\t" + indivCastedRequest.getRequesteeID()+'\t'+indivCastedRequest.getRequestStatus()+'\t'+indivCastedRequest.getFypID()+'\t'+indivCastedRequest.getNewTitle()+'\n');
             }
+        } catch (IOException ioe) {
+            ioe.printStackTrace();
+        }
 
+        pathToFile = Paths.get(filename1);
+        try (BufferedWriter bw = Files.newBufferedWriter(pathToFile, StandardCharsets.UTF_8)) {
+            // Write the header
+            bw.write("requestID\trequesterID\trequestStatus\tfypID\n");
+            // Write each request
+            for (Object request : requestList.get(1)) {
+                RequestDeregister indivCastedRequest = (RequestDeregister) request;
+                bw.write(indivCastedRequest.getRequestID() + "\t" + indivCastedRequest.getRequesterID() + "\t" +indivCastedRequest.getRequestStatus()+'\t'+indivCastedRequest.getFypID()+'\n');
+            }
+        } catch (IOException ioe) {
+            ioe.printStackTrace();
+        }
+
+        pathToFile = Paths.get(filename2);
+        try (BufferedWriter bw = Files.newBufferedWriter(pathToFile, StandardCharsets.UTF_8)) {
+            // Write the header
+            bw.write("requestID\trequesterID\trequestStatus\tfypID\n");
+            // Write each request
+            for (Object request : requestList.get(2)) {
+                RequestRegister indivCastedRequest = (RequestRegister) request;
+                bw.write(indivCastedRequest.getRequestID() + "\t" + indivCastedRequest.getRequesterID() + "\t" +indivCastedRequest.getRequestStatus()+'\t'+indivCastedRequest.getFypID()+'\n');
+            }
+        } catch (IOException ioe) {
+            ioe.printStackTrace();
+        }
+
+        pathToFile = Paths.get(filename3);
+        try (BufferedWriter bw = Files.newBufferedWriter(pathToFile, StandardCharsets.UTF_8)) {
+            // Write the header
+            bw.write("requestID\trequesterID\trequestStatus\tfypID\tnewSupervisorId\n");
+            // Write each request
+            for (Object request : requestList.get(3)) {
+                RequestTransferSupervisor indivCastedRequest = (RequestTransferSupervisor) request;
+                bw.write(indivCastedRequest.getRequestID() + "\t" + indivCastedRequest.getRequesterID() + "\t" +indivCastedRequest.getRequestStatus()+'\t'+indivCastedRequest.getFypID()+'\t'+indivCastedRequest.getNewSupervisorID()+'\n');
+            }
         } catch (IOException ioe) {
             ioe.printStackTrace();
         }
@@ -85,32 +119,32 @@ public class FileUpdater {
      * @param fileName the name of the CSV file to write to
      */
     public static void writeSupervisorToFile(String fileName) {
-        SupervisorList supervisorList = FYPMS1.getSupervisorList();
-        Path pathToFile = Paths.get(fileName);
+    ArrayList<SupervisorAccount> supervisorList = FYPMS1.getSupervisorList();
+    Path pathToFile = Paths.get(fileName);
 
-        try (BufferedWriter bw = Files.newBufferedWriter(pathToFile, StandardCharsets.UTF_8)) {
-            for (Supervisor supervisor : supervisorList.getSupervisors()) {
-                bw.write(supervisor.getName() + "," + supervisor.getEmail()+ "," + supervisor.getProj_1()+ "," + supervisor.getProj_2());
-                bw.newLine();
-            }
-            System.out.println("Supervisors successfully written to " + fileName);
-        } catch (IOException e) {
-            System.err.format("IOException: %s%n", e);
+    try (BufferedWriter bw = Files.newBufferedWriter(pathToFile, StandardCharsets.UTF_8)) {
+        bw.write("Name\tEmail\tPassword\tProject 1\tProject 2\n");
+        for (SupervisorAccount supervisor : supervisorList) {
+            bw.write(supervisor.getName() + "\t" + supervisor.getEmail() + "\t" +supervisor.getPassword()+"\t"+ supervisor.getProj_1() + "\t" + supervisor.getProj_2());
+            bw.newLine();
         }
+        System.out.println("Supervisors successfully written to " + fileName);
+    } catch (IOException e) {
+        System.err.format("IOException: %s%n", e);
     }
+}
+
 
     public static void writeCoordinatorToFile(String fileName) {
-        CoordinatorList coordinatorList = FYPMS1.getCoordinatorList();
+        ArrayList<FYPCoordinatorAccount> coordinatorList = FYPMS1.getCoordinatorList();
         Path pathToFile = Paths.get(fileName);
 
         try (BufferedWriter bw = Files.newBufferedWriter(pathToFile, StandardCharsets.UTF_8)) {
-            for (Coordinator coordinator : coordinatorList.getCoordinatorList()) {
-                StringBuilder sb = new StringBuilder();
-                sb.append(coordinator.getName());
-                sb.append(",");
-                sb.append(coordinator.getEmail());
-                sb.append("\n");
-                bw.write(sb.toString());
+                    bw.write("Name\tEmail\tPassword\tProject 1\tProject 2\n");
+
+            for (FYPCoordinatorAccount coordinator : coordinatorList) {
+            bw.write(coordinator.getName() + "\t" + coordinator.getEmail() + "\t" +coordinator.getPassword()+"\t"+ coordinator.getProj_1() + "\t" + coordinator.getProj_2());
+            bw.newLine();
             }
         } catch (IOException ioe) {
             ioe.printStackTrace();
@@ -121,21 +155,18 @@ public class FileUpdater {
     public static void writeStudentToFile(String fileName) {
         Path pathToFile = Paths.get(fileName);
 
-        StudentList studentList = FYPMS1.getStudentList();
+        ArrayList<StudentAccount> studentList = FYPMS1.getStudentList();
 
         try (BufferedWriter bw = Files.newBufferedWriter(pathToFile, StandardCharsets.UTF_8)) {
-            for (StudentAccount studentAccount : studentList.getStudentList()) {
-                bw.write(studentAccount.getName() + "," + studentAccount.getEmail() + ",");
-                int[] projectRequests = studentAccount.getProjectsRequested();
-                for (int i = 0; i < projectRequests.length; i++) {
-                    bw.write(projectRequests[i] + ";");
-                    if (i < projectRequests.length - 1) {
-                        bw.write(" ");
-                    }
-                }
-                bw.newLine();
+        bw.write("Name\tEmail\tPassword\tProjectID\tStatus\n");
+
+            for (StudentAccount student : studentList) {
+            bw.write(student.getName() + "\t" + student.getEmail() + "\t" + student.getPassword() + "\t" + student.getAssignedProject() + "\t" + student.getStatus());  
+            bw.newLine();
+             }
+        System.out.println("Students successfully written to " + fileName);
             }
-        } catch (IOException ioe) {
+        catch (IOException ioe) {
             ioe.printStackTrace();
         }
     }

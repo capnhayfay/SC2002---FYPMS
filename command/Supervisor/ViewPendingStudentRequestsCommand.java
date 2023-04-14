@@ -15,22 +15,31 @@ public class ViewPendingStudentRequestsCommand implements Command {
     }
 
     public void execute() {
-        int RequestCount = 1;
 
         System.out.println();
         System.out.println("Pending Request");
         System.out.println();
         
         ArrayList<ArrayList <Object>> requests =  FYPMS1.getRequestList();
+        int requestCount = 0;
         for (ArrayList <Object> request : requests) {
             for (Object indivRequest : request){
                 Request indivCastedRequest = (Request) indivRequest;
                 if (indivCastedRequest.getRequesteeID().equals(Supervisor) && indivCastedRequest.getRequestStatus() == RequestStatus.PENDING) {
-                    System.out.println("============= Request No. " + RequestCount++ + " ==============");
+                    System.out.println("============= Request ID " +indivCastedRequest.getRequestID() + " ==============");
                     indivCastedRequest.printDetails();
                     System.out.println();
+                    requestCount++;
                 }
             }
+        }
+
+        if (requestCount ==0)
+        {
+            System.out.println("There are no pending requests.");
+        }
+        else{
+            System.out.println("There are " +requestCount+" pending requests.");
         }
 
     }

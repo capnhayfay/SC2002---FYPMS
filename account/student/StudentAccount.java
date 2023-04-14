@@ -61,6 +61,10 @@ public class StudentAccount extends Account {
         return studentStatus;
     }
 
+    public void setStatus(StudentStatus studentStatus) {
+        this.studentStatus=studentStatus;
+    }
+
     public void ChangeStudentStatus(StudentStatus newStatus) {
         studentStatus = newStatus;
     }

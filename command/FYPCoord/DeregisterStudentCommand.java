@@ -18,12 +18,12 @@ public class DeregisterStudentCommand implements Command {
     }
 
     public void execute() {
-    Scanner sc = new Scanner(System.in);
+        Scanner sc = new Scanner(System.in);
         System.out.println();
         System.out.println("Select option:");
         System.out.println("1. Accept deregistration request");
         System.out.println("2. Reject deregistration request");
-        switch(sc.nextInt()) {
+        switch (sc.nextInt()) {
             case 1:
                 String StudentName = FYPMS1.getStudentName(requestDeregister.getRequesterID());
                 String StudentEmail = FYPMS1.getStudentEmail(requestDeregister.getRequesterID());
@@ -31,14 +31,19 @@ public class DeregisterStudentCommand implements Command {
                 project.setStudentID(requestDeregister.getRequesterID());
                 project.setStudentEmail(StudentEmail);
                 project.setStudentName(StudentName);
-                requestDeregister.setStatus(RequestStatus.APPROVED);    
-                FYPMS1.setStudentStatus(requestDeregister.getRequesterID(), StudentStatus.DEREGISTERED_PROJECT);            
-                System.out.println("Deregistered project " + project.getTitle() + " to " + StudentName); 
+                requestDeregister.setStatus(RequestStatus.APPROVED);
+                FYPMS1.setStudentStatus(requestDeregister.getRequesterID(), StudentStatus.DEREGISTERED_PROJECT,
+                        requestDeregister.getFypID());
+                System.out.println("Deregistered project " + project.getTitle() + " to " + StudentName);
+                System.out.println("Press enter to continue...");
+                sc.nextLine();
                 break;
             case 2:
                 requestDeregister.setStatus(RequestStatus.REJECTED);
-                FYPMS1.setStudentStatus(requestDeregister.getRequesterID(), StudentStatus.ASSIGNED_PROJECT);    
-                System.out.println("Rejected "+ requestDeregister.getRequesterID()+ " for "  + project.getTitle());
+                FYPMS1.setStudentStatus(requestDeregister.getRequesterID(), StudentStatus.ASSIGNED_PROJECT, 0);
+                System.out.println("Rejected " + requestDeregister.getRequesterID() + " for " + project.getTitle());
+                System.out.println("Press enter to continue...");
+                sc.nextLine();
                 break;
             default:
                 System.out.println("Invalid option");

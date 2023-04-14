@@ -1,8 +1,10 @@
 package command.Student;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 import FYPMS.FYPMS1;
+import FYPMS.project.FYPStatus;
 import FYPMS.request.*;
 import account.student.StudentAccount;
 import account.student.StudentStatus;
@@ -14,7 +16,8 @@ public class RequestCoordDeregisterCommand implements Command {
     public RequestCoordDeregisterCommand(StudentAccount studentAccount) {
         this.studentAccount = studentAccount;
     }
-    ArrayList<ArrayList <Object>>  requests = FYPMS1.getRequestList();
+
+    ArrayList<ArrayList<Object>> requests = FYPMS1.getRequestList();
 
     public void execute() {
         if (studentAccount.getStatus() == StudentStatus.NO_PROJECT) {
@@ -28,9 +31,11 @@ public class RequestCoordDeregisterCommand implements Command {
             return;
         }
         // Temporary requestID = 1
-        RequestDeregister request = new RequestDeregister(requests.get(1).size()+1000,studentAccount.getLoginId(), RequestStatus.PENDING,studentAccount.getAssignedProject());
-        requests.get(1).add(request);
-    }
 
+        RequestDeregister request = new RequestDeregister(requests.get(1).size() + 1000, studentAccount.getLoginId(),
+                RequestStatus.PENDING, studentAccount.getAssignedProject());
+        requests.get(1).add(request);
+        System.out.println("Successfully Applied to deregister for project " + studentAccount.getAssignedProject());
+    }
 
 }

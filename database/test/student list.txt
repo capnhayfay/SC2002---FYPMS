@@ -1,5 +1,5 @@
 Name	Email	Password	ProjectID	Status
-CHERN	YCHERN@e.ntu.edu.sg;	password	0	NO_PROJECT
+CHERN	YCHERN@e.ntu.edu.sg;	password	5	ASSIGNED_PROJECT
 KOH	KOH1@e.ntu.edu.sg;	password	0	NO_PROJECT
 BRANDON	BR015@e.ntu.edu.sg;	password	0	NO_PROJECT
 CALVIN	CT113@e.ntu.edu.sg;	password	0	NO_PROJECT

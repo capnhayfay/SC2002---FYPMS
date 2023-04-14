@@ -46,28 +46,34 @@ public class AllocateProjectCommand implements Command {
                 supervisor = FYPMS1.getSupervisorAccount(project.getSupervisorName());
                 if (supervisor.getProjList().size() < 2) {
                     supervisor.addProj(project.getTitle());
-                } else {
-                    System.out.println("Error: " + supervisor.getName() + " has reached the project limit.");
-                    System.out.println("Setting all of " + supervisor.getName() + "'s projects to unavailable");
-                    System.out.println(
-                            "Rejecting all pending registration requests for " + supervisor.getName() + "'s projects.");
-                    ArrayList<FYP> supervisorFYPList = FYPMS1.getSuperFypList(supervisor.getName());
-                    System.out.println("reached");
-                    for (FYP fyp : supervisorFYPList) {
-                        if (fyp.getStatus().equals(FYPStatus.AVAILABLE) || fyp.getStatus().equals(FYPStatus.RESERVED)) {
-                            fyp.setStatus(FYPStatus.UNAVAILABLE);
-                        }
-                        ArrayList<Object> requests = FYPMS1.getRequestList().get(2);
-                        for (Object indivRequest : requests) {
-                            Request indivCastedRequest = (Request) indivRequest;
-                            if (indivCastedRequest.getFypID() == fyp.getProjectId()) {
-                                indivCastedRequest.setStatus(RequestStatus.REJECTED);
-                                String setStudentStatus = indivCastedRequest.getRequesterID();
-                                FYPMS1.setStudentStatus(setStudentStatus, StudentStatus.NO_PROJECT,
-                                        indivCastedRequest.getFypID());
+                    if (supervisor.getProjList().size() == 2) {
+                        ArrayList<FYP> supervisorFYPList = FYPMS1.getSuperFypList(supervisor.getName());
+                        for (FYP fyp : supervisorFYPList) {
+                            if (fyp.getStatus().equals(FYPStatus.AVAILABLE)
+                                    || fyp.getStatus().equals(FYPStatus.RESERVED)) {
+                                fyp.setStatus(FYPStatus.UNAVAILABLE);
+                                ArrayList<Object> requests = FYPMS1.getRequestList().get(2);
+                                for (Object indivRequest : requests) {
+                                    Request indivCastedRequest = (Request) indivRequest;
+                                    if (indivCastedRequest.getFypID() == fyp.getProjectId()) {
+                                        indivCastedRequest.setStatus(RequestStatus.REJECTED);
+                                        String setStudentStatus = indivCastedRequest.getRequesterID();
+                                        FYPMS1.setStudentStatus(setStudentStatus, StudentStatus.NO_PROJECT,
+                                                indivCastedRequest.getFypID());
+                                    }
+                                }
                             }
                         }
+                        System.out.println(
+                                "Rejecting all pending registration requests for " + supervisor.getName()
+                                        + "'s projects.");
+                        System.out.println("Setting all of " + supervisor.getName() + "'s projects to unavailable");
+
                     }
+
+                } else {
+                    System.out.println("Error: " + supervisor.getName() + " has reached the project limit.");
+
                     return;
                 }
                 System.out.println("Allocated project " + project.getTitle() + " to " + StudentName);

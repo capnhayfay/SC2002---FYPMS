@@ -27,7 +27,7 @@ public class GenerateFilteredProjectDetailsCommand implements Command {
         ArrayList<FYP> fyps = projects.getFYPs();
         switch (filterType) {
             // Filter by status
-            case 1:
+            case 1 -> {
                 System.out.println();
                 System.out.println("==================================");
                 System.out.println("Filter by:");
@@ -38,25 +38,16 @@ public class GenerateFilteredProjectDetailsCommand implements Command {
                 System.out.println();
                 System.out.println("Enter the number of your choice:");
                 System.out.println("==================================");
-
                 while (!validInput) {
                     try {
                         selection = sc.nextInt();
                         if (selection < 5 & selection >= 1) {
                             validInput = true;
                             switch (selection) {
-                                case 1:
-                                    this.filter = FYPStatus.AVAILABLE;
-                                    break;
-                                case 2:
-                                    this.filter = FYPStatus.RESERVED;
-                                    break;
-                                case 3:
-                                    this.filter = FYPStatus.UNAVAILABLE;
-                                    break;
-                                case 4:
-                                    this.filter = FYPStatus.ALLOCATED;
-                                    break;
+                                case 1 -> this.filter = FYPStatus.AVAILABLE;
+                                case 2 -> this.filter = FYPStatus.RESERVED;
+                                case 3 -> this.filter = FYPStatus.UNAVAILABLE;
+                                case 4 -> this.filter = FYPStatus.ALLOCATED;
                             }
                         }
                     } catch (InputMismatchException e) {
@@ -68,19 +59,17 @@ public class GenerateFilteredProjectDetailsCommand implements Command {
                 System.out.println();
                 for (FYP fyp : fyps) {
                     if (fyp.getStatus() == this.filter) {
-                        System.out.println("============= FYP ID " + fyp.getProjectId() + " ==============");
+                        System.out.println("============= FYP No. " + fypCount++ + " ==============");
                         fyp.printFYPDetails();
                         System.out.println();
-                        fypCount++;
                     }
                 }
                 System.out.println("===== There are " + (fypCount - 1) + " Final Year Projects "
                         + this.filter.toString().toLowerCase() + "! =====");
-
-                break;
+            }
 
             // Filter by supervisor
-            case 2:
+            case 2 -> {
                 int i = 1;
                 String supervisorName = "";
                 System.out.println();
@@ -94,7 +83,6 @@ public class GenerateFilteredProjectDetailsCommand implements Command {
                         i++;
                     }
                 }
-
                 for (Map.Entry<Integer, String> pair : supervisorMapIdx.entrySet()) {
                     System.out.print("(" + pair.getKey() + ") ");
                     System.out.println(pair.getValue());
@@ -117,21 +105,18 @@ public class GenerateFilteredProjectDetailsCommand implements Command {
                         System.out.print("Your selection can only be an integer!");
                     }
                 }
-                fypCount = 1;
                 System.out.println();
                 System.out.println("List of all Final Year Projects");
                 System.out.println();
                 for (FYP filteredFyp : fyps) {
                     if (filteredFyp.getSupervisorName().equals(supervisorName)) {
-                        System.out.println("============= FYP ID " + filteredFyp.getProjectId() + " ==============");
+                        System.out.println("============= FYP No. " + fypCount++ + " ==============");
                         filteredFyp.printFYPDetails();
                         System.out.println();
-                        fypCount++;
                     }
                 }
                 System.out.println("===== There are " + (fypCount - 1) + " Final Year Projects! =====");
-                break;
-
+            }
         }
 
     }

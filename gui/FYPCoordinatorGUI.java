@@ -262,10 +262,10 @@ public class FYPCoordinatorGUI implements Menu, Logout, GetCommand {
                             ;
                             break;
                         case 2:
-                            new GenerateFilteredProjectDetailsCommand(1).execute(); // filter by status
+                            new GenerateFilteredProjectDetailsCommand(2).execute(); // filter by status
                             break;
                         case 3:
-                            new GenerateFilteredProjectDetailsCommand(2).execute(); // filter by supervisor
+                            new GenerateFilteredProjectDetailsCommand(1).execute(); // filter by supervisor
                             break;
                         case 4:
                             System.out.println("Returning to Main Page...");

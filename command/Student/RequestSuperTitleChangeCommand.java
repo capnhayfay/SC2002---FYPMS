@@ -39,9 +39,9 @@ public class RequestSuperTitleChangeCommand implements Command {
                     Scanner sc = new Scanner(System.in);
                     System.out.println("Input new project title: ");
                     String newtitle = sc.nextLine();
-                    String supervisor = fyp.getSupervisorName();
+                    String supervisorID = SCSE.getSupervisorAccount(fyp.getSupervisorName()).getLoginId();
                     RequestChangeTitle request = new RequestChangeTitle(requests.get(0).size(), student.getLoginId(),
-                            supervisor, RequestStatus.PENDING, student.getAssignedProject(), newtitle);
+                            supervisorID, RequestStatus.PENDING, student.getAssignedProject(), newtitle);
                     requests.get(0).add(request);
                     System.out.println("Request for title change submitted.");
                 }

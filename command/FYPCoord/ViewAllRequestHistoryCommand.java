@@ -23,11 +23,19 @@ public class ViewAllRequestHistoryCommand implements Command {
      */
     public void execute() {
         ArrayList<ArrayList<Object>> requests = SCSE.getRequestList();
+        int empty = 1;
         for (ArrayList<Object> request : requests) {
+            if (request.size() != 0) {
+                empty = 0;
+            }
             for (Object indivRequest : request) {
                 Request indivCastedRequest = (Request) indivRequest;
                 indivCastedRequest.printDetails();
             }
+        }
+        if (empty == 1) {
+            System.out.println();
+            System.out.println("There is no requests.");
         }
     }
 }

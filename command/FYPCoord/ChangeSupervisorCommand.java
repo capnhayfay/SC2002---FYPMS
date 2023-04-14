@@ -82,6 +82,15 @@ public class ChangeSupervisorCommand implements Command {
                             project.setSupervisorEmail(nsupervisor.getEmail());
                             System.out.println(
                                     nsupervisor.getName() + " has a new project " + nsupervisor.getProjList().get(idx));
+                            if (nsupervisor.getProjList().size() == 2) {
+                                for (FYP fyp : SCSE.getSuperFypList(nsupervisor.getName())) {
+                                    if (fyp.getStatus().equals(FYPStatus.AVAILABLE)) {
+                                        fyp.setStatus(FYPStatus.UNAVAILABLE);
+                                    }
+
+                                }
+                            }
+
                         }
                         idx++;
                     }

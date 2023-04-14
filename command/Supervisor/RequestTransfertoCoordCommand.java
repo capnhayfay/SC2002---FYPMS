@@ -25,10 +25,10 @@ import account.supervisor.SupervisorAccount;
 
 public class RequestTransfertoCoordCommand implements Command {
     /*
-      The RequestTransfertoCoordCommand class represents a command to transfer
-      supervision of an FYP project from the current
-      supervisor to another supervisor. This class implements the Command
-      interface.
+     * The RequestTransfertoCoordCommand class represents a command to transfer
+     * supervision of an FYP project from the current
+     * supervisor to another supervisor. This class implements the Command
+     * interface.
      */
 
     /** The SupervisorAccount object representing the current supervisor */
@@ -67,7 +67,11 @@ public class RequestTransfertoCoordCommand implements Command {
         System.out.println("Input project ID to transfer: ");
         Scanner sc = new Scanner(System.in);
         int fypId = sc.nextInt();
-
+        if (!supervisorAccount.getName().equals(FYPList.getFYPById(fypId).getSupervisorName())) {
+            System.out.println();
+            System.out.println("Invalid project ID entered");
+            return;
+        }
         if (FYPList.getFYPById(fypId).getStatus().equals(FYPStatus.ALLOCATED)) {
             System.out.println("Input new supervisor ID: ");
             String newSupervisorID = sc.next();

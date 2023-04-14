@@ -145,6 +145,7 @@ public class FileReader {
                 String[] attributes = line.split("\\t");
                 int projectId = Integer.parseInt(attributes[0]);
                 String supervisorName = attributes[1];
+                supervisorName = supervisorName.replace('\"', ' ').trim();
                 String supervisorEmail = attributes[2];
                 String title = attributes[3];
                 FYPStatus status = FYPStatus.StringtoStatus(attributes[4]);

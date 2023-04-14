@@ -2,13 +2,10 @@ package FYPMS;
 
 import account.supervisor.FYPCoordinatorAccount;
 import account.supervisor.SupervisorAccount;
-
 import FYPMS.project.FYP;
 import FYPMS.project.FYPList;
-import FYPMS.request.Request;
 import FYPMS.request.RequestChangeTitle;
 import FYPMS.request.RequestDeregister;
-import FYPMS.request.RequestList;
 import FYPMS.request.RequestRegister;
 import FYPMS.request.RequestTransferSupervisor;
 import account.student.StudentAccount;
@@ -39,6 +36,18 @@ public class FYPMS1 {
 
     public static ArrayList<ArrayList<Object>> getRequestList() {
         return requests;
+    }
+
+    public static FYPList getSuperFypList(String supervisorName) {
+        FYPList superFyps = new FYPList();
+
+        ArrayList<FYP> temp = fypList.getFYPs();
+        for (FYP fyp : temp) {
+            if (fyp.getSupervisorName().equals(supervisorName)) {
+                superFyps.addFYP(fyp);
+            }
+        }
+        return superFyps;
     }
 
     public static RequestChangeTitle getRequestChangeTitle(int requestID) {
@@ -79,6 +88,15 @@ public class FYPMS1 {
             }
         }
         return null;
+    }
+
+    public static SupervisorAccount getSupervisorAccount(String SuperName) {
+        for (SupervisorAccount account : SupervisorAccounts) {
+            if (account.getName().equals(SuperName)) {
+                return account;
+            }
+        }
+        return null; // account not found
     }
 
     public static ArrayList<SupervisorAccount> getSupervisorList() {
@@ -167,7 +185,6 @@ public class FYPMS1 {
         for (StudentAccount account : StudentAccount) {
             if (account.getLoginId().equals(studentID)) {
                 account.setStatus(studentStatus);
-                ;
                 account.setAssignedProject(fypID);
             }
         }

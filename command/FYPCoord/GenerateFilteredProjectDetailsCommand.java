@@ -68,9 +68,10 @@ public class GenerateFilteredProjectDetailsCommand implements Command {
                 System.out.println();
                 for (FYP fyp : fyps) {
                     if (fyp.getStatus() == this.filter) {
-                        System.out.println("============= FYP No. " + fypCount++ + " ==============");
+                        System.out.println("============= FYP ID " + fyp.getProjectId() + " ==============");
                         fyp.printFYPDetails();
                         System.out.println();
+                        fypCount++;
                     }
                 }
                 System.out.println("===== There are " + (fypCount - 1) + " Final Year Projects "
@@ -122,9 +123,10 @@ public class GenerateFilteredProjectDetailsCommand implements Command {
                 System.out.println();
                 for (FYP filteredFyp : fyps) {
                     if (filteredFyp.getSupervisorName().equals(supervisorName)) {
-                        System.out.println("============= FYP No. " + fypCount++ + " ==============");
+                        System.out.println("============= FYP ID " + filteredFyp.getProjectId() + " ==============");
                         filteredFyp.printFYPDetails();
                         System.out.println();
+                        fypCount++;
                     }
                 }
                 System.out.println("===== There are " + (fypCount - 1) + " Final Year Projects! =====");

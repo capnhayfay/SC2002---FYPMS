@@ -20,6 +20,9 @@ public class DeregisterStudentCommand implements Command {
     public void execute() {
         Scanner sc = new Scanner(System.in);
         System.out.println();
+        requestDeregister.printDetails();
+        ;
+        System.out.println();
         System.out.println("Select option:");
         System.out.println("1. Accept deregistration request");
         System.out.println("2. Reject deregistration request");

@@ -1,10 +1,8 @@
 package command.Student;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 
 import FYPMS.FYPMS1;
-import FYPMS.project.FYPStatus;
 import FYPMS.request.*;
 import account.student.StudentAccount;
 import account.student.StudentStatus;

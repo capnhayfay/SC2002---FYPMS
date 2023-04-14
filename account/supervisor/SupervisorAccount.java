@@ -1,32 +1,25 @@
 package account.supervisor;
 
+import java.util.ArrayList;
+
 import account.Account;
 import account.UserType;
 
 public class SupervisorAccount extends Account {
-    private String proj1;
-    private String proj2;
+    private ArrayList<String> proj;
 
-    public SupervisorAccount(String userId, String password, UserType userType, String emailAddress, String name) {
+    public SupervisorAccount(String userId, String password, UserType userType, String emailAddress, String name,
+            ArrayList<String> proj) {
         super(userId, password, userType, emailAddress, name);
-        this.proj1 = "0";
-        this.proj2 = "0";
+        this.proj = proj;
     }
 
-    public void setProj_1(String proj1) {
-        this.proj1 = proj1;
+    public void addProj(String newProj) {
+        proj.add(newProj);
     }
 
-    public String getProj_1() {
-        return this.proj1;
-    }
-
-    public void setProj_2(String proj2) {
-        this.proj2 = proj2;
-    }
-
-    public String getProj_2() {
-        return this.proj2;
+    public ArrayList<String> getProjList() {
+        return this.proj;
     }
 
     public UserType login(String loginId, String password) {
@@ -39,14 +32,16 @@ public class SupervisorAccount extends Account {
     public void printDetails() {
         System.out.println("Supervisor name: " + this.getName());
         System.out.println("Email: " + this.getEmail());
-        if (this.proj1.equals("0")) {
+        if (proj.size() == 0) {
             System.out.println("Supervisor has no projects!");
         } else {
-            System.out.println("Project 1: " + this.proj1);
-            if (!this.proj2.equals("0")) {
-                System.out.println("Project 2: " + this.proj2);
+            int counter = 1;
+            for (String project : proj) {
+                System.out.println("Project " + counter + ": " + project);
+                counter++;
+                System.out.println();
             }
-            System.out.println();
+
         }
         System.out.println();
     }

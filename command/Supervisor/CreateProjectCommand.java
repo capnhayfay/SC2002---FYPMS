@@ -22,7 +22,8 @@ public class CreateProjectCommand implements Command {
         Scanner sc = new Scanner(System.in);
         System.out.println("Input Title of FYP: ");
         String title = sc.nextLine();
-        FYP fyp = new FYP(fypList.getFYPs().size()+1, supervisor.getName(), supervisor.getEmail(), "", "", "", title, FYPStatus.AVAILABLE);
+        FYP fyp = new FYP(fypList.getFYPs().size() + 1, supervisor.getName(), supervisor.getEmail(), "", "", "", title,
+                FYPStatus.AVAILABLE);
         fypList.addFYP(fyp);
     }
 }

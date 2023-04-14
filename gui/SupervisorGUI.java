@@ -47,9 +47,9 @@ public class SupervisorGUI implements Menu, Logout, GetCommand {
         System.out.println();
         System.out.println("1. Create, update or view projects");
         if (new CheckPendingRequests(supervisor.getLoginId()).execute() == 1) {
-            System.out.println("2. View student pending requests (NEW)");
+            System.out.println("2. View pending requests (NEW)");
         } else {
-            System.out.println("2. View student pending requests");
+            System.out.println("2. View pending requests");
         }
         System.out.println("3. Request to transfer student");
         System.out.println("4. View Request History");
@@ -106,7 +106,7 @@ public class SupervisorGUI implements Menu, Logout, GetCommand {
                     scanner.nextLine();
                     switch (selectedChoice) {
                         case 1:
-                            if (!supervisor.getProj_2().equals("0")) {
+                            if (supervisor.getProjList().size() == 2) {
                                 System.out.println();
                                 System.out.println("You have reach the maximum allocated project capacity.");
                                 break;
@@ -115,7 +115,7 @@ public class SupervisorGUI implements Menu, Logout, GetCommand {
                             }
                             break;
                         case 2:
-                            new ModifyFYPTitle().execute();
+                            new ModifyFYPTitle(supervisor).execute();
                             break;
                         case 3:
                             new ViewSubmittedFYPCommand(supervisor.getName()).execute();

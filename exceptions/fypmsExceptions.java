@@ -1,7 +1,5 @@
 package exceptions;
 
-import java.util.Scanner;
-
 public class fypmsExceptions {
 
     @SuppressWarnings("serial")

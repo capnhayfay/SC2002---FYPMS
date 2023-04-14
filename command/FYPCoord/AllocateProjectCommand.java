@@ -17,7 +17,6 @@ public class AllocateProjectCommand implements Command {
     private FYP project;
     private RequestRegister registerRequest;
     private SupervisorAccount supervisor;
-    private FYPList supervisorFYPList;
 
     public AllocateProjectCommand(FYP project, RequestRegister registerRequest) {
         this.project = project;
@@ -26,6 +25,8 @@ public class AllocateProjectCommand implements Command {
 
     public void execute() {
         Scanner sc = new Scanner(System.in);
+        System.out.println();
+        registerRequest.printDetails();
         System.out.println();
         System.out.println("Select option:");
         System.out.println("1. Accept registration request");
@@ -43,18 +44,16 @@ public class AllocateProjectCommand implements Command {
                 FYPMS1.setStudentStatus(registerRequest.getRequesterID(), StudentStatus.ASSIGNED_PROJECT,
                         registerRequest.getFypID());
                 supervisor = FYPMS1.getSupervisorAccount(project.getSupervisorName());
-                if (supervisor.getProj_1().equals("0")) {
-                    supervisor.setProj_1(project.getTitle());
-                } else if (supervisor.getProj_2().equals("0")) {
-                    supervisor.setProj_2(project.getTitle());
-                }
-                System.out.println(supervisor.getProj_1());
-                System.out.println(supervisor.getProj_2());
-                if (!(supervisor.getProj_1().equals("0")) && !(supervisor.getProj_2().equals("0"))) {
-                    System.out.println("Both projects are full, setting all projects to unavailable");
-                    supervisorFYPList = FYPMS1.getSuperFypList(supervisor.getName());
+                if (supervisor.getProjList().size() < 2) {
+                    supervisor.addProj(project.getTitle());
+                } else {
+                    System.out.println("Error: " + supervisor.getName() + " has reached the project limit.");
+                    System.out.println("Setting all of " + supervisor.getName() + "'s projects to unavailable");
+                    System.out.println(
+                            "Rejecting all pending registration requests for " + supervisor.getName() + "'s projects.");
+                    ArrayList<FYP> supervisorFYPList = FYPMS1.getSuperFypList(supervisor.getName());
                     System.out.println("reached");
-                    for (FYP fyp : supervisorFYPList.getFYPs()) {
+                    for (FYP fyp : supervisorFYPList) {
                         if (fyp.getStatus().equals(FYPStatus.AVAILABLE) || fyp.getStatus().equals(FYPStatus.RESERVED)) {
                             fyp.setStatus(FYPStatus.UNAVAILABLE);
                         }
@@ -69,6 +68,7 @@ public class AllocateProjectCommand implements Command {
                             }
                         }
                     }
+                    return;
                 }
                 System.out.println("Allocated project " + project.getTitle() + " to " + StudentName);
                 System.out.println("Press enter to continue...");

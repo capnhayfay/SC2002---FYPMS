@@ -24,6 +24,8 @@ import static account.student.StudentStatus.StudentStatusToEnum;
 
 public class FileReader {
 
+    private static final FYP[] FYPList = null;
+
     /**
      * Reads FYPs from file and adds them to the FYPList
      * 
@@ -48,9 +50,9 @@ public class FileReader {
                 }
                 int atIndex = email.indexOf("@");
                 String userId = email.substring(0, atIndex);
-                SupervisorAccount student = new SupervisorAccount(userId, password, userType, email, name);
-
-                supervisorList.add(student);
+                ArrayList<String> fypList = getSupervisorFYPs(name);
+                SupervisorAccount supervisor = new SupervisorAccount(userId, password, userType, email, name, fypList);
+                supervisorList.add(supervisor);
                 line = br.readLine();
             }
 
@@ -78,9 +80,10 @@ public class FileReader {
                 }
                 int atIndex = email.indexOf("@");
                 String userId = email.substring(0, atIndex);
-                FYPCoordinatorAccount student = new FYPCoordinatorAccount(userId, password, userType, email, name);
-
-                fypCoordinatorList.add(student);
+                ArrayList<String> fypList = getSupervisorFYPs(name);
+                FYPCoordinatorAccount fypCoord = new FYPCoordinatorAccount(userId, password, userType, email, name,
+                        fypList);
+                fypCoordinatorList.add(fypCoord);
                 line = br.readLine();
             }
 
@@ -244,5 +247,15 @@ public class FileReader {
         } catch (IOException ioe) {
             ioe.printStackTrace();
         }
+    }
+
+    public static ArrayList<String> getSupervisorFYPs(String supervisorName) {
+        ArrayList<String> supervisorFYPs = new ArrayList<String>();
+        for (FYP fyp : FYPMS1.getFypList().getFYPs()) {
+            if (fyp.getSupervisorName().equals(supervisorName) && fyp.getStatus() == FYPStatus.ALLOCATED) {
+                supervisorFYPs.add(fyp.getTitle());
+            }
+        }
+        return supervisorFYPs;
     }
 }

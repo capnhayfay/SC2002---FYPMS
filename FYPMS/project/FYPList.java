@@ -7,7 +7,7 @@ import java.util.ArrayList;
  * and are entitled to supervise
  */
 public class FYPList {
-    private ArrayList<FYP> fyps = new ArrayList<>();
+    private static ArrayList<FYP> fyps = new ArrayList<>();
 
     /**
      * Adds a FYP to the list of FYPs the department can supervise
@@ -28,9 +28,10 @@ public class FYPList {
         System.out.println();
         for (FYP fyp : fyps) {
             if (fyp.getStatus() == FYPStatus.AVAILABLE) {
-                System.out.println("============= FYP No. " + fypCount++ + " ==============");
+                System.out.println("============= FYP ID " + fyp.getProjectId() + " ==============");
                 fyp.printFYPDetails();
                 System.out.println();
+                fypCount++;
             }
         }
         System.out.println("===== There are " + (fypCount - 1) + " Final Year Projects available! =====");
@@ -40,12 +41,13 @@ public class FYPList {
      * Prints all FYPs in the system for faculty members
      */
     public void listAllFYPsForFaculty() {
-        int fypCount = 1;
+        int fypCount = 0;
         System.out.println();
         System.out.println("List of All Final Year Projects");
         System.out.println();
         for (FYP fyp : fyps) {
-            System.out.println("============= FYP No. " + fypCount++ + " ==============");
+            fypCount++;
+            System.out.println("============= FYP ID " + fyp.getProjectId() + " ==============");
             fyp.printFYPDetails();
             System.out.println();
         }
@@ -82,11 +84,12 @@ public class FYPList {
 
         for (FYP fyp : fyps) {
             if (fyp.getTitle().toLowerCase().contains(keyword.toLowerCase())) {
-                System.out.println("============= FYP No. " + ++numOfResults + " ==============");
+                System.out.println("============= FYP ID " + fyp.getProjectId() + " ==============");
                 fyp.printFYPDetails();
                 System.out.println();
                 System.out.println("Search Results for Final Year Projects titled \"" + keyword + "\"");
                 System.out.println();
+                numOfResults++;
             }
         }
         if (numOfResults == 0) {
@@ -97,7 +100,6 @@ public class FYPList {
     }
 
     public ArrayList<FYP> searchFYPSByKeywordWithReturn(String keyword) {
-        int numOfResults = 0;
         ArrayList<FYP> fypSearchResults = new ArrayList<>();
 
         for (FYP fyp : fyps) {

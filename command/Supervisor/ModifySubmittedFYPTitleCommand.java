@@ -2,10 +2,8 @@ package command.Supervisor;
 
 import command.Command;
 
-import java.util.ArrayList;
 import java.util.Scanner;
 
-import FYPMS.FYPMS1;
 import FYPMS.project.*;
 import FYPMS.request.RequestChangeTitle;
 import FYPMS.request.RequestStatus;
@@ -25,15 +23,15 @@ public class ModifySubmittedFYPTitleCommand implements Command {
         System.out.println("Select option:");
         System.out.println("1. Accept Title request");
         System.out.println("2. Reject Title request");
-        switch(sc.nextInt()) {
+        switch (sc.nextInt()) {
             case 1:
                 project.setTitle(titleRequest.getNewTitle());
-                titleRequest.setStatus(RequestStatus.APPROVED); 
-                System.out.println("Project title has been change to" + project.getTitle()); 
+                titleRequest.setStatus(RequestStatus.APPROVED);
+                System.out.println("Project title has been change to" + project.getTitle());
                 break;
             case 2:
                 titleRequest.setStatus(RequestStatus.REJECTED);
-                System.out.println("Rejected changing of title to"+ project.getTitle());
+                System.out.println("Rejected changing of title to" + project.getTitle());
                 break;
             default:
                 System.out.println("Invalid option");
@@ -43,4 +41,3 @@ public class ModifySubmittedFYPTitleCommand implements Command {
     }
 
 }
-

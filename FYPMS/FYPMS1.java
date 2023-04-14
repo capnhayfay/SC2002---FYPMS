@@ -38,13 +38,11 @@ public class FYPMS1 {
         return requests;
     }
 
-    public static FYPList getSuperFypList(String supervisorName) {
-        FYPList superFyps = new FYPList();
-
-        ArrayList<FYP> temp = fypList.getFYPs();
-        for (FYP fyp : temp) {
+    public static ArrayList<FYP> getSuperFypList(String supervisorName) {
+        ArrayList<FYP> superFyps = new ArrayList<FYP>();
+        for (FYP fyp : fypList.getFYPs()) {
             if (fyp.getSupervisorName().equals(supervisorName)) {
-                superFyps.addFYP(fyp);
+                superFyps.add(fyp);
             }
         }
         return superFyps;

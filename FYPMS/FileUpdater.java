@@ -1,7 +1,6 @@
 package FYPMS;
 
 import java.io.BufferedWriter;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -133,8 +132,7 @@ public class FileUpdater {
             bw.write("Name\tEmail\tPassword\tProject 1\tProject 2");
             for (SupervisorAccount supervisor : supervisorList) {
                 bw.newLine();
-                bw.write(supervisor.getName() + "\t" + supervisor.getEmail() + "\t" + supervisor.getPassword() + "\t"
-                        + supervisor.getProj_1() + "\t" + supervisor.getProj_2());
+                bw.write(supervisor.getName() + "\t" + supervisor.getEmail() + "\t" + supervisor.getPassword());
             }
             System.out.println("Supervisors successfully written to " + fileName);
         } catch (IOException e) {
@@ -151,8 +149,7 @@ public class FileUpdater {
 
             for (FYPCoordinatorAccount coordinator : coordinatorList) {
                 bw.newLine();
-                bw.write(coordinator.getName() + "\t" + coordinator.getEmail() + "\t" + coordinator.getPassword() + "\t"
-                        + coordinator.getProj_1() + "\t" + coordinator.getProj_2());
+                bw.write(coordinator.getName() + "\t" + coordinator.getEmail() + "\t" + coordinator.getPassword());
             }
         } catch (IOException ioe) {
             ioe.printStackTrace();

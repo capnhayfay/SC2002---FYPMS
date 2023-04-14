@@ -62,9 +62,9 @@ public class FYPCoordinatorGUI implements Menu, Logout, GetCommand {
         System.out.println();
         System.out.println("1. Create, update or view projects");
         if (new CheckPendingRequests(FYPCoordinator.getLoginId()).execute() == 1) {
-            System.out.println("2. View student pending requests (NEW)");
+            System.out.println("2. View pending requests (NEW)");
         } else {
-            System.out.println("2. View student pending requests");
+            System.out.println("2. View pending requests");
         }
         System.out.println("3. Request to transfer student");
         System.out.println("4. View Own Request History");
@@ -122,7 +122,7 @@ public class FYPCoordinatorGUI implements Menu, Logout, GetCommand {
                     scanner.nextLine();
                     switch (selectedChoice) {
                         case 1:
-                            if (!FYPCoordinator.getProj_2().equals("0")) {
+                            if (FYPCoordinator.getProjList().size() == 2) {
                                 System.out.println();
                                 System.out.println("You have reach the maximum allocated project capacity.");
                                 break;
@@ -131,7 +131,7 @@ public class FYPCoordinatorGUI implements Menu, Logout, GetCommand {
                             }
                             break;
                         case 2:
-                            new ModifyFYPTitle().execute();
+                            new ModifyFYPTitle(FYPCoordinator).execute();
                             break;
                         case 3:
                             new ViewSubmittedFYPCommand(FYPCoordinator.getName()).execute();
@@ -185,9 +185,7 @@ public class FYPCoordinatorGUI implements Menu, Logout, GetCommand {
                                 } else if (reqID / 1000 == 3) {
                                     RequestTransferSupervisor transferSupervisorRequest = FYPMS1
                                             .getRequestTransferSupervisor(reqID);
-                                    projID = transferSupervisorRequest.getFypID();
-                                    selectedProj = FYPList.getFYPById(projID);
-                                    new ChangeSupervisorCommand(projID, transferSupervisorRequest.getNewSupervisorID())
+                                    new ChangeSupervisorCommand(transferSupervisorRequest)
                                             .execute();
                                 } else {
                                     System.out.println("Invalid Input. Returning to Main Page...");

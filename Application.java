@@ -16,13 +16,13 @@ public class Application {
 
 	public void run() throws IOException {
 
-		FYPMS1 fypms = new FYPMS1();
+		new FYPMS1();
 
 		// load in CSV
+		FileReader.readFYPsFromFile("./database/Modified/rollover project.txt");
 		FileReader.readSupervisorsFromFile("./database/Modified/faculty_list.txt");
 		FileReader.readCoordinatorsFromFile("./database/Modified/FYP coordinator.txt");
 		FileReader.readStudentsFromFile("./database/Modified/student list.txt");
-		FileReader.readFYPsFromFile("./database/Modified/rollover project.txt");
 		FileReader.readRequestsFromFile("./database/Modified/0requestChangeTitle.txt",
 				"./database/Modified/1requestDeregister.txt",
 				"./database/Modified/2requestRegister.txt",
@@ -52,7 +52,7 @@ public class Application {
 		while (true) {
 			if (loggedInUserType == "") {
 				System.out.println("Which type of user are you? ");
-				System.out.println("1. StudentAccount");
+				System.out.println("1. Student");
 				System.out.println("2. Supervisor");
 				System.out.println("3. FYP Coordinator");
 				System.out.println("0. Exit");
@@ -96,14 +96,17 @@ public class Application {
 				StudentGUI studentGUI = new StudentGUI(studentAccount, loggedInUserType);
 				studentGUI.display();
 				if (studentGUI.execute() == 0) {
+					loggedInUserType = "";
 					break;
 				}
 				loggedInUserType = studentGUI.getUserType();
-			} else if (loggedInUserType == "Supervisor") {
+			} else if (loggedInUserType == "Supervisor" &&
+					!supervisorAccount.getName().equalsIgnoreCase(FYPMS1.getCoordinatorList().get(0).getName())) {
 				SupervisorGUI supervisorAccountGUI = new SupervisorGUI(supervisorAccount,
 						loggedInUserType);
 				supervisorAccountGUI.display();
 				if (supervisorAccountGUI.execute() == 0) {
+					loggedInUserType = "";
 					break;
 				}
 				loggedInUserType = supervisorAccountGUI.getUserType();
@@ -112,9 +115,15 @@ public class Application {
 						loggedInUserType);
 				fypCoordinatorGUI.display();
 				if (fypCoordinatorGUI.execute() == 0) {
+					loggedInUserType = "";
 					break;
 				}
 				loggedInUserType = fypCoordinatorGUI.getUserType();
+			} else {
+				System.out.println();
+				System.out.println("Invalid user type, please try again");
+				System.out.println();
+				loggedInUserType = "";
 			}
 		}
 

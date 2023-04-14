@@ -50,7 +50,7 @@ public class FYPCoordinatorGUI implements Menu, Logout, GetCommand {
         System.out.println();
         // System.out.println("-----------------------------------------");
         System.out.println("=========================================");
-        System.out.println("           FYP Coordinator Menu            ");
+        System.out.println("           FYP Coordinator Menu          ");
         System.out.println("=========================================");
         // System.out.println("-----------------------------------------");
         System.out.println();
@@ -118,13 +118,12 @@ public class FYPCoordinatorGUI implements Menu, Logout, GetCommand {
                     scanner.nextLine();
                     switch (selectedChoice) {
                         case 1:
-                            if(!FYPCoordinator.getProj_2().equals("0")){
+                            if (!FYPCoordinator.getProj_2().equals("0")) {
                                 System.out.println();
                                 System.out.println("You have reach the maximum allocated project capacity.");
                                 break;
-                            }
-                            else{
-                                new CreateProjectCommand(FYPCoordinator).execute();    
+                            } else {
+                                new CreateProjectCommand(FYPCoordinator).execute();
                             }
                             break;
                         case 2:
@@ -138,9 +137,11 @@ public class FYPCoordinatorGUI implements Menu, Logout, GetCommand {
                 case 2:
                     new ViewPendingStudentRequestsCommand(FYPCoordinator.getLoginId()).execute();
                     System.out.println("=========================================");
+                    System.out.println();
                     System.out.println("Please select your choice");
                     System.out.println("1. Approve or Reject Request");
                     System.out.println("2. Return to Main Page");
+                    System.out.println();
                     if (!scanner.hasNextInt()) {
                         System.out.println("Invalid input format for option number. Please try again.");
                         scanner.nextLine();
@@ -150,6 +151,7 @@ public class FYPCoordinatorGUI implements Menu, Logout, GetCommand {
                     }
                     int choice2 = scanner.nextInt();
                     scanner.nextLine();
+                    System.out.println();
                     int reqID;
                     int projID;
                     FYP selectedProj;
@@ -160,24 +162,22 @@ public class FYPCoordinatorGUI implements Menu, Logout, GetCommand {
                             selectedProj = FYPList.getFYPById(projID);
                             System.out.println("Input request ID: ");
                             reqID = scanner.nextInt();
-                            if (reqID/1000 == 0){
+                            if (reqID / 1000 == 0) {
                                 // requestitlechange
                                 RequestChangeTitle titleRequest = FYPMS1.getRequestChangeTitle(reqID);
                                 new ModifySubmittedFYPTitleCommand(selectedProj, titleRequest).execute();
-                            }
-                            else if (reqID/1000 == 1){
+                            } else if (reqID / 1000 == 1) {
                                 RequestDeregister deregistrationRequest = FYPMS1.getRequestDeregister(reqID);
-                                new DeregisterStudentCommand(selectedProj,deregistrationRequest).execute();
-                            }
-                            else if (reqID/1000 == 2){
+                                new DeregisterStudentCommand(selectedProj, deregistrationRequest).execute();
+                            } else if (reqID / 1000 == 2) {
                                 RequestRegister registrationRequest = FYPMS1.getRequestRegister(reqID);
                                 new AllocateProjectCommand(selectedProj, registrationRequest).execute();
-                            }
-                            else if (reqID/1000 == 3){
-                                RequestTransferSupervisor transferSupervisorRequest = FYPMS1.getRequestTransferSupervisor(reqID);
-                                new ChangeSupervisorCommand(projID, transferSupervisorRequest.getNewSupervisorID()).execute();
-                            }
-                            else {
+                            } else if (reqID / 1000 == 3) {
+                                RequestTransferSupervisor transferSupervisorRequest = FYPMS1
+                                        .getRequestTransferSupervisor(reqID);
+                                new ChangeSupervisorCommand(projID, transferSupervisorRequest.getNewSupervisorID())
+                                        .execute();
+                            } else {
                                 System.out.println("Wrong input");
                             }
                             break;

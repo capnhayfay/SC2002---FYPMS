@@ -119,7 +119,7 @@ public class FileReader {
             ioe.printStackTrace();
         }
     }
-    
+
     public static void readFYPsFromFile(String fileName) {
         // DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd
         // HH:mm");
@@ -140,14 +140,14 @@ public class FileReader {
                 String studentID = null;
                 String studentName = null;
                 String studentEmail = null;
-                if(attributes[5].length() > 3){
+                if (attributes[5].length() > 3) {
                     studentID = attributes[5];
-                    studentName = attributes [6];
-                    studentEmail = attributes [7];
-                }  
+                    studentName = attributes[6];
+                    studentEmail = attributes[7];
+                }
 
-                fyp = new 
-                FYP(projectId, supervisorName, supervisorEmail, studentID, studentName, studentEmail, title, status);
+                fyp = new FYP(projectId, supervisorName, supervisorEmail, studentID, studentName, studentEmail, title,
+                        status);
                 fypList.addFYP(fyp);
                 line = br.readLine();
             }
@@ -163,20 +163,22 @@ public class FileReader {
 
         ArrayList<Object> requestChangeTitleList = new ArrayList<Object>();
         try (BufferedReader br = Files.newBufferedReader(pathToFile, StandardCharsets.UTF_8)) {
-        String line = br.readLine(); // skip header
-        line = br.readLine();
-        while (line != null) {
-            String[] attributes = line.split("\\t");
-            int requestId = Integer.parseInt(attributes[0]);
-            String requesterID = attributes[1];
-            String requesteeID = attributes[2];
-            RequestStatus requestStatus = RequestStatus.StringtoRequestStatus(attributes[3]);
-            int fypID = Integer.parseInt(attributes[4]);
-            String newTitle = attributes[5];
-            RequestChangeTitle request = new RequestChangeTitle(requestId, requesterID,requesteeID,requestStatus, fypID, newTitle);
-            requestChangeTitleList.add(request);
-        }
-        requests.add(requestChangeTitleList);
+            String line = br.readLine(); // skip header
+            line = br.readLine();
+            while (line != null) {
+                String[] attributes = line.split("\\t");
+                int requestId = Integer.parseInt(attributes[0]);
+                String requesterID = attributes[1];
+                String requesteeID = attributes[2];
+                RequestStatus requestStatus = RequestStatus.StringtoRequestStatus(attributes[3]);
+                int fypID = Integer.parseInt(attributes[4]);
+                String newTitle = attributes[5];
+                RequestChangeTitle request = new RequestChangeTitle(requestId, requesterID, requesteeID, requestStatus,
+                        fypID, newTitle);
+                requestChangeTitleList.add(request);
+                line = br.readLine();
+            }
+            requests.add(requestChangeTitleList);
         } catch (IOException ioe) {
             ioe.printStackTrace();
         }
@@ -184,18 +186,19 @@ public class FileReader {
         pathToFile = Paths.get(fileName1);
         ArrayList<Object> requestDeregisterList = new ArrayList<Object>();
         try (BufferedReader br = Files.newBufferedReader(pathToFile, StandardCharsets.UTF_8)) {
-        String line = br.readLine(); // skip header
-        line = br.readLine();
-        while (line != null) {
-            String[] attributes = line.split("\\t");
-            int requestId = Integer.parseInt(attributes[0]);
-            String requesterID = attributes[1];
-            RequestStatus requestStatus = RequestStatus.StringtoRequestStatus(attributes[2]);
-            int fypID = Integer.parseInt(attributes[3]);
-            RequestDeregister request = new RequestDeregister(requestId, requesterID, requestStatus, fypID);
-            requestDeregisterList.add(request);
-        }
-        requests.add(requestDeregisterList);
+            String line = br.readLine(); // skip header
+            line = br.readLine();
+            while (line != null) {
+                String[] attributes = line.split("\\t");
+                int requestId = Integer.parseInt(attributes[0]);
+                String requesterID = attributes[1];
+                RequestStatus requestStatus = RequestStatus.StringtoRequestStatus(attributes[2]);
+                int fypID = Integer.parseInt(attributes[3]);
+                RequestDeregister request = new RequestDeregister(requestId, requesterID, requestStatus, fypID);
+                requestDeregisterList.add(request);
+                line = br.readLine();
+            }
+            requests.add(requestDeregisterList);
         } catch (IOException ioe) {
             ioe.printStackTrace();
         }
@@ -203,18 +206,19 @@ public class FileReader {
         pathToFile = Paths.get(fileName2);
         ArrayList<Object> requestRegisterList = new ArrayList<Object>();
         try (BufferedReader br = Files.newBufferedReader(pathToFile, StandardCharsets.UTF_8)) {
-        String line = br.readLine(); // skip header
-        line = br.readLine();
-        while (line != null) {
-            String[] attributes = line.split("\\t");
-            int requestId = Integer.parseInt(attributes[0]);
-            String requesterID = attributes[1];
-            RequestStatus requestStatus = RequestStatus.StringtoRequestStatus(attributes[2]);
-            int fypID = Integer.parseInt(attributes[3]);
-            RequestRegister request = new RequestRegister(requestId, requesterID, requestStatus, fypID);
-            requestRegisterList.add(request);
-        }
-        requests.add(requestRegisterList);
+            String line = br.readLine(); // skip header
+            line = br.readLine();
+            while (line != null) {
+                String[] attributes = line.split("\\t");
+                int requestId = Integer.parseInt(attributes[0]);
+                String requesterID = attributes[1];
+                RequestStatus requestStatus = RequestStatus.StringtoRequestStatus(attributes[2]);
+                int fypID = Integer.parseInt(attributes[3]);
+                RequestRegister request = new RequestRegister(requestId, requesterID, requestStatus, fypID);
+                requestRegisterList.add(request);
+                line = br.readLine();
+            }
+            requests.add(requestRegisterList);
         } catch (IOException ioe) {
             ioe.printStackTrace();
         }
@@ -222,19 +226,21 @@ public class FileReader {
         pathToFile = Paths.get(fileName3);
         ArrayList<Object> requestTransferSupervisorList = new ArrayList<Object>();
         try (BufferedReader br = Files.newBufferedReader(pathToFile, StandardCharsets.UTF_8)) {
-        String line = br.readLine(); // skip header
-        line = br.readLine();
-        while (line != null) {
-        String[] attributes = line.split("\\t");
-        int requestId = Integer.parseInt(attributes[0]);
-        String requesterID = attributes[1];
-        RequestStatus requestStatus = RequestStatus.StringtoRequestStatus(attributes[2]);
-        int fypID = Integer.parseInt(attributes[3]);
-        String newSupervisorId = attributes[4];
-        RequestTransferSupervisor request = new RequestTransferSupervisor(requestId, requesterID, requestStatus, fypID, newSupervisorId);
-        requestTransferSupervisorList.add(request);
-        }
-        requests.add(requestTransferSupervisorList);
+            String line = br.readLine(); // skip header
+            line = br.readLine();
+            while (line != null) {
+                String[] attributes = line.split("\\t");
+                int requestId = Integer.parseInt(attributes[0]);
+                String requesterID = attributes[1];
+                RequestStatus requestStatus = RequestStatus.StringtoRequestStatus(attributes[2]);
+                int fypID = Integer.parseInt(attributes[3]);
+                String newSupervisorId = attributes[4];
+                RequestTransferSupervisor request = new RequestTransferSupervisor(requestId, requesterID, requestStatus,
+                        fypID, newSupervisorId);
+                requestTransferSupervisorList.add(request);
+                line = br.readLine();
+            }
+            requests.add(requestTransferSupervisorList);
         } catch (IOException ioe) {
             ioe.printStackTrace();
         }

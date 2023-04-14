@@ -25,7 +25,8 @@ public class AllocateProjectCommand implements Command {
         System.out.println("Select option:");
         System.out.println("1. Accept registration request");
         System.out.println("2. Reject registration request");
-        switch(sc.nextInt()) {
+        System.out.println();
+        switch (sc.nextInt()) {
             case 1:
                 String StudentName = FYPMS1.getStudentName(registerRequest.getRequesterID());
                 String StudentEmail = FYPMS1.getStudentEmail(registerRequest.getRequesterID());
@@ -33,14 +34,19 @@ public class AllocateProjectCommand implements Command {
                 project.setStudentID(registerRequest.getRequesterID());
                 project.setStudentEmail(StudentEmail);
                 project.setStudentName(StudentName);
-                registerRequest.setStatus(RequestStatus.APPROVED); 
-                FYPMS1.setStudentStatus(registerRequest.getRequesterID(), StudentStatus.ASSIGNED_PROJECT);             
-                System.out.println("Allocated project " + project.getTitle() + " to " + StudentName); 
+                registerRequest.setStatus(RequestStatus.APPROVED);
+                FYPMS1.setStudentStatus(registerRequest.getRequesterID(), StudentStatus.ASSIGNED_PROJECT,
+                        registerRequest.getFypID());
+                System.out.println("Allocated project " + project.getTitle() + " to " + StudentName);
+                System.out.println("Press enter to continue...");
+                sc.nextLine();
                 break;
             case 2:
                 registerRequest.setStatus(RequestStatus.REJECTED);
-                FYPMS1.setStudentStatus(registerRequest.getRequesterID(), StudentStatus.NO_PROJECT); 
-                System.out.println("Rejected "+registerRequest.getRequesterID()+ " for "  + project.getTitle());
+                FYPMS1.setStudentStatus(registerRequest.getRequesterID(), StudentStatus.NO_PROJECT, 0);
+                System.out.println("Rejected " + registerRequest.getRequesterID() + " for " + project.getTitle());
+                System.out.println("Press enter to continue...");
+                sc.nextLine();
                 break;
             default:
                 System.out.println("Invalid option");

@@ -19,13 +19,26 @@ public class Application {
 		FYPMS1 fypms = new FYPMS1();
 
 		// load in CSV
-
 		FileReader.readSupervisorsFromFile("./database/Modified/faculty_list.txt");
-		FileReader.readCoordinatorsFromFile("./database/Modified/FYP coordinator.txt");
+		FileReader.readCoordinatorsFromFile("./database/Modified/FYPcoordinator.txt");
 		FileReader.readStudentsFromFile("./database/Modified/student list.txt");
 		FileReader.readFYPsFromFile("./database/Modified/rollover project.txt");
-		FileReader.readRequestsFromFile("./database/Modified/0requestChangeTitle.txt","./database/Modified/1requestDeregister.txt","./database/Modified/2requestRegister.txt","./database/Modified/3requestTransferSupervisor.txt");
+		FileReader.readRequestsFromFile("./database/Modified/0requestChangeTitle.txt",
+				"./database/Modified/1requestDeregister.txt",
+				"./database/Modified/2requestRegister.txt",
+				"./database/Modified/3requestTransferSupervisor.txt");
 		// end of load in CSV
+
+		// load in CSV
+		FileReader.readSupervisorsFromFile("./database/test/faculty_list.txt");
+		FileReader.readCoordinatorsFromFile("./database/test/FYP coordinator.txt");
+		FileReader.readStudentsFromFile("./database/test/student list.txt");
+		FileReader.readFYPsFromFile("./database/test/rollover project.txt");
+		FileReader.readRequestsFromFile("./database/test/0requestChangeTitle.txt",
+				"./database/test/1requestDeregister.txt", "./database/test/2requestRegister.txt",
+				"./database/test/3requestTransferSupervisor.txt");
+		// end of load in CSV
+
 		Scanner scanner = new Scanner(System.in);
 		String loggedInUserType = "";
 		StudentAccount studentAccount = null;
@@ -36,11 +49,11 @@ public class Application {
 		System.out.println();
 		while (true) {
 			if (loggedInUserType == "") {
-				System.out.print("Which type of user are you? ");
-				System.out.println();
+				System.out.println("Which type of user are you? ");
 				System.out.println("1. StudentAccount");
 				System.out.println("2. Supervisor");
 				System.out.println("3. FYP Coordinator");
+				System.out.println();
 				int choice = scanner.nextInt();
 				switch (choice) {
 					case 1:
@@ -96,7 +109,13 @@ public class Application {
 			}
 		}
 
-		FileUpdater.writeRequestsToFile("./database/test/0requestChangeTitle.txt","./database/test/1requestDeregister.txt","./database/test/2requestRegister.txt","./database/test/3requestTransferSupervisor.txt");
+		FileUpdater.writeSupervisorToFile("./database/test/faculty_list.txt");
+		FileUpdater.writeCoordinatorToFile("./database/test/FYP coordinator.txt");
+		FileUpdater.writeStudentToFile("./database/test/student list.txt");
+		FileUpdater.writeFYPsToFile("./database/test/rollover project.txt");
+		FileUpdater.writeRequestsToFile("./database/test/0requestChangeTitle.txt",
+				"./database/test/1requestDeregister.txt", "./database/test/2requestRegister.txt",
+				"./database/test/3requestTransferSupervisor.txt");
 
 		new EndProgramMenu().display();
 	}

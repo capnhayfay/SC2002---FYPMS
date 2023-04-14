@@ -1,2 +1,2 @@
-Name	Email
-Li Fang	ASFLI@NTU.EDU.SG
+Name	Email	Password	Project 1	Project 2
+Li Fang	ASFLI@NTU.EDU.SG	password	0	0

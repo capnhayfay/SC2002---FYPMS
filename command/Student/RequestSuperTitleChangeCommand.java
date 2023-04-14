@@ -29,19 +29,22 @@ public class RequestSuperTitleChangeCommand implements Command {
             System.out.println("Error: Your registration is still pending.");
             return;
         }
-        ArrayList<ArrayList <Object>>  requests = FYPMS1.getRequestList();
+        ArrayList<ArrayList<Object>> requests = FYPMS1.getRequestList();
         FYPList fyplist = FYPMS1.getFypList();
         ArrayList<FYP> fyps = fyplist.getFYPs();
-        
+
         for (FYP fyp : fyps) {
-            if (fyp.getStudentID().equals(student.getLoginId())){
-                Scanner sc = new Scanner(System.in);
-                System.out.println("Input new project title: ");
-                String newtitle = sc.nextLine();
-                String supervisor = fyp.getSupervisorName();
-                RequestChangeTitle request = new RequestChangeTitle(requests.get(0).size(), student.getLoginId(), supervisor,RequestStatus.PENDING, student.getAssignedProject(), newtitle);
-                requests.get(0).add(request);
-                System.out.println("Request for title change submitted.");
+            if (fyp.getStudentID() != null) {
+                if (fyp.getStudentID().equals(student.getLoginId())) {
+                    Scanner sc = new Scanner(System.in);
+                    System.out.println("Input new project title: ");
+                    String newtitle = sc.nextLine();
+                    String supervisor = fyp.getSupervisorName();
+                    RequestChangeTitle request = new RequestChangeTitle(requests.get(0).size(), student.getLoginId(),
+                            supervisor, RequestStatus.PENDING, student.getAssignedProject(), newtitle);
+                    requests.get(0).add(request);
+                    System.out.println("Request for title change submitted.");
+                }
             }
         }
     }

@@ -9,7 +9,6 @@ import FYPMS.request.RequestChangeTitle;
 import account.supervisor.SupervisorAccount;
 import command.ChangePassword;
 import command.ViewOwnRequestRecordsCommand;
-import command.FYPCoord.AllocateProjectCommand;
 import command.Supervisor.*;
 import FYPMS.FYPMS1;
 
@@ -24,7 +23,7 @@ public class SupervisorGUI implements Menu, Logout, GetCommand {
      * Creates a SupervisorGui with the given Supervisor Account
      * 
      * @param supervisor which is the Supervisor account
-     * @return 
+     * @return
      */
     public SupervisorGUI(SupervisorAccount supervisor, String UserType) {
         this.supervisor = supervisor;
@@ -105,13 +104,12 @@ public class SupervisorGUI implements Menu, Logout, GetCommand {
                     scanner.nextLine();
                     switch (selectedChoice) {
                         case 1:
-                            if(!supervisor.getProj_2().equals("0")){
+                            if (!supervisor.getProj_2().equals("0")) {
                                 System.out.println();
                                 System.out.println("You have reach the maximum allocated project capacity.");
                                 break;
-                            }
-                            else{
-                                new CreateProjectCommand(supervisor).execute();    
+                            } else {
+                                new CreateProjectCommand(supervisor).execute();
                             }
                             break;
                         case 2:
@@ -123,7 +121,7 @@ public class SupervisorGUI implements Menu, Logout, GetCommand {
                     }
                     break;
                 case 2:
-                    new ViewPendingStudentRequestsCommand(supervisor.getLoginId()).execute();
+                    new ViewPendingStudentRequestsCommand(supervisor.getName()).execute();
                     System.out.println("Please select your choice");
                     System.out.println("1. Approve or Reject Request");
                     System.out.println("2. Return to Main Page");
@@ -146,12 +144,11 @@ public class SupervisorGUI implements Menu, Logout, GetCommand {
                             selectedProj = FYPList.getFYPById(projID);
                             System.out.println("Input request ID: ");
                             reqID = scanner.nextInt();
-                            if (reqID / 1000 == 0){
+                            if (reqID / 1000 == 0) {
                                 // requestitlechange
                                 RequestChangeTitle titleRequest = FYPMS1.getRequestChangeTitle(reqID);
                                 new ModifySubmittedFYPTitleCommand(selectedProj, titleRequest).execute();
-                            }
-                            else if (reqID / 1000 != 0){
+                            } else if (reqID / 1000 != 0) {
                                 System.out.println("Wrong input");
                             }
                             break;

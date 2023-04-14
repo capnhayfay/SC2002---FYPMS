@@ -30,7 +30,6 @@ public class FYPMS1 {
     private static ArrayList<SupervisorAccount> SupervisorAccounts = new ArrayList<SupervisorAccount>();
 
     static ArrayList<ArrayList<Object>> requests = new ArrayList<ArrayList<Object>>();
-    
 
     private static final FYPList fypList = new FYPList();
 
@@ -42,51 +41,43 @@ public class FYPMS1 {
         return requests;
     }
 
-    public static RequestChangeTitle getRequestChangeTitle(int requestID)
-    {
-            for (Object indivRequest : requests.get(0))
-            {
-                RequestChangeTitle indivCastedRequest = (RequestChangeTitle) indivRequest;
-                if (indivCastedRequest.getRequestID() == requestID) {
-                    return indivCastedRequest;
-             }
+    public static RequestChangeTitle getRequestChangeTitle(int requestID) {
+        for (Object indivRequest : requests.get(0)) {
+            RequestChangeTitle indivCastedRequest = (RequestChangeTitle) indivRequest;
+            if (indivCastedRequest.getRequestID() == requestID) {
+                return indivCastedRequest;
             }
+        }
         return null;
     }
 
-    public static RequestDeregister getRequestDeregister(int requestID)
-    {
-            for (Object indivRequest : requests.get(1))
-            {
-                RequestDeregister indivCastedRequest = (RequestDeregister) indivRequest;
-                if (indivCastedRequest.getRequestID() == requestID) {
-                    return indivCastedRequest;
-             }
+    public static RequestDeregister getRequestDeregister(int requestID) {
+        for (Object indivRequest : requests.get(1)) {
+            RequestDeregister indivCastedRequest = (RequestDeregister) indivRequest;
+            if (indivCastedRequest.getRequestID() == requestID) {
+                return indivCastedRequest;
             }
+        }
         return null;
     }
 
-    public static RequestRegister getRequestRegister(int requestID)
-    {
-            for (Object indivRequest : requests.get(2))
-            {
-                RequestRegister indivCastedRequest = (RequestRegister) indivRequest;
-                if (indivCastedRequest.getRequestID() == requestID) {
-                    return indivCastedRequest;
-             }
+    public static RequestRegister getRequestRegister(int requestID) {
+        for (Object indivRequest : requests.get(2)) {
+            RequestRegister indivCastedRequest = (RequestRegister) indivRequest;
+            if (indivCastedRequest.getRequestID() == requestID) {
+                return indivCastedRequest;
             }
+        }
         return null;
     }
 
-    public static RequestTransferSupervisor getRequestTransferSupervisor(int requestID)
-    {
-            for (Object indivRequest : requests.get(3))
-            {
-                RequestTransferSupervisor indivCastedRequest = (RequestTransferSupervisor) indivRequest;
-                if (indivCastedRequest.getRequestID() == requestID) {
-                    return indivCastedRequest;
-             }
+    public static RequestTransferSupervisor getRequestTransferSupervisor(int requestID) {
+        for (Object indivRequest : requests.get(3)) {
+            RequestTransferSupervisor indivCastedRequest = (RequestTransferSupervisor) indivRequest;
+            if (indivCastedRequest.getRequestID() == requestID) {
+                return indivCastedRequest;
             }
+        }
         return null;
     }
 
@@ -136,61 +127,48 @@ public class FYPMS1 {
         }
     }
 
-    public static String getStudentEmail(String studentID)
-    {
-        for (StudentAccount account : StudentAccount)
-        {
-            if (account.getLoginId().equals(studentID))
-            {
+    public static String getStudentEmail(String studentID) {
+        for (StudentAccount account : StudentAccount) {
+            if (account.getLoginId().equals(studentID)) {
                 return account.getEmail();
             }
         }
         return null;
     }
 
-    public static String getStudentName(String studentID)
-    {
-        for (StudentAccount account : StudentAccount)
-        {
-            if (account.getLoginId().equals(studentID))
-            {
+    public static String getStudentName(String studentID) {
+        for (StudentAccount account : StudentAccount) {
+            if (account.getLoginId().equals(studentID)) {
                 return account.getName();
             }
         }
         return null;
     }
 
-    public static String getSupervisorName(String supervisorID)
-    {
-        for (SupervisorAccount account : SupervisorAccounts)
-        {
-            if (account.getLoginId().equals(supervisorID))
-            {
+    public static String getSupervisorName(String supervisorID) {
+        for (SupervisorAccount account : SupervisorAccounts) {
+            if (account.getLoginId().equals(supervisorID)) {
                 return account.getName();
             }
         }
         return null;
     }
 
-    public static String getSupervisorEmail(String supervisorID)
-    {
-        for (SupervisorAccount account : SupervisorAccounts)
-        {
-            if (account.getLoginId().equals(supervisorID))
-            {
+    public static String getSupervisorEmail(String supervisorID) {
+        for (SupervisorAccount account : SupervisorAccounts) {
+            if (account.getLoginId().equals(supervisorID)) {
                 return account.getEmail();
             }
         }
         return null;
     }
 
-    public static void setStudentStatus(String studentID, StudentStatus studentStatus)
-    {
-        for (StudentAccount account : StudentAccount)
-        {
-            if (account.getLoginId().equals(studentID))
-            {
-                account.setStatus(studentStatus);;
+    public static void setStudentStatus(String studentID, StudentStatus studentStatus, int fypID) {
+        for (StudentAccount account : StudentAccount) {
+            if (account.getLoginId().equals(studentID)) {
+                account.setStatus(studentStatus);
+                ;
+                account.setAssignedProject(fypID);
             }
         }
     }

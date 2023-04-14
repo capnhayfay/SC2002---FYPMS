@@ -19,14 +19,16 @@ public class ViewPendingStudentRequestsCommand implements Command {
         System.out.println();
         System.out.println("Pending Request");
         System.out.println();
-        
-        ArrayList<ArrayList <Object>> requests =  FYPMS1.getRequestList();
+
+        ArrayList<ArrayList<Object>> requests = FYPMS1.getRequestList();
         int requestCount = 0;
-        for (ArrayList <Object> request : requests) {
-            for (Object indivRequest : request){
+        for (ArrayList<Object> request : requests) {
+            for (Object indivRequest : request) {
                 Request indivCastedRequest = (Request) indivRequest;
-                if (indivCastedRequest.getRequesteeID().equals(Supervisor) && indivCastedRequest.getRequestStatus() == RequestStatus.PENDING) {
-                    System.out.println("============= Request ID " +indivCastedRequest.getRequestID() + " ==============");
+                if (indivCastedRequest.getRequesteeID().equals(Supervisor)
+                        && indivCastedRequest.getRequestStatus() == RequestStatus.PENDING) {
+                    System.out.println(
+                            "============= Request ID " + indivCastedRequest.getRequestID() + " ==============");
                     indivCastedRequest.printDetails();
                     System.out.println();
                     requestCount++;
@@ -34,22 +36,21 @@ public class ViewPendingStudentRequestsCommand implements Command {
             }
         }
 
-        if (requestCount ==0)
-        {
+        if (requestCount == 0) {
             System.out.println("There are no pending requests.");
-        }
-        else{
-            System.out.println("There are " +requestCount+" pending requests.");
+        } else {
+            System.out.println("There are " + requestCount + " pending requests.");
         }
 
     }
 
     public int checkUpdates() {
-        ArrayList<ArrayList <Object>> requests =  FYPMS1.getRequestList();
-        for (ArrayList <Object> request : requests) {
-            for (Object indivRequest : request){
+        ArrayList<ArrayList<Object>> requests = FYPMS1.getRequestList();
+        for (ArrayList<Object> request : requests) {
+            for (Object indivRequest : request) {
                 Request indivCastedRequest = (Request) indivRequest;
-                if (indivCastedRequest.getRequesteeID().equals(Supervisor) && indivCastedRequest.getRequestStatus() == RequestStatus.PENDING) {
+                if (indivCastedRequest.getRequesteeID().equals(Supervisor)
+                        && indivCastedRequest.getRequestStatus() == RequestStatus.PENDING) {
                     return 1;
                 }
             }

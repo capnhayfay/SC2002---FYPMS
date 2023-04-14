@@ -5,23 +5,27 @@ import account.UserType;
 
 public class StudentAccount extends Account {
 
-    public StudentAccount(String userId, String password, UserType userType, String emailAddress, String name, int assignedProject, StudentStatus studentStatus){
-        super(userId, password,userType,emailAddress,name);
+    public StudentAccount(String userId, String password, UserType userType, String emailAddress, String name,
+            int assignedProject, StudentStatus studentStatus) {
+        super(userId, password, userType, emailAddress, name);
         this.assignedProject = assignedProject;
         this.studentStatus = studentStatus;
     }
+
     /**
      * Authenticates login of CustomerAccount
-     * @param userId which is entered by user
+     * 
+     * @param userId   which is entered by user
      * @param password which is entered by user
      * @return Account if login successful, null if login failed
      */
-    public UserType login(String userId, String password){
-        if(this.getLoginId().equals(userId) && this.getPassword().equals(password)){
+    public UserType login(String userId, String password) {
+        if (this.getLoginId().equals(userId) && this.getPassword().equals(password)) {
             return this.getUserType();
         }
         return null;
     }
+
     private int assignedProject;
     private StudentStatus studentStatus;
 
@@ -42,12 +46,12 @@ public class StudentAccount extends Account {
         System.out.println("Email: " + getEmail());
         if (studentStatus.equals(StudentStatus.ASSIGNED_PROJECT)) {
             System.out.println("Assigned Project: " + assignedProject);
+        } else {
+            System.out.println("You have no assigned project.");
         }
-        else {System.out.println("You have no assigned project.");}
         System.out.println("Status:" + studentStatus);
         System.out.println();
     }
-
 
     public int getAssignedProject() {
         return assignedProject;
@@ -62,11 +66,11 @@ public class StudentAccount extends Account {
     }
 
     public void setStatus(StudentStatus studentStatus) {
-        this.studentStatus=studentStatus;
+        this.studentStatus = studentStatus;
     }
 
-    public void ChangeStudentStatus(StudentStatus newStatus) {
-        studentStatus = newStatus;
+    public void setAssignedProject(int assignedProject) {
+        this.assignedProject = assignedProject;
     }
 
 }

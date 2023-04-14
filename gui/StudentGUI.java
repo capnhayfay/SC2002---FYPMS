@@ -32,17 +32,14 @@ public class StudentGUI implements Menu, Logout, GetCommand {
      */
     public void display() {
         System.out.println();
-        // System.out.println("-----------------------------------------");
         System.out.println("=========================================");
-        System.out.println("               StudentAccount Menu             ");
+        System.out.println("         StudentAccount Menu             ");
         System.out.println("=========================================");
-        // System.out.println("-----------------------------------------");
-        System.out.println();
         System.out.println("Logged in as User: " + curAcc.getLoginId());
         System.out.println();
         System.out.println("1. View all available FYP");
         System.out.println("2. Register FYP");
-        System.out.println("3. View your FYP");
+        System.out.println("3. View your registered FYP");
         System.out.println("4. Request to change FYP title");
         System.out.println("5. Request to deregister FYP ");
         System.out.println("6. View Request Status and History");

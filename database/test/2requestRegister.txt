@@ -1,2 +1,2 @@
 requestID	requesterID	requestStatus	fypID
-2000	YCHERN	PENDING	2
+2000	YCHERN	APPROVED	5

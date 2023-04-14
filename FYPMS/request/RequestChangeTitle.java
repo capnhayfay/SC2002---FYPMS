@@ -1,7 +1,7 @@
 package FYPMS.request;
 
 public class RequestChangeTitle extends Request {
-    private String newTitle;
+    private final String newTitle;
 
     public RequestChangeTitle(int requestID, String requesterID, String requesteeID, RequestStatus requestStatus, int fypID,
             String newTitle) {

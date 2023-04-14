@@ -1,9 +1,9 @@
 package FYPMS.request;
-import FYPMS.FYPMS1;
+import FYPMS.SCSE;
 
 public class RequestDeregister extends Request {
 
     public RequestDeregister(int requestID, String requesterID, RequestStatus requestStatus,int fypID) {
-        super(requestID, requesterID, FYPMS1.getCoordinatorList().get(0).getLoginId(), requestStatus, RequestRelationship.STUDENTCoordinator, RequestType.DEREGISTER_PROJECT, fypID);
+        super(requestID, requesterID, SCSE.getCoordinatorList().get(0).getLoginId(), requestStatus, RequestRelationship.STUDENTCoordinator, RequestType.DEREGISTER_PROJECT, fypID);
     }
 }

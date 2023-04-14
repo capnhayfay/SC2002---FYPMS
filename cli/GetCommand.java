@@ -1,4 +1,4 @@
-package gui;
+package cli;
 
 /**
  * Represents command to execute GUI

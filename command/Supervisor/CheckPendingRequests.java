@@ -6,11 +6,11 @@ package command.Supervisor;
 
 import java.util.ArrayList;
 
-import FYPMS.FYPMS1;
+import FYPMS.SCSE;
 import FYPMS.request.*;
 
 public class CheckPendingRequests {
-    private String Supervisor;
+    private final String Supervisor;
 
     public CheckPendingRequests(String Supervisor) {
         this.Supervisor = Supervisor;
@@ -27,7 +27,7 @@ public class CheckPendingRequests {
      *         otherwise.
      */
     public int execute() {
-        ArrayList<ArrayList<Object>> requests = FYPMS1.getRequestList();
+        ArrayList<ArrayList<Object>> requests = SCSE.getRequestList();
         for (ArrayList<Object> request : requests) {
             for (Object indivRequest : request) {
                 Request indivCastedRequest = (Request) indivRequest;

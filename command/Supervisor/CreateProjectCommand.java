@@ -9,7 +9,7 @@ package command.Supervisor;
 
 import java.util.Scanner;
 
-import FYPMS.FYPMS1;
+import FYPMS.SCSE;
 import FYPMS.project.FYP;
 import FYPMS.project.FYPList;
 import FYPMS.project.FYPStatus;
@@ -17,13 +17,13 @@ import account.supervisor.SupervisorAccount;
 import command.Command;
 
 public class CreateProjectCommand implements Command {
-    private SupervisorAccount supervisor;
+    private final SupervisorAccount supervisor;
 
     public CreateProjectCommand(SupervisorAccount supervisor) {
         this.supervisor = supervisor;
     }
 
-    FYPList fypList = FYPMS1.getFypList();
+    final FYPList fypList = SCSE.getFypList();
 
     /**
      * This method prompts the user to input the title of the new FYP project and

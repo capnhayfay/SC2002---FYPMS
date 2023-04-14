@@ -1,5 +1,6 @@
-package gui;
+package cli;
 
+import FYPMS.SCSE;
 import account.*;
 import java.util.Scanner;
 
@@ -12,12 +13,11 @@ import command.ViewIncomingRequestRecordsCommand;
 import command.ViewOutcomingRequestRecordsCommand;
 import command.ViewAllRequestRecordsCommand;
 import command.Supervisor.*;
-import FYPMS.FYPMS1;
 
 /**
  * GUI which is shown to the Supervisor Account
  */
-public class SupervisorGUI implements Menu, Logout, GetCommand {
+public class SupervisorCLI implements Menu, Logout, GetCommand {
     private SupervisorAccount supervisor;
     private String UserType;
 
@@ -25,9 +25,8 @@ public class SupervisorGUI implements Menu, Logout, GetCommand {
      * Creates a SupervisorGui with the given Supervisor Account
      * 
      * @param supervisor which is the Supervisor account
-     * @return
      */
-    public SupervisorGUI(SupervisorAccount supervisor, String UserType) {
+    public SupervisorCLI(SupervisorAccount supervisor, String UserType) {
         this.supervisor = supervisor;
         this.UserType = UserType;
     }
@@ -148,7 +147,7 @@ public class SupervisorGUI implements Menu, Logout, GetCommand {
                                 reqID = scanner.nextInt();
                                 if (reqID / 1000 == 0) {
                                     // Request Title Change
-                                    RequestChangeTitle titleRequest = FYPMS1.getRequestChangeTitle(reqID);
+                                    RequestChangeTitle titleRequest = SCSE.getRequestChangeTitle(reqID);
                                     if (!titleRequest.getRequesteeID().equals(supervisor.getLoginId())) {
                                         System.out.println("Invalid Input. Returning to Main Page...");
                                         break;
@@ -241,6 +240,11 @@ public class SupervisorGUI implements Menu, Logout, GetCommand {
         return this.supervisor;
     }
 
+    /**
+     * Returns String in SupervisorAccountGUI
+     * 
+     * @return String
+     */
     public String getUserType() {
         return UserType;
     }

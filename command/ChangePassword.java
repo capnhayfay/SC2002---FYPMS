@@ -16,7 +16,7 @@ import account.Account;
  * is set to 5.
  */
 public class ChangePassword implements Command {
-    private Account user;
+    private final Account user;
 
     /**
      * Constructs a new ChangePassword command with the given user account.

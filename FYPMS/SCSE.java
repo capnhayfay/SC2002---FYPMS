@@ -17,16 +17,16 @@ import java.util.ArrayList;
  * Represents the company this application is created for
  * Contains all bookings, movies and cineplexes the company owns
  */
-public class FYPMS1 {
+public class SCSE {
 
     // private static final CoordinatorList coordinatorList = new CoordinatorList();
     // private static final SupervisorList supervisorList = new SupervisorList();
     // private static final StudentList studentList = new StudentList();
-    private static ArrayList<StudentAccount> StudentAccount = new ArrayList<StudentAccount>();
-    private static ArrayList<FYPCoordinatorAccount> FYPCoordinatorAccounts = new ArrayList<FYPCoordinatorAccount>();
-    private static ArrayList<SupervisorAccount> SupervisorAccounts = new ArrayList<SupervisorAccount>();
+    private static final ArrayList<StudentAccount> StudentAccount = new ArrayList<StudentAccount>();
+    private static final ArrayList<FYPCoordinatorAccount> FYPCoordinatorAccounts = new ArrayList<FYPCoordinatorAccount>();
+    private static final ArrayList<SupervisorAccount> SupervisorAccounts = new ArrayList<SupervisorAccount>();
 
-    static ArrayList<ArrayList<Object>> requests = new ArrayList<ArrayList<Object>>();
+    static final ArrayList<ArrayList<Object>> requests = new ArrayList<ArrayList<Object>>();
 
     private static final FYPList fypList = new FYPList();
 

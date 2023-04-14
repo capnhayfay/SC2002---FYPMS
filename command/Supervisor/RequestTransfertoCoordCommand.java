@@ -16,23 +16,23 @@ package command.Supervisor;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import FYPMS.SCSE;
 import command.Command;
-import FYPMS.FYPMS1;
 import FYPMS.project.FYPList;
 import FYPMS.project.FYPStatus;
 import FYPMS.request.*;
 import account.supervisor.SupervisorAccount;
 
 public class RequestTransfertoCoordCommand implements Command {
-    /**
-     * The RequestTransfertoCoordCommand class represents a command to transfer
-     * supervision of an FYP project from the current
-     * supervisor to another supervisor. This class implements the Command
-     * interface.
+    /*
+      The RequestTransfertoCoordCommand class represents a command to transfer
+      supervision of an FYP project from the current
+      supervisor to another supervisor. This class implements the Command
+      interface.
      */
 
     /** The SupervisorAccount object representing the current supervisor */
-    private SupervisorAccount supervisorAccount;
+    private final SupervisorAccount supervisorAccount;
 
     /**
      * Constructs a new RequestTransfertoCoordCommand object with the given
@@ -46,7 +46,7 @@ public class RequestTransfertoCoordCommand implements Command {
     }
 
     /** The list of requests in the system */
-    ArrayList<ArrayList<Object>> requests = FYPMS1.getRequestList();
+    final ArrayList<ArrayList<Object>> requests = SCSE.getRequestList();
 
     /**
      * Executes the command to transfer supervision of an FYP project from the
@@ -72,7 +72,7 @@ public class RequestTransfertoCoordCommand implements Command {
             System.out.println("Input new supervisor ID: ");
             String newSupervisorID = sc.next();
 
-            ArrayList<SupervisorAccount> supervisors = FYPMS1.getSupervisorList();
+            ArrayList<SupervisorAccount> supervisors = SCSE.getSupervisorList();
             for (SupervisorAccount indi : supervisors) {
                 if (indi.getLoginId().equals(newSupervisorID)
                         && !(newSupervisorID.equals(supervisorAccount.getLoginId()))) {

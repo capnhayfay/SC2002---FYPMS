@@ -7,11 +7,11 @@ package account;
  */
 
 public abstract class Account {
-    private String email; // email address of the user
-    private String name; // name of the user
-    private String userId; // login ID of the user
+    private final String email; // email address of the user
+    private final String name; // name of the user
+    private final String userId; // login ID of the user
     private String password; // password of the user
-    private UserType userType; // type of account: Student, Supervisor and FYPCoordinator
+    private final UserType userType; // type of account: Student, Supervisor and FYPCoordinator
 
     /**
      * Creates an Account Object with given parameters

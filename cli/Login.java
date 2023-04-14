@@ -2,7 +2,7 @@
  * 
  * Represents an interface for logging into an account.
  */
-package gui;
+package cli;
 
 import account.Account;
 

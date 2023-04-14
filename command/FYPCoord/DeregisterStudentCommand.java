@@ -4,20 +4,21 @@ A command that deregisters a student from a project in the FYPMS system.
 */
 package command.FYPCoord;
 
-import FYPMS.FYPMS1;
+import FYPMS.SCSE;
 import FYPMS.project.*;
 import FYPMS.request.Request;
 import FYPMS.request.RequestDeregister;
 import FYPMS.request.RequestStatus;
 import account.student.StudentStatus;
+import account.supervisor.SupervisorAccount;
 import command.Command;
 
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class DeregisterStudentCommand implements Command {
-    private FYP project;
-    private RequestDeregister requestDeregister;
+    private final FYP project;
+    private final RequestDeregister requestDeregister;
 
     /**
      * Constructs a new DeregisterStudentCommand object with the specified project
@@ -40,7 +41,6 @@ public class DeregisterStudentCommand implements Command {
         Scanner sc = new Scanner(System.in);
         System.out.println();
         requestDeregister.printDetails();
-        ;
         System.out.println();
         System.out.println("Select option:");
         System.out.println("1. Accept deregistration request");
@@ -49,15 +49,15 @@ public class DeregisterStudentCommand implements Command {
         System.out.println("=========================================");
         switch (requestAction) {
             case 1:
-                String StudentName = FYPMS1.getStudentName(requestDeregister.getRequesterID());
+                String StudentName = SCSE.getStudentName(requestDeregister.getRequesterID());
                 project.setStatus(FYPStatus.AVAILABLE);
                 project.setStudentID("");
                 project.setStudentEmail(null);
                 project.setStudentName(null);
                 requestDeregister.setStatus(RequestStatus.APPROVED);
-                FYPMS1.setStudentStatus(requestDeregister.getRequesterID(), StudentStatus.DEREGISTERED_PROJECT,
+                SCSE.setStudentStatus(requestDeregister.getRequesterID(), StudentStatus.DEREGISTERED_PROJECT,
                         requestDeregister.getFypID());
-                for (ArrayList<Object> requests : FYPMS1.getRequestList())
+                for (ArrayList<Object> requests : SCSE.getRequestList())
                     for (Object indivRequest : requests) {
                         Request indivCastedRequest = (Request) indivRequest;
                         if (indivCastedRequest.getRequesterID().equals(requestDeregister.getRequesterID())
@@ -65,13 +65,23 @@ public class DeregisterStudentCommand implements Command {
                             indivCastedRequest.setStatus(RequestStatus.REJECTED);
                         }
                     }
+                SupervisorAccount supervisor = SCSE.getSupervisorAccount(project.getSupervisorName());
+                supervisor.getProjList().remove(project.getTitle());
+                if (supervisor.getProjList().size() < 2) {
+                    for (FYP fyp : SCSE.getSuperFypList(supervisor.getName())) {
+                        if (fyp.getStatus().equals(FYPStatus.UNAVAILABLE)) {
+                            fyp.setStatus(FYPStatus.AVAILABLE);
+                        }
+                    }
+                }
+
                 System.out.println("Deregistered project " + project.getTitle() + " from " + StudentName);
                 System.out.println("Press enter to continue...");
                 sc.nextLine();
                 break;
             case 2:
                 requestDeregister.setStatus(RequestStatus.REJECTED);
-                FYPMS1.setStudentStatus(requestDeregister.getRequesterID(), StudentStatus.ASSIGNED_PROJECT, 0);
+                SCSE.setStudentStatus(requestDeregister.getRequesterID(), StudentStatus.ASSIGNED_PROJECT, 0);
                 System.out.println("Rejected " + requestDeregister.getRequesterID() + " for " + project.getTitle());
                 System.out.println("Press enter to continue...");
                 sc.nextLine();

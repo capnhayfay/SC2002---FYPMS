@@ -1,1 +1,3 @@
 requestID	requesterID	requestStatus	fypID
+2000	KOH1	APPROVED	5
+2001	YCHERN	APPROVED	6

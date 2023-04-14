@@ -1,11 +1,11 @@
 package FYPMS.request;
 
-import FYPMS.FYPMS1;
+import FYPMS.SCSE;
 
 public class RequestRegister extends Request {
 
     public RequestRegister(int requestID, String requesterID, RequestStatus requestStatus,int fypID) {
-        super(requestID, requesterID, FYPMS1.getCoordinatorList().get(0).getLoginId(), requestStatus, RequestRelationship.STUDENTCoordinator, RequestType.REGISTER_PROJECT, fypID);
+        super(requestID, requesterID, SCSE.getCoordinatorList().get(0).getLoginId(), requestStatus, RequestRelationship.STUDENTCoordinator, RequestType.REGISTER_PROJECT, fypID);
     }
 
     public void printDetails() {

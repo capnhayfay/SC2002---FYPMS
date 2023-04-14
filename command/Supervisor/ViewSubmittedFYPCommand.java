@@ -1,22 +1,39 @@
+/**
+ * ViewSubmittedFYPCommand is a command class that retrieves all Final Year Projects assigned to a specific Supervisor and displays their details in a numbered list format.
+ * It implements the Command interface.
+*/
+
 package command.Supervisor;
 
 import java.util.ArrayList;
 
-import FYPMS.FYPMS1;
+import FYPMS.SCSE;
 import FYPMS.project.FYP;
 import FYPMS.project.FYPList;
 import command.Command;
 
 public class ViewSubmittedFYPCommand implements Command {
-    private String Supervisor;
+    // The name of the Supervisor whose Final Year Projects will be displayed
+    private final String Supervisor;
 
+    /**
+     * Constructs a ViewSubmittedFYPCommand object with the provided Supervisor
+     * name.
+     * 
+     * @param Supervisor - The name of the Supervisor whose Final Year Projects will
+     *                   be displayed.
+     */
     public ViewSubmittedFYPCommand(String Supervisor) {
         this.Supervisor = Supervisor;
     }
 
+    /**
+     * Executes the command to retrieve and display all Final Year Projects assigned
+     * to the Supervisor.
+     */
     public void execute() {
         int fypCount = 1;
-        FYPList projects = FYPMS1.getFypList();
+        FYPList projects = SCSE.getFypList();
         ArrayList<FYP> fyps = projects.getFYPs();
         System.out.println();
         System.out.println("List of all Final Year Projects");

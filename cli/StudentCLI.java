@@ -1,4 +1,4 @@
-package gui;
+package cli;
 
 import account.*;
 import account.student.StudentAccount;
@@ -11,7 +11,7 @@ import java.util.Scanner;
 
 /**
  * 
- * The StudentGUI class represents the graphical user interface shown to the
+ * The StudentCLI class represents the graphical user interface shown to the
  * student account.
  * It implements the Menu, Logout, and GetCommand interfaces. The class displays
  * a list of actions
@@ -21,17 +21,17 @@ import java.util.Scanner;
  * account details.
  */
 
-public class StudentGUI implements Menu, Logout, GetCommand {
+public class StudentCLI implements Menu, Logout, GetCommand {
     private StudentAccount curAcc;
     private String UserType;
 
     /**
-     * Constructs a StudentGUI object with the given student account and user type.
+     * Constructs a StudentCLI object with the given student account and user type.
      * 
      * @param curAcc   the student account of the user
      * @param UserType the user type of the student account
      */
-    public StudentGUI(StudentAccount curAcc, String UserType) {
+    public StudentCLI(StudentAccount curAcc, String UserType) {
         this.curAcc = curAcc;
         this.UserType = UserType;
     }

@@ -17,8 +17,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 
-import FYPMS.project.FYP;
-
 import static account.student.StudentStatus.StudentStatusToEnum;
 
 public class FileReader {
@@ -31,7 +29,7 @@ public class FileReader {
     public static void readSupervisorsFromFile(String fileName) {
         Path pathToFile = Paths.get(fileName);
 
-        ArrayList<SupervisorAccount> supervisorList = FYPMS1.getSupervisorList();
+        ArrayList<SupervisorAccount> supervisorList = SCSE.getSupervisorList();
 
         try (BufferedReader br = Files.newBufferedReader(pathToFile, StandardCharsets.UTF_8)) {
             String line = br.readLine();
@@ -66,7 +64,7 @@ public class FileReader {
     public static void readCoordinatorsFromFile(String fileName) {
         Path pathToFile = Paths.get(fileName);
 
-        ArrayList<FYPCoordinatorAccount> fypCoordinatorList = FYPMS1.getCoordinatorList();
+        ArrayList<FYPCoordinatorAccount> fypCoordinatorList = SCSE.getCoordinatorList();
 
         try (BufferedReader br = Files.newBufferedReader(pathToFile, StandardCharsets.UTF_8)) {
             String line = br.readLine();
@@ -102,7 +100,7 @@ public class FileReader {
     public static void readStudentsFromFile(String fileName) {
         Path pathToFile = Paths.get(fileName);
 
-        ArrayList<StudentAccount> studentList = FYPMS1.getStudentList();
+        ArrayList<StudentAccount> studentList = SCSE.getStudentList();
 
         try (BufferedReader br = Files.newBufferedReader(pathToFile, StandardCharsets.UTF_8)) {
             String line = br.readLine();
@@ -138,7 +136,7 @@ public class FileReader {
     public static void readFYPsFromFile(String fileName) {
 
         Path pathToFile = Paths.get(fileName);
-        FYPList fypList = FYPMS1.getFypList();
+        FYPList fypList = SCSE.getFypList();
         try (BufferedReader br = Files.newBufferedReader(pathToFile, StandardCharsets.UTF_8)) {
             String line = br.readLine();
             line = br.readLine();
@@ -182,12 +180,11 @@ public class FileReader {
      *                  requests.
      * @param fileName3 the name of the file containing the
      *                  RequestTransferSupervisor requests.
-     * @throws IOException if there is an error reading the files.
      */
 
     public static void readRequestsFromFile(String fileName, String fileName1, String fileName2, String fileName3) {
         Path pathToFile = Paths.get(fileName);
-        ArrayList<ArrayList<Object>> requests = FYPMS1.getRequestList();
+        ArrayList<ArrayList<Object>> requests = SCSE.getRequestList();
 
         ArrayList<Object> requestChangeTitleList = new ArrayList<Object>();
         try (BufferedReader br = Files.newBufferedReader(pathToFile, StandardCharsets.UTF_8)) {
@@ -284,7 +281,7 @@ public class FileReader {
      */
     public static ArrayList<String> getSupervisorFYPs(String supervisorName) {
         ArrayList<String> supervisorFYPs = new ArrayList<String>();
-        for (FYP fyp : FYPMS1.getFypList().getFYPs()) {
+        for (FYP fyp : SCSE.getFypList().getFYPs()) {
             if (fyp.getSupervisorName().equals(supervisorName) && fyp.getStatus() == FYPStatus.ALLOCATED) {
                 supervisorFYPs.add(fyp.getTitle());
             }

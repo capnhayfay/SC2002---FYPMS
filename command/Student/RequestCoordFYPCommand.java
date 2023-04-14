@@ -5,23 +5,21 @@ import java.util.Scanner;
 import java.util.ArrayList;
 import FYPMS.request.*;
 import account.student.*;
-import FYPMS.FYPMS1;
+import FYPMS.SCSE;
 import FYPMS.project.FYP;
 import FYPMS.project.FYPList;
 import FYPMS.project.FYPStatus;
-import account.student.StudentStatus;
 import account.supervisor.SupervisorAccount;
 import command.Command;
 
 public class RequestCoordFYPCommand implements Command {
-    private StudentAccount studentAccount;
-    private SupervisorAccount supervisor;
+    private final StudentAccount studentAccount;
 
     public RequestCoordFYPCommand(StudentAccount currentAcc) {
         this.studentAccount = currentAcc;
     }
 
-    ArrayList<ArrayList<Object>> requests = FYPMS1.getRequestList();
+    final ArrayList<ArrayList<Object>> requests = SCSE.getRequestList();
 
     public void execute() {
         if (studentAccount.getStatus() == StudentStatus.ASSIGNED_PROJECT) {
@@ -39,7 +37,7 @@ public class RequestCoordFYPCommand implements Command {
         System.out.println("Input project ID: ");
         int fypID = sc.nextInt();
         studentAccount.setStatus(StudentStatus.REQUESTED_PROJECT);
-        FYPList projects = FYPMS1.getFypList();
+        FYPList projects = SCSE.getFypList();
         ArrayList<FYP> fyps = projects.getFYPs();
         for (FYP fyp : fyps) {
             if (fyp.getProjectId() == fypID) {
@@ -48,7 +46,7 @@ public class RequestCoordFYPCommand implements Command {
                     return;
                 }
                 fyp.setStatus(FYPStatus.RESERVED);
-                supervisor = FYPMS1.getSupervisorAccount(fyp.getSupervisorName());
+                SupervisorAccount supervisor = SCSE.getSupervisorAccount(fyp.getSupervisorName());
                 break;
             }
         }

@@ -1,12 +1,12 @@
 package command;
 
-import FYPMS.FYPMS1;
+import FYPMS.SCSE;
 import FYPMS.request.Request;
 import account.Account;
 import java.util.ArrayList;
 
 public class ViewOutcomingRequestRecordsCommand implements Command {
-    private Account account;
+    private final Account account;
 
     public ViewOutcomingRequestRecordsCommand(Account account) {
         this.account = account;
@@ -17,7 +17,7 @@ public class ViewOutcomingRequestRecordsCommand implements Command {
         System.out.println();
         System.out.println("Request History");
         System.out.println();
-        ArrayList<ArrayList<Object>> requests = FYPMS1.getRequestList();
+        ArrayList<ArrayList<Object>> requests = SCSE.getRequestList();
         for (ArrayList<Object> request : requests) {
             for (Object indivRequest : request) {
                 Request indivCastedRequest = (Request) indivRequest;

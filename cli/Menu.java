@@ -1,4 +1,4 @@
-package gui;
+package cli;
 
 /**
  * Interface menu for the respective GUIs

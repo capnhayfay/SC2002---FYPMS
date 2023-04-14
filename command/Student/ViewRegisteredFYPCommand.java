@@ -3,7 +3,7 @@ package command.Student;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import FYPMS.FYPMS1;
+import FYPMS.SCSE;
 import FYPMS.project.FYP;
 import FYPMS.project.FYPList;
 import account.student.StudentAccount;
@@ -11,7 +11,7 @@ import account.student.StudentStatus;
 import command.Command;
 
 public class ViewRegisteredFYPCommand implements Command {
-    private StudentAccount studentAccount;
+    private final StudentAccount studentAccount;
 
     public ViewRegisteredFYPCommand(StudentAccount studentAccount) {
         this.studentAccount = studentAccount;
@@ -19,7 +19,7 @@ public class ViewRegisteredFYPCommand implements Command {
 
     public void execute() {
         Scanner sc = new Scanner(System.in);
-        FYPList projects = FYPMS1.getFypList();
+        FYPList projects = SCSE.getFypList();
         ArrayList<FYP> fyps = projects.getFYPs();
         System.out.println();
         if (studentAccount.getStatus() == StudentStatus.NO_PROJECT

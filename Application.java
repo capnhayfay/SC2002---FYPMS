@@ -1,15 +1,14 @@
-
-/**
-    * The Application class represents the main entry point of the FYPMS application.
-    * It initializes the system, loads data from CSV files, and starts the user interface by prompting the user to select their userType.
-    * Then, it prompts the user to log in.
-    * After the user logs in, the appropriate GUI (StudentGUI, SupervisorGUI or FYPCoordinatorGUI) is displayed and the user can interact with the system.
-    * Once the user is done, they can log out and the application will save any changes made to the data files.
-    * This class contains a main method that initializes a new instance of the Application class and invokes the run method.
-    * The run method initializes the FYPMS system, loads data from CSV files, prompts the user to log in and displays the appropriate GUI depending on the user type (student, supervisor or FYP coordinator). 
-    @see StudentGUI
-    @see SupervisorGUI
-    @see FYPCoordinatorGUI
+/*
+     The Application class represents the main entry point of the FYPMS application.
+     It initializes the system, loads data from CSV files, and starts the user interface by prompting the user to select their userType.
+     Then, it prompts the user to log in.
+     After the user logs in, the appropriate GUI (StudentCLI, SupervisorCLI or FYPCoordinatorCLI) is displayed and the user can interact with the system.
+     Once the user is done, they can log out and the application will save any changes made to the data files.
+     This class contains a main method that initializes a new instance of the Application class and invokes the run method.
+     The run method initializes the FYPMS system, loads data from CSV files, prompts the user to log in and displays the appropriate GUI depending on the user type (student, supervisor or FYP coordinator).
+    @see StudentCLI
+    @see SupervisorCLI
+    @see FYPCoordinatorCLI
     @see LoginUserMenu
     @see FileReader
     @see StudentAccount
@@ -20,15 +19,12 @@
 import account.supervisor.SupervisorAccount;
 import account.supervisor.FYPCoordinatorAccount;
 import account.student.StudentAccount;
-import gui.*;
+import cli.*;
 import FYPMS.*;
 
 import java.io.IOException;
 import java.util.InputMismatchException;
 import java.util.Scanner;
-
-import FYPMS.FileReader;
-import FYPMS.FileUpdater;
 
 public class Application {
 	/**
@@ -54,8 +50,6 @@ public class Application {
 	 */
 	public void run() throws IOException {
 
-		FYPMS1 fypms = new FYPMS1();
-
 		// load in CSV
 		FileReader.readFYPsFromFile("./database/Modified/rollover project.txt");
 		FileReader.readSupervisorsFromFile("./database/Modified/faculty_list.txt");
@@ -67,6 +61,17 @@ public class Application {
 				"./database/Modified/3requestTransferSupervisor.txt");
 		// end of load in CSV
 
+		// // load in updatedCSV
+		// FileReader.readFYPsFromFile("./database/test/rollover project.txt");
+		// FileReader.readSupervisorsFromFile("./database/test/faculty_list.txt");
+		// FileReader.readCoordinatorsFromFile("./database/test/FYP coordinator.txt");
+		// FileReader.readStudentsFromFile("./database/test/student list.txt");
+		// FileReader.readRequestsFromFile("./database/test/0requestChangeTitle.txt",
+		// "./database/test/1requestDeregister.txt",
+		// "./database/test/2requestRegister.txt",
+		// "./database/test/3requestTransferSupervisor.txt");
+		// // end of load in updatedCSV
+
 		Scanner scanner = new Scanner(System.in);
 		String loggedInUserType = "";
 		StudentAccount studentAccount = null;
@@ -77,7 +82,7 @@ public class Application {
 		new GreetUserMenu().display();
 		System.out.println();
 		while (true) {
-			if (loggedInUserType == "") {
+			if (loggedInUserType.equals("")) {
 				System.out.println("Which type of user are you? ");
 				System.out.println("1. Student");
 				System.out.println("2. Supervisor");
@@ -138,17 +143,17 @@ public class Application {
 				if (logout == 1) {
 					break;
 				}
-			} else if (loggedInUserType == "StudentAccount") {
-				StudentGUI studentGUI = new StudentGUI(studentAccount, loggedInUserType);
-				studentGUI.display();
-				if (studentGUI.execute() == 0) {
+			} else if (loggedInUserType.equals("StudentAccount")) {
+				StudentCLI studentCLI = new StudentCLI(studentAccount, loggedInUserType);
+				studentCLI.display();
+				if (studentCLI.execute() == 0) {
 					loggedInUserType = "";
 					break;
 				}
-				loggedInUserType = studentGUI.getUserType();
-			} else if (loggedInUserType == "Supervisor" &&
-					!supervisorAccount.getName().equalsIgnoreCase(FYPMS1.getCoordinatorList().get(0).getName())) {
-				SupervisorGUI supervisorAccountGUI = new SupervisorGUI(supervisorAccount,
+				loggedInUserType = studentCLI.getUserType();
+			} else if (loggedInUserType.equals("Supervisor") &&
+					!supervisorAccount.getName().equalsIgnoreCase(SCSE.getCoordinatorList().get(0).getName())) {
+				SupervisorCLI supervisorAccountGUI = new SupervisorCLI(supervisorAccount,
 						loggedInUserType);
 				supervisorAccountGUI.display();
 				if (supervisorAccountGUI.execute() == 0) {
@@ -156,8 +161,8 @@ public class Application {
 					break;
 				}
 				loggedInUserType = supervisorAccountGUI.getUserType();
-			} else if (loggedInUserType == "FYP Coordinator") {
-				FYPCoordinatorGUI fypCoordinatorGUI = new FYPCoordinatorGUI(fypCoordinatorAccount,
+			} else if (loggedInUserType.equals("FYP Coordinator")) {
+				FYPCoordinatorCLI fypCoordinatorGUI = new FYPCoordinatorCLI(fypCoordinatorAccount,
 						loggedInUserType);
 				fypCoordinatorGUI.display();
 				if (fypCoordinatorGUI.execute() == 0) {

@@ -9,10 +9,7 @@ public enum FYPStatus {
     UNAVAILABLE("UNAVAILABLE"),
     ALLOCATED("ALLOCATED");
 
-    private final String toString;
-
     FYPStatus(String toString) {
-        this.toString = toString;
     }
 
     public static FYPStatus StringtoStatus(String status) {

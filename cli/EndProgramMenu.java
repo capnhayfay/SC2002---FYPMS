@@ -1,4 +1,4 @@
-package gui;
+package cli;
 
 /**
  * The EndProgramMenu class implements the Menu interface and provides a way to

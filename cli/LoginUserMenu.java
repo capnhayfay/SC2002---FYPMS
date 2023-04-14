@@ -1,8 +1,8 @@
-package gui;
+package cli;
 
 import java.util.Scanner;
 
-import FYPMS.FYPMS1;
+import FYPMS.SCSE;
 import account.Account;
 import account.student.StudentAccount;
 import account.supervisor.FYPCoordinatorAccount;
@@ -17,7 +17,7 @@ public class LoginUserMenu implements Menu, Login {
     private StudentAccount studentAccount;
     private FYPCoordinatorAccount fypCoordinatorAccount;
     private SupervisorAccount supervisorAccount;
-    UserType userType;
+    final UserType userType;
 
     /**
      * Creates a new instance of LoginUserMenu for a StudentAccount.
@@ -103,7 +103,7 @@ public class LoginUserMenu implements Menu, Login {
      * @return the StudentAccount if the login is successful, null if not successful
      */
     public StudentAccount loginStudent(String username, String password) {
-        return FYPMS1.loginStudent(username, password);
+        return SCSE.loginStudent(username, password);
     }
 
     /**
@@ -114,7 +114,7 @@ public class LoginUserMenu implements Menu, Login {
      * @return the SupervisorAccount if login is successful, null otherwise
      */
     public SupervisorAccount loginSupervisorAccount(String username, String password) {
-        return FYPMS1.loginSupervisorAccount(username, password);
+        return SCSE.loginSupervisorAccount(username, password);
     }
 
     /**
@@ -125,7 +125,7 @@ public class LoginUserMenu implements Menu, Login {
      * @return the FYPCoordinatorAccount if login is successful, null otherwise
      */
     public FYPCoordinatorAccount loginFypCoordinatorAccount(String username, String password) {
-        return FYPMS1.loginFypCoordinatorAccount(username, password);
+        return SCSE.loginFypCoordinatorAccount(username, password);
     }
 
     /**

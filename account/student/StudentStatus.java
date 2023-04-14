@@ -27,18 +27,15 @@ public enum StudentStatus {
     DEREGISTERED_PROJECT("DEREGISTERED PROJECT");
 
     /**
-     * The string representation of the enumeration value.
-     */
-    private final String toString;
-
-    /**
      * Constructs a new {@code StudentStatus} enumeration with the specified
      * string representation.
      *
      * @param toString the string representation of the enumeration value
      */
     StudentStatus(String toString) {
-        this.toString = toString;
+        /**
+         * The string representation of the enumeration value.
+         */
     }
 
     /**

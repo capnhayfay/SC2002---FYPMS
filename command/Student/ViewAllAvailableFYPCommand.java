@@ -2,14 +2,14 @@ package command.Student;
 
 import java.util.Scanner;
 
-import FYPMS.FYPMS1;
+import FYPMS.SCSE;
 import FYPMS.project.FYPList;
 import account.student.StudentAccount;
 import account.student.StudentStatus;
 import command.Command;
 
 public class ViewAllAvailableFYPCommand implements Command {
-    private StudentAccount studentAccount;
+    private final StudentAccount studentAccount;
 
     public ViewAllAvailableFYPCommand(StudentAccount currentAcc) {
         this.studentAccount = currentAcc;
@@ -35,7 +35,7 @@ public class ViewAllAvailableFYPCommand implements Command {
             sc.nextLine();
             return;
         }
-        FYPList fypList = FYPMS1.getFypList();
+        FYPList fypList = SCSE.getFypList();
         fypList.listAvailableFYPsForStudents();
 
         System.out.println("Press enter to continue...");

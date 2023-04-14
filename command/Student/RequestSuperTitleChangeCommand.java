@@ -3,7 +3,7 @@ package command.Student;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import FYPMS.FYPMS1;
+import FYPMS.SCSE;
 import FYPMS.project.FYP;
 import FYPMS.project.FYPList;
 import FYPMS.request.*;
@@ -12,7 +12,7 @@ import account.student.StudentStatus;
 import command.Command;
 
 public class RequestSuperTitleChangeCommand implements Command {
-    private StudentAccount student;
+    private final StudentAccount student;
 
     public RequestSuperTitleChangeCommand(StudentAccount currentAcc) {
         this.student = currentAcc;
@@ -29,8 +29,8 @@ public class RequestSuperTitleChangeCommand implements Command {
             System.out.println("Error: Your registration is still pending.");
             return;
         }
-        ArrayList<ArrayList<Object>> requests = FYPMS1.getRequestList();
-        FYPList fyplist = FYPMS1.getFypList();
+        ArrayList<ArrayList<Object>> requests = SCSE.getRequestList();
+        FYPList fyplist = SCSE.getFypList();
         ArrayList<FYP> fyps = fyplist.getFYPs();
 
         for (FYP fyp : fyps) {

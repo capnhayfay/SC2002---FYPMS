@@ -1,21 +1,41 @@
+/**
+ * Represents a command to view pending student requests. Implements the Command interface.
+ * Allows a supervisor to view all pending requests or view pending requests by student ID.
+*/
 package command.Supervisor;
 
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import FYPMS.FYPMS1;
+import FYPMS.SCSE;
 import command.Command;
-
 import FYPMS.request.*;
 
 public class ViewPendingStudentRequestsCommand implements Command {
-    private String Supervisor;
+    /**
+     * The supervisor's ID.
+     */
+    private final String Supervisor;
+
+    /**
+     * The number of pending requests.
+     */
     private int requestCount = 0;
 
+    /**
+     * Constructor for ViewPendingStudentRequestsCommand class.
+     * 
+     * @param Supervisor The supervisor's ID.
+     */
     public ViewPendingStudentRequestsCommand(String Supervisor) {
         this.Supervisor = Supervisor;
     }
 
+    /**
+     * Executes the ViewPendingStudentRequestsCommand.
+     * Allows a supervisor to view all pending requests or view pending requests by
+     * student ID.
+     */
     public void execute() {
         Scanner scanner = new Scanner(System.in);
 
@@ -34,7 +54,7 @@ public class ViewPendingStudentRequestsCommand implements Command {
             choice = scanner.nextInt();
         } while (choice != 1 && choice != 2);
 
-        ArrayList<ArrayList<Object>> requests = FYPMS1.getRequestList();
+        ArrayList<ArrayList<Object>> requests = SCSE.getRequestList();
 
         switch (choice) {
             case 1:
@@ -87,6 +107,11 @@ public class ViewPendingStudentRequestsCommand implements Command {
 
     }
 
+    /**
+     * Returns the number of pending requests.
+     * 
+     * @return int The number of pending requests.
+     */
     public int getRequestNumber() {
         return requestCount;
     }

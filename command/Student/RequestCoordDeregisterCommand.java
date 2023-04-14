@@ -7,14 +7,14 @@ package command.Student;
 
 import java.util.ArrayList;
 
-import FYPMS.FYPMS1;
+import FYPMS.SCSE;
 import FYPMS.request.*;
 import account.student.StudentAccount;
 import account.student.StudentStatus;
 import command.Command;
 
 public class RequestCoordDeregisterCommand implements Command {
-    private StudentAccount studentAccount;
+    private final StudentAccount studentAccount;
 
     /**
      * The studentAccount object to hold student account information.
@@ -26,7 +26,7 @@ public class RequestCoordDeregisterCommand implements Command {
     /**
      * The list of requests for the system.
      */
-    ArrayList<ArrayList<Object>> requests = FYPMS1.getRequestList();
+    final ArrayList<ArrayList<Object>> requests = SCSE.getRequestList();
 
     /**
      * Executes the request for deregistration.

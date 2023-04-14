@@ -1,3 +1,8 @@
+/**
+ * This command allows the supervisor to view the status of all final year projects that they are supervising.
+ * It prints out a list of all FYPs with their details if the FYP's supervisor name matches the supervisor executing the command.
+*/
+
 package command.Supervisor;
 
 import java.util.ArrayList;
@@ -7,14 +12,26 @@ import FYPMS.project.FYPList;
 import command.Command;
 
 public class ViewSupervisorProjectStatusCommand implements Command {
-    private String Supervisor;
-    private FYPList projects;
+    private final String Supervisor;
+    private final FYPList projects;
 
+    /**
+     * Constructs a new ViewSupervisorProjectStatusCommand object with the given
+     * supervisor name and FYPList.
+     * 
+     * @param Supervisor The supervisor's name.
+     * @param projects   The FYPList to be used.
+     */
     public ViewSupervisorProjectStatusCommand(String Supervisor, FYPList projects) {
         this.Supervisor = Supervisor;
         this.projects = projects;
     }
 
+    /**
+     * Executes the command to print out a list of all FYPs with their details if
+     * the FYP's supervisor name matches
+     * the supervisor executing the command.
+     */
     public void execute() {
         int fypCount = 1;
         ArrayList<FYP> fyps = projects.getFYPs();

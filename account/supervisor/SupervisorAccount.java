@@ -14,7 +14,7 @@ import account.UserType;
  * the ability to add and retrieve assigned projects.
  */
 public class SupervisorAccount extends Account {
-    private ArrayList<String> proj;
+    private final ArrayList<String> proj;
 
     /**
      * Creates a new {@code SupervisorAccount} with the given parameters.

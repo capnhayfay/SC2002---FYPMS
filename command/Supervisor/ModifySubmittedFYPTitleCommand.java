@@ -14,8 +14,8 @@ import FYPMS.request.RequestStatus;
 
 public class ModifySubmittedFYPTitleCommand implements Command {
 
-    private FYP project;
-    private RequestChangeTitle titleRequest;
+    private final FYP project;
+    private final RequestChangeTitle titleRequest;
 
     /**
      * Constructor for the ModifySubmittedFYPTitleCommand class.

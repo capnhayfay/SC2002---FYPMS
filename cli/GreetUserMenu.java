@@ -1,4 +1,4 @@
-package gui;
+package cli;
 
 /**
  * Displayed at start of program

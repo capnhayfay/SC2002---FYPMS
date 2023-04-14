@@ -24,7 +24,7 @@ public class FileUpdater {
      * @param fileName the name of the CSV file to write to
      */
     public static void writeFYPsToFile(String fileName) {
-        FYPList fypList = FYPMS1.getFypList();
+        FYPList fypList = SCSE.getFypList();
         Path pathToFile = Paths.get(fileName);
 
         try (BufferedWriter bw = Files.newBufferedWriter(pathToFile, StandardCharsets.UTF_8)) {
@@ -51,7 +51,7 @@ public class FileUpdater {
      * @param fileName the name of the CSV file to write to
      */
     public static void writeRequestsToFile(String fileName, String filename1, String filename2, String filename3) {
-        ArrayList<ArrayList<Object>> requestList = FYPMS1.getRequestList();
+        ArrayList<ArrayList<Object>> requestList = SCSE.getRequestList();
         Path pathToFile = Paths.get(fileName);
 
         try (BufferedWriter bw = Files.newBufferedWriter(pathToFile, StandardCharsets.UTF_8)) {
@@ -125,7 +125,7 @@ public class FileUpdater {
      * @param fileName the name of the CSV file to write to
      */
     public static void writeSupervisorToFile(String fileName) {
-        ArrayList<SupervisorAccount> supervisorList = FYPMS1.getSupervisorList();
+        ArrayList<SupervisorAccount> supervisorList = SCSE.getSupervisorList();
         Path pathToFile = Paths.get(fileName);
 
         try (BufferedWriter bw = Files.newBufferedWriter(pathToFile, StandardCharsets.UTF_8)) {
@@ -145,7 +145,7 @@ public class FileUpdater {
      * @param fileName the name of the CSV file to write to
      */
     public static void writeCoordinatorToFile(String fileName) {
-        ArrayList<FYPCoordinatorAccount> coordinatorList = FYPMS1.getCoordinatorList();
+        ArrayList<FYPCoordinatorAccount> coordinatorList = SCSE.getCoordinatorList();
         Path pathToFile = Paths.get(fileName);
 
         try (BufferedWriter bw = Files.newBufferedWriter(pathToFile, StandardCharsets.UTF_8)) {
@@ -168,7 +168,7 @@ public class FileUpdater {
     public static void writeStudentToFile(String fileName) {
         Path pathToFile = Paths.get(fileName);
 
-        ArrayList<StudentAccount> studentList = FYPMS1.getStudentList();
+        ArrayList<StudentAccount> studentList = SCSE.getStudentList();
 
         try (BufferedWriter bw = Files.newBufferedWriter(pathToFile, StandardCharsets.UTF_8)) {
             bw.write("Name\tEmail\tPassword\tProjectID\tStatus");

@@ -1,4 +1,4 @@
-package gui;
+package cli;
 
 /**
  * Interface responsible for logging out of Account

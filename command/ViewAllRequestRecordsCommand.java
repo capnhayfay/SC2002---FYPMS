@@ -1,6 +1,6 @@
 package command;
 
-import FYPMS.FYPMS1;
+import FYPMS.SCSE;
 import FYPMS.request.Request;
 import account.Account;
 import java.util.ArrayList;
@@ -10,7 +10,7 @@ import java.util.ArrayList;
  * This command class is used to view all request records of a user.
  */
 public class ViewAllRequestRecordsCommand implements Command {
-    private Account account;
+    private final Account account;
 
     /**
      * Constructor for the ViewAllRequestRecordsCommand class.
@@ -29,7 +29,7 @@ public class ViewAllRequestRecordsCommand implements Command {
         System.out.println();
         System.out.println("Request History");
         System.out.println();
-        ArrayList<ArrayList<Object>> requests = FYPMS1.getRequestList();
+        ArrayList<ArrayList<Object>> requests = SCSE.getRequestList();
         for (ArrayList<Object> request : requests) {
             for (Object indivRequest : request) {
                 Request indivCastedRequest = (Request) indivRequest;

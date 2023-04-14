@@ -1,5 +1,6 @@
-package gui;
+package cli;
 
+import FYPMS.SCSE;
 import account.*;
 import account.supervisor.FYPCoordinatorAccount;
 import command.FYPCoord.AllocateProjectCommand;
@@ -22,7 +23,6 @@ import command.ViewOutcomingRequestRecordsCommand;
 
 import java.util.Scanner;
 
-import FYPMS.FYPMS1;
 import FYPMS.project.FYP;
 import FYPMS.project.FYPList;
 import FYPMS.request.RequestChangeTitle;
@@ -33,20 +33,20 @@ import FYPMS.request.RequestTransferSupervisor;
 /**
  * GUI which is shown to FYP Coordinator
  */
-public class FYPCoordinatorGUI implements Menu, Logout, GetCommand {
+public class FYPCoordinatorCLI implements Menu, Logout, GetCommand {
     /** The FYPCoordinator account of the user */
     private FYPCoordinatorAccount FYPCoordinator;
     /** The user type of the user */
     private String UserType;
 
     /**
-     * Constructs a FYPCoordinatorGUI with the given FYPCoordinator account and user
+     * Constructs a FYPCoordinatorCLI with the given FYPCoordinator account and user
      * type
      * 
      * @param FYPCoordinator the FYPCoordinator account of the user
      * @param UserType       the user type of the user
      */
-    public FYPCoordinatorGUI(FYPCoordinatorAccount FYPCoordinator, String UserType) {
+    public FYPCoordinatorCLI(FYPCoordinatorAccount FYPCoordinator, String UserType) {
         this.FYPCoordinator = FYPCoordinator;
         this.UserType = UserType;
     }
@@ -82,8 +82,7 @@ public class FYPCoordinatorGUI implements Menu, Logout, GetCommand {
 
     /**
      * Gets the user input and executes the required command
-     * 
-     * @return
+     *
      */
     public int execute() {
         Scanner scanner = new Scanner(System.in);
@@ -172,7 +171,7 @@ public class FYPCoordinatorGUI implements Menu, Logout, GetCommand {
                                 System.out.println("=========================================");
                                 if (reqID / 1000 == 0) {
                                     // requestitlechange
-                                    RequestChangeTitle titleRequest = FYPMS1.getRequestChangeTitle(reqID);
+                                    RequestChangeTitle titleRequest = SCSE.getRequestChangeTitle(reqID);
                                     if (!titleRequest.getRequesteeID().equals(FYPCoordinator.getLoginId())) {
                                         System.out.println("Invalid Input. Returning to Main Page...");
                                         break;
@@ -181,17 +180,17 @@ public class FYPCoordinatorGUI implements Menu, Logout, GetCommand {
                                     selectedProj = FYPList.getFYPById(projID);
                                     new ModifySubmittedFYPTitleCommand(selectedProj, titleRequest).execute();
                                 } else if (reqID / 1000 == 1) {
-                                    RequestDeregister deregistrationRequest = FYPMS1.getRequestDeregister(reqID);
+                                    RequestDeregister deregistrationRequest = SCSE.getRequestDeregister(reqID);
                                     projID = deregistrationRequest.getFypID();
                                     selectedProj = FYPList.getFYPById(projID);
                                     new DeregisterStudentCommand(selectedProj, deregistrationRequest).execute();
                                 } else if (reqID / 1000 == 2) {
-                                    RequestRegister registrationRequest = FYPMS1.getRequestRegister(reqID);
+                                    RequestRegister registrationRequest = SCSE.getRequestRegister(reqID);
                                     projID = registrationRequest.getFypID();
                                     selectedProj = FYPList.getFYPById(projID);
                                     new AllocateProjectCommand(selectedProj, registrationRequest).execute();
                                 } else if (reqID / 1000 == 3) {
-                                    RequestTransferSupervisor transferSupervisorRequest = FYPMS1
+                                    RequestTransferSupervisor transferSupervisorRequest = SCSE
                                             .getRequestTransferSupervisor(reqID);
                                     new ChangeSupervisorCommand(transferSupervisorRequest)
                                             .execute();
@@ -267,7 +266,6 @@ public class FYPCoordinatorGUI implements Menu, Logout, GetCommand {
                     switch (FilterChoice) {
                         case 1:
                             new ViewAllFYPCommand().execute();
-                            ;
                             break;
                         case 2:
                             new GenerateFilteredProjectDetailsCommand(2).execute(); // filter by status

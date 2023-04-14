@@ -1,14 +1,14 @@
 package FYPMS.request;
 
-import FYPMS.FYPMS1;
+import FYPMS.SCSE;
 
 public class RequestTransferSupervisor extends Request {
 
-    private String newSupervisorID;
+    private final String newSupervisorID;
 
     public RequestTransferSupervisor(int requestID, String requesterID, RequestStatus requestStatus, int fypID,
             String newSupervisorID) {
-        super(requestID, requesterID, FYPMS1.getCoordinatorList().get(0).getLoginId(), requestStatus,
+        super(requestID, requesterID, SCSE.getCoordinatorList().get(0).getLoginId(), requestStatus,
                 RequestRelationship.SUPERVISORCoordinator, RequestType.TRANSFER_SUPERVISOR, fypID);
         this.newSupervisorID = newSupervisorID;
     }

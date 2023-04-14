@@ -9,7 +9,7 @@ import FYPMS.project.*;
 
 import java.util.Scanner;
 
-import FYPMS.FYPMS1;
+import FYPMS.SCSE;
 import FYPMS.request.Request;
 import FYPMS.request.RequestRegister;
 import FYPMS.request.RequestStatus;
@@ -20,14 +20,11 @@ import command.Command;
 /**
  * Constructs a new AllocateProjectCommand object with the specified FYP project
  * and RequestRegister object.
- * 
- * @param project         the FYP project to be allocated
- * @param registerRequest the request for the project registration
+ *
  */
 public class AllocateProjectCommand implements Command {
-    private FYP project;
-    private RequestRegister registerRequest;
-    private SupervisorAccount supervisor;
+    private final FYP project;
+    private final RequestRegister registerRequest;
 
     public AllocateProjectCommand(FYP project, RequestRegister registerRequest) {
         this.project = project;
@@ -55,34 +52,35 @@ public class AllocateProjectCommand implements Command {
         System.out.println("=========================================");
         switch (requestAction) {
             case 1:
-                String StudentName = FYPMS1.getStudentName(registerRequest.getRequesterID());
-                String StudentEmail = FYPMS1.getStudentEmail(registerRequest.getRequesterID());
+                String StudentName = SCSE.getStudentName(registerRequest.getRequesterID());
+                String StudentEmail = SCSE.getStudentEmail(registerRequest.getRequesterID());
                 project.setStatus(FYPStatus.ALLOCATED);
                 project.setStudentID(registerRequest.getRequesterID());
                 project.setStudentEmail(StudentEmail);
                 project.setStudentName(StudentName);
                 registerRequest.setStatus(RequestStatus.APPROVED);
-                FYPMS1.setStudentStatus(registerRequest.getRequesterID(), StudentStatus.ASSIGNED_PROJECT,
+                SCSE.setStudentStatus(registerRequest.getRequesterID(), StudentStatus.ASSIGNED_PROJECT,
                         registerRequest.getFypID());
-                supervisor = FYPMS1.getSupervisorAccount(project.getSupervisorName());
+                SupervisorAccount supervisor = SCSE.getSupervisorAccount(project.getSupervisorName());
                 if (supervisor.getProjList().size() < 2) {
                     supervisor.addProj(project.getTitle());
                     if (supervisor.getProjList().size() == 2) {
-                        for (FYP fyp : FYPMS1.getSuperFypList(supervisor.getName())) {
+                        for (FYP fyp : SCSE.getSuperFypList(supervisor.getName())) {
                             if (fyp.getStatus().equals(FYPStatus.AVAILABLE)
                                     || fyp.getStatus().equals(FYPStatus.RESERVED)) {
                                 fyp.setStatus(FYPStatus.UNAVAILABLE);
-                                for (Object indivRequest : FYPMS1.getRequestList().get(2)) {
+                                for (Object indivRequest : SCSE.getRequestList().get(2)) {
                                     Request indivCastedRequest = (Request) indivRequest;
                                     if (indivCastedRequest.getFypID() == fyp.getProjectId()) {
                                         indivCastedRequest.setStatus(RequestStatus.REJECTED);
                                         String setStudentStatus = indivCastedRequest.getRequesterID();
-                                        FYPMS1.setStudentStatus(setStudentStatus, StudentStatus.NO_PROJECT,
+                                        SCSE.setStudentStatus(setStudentStatus, StudentStatus.NO_PROJECT,
                                                 indivCastedRequest.getFypID());
                                     }
                                 }
                             }
                         }
+                        System.out.println("Error: " + supervisor.getName() + " has reached the project limit.");
                         System.out.println(
                                 "Rejecting all pending registration requests for " + supervisor.getName()
                                         + "'s projects.");
@@ -92,7 +90,6 @@ public class AllocateProjectCommand implements Command {
 
                 } else {
                     System.out.println("Error: " + supervisor.getName() + " has reached the project limit.");
-
                     return;
                 }
                 System.out.println("Allocated project " + project.getTitle() + " to " + StudentName);
@@ -101,7 +98,7 @@ public class AllocateProjectCommand implements Command {
                 break;
             case 2:
                 registerRequest.setStatus(RequestStatus.REJECTED);
-                FYPMS1.setStudentStatus(registerRequest.getRequesterID(), StudentStatus.NO_PROJECT, 0);
+                SCSE.setStudentStatus(registerRequest.getRequesterID(), StudentStatus.NO_PROJECT, 0);
                 System.out.println("Rejected " + registerRequest.getRequesterID() + " for " + project.getTitle());
                 System.out.println("Press enter to continue...");
                 sc.nextLine();

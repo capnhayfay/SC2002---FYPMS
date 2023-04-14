@@ -11,16 +11,12 @@ public class Request {
     private final RequestRelationship requestRelationship; // enum
     private final RequestType requestType;
     private final int requestID;
-    private int fypID;
+    private final int fypID;
 
     /**
-     * Creates a request object for FYPMS1 requests
+     * Creates a request object for SCSE requests
      *
-     * @param requesterName    Name of requester
      * @param requestType      Request Type
-     * @param statusChangeTime Time of Request
-     * @param requestee
-     * @param requestStatus
      */
     public Request(int requestID, String requesterID, String requesteeID, RequestStatus requestStatus,
             RequestRelationship requestRelationship, RequestType requestType, int fypID) {
@@ -46,17 +42,16 @@ public class Request {
         System.out.println();
     }
 
-    /**
-     * Converts the request class in string form to RequestType enum
-     * 
-     * @param classLevel Class of request in string form
+    /*
+      Converts the request class in string form to RequestType enum
+
+      @param classLevel Class of request in string form
      * @return RequestType enum
      */
 
     /**
      * Helper function to convert RequestType enum to string, for CSV storage
      * 
-     * @param requestType RequestType enum
      * @return Class of request in string form
      */
 

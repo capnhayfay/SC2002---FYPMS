@@ -20,26 +20,25 @@ public class Application {
 		new FYPMS1();
 
 		// load in CSV
-		// FileReader.readFYPsFromFile("./database/Modified/rollover project.txt");
-		// FileReader.readSupervisorsFromFile("./database/Modified/faculty_list.txt");
-		// FileReader.readCoordinatorsFromFile("./database/Modified/FYP
-		// coordinator.txt");
-		// FileReader.readStudentsFromFile("./database/Modified/student list.txt");
-		// FileReader.readRequestsFromFile("./database/Modified/0requestChangeTitle.txt",
-		// "./database/Modified/1requestDeregister.txt",
-		// "./database/Modified/2requestRegister.txt",
-		// "./database/Modified/3requestTransferSupervisor.txt");
+		FileReader.readFYPsFromFile("./database/Modified/rollover project.txt");
+		FileReader.readSupervisorsFromFile("./database/Modified/faculty_list.txt");
+		FileReader.readCoordinatorsFromFile("./database/Modified/FYP coordinator.txt");
+		FileReader.readStudentsFromFile("./database/Modified/student list.txt");
+		FileReader.readRequestsFromFile("./database/Modified/0requestChangeTitle.txt",
+				"./database/Modified/1requestDeregister.txt",
+				"./database/Modified/2requestRegister.txt",
+				"./database/Modified/3requestTransferSupervisor.txt");
 		// end of load in CSV
 
 		// // load in CSV
-		FileReader.readSupervisorsFromFile("./database/test/faculty_list.txt");
-		FileReader.readCoordinatorsFromFile("./database/test/FYP coordinator.txt");
-		FileReader.readStudentsFromFile("./database/test/student list.txt");
-		FileReader.readFYPsFromFile("./database/test/rollover project.txt");
-		FileReader.readRequestsFromFile("./database/test/0requestChangeTitle.txt",
-				"./database/test/1requestDeregister.txt",
-				"./database/test/2requestRegister.txt",
-				"./database/test/3requestTransferSupervisor.txt");
+		// FileReader.readSupervisorsFromFile("./database/test/faculty_list.txt");
+		// FileReader.readCoordinatorsFromFile("./database/test/FYP coordinator.txt");
+		// FileReader.readStudentsFromFile("./database/test/student list.txt");
+		// FileReader.readFYPsFromFile("./database/test/rollover project.txt");
+		// FileReader.readRequestsFromFile("./database/test/0requestChangeTitle.txt",
+		// "./database/test/1requestDeregister.txt",
+		// "./database/test/2requestRegister.txt",
+		// "./database/test/3requestTransferSupervisor.txt");
 		// // end of load in CSV
 
 		Scanner scanner = new Scanner(System.in);
@@ -62,16 +61,18 @@ public class Application {
 				int choice = -1;
 				do {
 					try {
+						choice = scanner.nextInt();
+					} catch (InputMismatchException e) {
+						System.out.println("Please enter only numeric values!");
+						scanner.next();
+						System.out.println();
+						System.out.println();
 						System.out.println("Which type of user are you? ");
 						System.out.println("1. Student");
 						System.out.println("2. Supervisor");
 						System.out.println("3. FYP Coordinator");
 						System.out.println("0. Exit");
 						System.out.println();
-						choice = scanner.nextInt();
-					} catch (InputMismatchException e) {
-						System.out.println("Please enter only numeric values!");
-						scanner.next();
 					}
 
 				} while (choice == -1);

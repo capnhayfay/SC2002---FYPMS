@@ -47,13 +47,11 @@ public class AllocateProjectCommand implements Command {
                 if (supervisor.getProjList().size() < 2) {
                     supervisor.addProj(project.getTitle());
                     if (supervisor.getProjList().size() == 2) {
-                        ArrayList<FYP> supervisorFYPList = FYPMS1.getSuperFypList(supervisor.getName());
-                        for (FYP fyp : supervisorFYPList) {
+                        for (FYP fyp : FYPMS1.getSuperFypList(supervisor.getName())) {
                             if (fyp.getStatus().equals(FYPStatus.AVAILABLE)
                                     || fyp.getStatus().equals(FYPStatus.RESERVED)) {
                                 fyp.setStatus(FYPStatus.UNAVAILABLE);
-                                ArrayList<Object> requests = FYPMS1.getRequestList().get(2);
-                                for (Object indivRequest : requests) {
+                                for (Object indivRequest : FYPMS1.getRequestList().get(2)) {
                                     Request indivCastedRequest = (Request) indivRequest;
                                     if (indivCastedRequest.getFypID() == fyp.getProjectId()) {
                                         indivCastedRequest.setStatus(RequestStatus.REJECTED);

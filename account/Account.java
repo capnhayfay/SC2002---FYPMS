@@ -1,24 +1,26 @@
 package account;
 
 /**
- * Abstract class for Account
+ * 
+ * Abstract class for creating an Account object which holds user's login
+ * credentials, personal information and type of account.
  */
+
 public abstract class Account {
-    private String email;
-    private String name;
-    private String userId;
-    private String password;
-    private UserType userType;
-    // 0 for user, 1 for cineplexAdmin, 2 for companyAdmin
+    private String email; // email address of the user
+    private String name; // name of the user
+    private String userId; // login ID of the user
+    private String password; // password of the user
+    private UserType userType; // type of account: Student, Supervisor and FYPCoordinator
 
     /**
      * Creates an Account Object with given parameters
      * 
-     * @param userId       which is the login ID of user
-     * @param password     which is the password of user
-     * @param userType     which is the userType of user
-     * @param emailAddress which is the email address of user
-     * @param name         which is the name of user
+     * @param userId       the login ID of the user
+     * @param password     the password of the user
+     * @param userType     the type of account (Student, Supervisor, FYPCoordinator)
+     * @param emailAddress the email address of the user
+     * @param name         the name of the user
      */
     public Account(String userId, String password, UserType userType, String emailAddress, String name) {
 
@@ -29,61 +31,66 @@ public abstract class Account {
         this.email = emailAddress;
     }
 
+    /**
+     * Returns the login ID of the user.
+     * 
+     * @return the login ID of the user
+     */
     public final String getLoginId() {
         return userId;
     }
 
+    /**
+     * Returns the password of the user.
+     * 
+     * @return the password of the user
+     */
     public final String getPassword() {
         return password;
     }
 
+    /**
+     * Sets the password of the user.
+     * 
+     * @param newPass the new password to be set
+     */
     public final void setPassword(String newPass) {
         this.password = newPass;
     }
 
+    /**
+     * Returns the type of account of the user.
+     * 
+     * @return the type of account of the user
+     */
     public final UserType getUserType() {
         return userType;
     }
 
+    /**
+     * Returns the name of the user.
+     * 
+     * @return the name of the user
+     */
     public final String getName() {
         return name;
     }
 
+    /**
+     * Returns the email address of the user.
+     * 
+     * @return the email address of the user
+     */
     public final String getEmail() {
         return email;
     }
 
     /**
-     * Converts Int to UserType
+     * Abstract method that allows for user login.
      * 
-     * @param i which is an integer
-     * @return UserType corresponding to integer
+     * @param userId   the login ID of the user
+     * @param password the password of the user
+     * @return the UserType of the logged in user
      */
-    public static UserType convertIntToUserType(int i) {
-        switch (i) {
-            case 0:
-                return UserType.Student;
-            case 1:
-                return UserType.Supervisor;
-            default:
-                return UserType.FYPCoordinator;
-        }
-    }
-
-    /**
-     * Converts UserType to Int
-     * 
-     * @param userType of Account
-     * @return integer corresponding to UserType
-     */
-    public static int convertUserTypeToInt(UserType userType) {
-        if (userType == UserType.Student)
-            return 0;
-        else if (userType == UserType.Supervisor)
-            return 1;
-        else
-            return 0;
-    }
-
     public abstract UserType login(String userId, String password);
 }

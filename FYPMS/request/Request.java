@@ -22,7 +22,8 @@ public class Request {
      * @param requestee
      * @param requestStatus
      */
-    public Request(int requestID, String requesterID,String requesteeID, RequestStatus requestStatus, RequestRelationship requestRelationship, RequestType requestType, int fypID) {
+    public Request(int requestID, String requesterID, String requesteeID, RequestStatus requestStatus,
+            RequestRelationship requestRelationship, RequestType requestType, int fypID) {
         this.fypID = fypID;
         this.requestID = requestID;
         this.requesterID = requesterID;
@@ -38,7 +39,7 @@ public class Request {
     public void printDetails() {
         System.out.println("Requester: " + getRequesterID());
         System.out.println("Requestee: " + getRequesteeID());
-        System.out.println("Request Type: " + getRequestType() );
+        System.out.println("Request Type: " + getRequestType());
         System.out.println("Request Status: " + getRequestStatus());
         System.out.println("Request Relationship: " + getRequestRelationship());
         System.out.println("FYP ID: " + getFypID());
@@ -58,7 +59,6 @@ public class Request {
      * @param requestType RequestType enum
      * @return Class of request in string form
      */
-    
 
     public RequestRelationship getRequestRelationship() {
         return requestRelationship;
@@ -76,19 +76,19 @@ public class Request {
         return requestStatus;
     }
 
-    public int getFypID(){
+    public int getFypID() {
         return fypID;
     }
 
-    public int getRequestID(){
+    public int getRequestID() {
         return requestID;
     }
 
-    public RequestType getRequestType(){
+    public RequestType getRequestType() {
         return requestType;
     }
 
-    public void setStatus(RequestStatus requestStatus){
+    public void setStatus(RequestStatus requestStatus) {
         this.requestStatus = requestStatus;
     }
 }

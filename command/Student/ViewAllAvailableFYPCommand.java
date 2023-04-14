@@ -19,12 +19,13 @@ public class ViewAllAvailableFYPCommand implements Command {
         Scanner sc = new Scanner(System.in);
 
         if (studentAccount.getStatus() == StudentStatus.ASSIGNED_PROJECT) {
-            System.out.println("Error: You are already registered for an FYP.");
+            System.out
+                    .println("You are currently allocated to a FYP and do not have access to available project list.");
             System.out.println("Press enter to continue...");
             sc.nextLine();
             return;
         } else if (studentAccount.getStatus() == StudentStatus.DEREGISTERED_PROJECT) {
-            System.out.println("Error: You have deregistered for an FYP.");
+            System.out.println("You are not allowed to make selection again as you deregistered your FYP.");
             System.out.println("Press enter to continue...");
             sc.nextLine();
             return;

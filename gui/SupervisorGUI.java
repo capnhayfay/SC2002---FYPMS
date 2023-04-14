@@ -8,7 +8,9 @@ import FYPMS.project.FYPList;
 import FYPMS.request.RequestChangeTitle;
 import account.supervisor.SupervisorAccount;
 import command.ChangePassword;
-import command.ViewOwnRequestRecordsCommand;
+import command.ViewIncomingRequestRecordsCommand;
+import command.ViewOutcomingRequestRecordsCommand;
+import command.ViewAllRequestRecordsCommand;
 import command.Supervisor.*;
 import FYPMS.FYPMS1;
 
@@ -41,10 +43,10 @@ public class SupervisorGUI implements Menu, Logout, GetCommand {
         System.out.println("=========================================");
         // System.out.println("-----------------------------------------");
         System.out.println();
-        System.out.println("Logged in as Supervisor: " + supervisor.getLoginId());
+        System.out.println("Logged in as Supervisor: " + supervisor.getName());
         System.out.println();
         System.out.println("1. Create, update or view projects");
-        if (new ViewPendingStudentRequestsCommand(supervisor.getName()).checkUpdates() == 1) {
+        if (new CheckPendingRequests(supervisor.getLoginId()).execute() == 1) {
             System.out.println("2. View student pending requests (NEW)");
         } else {
             System.out.println("2. View student pending requests");
@@ -121,10 +123,57 @@ public class SupervisorGUI implements Menu, Logout, GetCommand {
                     }
                     break;
                 case 2:
-                    new ViewPendingStudentRequestsCommand(supervisor.getName()).execute();
+                    ViewPendingStudentRequestsCommand ViewRequests = new ViewPendingStudentRequestsCommand(
+                            supervisor.getLoginId());
+                    ViewRequests.execute();
+                    if (ViewRequests.getRequestNumber() != 0) {
+                        System.out.println("Please select your choice");
+                        System.out.println("1. Approve or Reject Request");
+                        System.out.println("2. Return to Main Page");
+                        if (!scanner.hasNextInt()) {
+                            System.out.println("Invalid input format for option number. Please try again.");
+                            scanner.nextLine();
+                            System.out.println();
+                            System.out.print("Please enter the option number: ");
+                            continue;
+                        }
+                        int choice2 = scanner.nextInt();
+                        scanner.nextLine();
+                        int reqID;
+                        int projID;
+                        FYP selectedProj;
+                        switch (choice2) {
+                            case 1:
+                                System.out.println("Input request ID: ");
+                                reqID = scanner.nextInt();
+                                if (reqID / 1000 == 0) {
+                                    // Request Title Change
+                                    RequestChangeTitle titleRequest = FYPMS1.getRequestChangeTitle(reqID);
+                                    projID = titleRequest.getFypID();
+                                    selectedProj = FYPList.getFYPById(projID);
+                                    new ModifySubmittedFYPTitleCommand(selectedProj, titleRequest).execute();
+                                } else if (reqID / 1000 != 0) {
+                                    System.out.println("Invalid Input. Returning to Main Page...");
+                                }
+                                break;
+                            case 2:
+                                System.out.println("Returning to Main Page...");
+                                break;
+                            default:
+                                System.out.println("Invalid Input. Returning to Main Page...");
+                                break;
+                        }
+                    }
+                    break;
+                case 3:
+                    new RequestTransfertoCoordCommand(supervisor).execute();
+                    break;
+                case 4:
                     System.out.println("Please select your choice");
-                    System.out.println("1. Approve or Reject Request");
-                    System.out.println("2. Return to Main Page");
+                    System.out.println("1. View all incoming requests");
+                    System.out.println("2. View all outgoing requests");
+                    System.out.println("3. View all requests");
+                    System.out.println("4. Return to main page");
                     if (!scanner.hasNextInt()) {
                         System.out.println("Invalid input format for option number. Please try again.");
                         scanner.nextLine();
@@ -132,35 +181,25 @@ public class SupervisorGUI implements Menu, Logout, GetCommand {
                         System.out.print("Please enter the option number: ");
                         continue;
                     }
-                    int choice2 = scanner.nextInt();
+                    int requestChoice = scanner.nextInt();
                     scanner.nextLine();
-                    int reqID;
-                    int projID;
-                    FYP selectedProj;
-                    switch (choice2) {
+                    switch (requestChoice) {
                         case 1:
-                            System.out.println("Input project ID: ");
-                            projID = scanner.nextInt();
-                            selectedProj = FYPList.getFYPById(projID);
-                            System.out.println("Input request ID: ");
-                            reqID = scanner.nextInt();
-                            if (reqID / 1000 == 0) {
-                                // requestitlechange
-                                RequestChangeTitle titleRequest = FYPMS1.getRequestChangeTitle(reqID);
-                                new ModifySubmittedFYPTitleCommand(selectedProj, titleRequest).execute();
-                            } else if (reqID / 1000 != 0) {
-                                System.out.println("Wrong input");
-                            }
+                            new ViewIncomingRequestRecordsCommand(supervisor).execute();
                             break;
                         case 2:
+                            new ViewOutcomingRequestRecordsCommand(supervisor).execute();
+                            break;
+                        case 3:
+                            new ViewAllRequestRecordsCommand(supervisor).execute();
+                            break;
+                        case 4:
+                            System.out.println("Returning to Main Page...");
+                            break;
+                        default:
+                            System.out.println("Invalid Input. Returning to Main Page...");
                             break;
                     }
-                    break;
-                case 3:
-                    new RequestTransfertoCoordCommand(supervisor).execute();
-                    break;
-                case 4:
-                    new ViewOwnRequestRecordsCommand(supervisor).execute();
                     break;
                 case 5:
                     new ChangePassword(supervisor).execute();

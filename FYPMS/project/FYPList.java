@@ -7,7 +7,7 @@ import java.util.ArrayList;
  * and are entitled to supervise
  */
 public class FYPList {
-    private final static ArrayList<FYP> fyps = new ArrayList<>();
+    private ArrayList<FYP> fyps = new ArrayList<>();
 
     /**
      * Adds a FYP to the list of FYPs the department can supervise
@@ -19,7 +19,7 @@ public class FYPList {
     }
 
     /**
-     * Prints the available FYPs (Ongoing, Pending) for viewing by students
+     * Prints the available FYPs for viewing by students
      */
     public void listAvailableFYPsForStudents() {
         int fypCount = 1;
@@ -27,7 +27,7 @@ public class FYPList {
         System.out.println("List of Available Final Year Projects");
         System.out.println();
         for (FYP fyp : fyps) {
-            if (fyp.getStatus() != FYPStatus.ALLOCATED && fyp.getStatus() != FYPStatus.UNAVAILABLE) {
+            if (fyp.getStatus() == FYPStatus.AVAILABLE) {
                 System.out.println("============= FYP No. " + fypCount++ + " ==============");
                 fyp.printFYPDetails();
                 System.out.println();
@@ -49,7 +49,7 @@ public class FYPList {
             fyp.printFYPDetails();
             System.out.println();
         }
-        System.out.println("===== There are " + fyps.size() + " Final Year Projects in the system! =====");
+        System.out.println("===== There are " + fypCount + " Final Year Projects in the system! =====");
         System.out.println();
         System.out.println("-----------------------------------------");
     }

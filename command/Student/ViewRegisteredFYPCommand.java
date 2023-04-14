@@ -24,7 +24,7 @@ public class ViewRegisteredFYPCommand implements Command {
         System.out.println();
         if (studentAccount.getStatus() == StudentStatus.NO_PROJECT
                 || studentAccount.getStatus() == StudentStatus.DEREGISTERED_PROJECT) {
-            System.out.println("Error: You are not registered for any FYP.");
+            System.out.println("You have not registered a project.");
             System.out.println("Press enter to continue...");
             sc.nextLine();
             return;

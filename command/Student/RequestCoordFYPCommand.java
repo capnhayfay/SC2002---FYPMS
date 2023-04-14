@@ -1,3 +1,4 @@
+
 package command.Student;
 
 import java.util.Scanner;
@@ -9,15 +10,18 @@ import FYPMS.project.FYP;
 import FYPMS.project.FYPList;
 import FYPMS.project.FYPStatus;
 import account.student.StudentStatus;
+import account.supervisor.SupervisorAccount;
 import command.Command;
+
 public class RequestCoordFYPCommand implements Command {
     private StudentAccount studentAccount;
+    private SupervisorAccount supervisor;
 
     public RequestCoordFYPCommand(StudentAccount currentAcc) {
         this.studentAccount = currentAcc;
     }
 
-    ArrayList<ArrayList <Object>>  requests = FYPMS1.getRequestList();
+    ArrayList<ArrayList<Object>> requests = FYPMS1.getRequestList();
 
     public void execute() {
         if (studentAccount.getStatus() == StudentStatus.ASSIGNED_PROJECT) {
@@ -38,13 +42,21 @@ public class RequestCoordFYPCommand implements Command {
         FYPList projects = FYPMS1.getFypList();
         ArrayList<FYP> fyps = projects.getFYPs();
         for (FYP fyp : fyps) {
-                if (fyp.getProjectId() == fypID) {
-                    fyp.setStatus(FYPStatus.RESERVED);
+            if (fyp.getProjectId() == fypID) {
+                if (!(fyp.getStatus().equals(FYPStatus.AVAILABLE))) {
+                    System.out.println("Error: Project is unavailable for registration.");
+                    return;
                 }
+                fyp.setStatus(FYPStatus.RESERVED);
+                supervisor = FYPMS1.getSupervisorAccount(fyp.getSupervisorName());
+                break;
+            }
         }
-        RequestRegister registerRequest = new RequestRegister(requests.get(2).size()+2000, studentAccount.getLoginId(),RequestStatus.PENDING, fypID);
-        requests.get(2).add(registerRequest); 
-        System.out.println("Successfully Applied for project " + fypID);          
+        RequestRegister registerRequest = new RequestRegister(requests.get(2).size() + 2000,
+                studentAccount.getLoginId(), RequestStatus.PENDING,
+                fypID);
+        requests.get(2).add(registerRequest);
+        System.out.println("Successfully Applied for project " + fypID);
     }
-    
+
 }

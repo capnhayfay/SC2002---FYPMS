@@ -105,13 +105,7 @@ public class SupervisorCLI implements Menu, Logout, GetCommand {
                     scanner.nextLine();
                     switch (selectedChoice) {
                         case 1:
-                            if (supervisor.getProjList().size() == 2) {
-                                System.out.println();
-                                System.out.println("You have reach the maximum allocated project capacity.");
-                                break;
-                            } else {
-                                new CreateProjectCommand(supervisor).execute();
-                            }
+                            new CreateProjectCommand(supervisor).execute();
                             break;
                         case 2:
                             new ModifyFYPTitle(supervisor).execute();

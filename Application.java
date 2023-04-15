@@ -84,7 +84,7 @@ public class Application {
 		new GreetUserMenu().display();
 		System.out.println();
 		while (true) {
-			if (loggedInUserType.equals(null)) {
+			if (loggedInUserType==null) {
 				System.out.println("Which type of user are you? ");
 				System.out.println("1. Student");
 				System.out.println("2. Supervisor");

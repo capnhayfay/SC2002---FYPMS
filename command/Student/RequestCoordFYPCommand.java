@@ -17,7 +17,7 @@ public class RequestCoordFYPCommand implements Command {
         this.studentAccount = currentAcc;
     }
 
-    final ArrayList<ArrayList<Object>> requests = RequestHistory.getRequestList();
+    final ArrayList<ArrayList<Request>> requests = RequestHistory.getRequestList();
 
     public void execute() {
         if (studentAccount.getStatus() == StudentStatus.ASSIGNED_PROJECT) {

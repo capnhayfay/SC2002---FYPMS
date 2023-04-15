@@ -43,6 +43,7 @@ public class CreateProjectCommand implements Command {
             fyp = new FYP(FYPList.getFypList().size() + 1, supervisor.getName(), supervisor.getEmail(), "", "", "",
                     title,
                     FYPStatus.UNAVAILABLE);
+            fypList.add(fyp);
         } else {
             fyp = new FYP(FYPList.getFypList().size() + 1, supervisor.getName(), supervisor.getEmail(), "", "", "",
                     title,

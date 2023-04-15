@@ -34,7 +34,6 @@ public class RequestCoordFYPCommand implements Command {
         Scanner sc = new Scanner(System.in);
         System.out.println("Input project ID: ");
         int fypID = sc.nextInt();
-        studentAccount.setStatus(StudentStatus.REQUESTED_PROJECT);
         ArrayList<FYP> fyps = FYPList.getFypList();
         for (FYP fyp : fyps) {
             if (fyp.getProjectId() == fypID) {
@@ -46,6 +45,7 @@ public class RequestCoordFYPCommand implements Command {
                 break;
             }
         }
+        studentAccount.setStatus(StudentStatus.REQUESTED_PROJECT);
         RequestRegister registerRequest = new RequestRegister(requests.get(2).size() + 2000,
                 studentAccount.getLoginId(), RequestStatus.PENDING,
                 fypID);

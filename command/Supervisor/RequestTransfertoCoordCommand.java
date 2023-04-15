@@ -16,11 +16,11 @@ package command.Supervisor;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import FYPMS.SCSE;
 import command.Command;
 import FYPMS.project.FYPList;
 import FYPMS.project.FYPStatus;
 import FYPMS.request.*;
+import account.AccountManager;
 import account.supervisor.SupervisorAccount;
 
 public class RequestTransfertoCoordCommand implements Command {
@@ -46,7 +46,7 @@ public class RequestTransfertoCoordCommand implements Command {
     }
 
     /** The list of requests in the system */
-    final ArrayList<ArrayList<Object>> requests = SCSE.getRequestList();
+    final ArrayList<ArrayList<Object>> requests = RequestHistory.getRequestList();
 
     /**
      * Executes the command to transfer supervision of an FYP project from the
@@ -76,7 +76,7 @@ public class RequestTransfertoCoordCommand implements Command {
             System.out.println("Input new supervisor ID: ");
             String newSupervisorID = sc.next();
 
-            ArrayList<SupervisorAccount> supervisors = SCSE.getSupervisorList();
+            ArrayList<SupervisorAccount> supervisors = AccountManager.getSupervisorList();
             for (SupervisorAccount indi : supervisors) {
                 if (indi.getLoginId().equals(newSupervisorID)
                         && !(newSupervisorID.equals(supervisorAccount.getLoginId()))) {

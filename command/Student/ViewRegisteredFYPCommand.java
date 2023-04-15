@@ -3,7 +3,6 @@ package command.Student;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import FYPMS.SCSE;
 import FYPMS.project.FYP;
 import FYPMS.project.FYPList;
 import account.student.StudentAccount;
@@ -19,8 +18,7 @@ public class ViewRegisteredFYPCommand implements Command {
 
     public void execute() {
         Scanner sc = new Scanner(System.in);
-        FYPList projects = SCSE.getFypList();
-        ArrayList<FYP> fyps = projects.getFYPs();
+        ArrayList<FYP> fyps = FYPList.getFypList();
         System.out.println();
         if (studentAccount.getStatus() == StudentStatus.NO_PROJECT
                 || studentAccount.getStatus() == StudentStatus.DEREGISTERED_PROJECT) {

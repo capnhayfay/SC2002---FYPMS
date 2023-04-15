@@ -5,8 +5,8 @@ package command.FYPCoord;
 
 import java.util.ArrayList;
 
-import FYPMS.SCSE;
 import FYPMS.request.Request;
+import FYPMS.request.RequestHistory;
 import command.Command;
 
 public class ViewAllRequestHistoryCommand implements Command {
@@ -22,7 +22,7 @@ public class ViewAllRequestHistoryCommand implements Command {
      * requests that were submitted to a coordinator.
      */
     public void execute() {
-        ArrayList<ArrayList<Object>> requests = SCSE.getRequestList();
+        ArrayList<ArrayList<Object>> requests = RequestHistory.getRequestList();
         int empty = 1;
         for (ArrayList<Object> request : requests) {
             if (request.size() != 0) {

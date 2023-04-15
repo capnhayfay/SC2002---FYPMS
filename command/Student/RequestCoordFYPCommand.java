@@ -5,11 +5,9 @@ import java.util.Scanner;
 import java.util.ArrayList;
 import FYPMS.request.*;
 import account.student.*;
-import FYPMS.SCSE;
 import FYPMS.project.FYP;
 import FYPMS.project.FYPList;
 import FYPMS.project.FYPStatus;
-import account.supervisor.SupervisorAccount;
 import command.Command;
 
 public class RequestCoordFYPCommand implements Command {
@@ -19,7 +17,7 @@ public class RequestCoordFYPCommand implements Command {
         this.studentAccount = currentAcc;
     }
 
-    final ArrayList<ArrayList<Object>> requests = SCSE.getRequestList();
+    final ArrayList<ArrayList<Object>> requests = RequestHistory.getRequestList();
 
     public void execute() {
         if (studentAccount.getStatus() == StudentStatus.ASSIGNED_PROJECT) {
@@ -37,8 +35,7 @@ public class RequestCoordFYPCommand implements Command {
         System.out.println("Input project ID: ");
         int fypID = sc.nextInt();
         studentAccount.setStatus(StudentStatus.REQUESTED_PROJECT);
-        FYPList projects = SCSE.getFypList();
-        ArrayList<FYP> fyps = projects.getFYPs();
+        ArrayList<FYP> fyps = FYPList.getFypList();
         for (FYP fyp : fyps) {
             if (fyp.getProjectId() == fypID) {
                 if (!(fyp.getStatus().equals(FYPStatus.AVAILABLE))) {
@@ -46,7 +43,6 @@ public class RequestCoordFYPCommand implements Command {
                     return;
                 }
                 fyp.setStatus(FYPStatus.RESERVED);
-                SupervisorAccount supervisor = SCSE.getSupervisorAccount(fyp.getSupervisorName());
                 break;
             }
         }

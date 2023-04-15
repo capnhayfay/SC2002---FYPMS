@@ -7,7 +7,6 @@ package command.Supervisor;
 
 import java.util.ArrayList;
 
-import FYPMS.SCSE;
 import FYPMS.project.FYP;
 import FYPMS.project.FYPList;
 import command.Command;
@@ -33,8 +32,7 @@ public class ViewSubmittedFYPCommand implements Command {
      */
     public void execute() {
         int fypCount = 1;
-        FYPList projects = SCSE.getFypList();
-        ArrayList<FYP> fyps = projects.getFYPs();
+        ArrayList<FYP> fyps = FYPList.getFypList();
         System.out.println();
         System.out.println("List of all Final Year Projects");
         System.out.println();

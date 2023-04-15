@@ -4,7 +4,6 @@ It implements the Command interface.
 */
 package command.FYPCoord;
 
-import FYPMS.SCSE;
 import FYPMS.project.*;
 import command.Command;
 
@@ -36,8 +35,8 @@ public class GenerateFilteredProjectDetailsCommand implements Command {
         int selection;
         Scanner sc = new Scanner(System.in);
         int fypCount = 1;
-        FYPList projects = SCSE.getFypList();
-        ArrayList<FYP> fyps = projects.getFYPs();
+        ArrayList<FYP> fyps = FYPList.getFypList();
+
         switch (filterType) {
             // Filter by status
             case 1 -> {

@@ -1,6 +1,5 @@
 package cli;
 
-import FYPMS.SCSE;
 import account.*;
 import account.supervisor.FYPCoordinatorAccount;
 import command.FYPCoord.AllocateProjectCommand;
@@ -27,6 +26,7 @@ import FYPMS.project.FYP;
 import FYPMS.project.FYPList;
 import FYPMS.request.RequestChangeTitle;
 import FYPMS.request.RequestDeregister;
+import FYPMS.request.RequestHistory;
 import FYPMS.request.RequestRegister;
 import FYPMS.request.RequestTransferSupervisor;
 
@@ -171,7 +171,7 @@ public class FYPCoordinatorCLI implements Menu, Logout, GetCommand {
                                 System.out.println("=========================================");
                                 if (reqID / 1000 == 0) {
                                     // requestitlechange
-                                    RequestChangeTitle titleRequest = SCSE.getRequestChangeTitle(reqID);
+                                    RequestChangeTitle titleRequest = RequestHistory.getRequestChangeTitle(reqID);
                                     if (!titleRequest.getRequesteeID().equals(FYPCoordinator.getLoginId())) {
                                         System.out.println("Invalid Input. Returning to Main Page...");
                                         break;
@@ -180,17 +180,17 @@ public class FYPCoordinatorCLI implements Menu, Logout, GetCommand {
                                     selectedProj = FYPList.getFYPById(projID);
                                     new ModifySubmittedFYPTitleCommand(selectedProj, titleRequest).execute();
                                 } else if (reqID / 1000 == 1) {
-                                    RequestDeregister deregistrationRequest = SCSE.getRequestDeregister(reqID);
+                                    RequestDeregister deregistrationRequest = RequestHistory.getRequestDeregister(reqID);
                                     projID = deregistrationRequest.getFypID();
                                     selectedProj = FYPList.getFYPById(projID);
                                     new DeregisterStudentCommand(selectedProj, deregistrationRequest).execute();
                                 } else if (reqID / 1000 == 2) {
-                                    RequestRegister registrationRequest = SCSE.getRequestRegister(reqID);
+                                    RequestRegister registrationRequest = RequestHistory.getRequestRegister(reqID);
                                     projID = registrationRequest.getFypID();
                                     selectedProj = FYPList.getFYPById(projID);
                                     new AllocateProjectCommand(selectedProj, registrationRequest).execute();
                                 } else if (reqID / 1000 == 3) {
-                                    RequestTransferSupervisor transferSupervisorRequest = SCSE
+                                    RequestTransferSupervisor transferSupervisorRequest = RequestHistory
                                             .getRequestTransferSupervisor(reqID);
                                     new ChangeSupervisorCommand(transferSupervisorRequest)
                                             .execute();

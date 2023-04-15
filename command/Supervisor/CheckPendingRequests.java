@@ -6,7 +6,6 @@ package command.Supervisor;
 
 import java.util.ArrayList;
 
-import FYPMS.SCSE;
 import FYPMS.request.*;
 
 public class CheckPendingRequests {
@@ -27,7 +26,7 @@ public class CheckPendingRequests {
      *         otherwise.
      */
     public int execute() {
-        ArrayList<ArrayList<Object>> requests = SCSE.getRequestList();
+        ArrayList<ArrayList<Object>> requests = RequestHistory.getRequestList();
         for (ArrayList<Object> request : requests) {
             for (Object indivRequest : request) {
                 Request indivCastedRequest = (Request) indivRequest;

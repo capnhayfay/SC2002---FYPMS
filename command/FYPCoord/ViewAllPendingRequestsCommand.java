@@ -7,8 +7,8 @@ import command.Command;
 
 import java.util.ArrayList;
 
-import FYPMS.SCSE;
 import FYPMS.request.Request;
+import FYPMS.request.RequestHistory;
 import FYPMS.request.RequestStatus;
 
 public class ViewAllPendingRequestsCommand implements Command {
@@ -20,7 +20,7 @@ public class ViewAllPendingRequestsCommand implements Command {
      */
 
     public void execute() {
-        ArrayList<ArrayList<Object>> requests = SCSE.getRequestList();
+        ArrayList<ArrayList<Object>> requests = RequestHistory.getRequestList();
         for (ArrayList<Object> request : requests) {
             for (Object indivRequest : request) {
                 Request indivCastedRequest = (Request) indivRequest;

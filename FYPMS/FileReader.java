@@ -1,7 +1,7 @@
 package FYPMS;
 
 import FYPMS.request.*;
-
+import account.AccountManager;
 import account.UserType;
 import account.student.StudentAccount;
 import account.supervisor.FYPCoordinatorAccount;
@@ -29,7 +29,7 @@ public class FileReader {
     public static void readSupervisorsFromFile(String fileName) {
         Path pathToFile = Paths.get(fileName);
 
-        ArrayList<SupervisorAccount> supervisorList = SCSE.getSupervisorList();
+        ArrayList<SupervisorAccount> supervisorList = AccountManager.getSupervisorList();
 
         try (BufferedReader br = Files.newBufferedReader(pathToFile, StandardCharsets.UTF_8)) {
             String line = br.readLine();
@@ -64,7 +64,7 @@ public class FileReader {
     public static void readCoordinatorsFromFile(String fileName) {
         Path pathToFile = Paths.get(fileName);
 
-        ArrayList<FYPCoordinatorAccount> fypCoordinatorList = SCSE.getCoordinatorList();
+        ArrayList<FYPCoordinatorAccount> fypCoordinatorList = AccountManager.getCoordinatorList();
 
         try (BufferedReader br = Files.newBufferedReader(pathToFile, StandardCharsets.UTF_8)) {
             String line = br.readLine();
@@ -100,7 +100,7 @@ public class FileReader {
     public static void readStudentsFromFile(String fileName) {
         Path pathToFile = Paths.get(fileName);
 
-        ArrayList<StudentAccount> studentList = SCSE.getStudentList();
+        ArrayList<StudentAccount> studentList = AccountManager.getStudentList();
 
         try (BufferedReader br = Files.newBufferedReader(pathToFile, StandardCharsets.UTF_8)) {
             String line = br.readLine();
@@ -136,7 +136,7 @@ public class FileReader {
     public static void readFYPsFromFile(String fileName) {
 
         Path pathToFile = Paths.get(fileName);
-        FYPList fypList = SCSE.getFypList();
+        ArrayList<FYP> fypList = FYPList.getFypList();
         try (BufferedReader br = Files.newBufferedReader(pathToFile, StandardCharsets.UTF_8)) {
             String line = br.readLine();
             line = br.readLine();
@@ -160,7 +160,7 @@ public class FileReader {
 
                 fyp = new FYP(projectId, supervisorName, supervisorEmail, studentID, studentName, studentEmail, title,
                         status);
-                fypList.addFYP(fyp);
+                fypList.add(fyp);
                 line = br.readLine();
             }
 
@@ -185,7 +185,7 @@ public class FileReader {
 
     public static void readRequestsFromFile(String fileName, String fileName1, String fileName2, String fileName3) {
         Path pathToFile = Paths.get(fileName);
-        ArrayList<ArrayList<Object>> requests = SCSE.getRequestList();
+        ArrayList<ArrayList<Object>> requests = RequestHistory.getRequestList();
 
         ArrayList<Object> requestChangeTitleList = new ArrayList<Object>();
         try (BufferedReader br = Files.newBufferedReader(pathToFile, StandardCharsets.UTF_8)) {
@@ -282,7 +282,7 @@ public class FileReader {
      */
     public static ArrayList<String> getSupervisorFYPs(String supervisorName) {
         ArrayList<String> supervisorFYPs = new ArrayList<String>();
-        for (FYP fyp : SCSE.getFypList().getFYPs()) {
+        for (FYP fyp : FYPList.getFypList()) {
             if (fyp.getSupervisorName().equals(supervisorName) && fyp.getStatus() == FYPStatus.ALLOCATED) {
                 supervisorFYPs.add(fyp.getTitle());
             }

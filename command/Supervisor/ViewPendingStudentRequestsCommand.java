@@ -7,7 +7,6 @@ package command.Supervisor;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import FYPMS.SCSE;
 import command.Command;
 import FYPMS.request.*;
 
@@ -54,7 +53,7 @@ public class ViewPendingStudentRequestsCommand implements Command {
             choice = scanner.nextInt();
         } while (choice != 1 && choice != 2);
 
-        ArrayList<ArrayList<Object>> requests = SCSE.getRequestList();
+        ArrayList<ArrayList<Object>> requests = RequestHistory.getRequestList();
 
         switch (choice) {
             case 1:

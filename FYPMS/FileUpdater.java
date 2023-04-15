@@ -7,6 +7,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+
+import account.AccountManager;
 import account.student.StudentAccount;
 import account.supervisor.FYPCoordinatorAccount;
 import account.supervisor.SupervisorAccount;
@@ -14,6 +16,7 @@ import FYPMS.project.FYP;
 import FYPMS.project.FYPList;
 import FYPMS.request.RequestChangeTitle;
 import FYPMS.request.RequestDeregister;
+import FYPMS.request.RequestHistory;
 import FYPMS.request.RequestRegister;
 import FYPMS.request.RequestTransferSupervisor;
 
@@ -24,7 +27,7 @@ public class FileUpdater {
      * @param fileName the name of the CSV file to write to
      */
     public static void writeFYPsToFile(String fileName) {
-        FYPList fypList = SCSE.getFypList();
+        ArrayList<FYP> fypList = FYPList.getFypList();
         Path pathToFile = Paths.get(fileName);
 
         try (BufferedWriter bw = Files.newBufferedWriter(pathToFile, StandardCharsets.UTF_8)) {
@@ -33,7 +36,7 @@ public class FileUpdater {
             bw.write("ProjectID\tSupervisorName\tSupervisorEmail\tTitle\tStatus\tStudentID\tStudentName\tStudentEmail");
 
             // Write each FYP
-            for (FYP fyp : fypList.getFYPs()) {
+            for (FYP fyp : fypList) {
                 bw.newLine();
                 bw.write(fyp.getProjectId() + "\t" + fyp.getSupervisorName() + "\t" + fyp.getSupervisorEmail() + "\t"
                         + fyp.getTitle() + "\t" + fyp.getStatus() + "\t" + fyp.getStudentID() + "\t"
@@ -51,7 +54,7 @@ public class FileUpdater {
      * @param fileName the name of the CSV file to write to
      */
     public static void writeRequestsToFile(String fileName, String filename1, String filename2, String filename3) {
-        ArrayList<ArrayList<Object>> requestList = SCSE.getRequestList();
+        ArrayList<ArrayList<Object>> requestList = RequestHistory.getRequestList();
         Path pathToFile = Paths.get(fileName);
 
         try (BufferedWriter bw = Files.newBufferedWriter(pathToFile, StandardCharsets.UTF_8)) {
@@ -125,7 +128,7 @@ public class FileUpdater {
      * @param fileName the name of the CSV file to write to
      */
     public static void writeSupervisorToFile(String fileName) {
-        ArrayList<SupervisorAccount> supervisorList = SCSE.getSupervisorList();
+        ArrayList<SupervisorAccount> supervisorList = AccountManager.getSupervisorList();
         Path pathToFile = Paths.get(fileName);
 
         try (BufferedWriter bw = Files.newBufferedWriter(pathToFile, StandardCharsets.UTF_8)) {
@@ -145,7 +148,7 @@ public class FileUpdater {
      * @param fileName the name of the CSV file to write to
      */
     public static void writeCoordinatorToFile(String fileName) {
-        ArrayList<FYPCoordinatorAccount> coordinatorList = SCSE.getCoordinatorList();
+        ArrayList<FYPCoordinatorAccount> coordinatorList = AccountManager.getCoordinatorList();
         Path pathToFile = Paths.get(fileName);
 
         try (BufferedWriter bw = Files.newBufferedWriter(pathToFile, StandardCharsets.UTF_8)) {
@@ -168,7 +171,7 @@ public class FileUpdater {
     public static void writeStudentToFile(String fileName) {
         Path pathToFile = Paths.get(fileName);
 
-        ArrayList<StudentAccount> studentList = SCSE.getStudentList();
+        ArrayList<StudentAccount> studentList = AccountManager.getStudentList();
 
         try (BufferedWriter bw = Files.newBufferedWriter(pathToFile, StandardCharsets.UTF_8)) {
             bw.write("Name\tEmail\tPassword\tProjectID\tStatus");

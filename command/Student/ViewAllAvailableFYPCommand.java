@@ -1,8 +1,9 @@
 package command.Student;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
-import FYPMS.SCSE;
+import FYPMS.project.FYP;
 import FYPMS.project.FYPList;
 import account.student.StudentAccount;
 import account.student.StudentStatus;
@@ -35,8 +36,7 @@ public class ViewAllAvailableFYPCommand implements Command {
             sc.nextLine();
             return;
         }
-        FYPList fypList = SCSE.getFypList();
-        fypList.listAvailableFYPsForStudents();
+        FYPList.listAvailableFYPsForStudents();
 
         System.out.println("Press enter to continue...");
         sc.nextLine();

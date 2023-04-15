@@ -7,9 +7,9 @@
 
 package command.Supervisor;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
-import FYPMS.SCSE;
 import FYPMS.project.FYP;
 import FYPMS.project.FYPList;
 import FYPMS.project.FYPStatus;
@@ -23,7 +23,7 @@ public class CreateProjectCommand implements Command {
         this.supervisor = supervisor;
     }
 
-    final FYPList fypList = SCSE.getFypList();
+    final ArrayList<FYP> fypList = FYPList.getFypList();
 
     /**
      * This method prompts the user to input the title of the new FYP project and
@@ -40,14 +40,14 @@ public class CreateProjectCommand implements Command {
         if (supervisor.getProjList().size() >= 2) {
             System.out.println("Warning! You are already in charge of at least 2 projects");
             System.out.println("Proceeding to make new project unavailable...");
-            fyp = new FYP(fypList.getFYPs().size() + 1, supervisor.getName(), supervisor.getEmail(), "", "", "",
+            fyp = new FYP(FYPList.getFypList().size() + 1, supervisor.getName(), supervisor.getEmail(), "", "", "",
                     title,
                     FYPStatus.UNAVAILABLE);
         } else {
-            fyp = new FYP(fypList.getFYPs().size() + 1, supervisor.getName(), supervisor.getEmail(), "", "", "",
+            fyp = new FYP(FYPList.getFypList().size() + 1, supervisor.getName(), supervisor.getEmail(), "", "", "",
                     title,
                     FYPStatus.AVAILABLE);
-            fypList.addFYP(fyp);
+            fypList.add(fyp);
         }
     }
 }

@@ -5,10 +5,10 @@
     */
 package command.FYPCoord;
 
-import FYPMS.SCSE;
 import FYPMS.project.*;
 import FYPMS.request.RequestStatus;
 import FYPMS.request.RequestTransferSupervisor;
+import account.AccountManager;
 import account.supervisor.SupervisorAccount;
 import command.Command;
 
@@ -43,7 +43,7 @@ public class ChangeSupervisorCommand implements Command {
                 String newSupervisorName = transferRequest.getNewSupervisorID();
                 FYP project = FYPList.getFYPById(FYPId);
                 String currentSupervisorName = project.getSupervisorName();
-                ArrayList<SupervisorAccount> supervisors = SCSE.getSupervisorList();
+                ArrayList<SupervisorAccount> supervisors = AccountManager.getSupervisorList();
                 SupervisorAccount currentSupervisor = null;
                 for (SupervisorAccount supervisor : supervisors) {
                     if (supervisor.getName().equalsIgnoreCase(currentSupervisorName)) {
@@ -83,7 +83,7 @@ public class ChangeSupervisorCommand implements Command {
                             System.out.println(
                                     nsupervisor.getName() + " has a new project " + nsupervisor.getProjList().get(idx));
                             if (nsupervisor.getProjList().size() == 2) {
-                                for (FYP fyp : SCSE.getSuperFypList(nsupervisor.getName())) {
+                                for (FYP fyp : FYPList.getSuperFypList(nsupervisor.getName())) {
                                     if (fyp.getStatus().equals(FYPStatus.AVAILABLE)) {
                                         fyp.setStatus(FYPStatus.UNAVAILABLE);
                                     }
@@ -116,7 +116,7 @@ public class ChangeSupervisorCommand implements Command {
                 System.out.println("Current Supervisor is: " + project.getSupervisorName());
                 System.out.println("Change in progress");
 
-                for (FYP fyp : SCSE.getSuperFypList(currentSupervisor.getName())) {
+                for (FYP fyp : FYPList.getSuperFypList(currentSupervisor.getName())) {
                     if (fyp.getStatus().equals(FYPStatus.UNAVAILABLE)) {
                         fyp.setStatus(FYPStatus.AVAILABLE);
                     }

@@ -1,92 +1,16 @@
-package FYPMS;
+package account;
 
 import account.supervisor.FYPCoordinatorAccount;
 import account.supervisor.SupervisorAccount;
-import FYPMS.project.FYP;
-import FYPMS.project.FYPList;
-import FYPMS.request.RequestChangeTitle;
-import FYPMS.request.RequestDeregister;
-import FYPMS.request.RequestRegister;
-import FYPMS.request.RequestTransferSupervisor;
 import account.student.StudentAccount;
 import account.student.StudentStatus;
 
 import java.util.ArrayList;
 
-/**
- * Represents the company this application is created for
- * Contains all bookings, movies and cineplexes the company owns
- */
-public class SCSE {
-
-    // private static final CoordinatorList coordinatorList = new CoordinatorList();
-    // private static final SupervisorList supervisorList = new SupervisorList();
-    // private static final StudentList studentList = new StudentList();
+public class AccountManager {
     private static final ArrayList<StudentAccount> StudentAccount = new ArrayList<StudentAccount>();
     private static final ArrayList<FYPCoordinatorAccount> FYPCoordinatorAccounts = new ArrayList<FYPCoordinatorAccount>();
     private static final ArrayList<SupervisorAccount> SupervisorAccounts = new ArrayList<SupervisorAccount>();
-
-    static final ArrayList<ArrayList<Object>> requests = new ArrayList<ArrayList<Object>>();
-
-    private static final FYPList fypList = new FYPList();
-
-    public static FYPList getFypList() {
-        return fypList;
-    }
-
-    public static ArrayList<ArrayList<Object>> getRequestList() {
-        return requests;
-    }
-
-    public static ArrayList<FYP> getSuperFypList(String supervisorName) {
-        ArrayList<FYP> superFyps = new ArrayList<FYP>();
-        for (FYP fyp : fypList.getFYPs()) {
-            if (fyp.getSupervisorName().equals(supervisorName)) {
-                superFyps.add(fyp);
-            }
-        }
-        return superFyps;
-    }
-
-    public static RequestChangeTitle getRequestChangeTitle(int requestID) {
-        for (Object indivRequest : requests.get(0)) {
-            RequestChangeTitle indivCastedRequest = (RequestChangeTitle) indivRequest;
-            if (indivCastedRequest.getRequestID() == requestID) {
-                return indivCastedRequest;
-            }
-        }
-        return null;
-    }
-
-    public static RequestDeregister getRequestDeregister(int requestID) {
-        for (Object indivRequest : requests.get(1)) {
-            RequestDeregister indivCastedRequest = (RequestDeregister) indivRequest;
-            if (indivCastedRequest.getRequestID() == requestID) {
-                return indivCastedRequest;
-            }
-        }
-        return null;
-    }
-
-    public static RequestRegister getRequestRegister(int requestID) {
-        for (Object indivRequest : requests.get(2)) {
-            RequestRegister indivCastedRequest = (RequestRegister) indivRequest;
-            if (indivCastedRequest.getRequestID() == requestID) {
-                return indivCastedRequest;
-            }
-        }
-        return null;
-    }
-
-    public static RequestTransferSupervisor getRequestTransferSupervisor(int requestID) {
-        for (Object indivRequest : requests.get(3)) {
-            RequestTransferSupervisor indivCastedRequest = (RequestTransferSupervisor) indivRequest;
-            if (indivCastedRequest.getRequestID() == requestID) {
-                return indivCastedRequest;
-            }
-        }
-        return null;
-    }
 
     public static SupervisorAccount getSupervisorAccount(String SuperName) {
         for (SupervisorAccount account : SupervisorAccounts) {
@@ -180,4 +104,5 @@ public class SCSE {
             }
         }
     }
+    
 }

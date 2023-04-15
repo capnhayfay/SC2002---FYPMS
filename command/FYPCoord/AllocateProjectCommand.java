@@ -9,10 +9,11 @@ import FYPMS.project.*;
 
 import java.util.Scanner;
 
-import FYPMS.SCSE;
 import FYPMS.request.Request;
+import FYPMS.request.RequestHistory;
 import FYPMS.request.RequestRegister;
 import FYPMS.request.RequestStatus;
+import account.AccountManager;
 import account.student.StudentStatus;
 import account.supervisor.SupervisorAccount;
 import command.Command;
@@ -52,29 +53,29 @@ public class AllocateProjectCommand implements Command {
         System.out.println("=========================================");
         switch (requestAction) {
             case 1:
-                String StudentName = SCSE.getStudentName(registerRequest.getRequesterID());
-                String StudentEmail = SCSE.getStudentEmail(registerRequest.getRequesterID());
+                String StudentName = AccountManager.getStudentName(registerRequest.getRequesterID());
+                String StudentEmail = AccountManager.getStudentEmail(registerRequest.getRequesterID());
                 project.setStatus(FYPStatus.ALLOCATED);
                 project.setStudentID(registerRequest.getRequesterID());
                 project.setStudentEmail(StudentEmail);
                 project.setStudentName(StudentName);
                 registerRequest.setStatus(RequestStatus.APPROVED);
-                SCSE.setStudentStatus(registerRequest.getRequesterID(), StudentStatus.ASSIGNED_PROJECT,
+                AccountManager.setStudentStatus(registerRequest.getRequesterID(), StudentStatus.ASSIGNED_PROJECT,
                         registerRequest.getFypID());
-                SupervisorAccount supervisor = SCSE.getSupervisorAccount(project.getSupervisorName());
+                SupervisorAccount supervisor = AccountManager.getSupervisorAccount(project.getSupervisorName());
                 if (supervisor.getProjList().size() < 2) {
                     supervisor.addProj(project.getTitle());
                     if (supervisor.getProjList().size() == 2) {
-                        for (FYP fyp : SCSE.getSuperFypList(supervisor.getName())) {
+                        for (FYP fyp : FYPList.getSuperFypList(supervisor.getName())) {
                             if (fyp.getStatus().equals(FYPStatus.AVAILABLE)
                                     || fyp.getStatus().equals(FYPStatus.RESERVED)) {
                                 fyp.setStatus(FYPStatus.UNAVAILABLE);
-                                for (Object indivRequest : SCSE.getRequestList().get(2)) {
+                                for (Object indivRequest : RequestHistory.getRequestList().get(2)) {
                                     Request indivCastedRequest = (Request) indivRequest;
                                     if (indivCastedRequest.getFypID() == fyp.getProjectId()) {
                                         indivCastedRequest.setStatus(RequestStatus.REJECTED);
                                         String setStudentStatus = indivCastedRequest.getRequesterID();
-                                        SCSE.setStudentStatus(setStudentStatus, StudentStatus.NO_PROJECT,
+                                        AccountManager.setStudentStatus(setStudentStatus, StudentStatus.NO_PROJECT,
                                                 indivCastedRequest.getFypID());
                                     }
                                 }
@@ -98,7 +99,7 @@ public class AllocateProjectCommand implements Command {
                 break;
             case 2:
                 registerRequest.setStatus(RequestStatus.REJECTED);
-                SCSE.setStudentStatus(registerRequest.getRequesterID(), StudentStatus.NO_PROJECT, 0);
+                AccountManager.setStudentStatus(registerRequest.getRequesterID(), StudentStatus.NO_PROJECT, 0);
                 System.out.println("Rejected " + registerRequest.getRequesterID() + " for " + project.getTitle());
                 System.out.println("Press enter to continue...");
                 sc.nextLine();

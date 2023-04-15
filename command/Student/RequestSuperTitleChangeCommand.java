@@ -3,10 +3,10 @@ package command.Student;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import FYPMS.SCSE;
 import FYPMS.project.FYP;
 import FYPMS.project.FYPList;
 import FYPMS.request.*;
+import account.AccountManager;
 import account.student.StudentAccount;
 import account.student.StudentStatus;
 import command.Command;
@@ -29,9 +29,8 @@ public class RequestSuperTitleChangeCommand implements Command {
             System.out.println("Error: Your registration is still pending.");
             return;
         }
-        ArrayList<ArrayList<Object>> requests = SCSE.getRequestList();
-        FYPList fyplist = SCSE.getFypList();
-        ArrayList<FYP> fyps = fyplist.getFYPs();
+        ArrayList<ArrayList<Object>> requests = RequestHistory.getRequestList();
+        ArrayList<FYP> fyps = FYPList.getFypList();
 
         for (FYP fyp : fyps) {
             if (fyp.getStudentID() != null) {
@@ -39,7 +38,7 @@ public class RequestSuperTitleChangeCommand implements Command {
                     Scanner sc = new Scanner(System.in);
                     System.out.println("Input new project title: ");
                     String newtitle = sc.nextLine();
-                    String supervisorID = SCSE.getSupervisorAccount(fyp.getSupervisorName()).getLoginId();
+                    String supervisorID = AccountManager.getSupervisorAccount(fyp.getSupervisorName()).getLoginId();
                     RequestChangeTitle request = new RequestChangeTitle(requests.get(0).size(), student.getLoginId(),
                             supervisorID, RequestStatus.PENDING, student.getAssignedProject(), newtitle);
                     requests.get(0).add(request);

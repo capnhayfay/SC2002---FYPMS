@@ -1,6 +1,6 @@
 package FYPMS.request;
 
-import FYPMS.SCSE;
+import account.AccountManager;
 
 public class RequestTransferSupervisor extends Request {
 
@@ -8,7 +8,7 @@ public class RequestTransferSupervisor extends Request {
 
     public RequestTransferSupervisor(int requestID, String requesterID, RequestStatus requestStatus, int fypID,
             String newSupervisorID) {
-        super(requestID, requesterID, SCSE.getCoordinatorList().get(0).getLoginId(), requestStatus,
+        super(requestID, requesterID, AccountManager.getCoordinatorList().get(0).getLoginId(), requestStatus,
                 RequestRelationship.SUPERVISORCoordinator, RequestType.TRANSFER_SUPERVISOR, fypID);
         this.newSupervisorID = newSupervisorID;
     }

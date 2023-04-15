@@ -1,7 +1,7 @@
 package command;
 
-import FYPMS.SCSE;
 import FYPMS.request.Request;
+import FYPMS.request.RequestHistory;
 import account.Account;
 import java.util.ArrayList;
 
@@ -17,7 +17,7 @@ public class ViewIncomingRequestRecordsCommand implements Command {
         System.out.println();
         System.out.println("Request History");
         System.out.println();
-        ArrayList<ArrayList<Object>> requests = SCSE.getRequestList();
+        ArrayList<ArrayList<Object>> requests = RequestHistory.getRequestList();
         for (ArrayList<Object> request : requests) {
             for (Object indivRequest : request) {
                 Request indivCastedRequest = (Request) indivRequest;

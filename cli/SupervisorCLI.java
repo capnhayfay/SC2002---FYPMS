@@ -1,12 +1,12 @@
 package cli;
 
-import FYPMS.SCSE;
 import account.*;
 import java.util.Scanner;
 
 import FYPMS.project.FYP;
 import FYPMS.project.FYPList;
 import FYPMS.request.RequestChangeTitle;
+import FYPMS.request.RequestHistory;
 import account.supervisor.SupervisorAccount;
 import command.ChangePassword;
 import command.ViewIncomingRequestRecordsCommand;
@@ -147,7 +147,7 @@ public class SupervisorCLI implements Menu, Logout, GetCommand {
                                 reqID = scanner.nextInt();
                                 if (reqID / 1000 == 0) {
                                     // Request Title Change
-                                    RequestChangeTitle titleRequest = SCSE.getRequestChangeTitle(reqID);
+                                    RequestChangeTitle titleRequest = RequestHistory.getRequestChangeTitle(reqID);
                                     if (!titleRequest.getRequesteeID().equals(supervisor.getLoginId())) {
                                         System.out.println("Invalid Input. Returning to Main Page...");
                                         break;

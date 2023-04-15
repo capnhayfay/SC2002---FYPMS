@@ -2,8 +2,8 @@ package cli;
 
 import java.util.Scanner;
 
-import FYPMS.SCSE;
 import account.Account;
+import account.AccountManager;
 import account.student.StudentAccount;
 import account.supervisor.FYPCoordinatorAccount;
 import account.supervisor.SupervisorAccount;
@@ -103,7 +103,7 @@ public class LoginUserMenu implements Menu, Login {
      * @return the StudentAccount if the login is successful, null if not successful
      */
     public StudentAccount loginStudent(String username, String password) {
-        return SCSE.loginStudent(username, password);
+        return AccountManager.loginStudent(username, password);
     }
 
     /**
@@ -114,7 +114,7 @@ public class LoginUserMenu implements Menu, Login {
      * @return the SupervisorAccount if login is successful, null otherwise
      */
     public SupervisorAccount loginSupervisorAccount(String username, String password) {
-        return SCSE.loginSupervisorAccount(username, password);
+        return AccountManager.loginSupervisorAccount(username, password);
     }
 
     /**
@@ -125,7 +125,7 @@ public class LoginUserMenu implements Menu, Login {
      * @return the FYPCoordinatorAccount if login is successful, null otherwise
      */
     public FYPCoordinatorAccount loginFypCoordinatorAccount(String username, String password) {
-        return SCSE.loginFypCoordinatorAccount(username, password);
+        return AccountManager.loginFypCoordinatorAccount(username, password);
     }
 
     /**

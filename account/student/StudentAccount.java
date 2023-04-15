@@ -70,9 +70,6 @@ public class StudentAccount extends Account {
      * 
      * @return true if the student has been assigned to a project, false otherwise
      */
-    public boolean hasProject() {
-        return studentStatus == StudentStatus.ASSIGNED_PROJECT;
-    }
 
     /**
      * Gets the status of the student

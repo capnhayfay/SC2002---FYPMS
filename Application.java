@@ -18,6 +18,7 @@
 
 import account.supervisor.SupervisorAccount;
 import account.supervisor.FYPCoordinatorAccount;
+import account.AccountManager;
 import account.student.StudentAccount;
 import cli.*;
 import FYPMS.*;
@@ -152,7 +153,7 @@ public class Application {
 				}
 				loggedInUserType = studentCLI.getUserType();
 			} else if (loggedInUserType.equals("Supervisor") &&
-					!supervisorAccount.getName().equalsIgnoreCase(SCSE.getCoordinatorList().get(0).getName())) {
+					!supervisorAccount.getName().equalsIgnoreCase(AccountManager.getCoordinatorList().get(0).getName())) {
 				SupervisorCLI supervisorAccountGUI = new SupervisorCLI(supervisorAccount,
 						loggedInUserType);
 				supervisorAccountGUI.display();

@@ -11,7 +11,6 @@ package command.Supervisor;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import FYPMS.SCSE;
 import FYPMS.project.FYP;
 import FYPMS.project.FYPList;
 import account.supervisor.SupervisorAccount;
@@ -25,7 +24,7 @@ public class ModifyFYPTitle implements Command {
         this.supervisor = supervisor;
     }
 
-    FYPList fypList = SCSE.getFypList();
+    ArrayList<FYP> fypList = FYPList.getFypList();
 
     /**
      * This method prompts the user to input the project ID of the project to be
@@ -44,9 +43,7 @@ public class ModifyFYPTitle implements Command {
         System.out.println("Input projectID to change title: ");
         int projectID = sc.nextInt();
         String oldTitle = "";
-        FYPList projects = SCSE.getFypList();
-        ArrayList<FYP> fyps = projects.getFYPs();
-        for (FYP fyp : fyps) {
+        for (FYP fyp : fypList) {
             if (fyp.getProjectId() == projectID) {
                 oldTitle = fyp.getTitle();
                 ArrayList<String> proj = supervisor.getProjList();

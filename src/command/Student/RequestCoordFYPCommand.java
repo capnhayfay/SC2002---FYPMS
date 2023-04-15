@@ -22,8 +22,11 @@ import src.FYPMS.request.RequestStatus;
 import src.account.student.StudentAccount;
 import src.account.student.StudentStatus;
 import src.command.Command;
+import src.exceptions.fypmsExceptions;
 
 import java.util.ArrayList;
+import java.util.InputMismatchException;
+import java.util.Optional;
 import java.util.Scanner;
 
 
@@ -61,19 +64,58 @@ public class RequestCoordFYPCommand implements Command {
         }
 
         Scanner sc = new Scanner(System.in);
-        System.out.println("Input project ID: ");
-        int fypID = sc.nextInt();
-        ArrayList<FYP> fypList = FYPList.getFypList();
-        for (FYP fyp : fypList) {
-            if (fyp.getProjectId() == fypID) {
-                if (!(fyp.getStatus().equals(FYPStatus.AVAILABLE))) {
-                    System.out.println("Error: Project is unavailable for registration.");
-                    return;
+        Optional<FYP> checker = Optional.empty();
+        int fypID = -1;
+        do {
+            try {
+
+                do{
+                    try {
+                        System.out.println("Input project ID, or enter 0 to return to menu: ");
+                        fypID = sc.nextInt();
+                    } catch (InputMismatchException e) {
+                        sc.nextLine();
+                        fypID = -2;
+                        System.out.println(new fypmsExceptions.invalidInputException("Only Numeric Input Allowed!").toString());
+                        System.out.println();
+                        continue;
+                    }
+                } while (fypID == -2);
+                checker = FYPList.fypIdExists(fypID);
+                try {
+                    if (fypID == 0) {
+                        System.out.println("Returning to menu...");
+                        Thread.sleep(300);
+                        return;
+                    }
+                } catch (Exception e){
+                    System.out.println(e.toString());
                 }
-                fyp.setStatus(FYPStatus.RESERVED);
-                break;
+                if (checker.isEmpty()) {
+                    throw new fypmsExceptions.noSuchProjectException();
+                }
+            } catch (fypmsExceptions.noSuchProjectException noSuchProject) {
+                sc.nextLine();
+                System.out.println(noSuchProject.toString().
+                        subSequence(noSuchProject.toString().indexOf(":")+2, noSuchProject.toString().length()-1));
+                System.out.println("If you do not wish to retry, press 0");
             }
+        } while (checker.isEmpty() && fypID != 0);
+
+
+
+
+        assert checker.isPresent();
+        try{
+            if (!checker.get().getStatus().equals(FYPStatus.AVAILABLE)){
+                throw new fypmsExceptions.projectNotAvailableException();
+            }
+        } catch(fypmsExceptions.projectNotAvailableException projectNotAvailableException){
+            System.out.println(projectNotAvailableException.toString());
+            return;
         }
+        checker.get().setStatus(FYPStatus.RESERVED);
+        ArrayList<FYP> fypList = FYPList.getFypList();
         studentAccount.setStatus(StudentStatus.REQUESTED_PROJECT);
         RequestRegister registerRequest = new RequestRegister(requestHistory.get(2).size() + 2000,
                 studentAccount.getLoginId(), RequestStatus.PENDING,

@@ -1,6 +1,9 @@
 package src.FYPMS.project;
 
+import src.exceptions.fypmsExceptions;
+
 import java.util.ArrayList;
+import java.util.Optional;
 
 /**
  * Represents the list of Final Year Projects (FYPs) the department has approved
@@ -82,6 +85,17 @@ public class FYPList {
     public void addFYP(FYP fyp) {
         fypList.add(fyp);
     }
+
+    public static Optional<FYP> fypIdExists(int fypId) {
+        for (FYP fyp : fypList) {
+            if (fyp.getProjectId() == fypId) {
+                return Optional.of(fyp);
+            }
+        }
+        return Optional.empty();
+    }
+
+
 
     // /**
     //  * Searches for a FYP using a keyword inputted by users

@@ -42,7 +42,7 @@ public class ChangeSupervisorCommand implements Command {
         int requestAction = sc.nextInt();
         System.out.println("=========================================");
         switch (requestAction) {
-            case 1:
+            case 1 -> {
                 int FYPId = transferRequest.getFypID();
                 String newSupervisorName = transferRequest.getNewSupervisorID();
                 FYP fyp = FYPList.getFYPById(FYPId);
@@ -64,20 +64,19 @@ public class ChangeSupervisorCommand implements Command {
                             System.out.println("Do you wish to proceed? Y/N");
                             String choice = sc.next();
                             switch (choice) {
-                                case "Y":
-                                case "Yes":
+                                case "Y", "Yes" -> {
                                     newsupervisorAccount.addProj(fyp.getTitle());
                                     transferRequest.setStatus(RequestStatus.APPROVED);
                                     fyp.setSupervisorName(newsupervisorAccount.getName());
                                     fyp.setSupervisorEmail(newsupervisorAccount.getEmail());
                                     System.out.println(newsupervisorAccount.getName() + " has a new project "
                                             + newsupervisorAccount.getProjList().get(idx));
-                                    break;
-                                case "N":
-                                case "No":
+                                }
+                                case "N", "No" -> {
                                     transferRequest.setStatus(RequestStatus.REJECTED);
-                                    System.out.println("Succesfully rejected request.");
+                                    System.out.println("Successfully rejected request.");
                                     return;
+                                }
                             }
                         } else {
                             newsupervisorAccount.addProj(fyp.getTitle());
@@ -99,8 +98,8 @@ public class ChangeSupervisorCommand implements Command {
                         idx++;
                     }
                 }
-
                 String temp = "";
+                assert currentSupervisor != null;
                 for (String currSupProject : currentSupervisor.getProjList()) {
                     if (currSupProject.equals(fyp.getTitle())) {
                         temp = fyp.getTitle();
@@ -108,10 +107,9 @@ public class ChangeSupervisorCommand implements Command {
                     }
 
                 }
-
                 if (!temp.equals("")) {
                     currentSupervisor.getProjList().remove(temp);
-                } else if (temp.equals("")) {
+                } else {
                     System.out.println("The requester is not in charge of this project");
                     transferRequest.setStatus(RequestStatus.REJECTED);
                     return;
@@ -119,20 +117,14 @@ public class ChangeSupervisorCommand implements Command {
                 System.out.println();
                 System.out.println("Current Supervisor is: " + fyp.getSupervisorName());
                 System.out.println("Change in progress");
-
                 for (FYP project : FYPList.getSuperFypList(currentSupervisor.getName())) {
                     if (project.getStatus().equals(FYPStatus.UNAVAILABLE)) {
                         project.setStatus(FYPStatus.AVAILABLE);
                     }
                 }
-
-                break;
-            case 2:
-                transferRequest.setStatus(RequestStatus.REJECTED);
-                break;
-            default:
-                System.out.print("Error: Invalid input. Returning to main menu....");
-                break;
+            }
+            case 2 -> transferRequest.setStatus(RequestStatus.REJECTED);
+            default -> System.out.print("Error: Invalid input. Returning to main menu....");
         }
     }
 }

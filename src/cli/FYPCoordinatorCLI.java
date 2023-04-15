@@ -6,7 +6,6 @@ import src.FYPMS.request.*;
 import src.account.Account;
 import src.account.UserType;
 import src.account.supervisor.FYPCoordinatorAccount;
-import src.account.supervisor.SupervisorAccount;
 import src.command.ChangePassword;
 import src.command.FYPCoord.*;
 import src.command.Supervisor.*;
@@ -21,7 +20,7 @@ import java.util.Scanner;
  */
 public class FYPCoordinatorCLI implements Menu, Logout, GetCommand {
     /**
-     * The FYPCoordinator src.account of the user
+     * The FYPCoordinator account of the user
      */
     private FYPCoordinatorAccount fypCoordinatorAccount;
     /**

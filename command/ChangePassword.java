@@ -43,12 +43,17 @@ public class ChangePassword implements Command {
             System.out.println("Enter current password:");
             String curPass = sc.next();
             if (curPass.equals(account.getPassword())) {
+                System.out.println();
                 System.out.println("Enter new password:");
                 String newPass = sc.next();
+                System.out.println();
                 System.out.println("Confirm new password:");
                 String finalPass = sc.next();
                 if (finalPass.equals(newPass)) {
                     account.setPassword(newPass);
+                    System.out.println();
+                    System.out.println("Successfully changed password!");
+                    System.out.println();
                     break;
                 } else {
                     System.out.println("Password does not match!");

@@ -49,6 +49,8 @@ public class CreateProjectCommand implements Command {
                     title,
                     FYPStatus.AVAILABLE);
             fypList.add(fyp);
+            System.out.println();
+            System.out.println("Project has successfully been created!");
         }
     }
 }

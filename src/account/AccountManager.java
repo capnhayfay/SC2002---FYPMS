@@ -14,9 +14,9 @@ import java.util.ArrayList;
  */
 public class AccountManager {
     // ArrayLists to hold different types of accounts
-    private static final ArrayList<StudentAccount> StudentAccount = new ArrayList<StudentAccount>();
-    private static final ArrayList<FYPCoordinatorAccount> FYPCoordinatorAccounts = new ArrayList<FYPCoordinatorAccount>();
-    private static final ArrayList<SupervisorAccount> SupervisorAccounts = new ArrayList<SupervisorAccount>();
+    private static final ArrayList<StudentAccount> StudentAccount = new ArrayList<>();
+    private static final ArrayList<FYPCoordinatorAccount> FYPCoordinatorAccounts = new ArrayList<>();
+    private static final ArrayList<SupervisorAccount> SupervisorAccounts = new ArrayList<>();
     /**
      * Creates an instance of the Account manager to manages the runtime memory versions of all accounts
      */

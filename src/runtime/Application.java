@@ -27,6 +27,7 @@ import src.cli.*;
 
 import java.io.IOException;
 import java.util.InputMismatchException;
+import java.util.Objects;
 import java.util.Scanner;
 
 /**
@@ -48,6 +49,18 @@ public class Application {
      * @throws IOException If there is an I/O error reading the CSV files.
      */
     public static void main(String[] args) throws IOException {
+        /*
+          The run method initializes the src.FYPMS system, loads data from CSV files,
+          prompts the user to log in and
+          displays the appropriate GUI depending on the user type (student, supervisor
+          or FYP coordinator).
+          Once the user is done interacting with the system, any changes made are saved
+          to the data files.
+
+          @throws IOException If there is an I/O error reading or writing the CSV
+         *                     files.
+         */
+
         // load in CSV
         FileReader.readFYPsFromFile("src/database/Modified/rollover project.txt");
         FileReader.readSupervisorsFromFile("src/database/Modified/faculty_list.txt");
@@ -137,7 +150,7 @@ public class Application {
                 }
                 loggedInUserType = studentCLI.getUserType();
             } else if (loggedInUserType.equals(UserType.Supervisor) &&
-                    !supervisorAccount.getName().equalsIgnoreCase(AccountManager.getCoordinatorList().get(0).getName())) {
+                    !Objects.requireNonNull(supervisorAccount).getName().equalsIgnoreCase(AccountManager.getCoordinatorList().get(0).getName())) {
                 SupervisorCLI supervisorAccountGUI = new SupervisorCLI(supervisorAccount,
                         loggedInUserType);
                 supervisorAccountGUI.display();
@@ -174,17 +187,7 @@ public class Application {
                 "src/database/test/3requestTransferSupervisor.txt");
     }
 
-    /**
-     * The run method initializes the src.FYPMS system, loads data from CSV files,
-     * prompts the user to log in and
-     * displays the appropriate GUI depending on the user type (student, supervisor
-     * or FYP coordinator).
-     * Once the user is done interacting with the system, any changes made are saved
-     * to the data files.
-     *
-     * @throws IOException If there is an I/O error reading or writing the CSV
-     *                     files.
-     */
+
     //public void run() throws IOException {
         // end of load in CSV
         // load in updatedCSV

@@ -89,7 +89,7 @@ public class SupervisorCLI implements Menu, Logout, GetCommand {
                 return 0;
             }
             switch (userCh) {
-                case 1:
+                case 1 -> {
                     System.out.println("Please input a choice from Create, Update, and View Projects");
                     System.out.println("1. Create Project");
                     System.out.println("2. Update Project Title");
@@ -105,18 +105,12 @@ public class SupervisorCLI implements Menu, Logout, GetCommand {
                     int selectedChoice = scanner.nextInt();
                     scanner.nextLine();
                     switch (selectedChoice) {
-                        case 1:
-                            new CreateProjectCommand(supervisorAccount).execute();
-                            break;
-                        case 2:
-                            new ModifyFYPTitle(supervisorAccount).execute();
-                            break;
-                        case 3:
-                            new ViewSubmittedFYPCommand(supervisorAccount.getName()).execute();
-                            break;
+                        case 1 -> new CreateProjectCommand(supervisorAccount).execute();
+                        case 2 -> new ModifyFYPTitle(supervisorAccount).execute();
+                        case 3 -> new ViewSubmittedFYPCommand(supervisorAccount.getName()).execute();
                     }
-                    break;
-                case 2:
+                }
+                case 2 -> {
                     ViewPendingStudentRequestsCommand ViewRequests = new ViewPendingStudentRequestsCommand(
                             supervisorAccount.getLoginId());
                     ViewRequests.execute();
@@ -137,12 +131,13 @@ public class SupervisorCLI implements Menu, Logout, GetCommand {
                         int projID;
                         FYP fyp;
                         switch (choice2) {
-                            case 1:
+                            case 1 -> {
                                 System.out.println("Input request ID: ");
                                 reqID = scanner.nextInt();
                                 if (reqID / 1000 == 0) {
                                     // Request Title Change
                                     RequestChangeTitle titleRequest = RequestHistory.getRequestChangeTitle(reqID);
+                                    assert titleRequest != null;
                                     if (!titleRequest.getRequesteeID().equals(supervisorAccount.getLoginId())) {
                                         System.out.println("Invalid Input. Returning to Main Page...");
                                         break;
@@ -153,20 +148,14 @@ public class SupervisorCLI implements Menu, Logout, GetCommand {
                                 } else if (reqID / 1000 != 0) {
                                     System.out.println("Invalid Input. Returning to Main Page...");
                                 }
-                                break;
-                            case 2:
-                                System.out.println("Returning to Main Page...");
-                                break;
-                            default:
-                                System.out.println("Invalid Input. Returning to Main Page...");
-                                break;
+                            }
+                            case 2 -> System.out.println("Returning to Main Page...");
+                            default -> System.out.println("Invalid Input. Returning to Main Page...");
                         }
                     }
-                    break;
-                case 3:
-                    new RequestTransfertoCoordCommand(supervisorAccount).execute();
-                    break;
-                case 4:
+                }
+                case 3 -> new RequestTransfertoCoordCommand(supervisorAccount).execute();
+                case 4 -> {
                     System.out.println("Please select your choice");
                     System.out.println("1. View all incoming requests");
                     System.out.println("2. View all outgoing requests");
@@ -182,37 +171,28 @@ public class SupervisorCLI implements Menu, Logout, GetCommand {
                     int requestChoice = scanner.nextInt();
                     scanner.nextLine();
                     switch (requestChoice) {
-                        case 1:
-                            new ViewIncomingRequestRecordsCommand(supervisorAccount).execute();
-                            break;
-                        case 2:
-                            new ViewOutcomingRequestRecordsCommand(supervisorAccount).execute();
-                            break;
-                        case 3:
-                            new ViewAllRequestRecordsCommand(supervisorAccount).execute();
-                            break;
-                        case 4:
-                            System.out.println("Returning to Main Page...");
-                            break;
-                        default:
-                            System.out.println("Invalid Input. Returning to Main Page...");
-                            break;
+                        case 1 -> new ViewIncomingRequestRecordsCommand(supervisorAccount).execute();
+                        case 2 -> new ViewOutcomingRequestRecordsCommand(supervisorAccount).execute();
+                        case 3 -> new ViewAllRequestRecordsCommand(supervisorAccount).execute();
+                        case 4 -> System.out.println("Returning to Main Page...");
+                        default -> System.out.println("Invalid Input. Returning to Main Page...");
                     }
-                    break;
-                case 5:
+                }
+                case 5 -> {
                     new ChangePassword(supervisorAccount).execute();
                     logout();
-                    break;
-                case 6:
+                }
+                case 6 -> {
                     logout();
                     System.out.println();
                     System.out.println("Logged out successfully.");
                     System.out.println();
                     return 1;
-                default:
+                }
+                default -> {
                     System.out.println();
                     System.out.println("Option number out of range. Please try again.");
-                    break;
+                }
             }
             return 1;
         }

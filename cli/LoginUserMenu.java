@@ -26,7 +26,7 @@ public class LoginUserMenu implements Menu, Login {
      */
     public LoginUserMenu(StudentAccount studentAccount) {
         this.studentAccount = studentAccount;
-        userType = UserType.Student;
+        this.userType = UserType.Student;
     }
 
     /**
@@ -160,5 +160,11 @@ public class LoginUserMenu implements Menu, Login {
     public FYPCoordinatorAccount getFYPCoordinatorAccount() {
         return fypCoordinatorAccount;
     }
+
+    public UserType getUserType() {
+        return userType;
+    }
+
+    
 
 }

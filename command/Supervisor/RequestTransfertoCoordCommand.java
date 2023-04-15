@@ -46,7 +46,7 @@ public class RequestTransfertoCoordCommand implements Command {
     }
 
     /** The list of requests in the system */
-    final ArrayList<ArrayList<Request>> requests = RequestHistory.getRequestList();
+    final ArrayList<ArrayList<Request>> requestHistory = RequestHistory.getRequestHistory();
 
     /**
      * Executes the command to transfer supervision of an FYP project from the
@@ -80,9 +80,9 @@ public class RequestTransfertoCoordCommand implements Command {
             for (SupervisorAccount indi : supervisors) {
                 if (indi.getLoginId().equals(newSupervisorID)
                         && !(newSupervisorID.equals(supervisorAccount.getLoginId()))) {
-                    RequestTransferSupervisor request = new RequestTransferSupervisor(requests.get(3).size() + 3000,
+                    RequestTransferSupervisor requestTransferSupervisor = new RequestTransferSupervisor(requestHistory.get(3).size() + 3000,
                             supervisorAccount.getLoginId(), RequestStatus.PENDING, fypId, newSupervisorID);
-                    requests.get(3).add(request);
+                            requestHistory.get(3).add(requestTransferSupervisor);
                     return;
                 }
             }

@@ -24,11 +24,11 @@ import command.Command;
  *
  */
 public class AllocateProjectCommand implements Command {
-    private final FYP project;
+    private final FYP fyp;
     private final RequestRegister registerRequest;
 
-    public AllocateProjectCommand(FYP project, RequestRegister registerRequest) {
-        this.project = project;
+    public AllocateProjectCommand(FYP fyp, RequestRegister registerRequest) {
+        this.fyp = fyp;
         this.registerRequest = registerRequest;
     }
 
@@ -55,22 +55,22 @@ public class AllocateProjectCommand implements Command {
             case 1:
                 String StudentName = AccountManager.getStudentName(registerRequest.getRequesterID());
                 String StudentEmail = AccountManager.getStudentEmail(registerRequest.getRequesterID());
-                project.setStatus(FYPStatus.ALLOCATED);
-                project.setStudentID(registerRequest.getRequesterID());
-                project.setStudentEmail(StudentEmail);
-                project.setStudentName(StudentName);
+                fyp.setStatus(FYPStatus.ALLOCATED);
+                fyp.setStudentID(registerRequest.getRequesterID());
+                fyp.setStudentEmail(StudentEmail);
+                fyp.setStudentName(StudentName);
                 registerRequest.setStatus(RequestStatus.APPROVED);
                 AccountManager.setStudentStatus(registerRequest.getRequesterID(), StudentStatus.ASSIGNED_PROJECT,
                         registerRequest.getFypID());
-                SupervisorAccount supervisor = AccountManager.getSupervisorAccount(project.getSupervisorName());
-                if (supervisor.getProjList().size() < 2) {
-                    supervisor.addProj(project.getTitle());
-                    if (supervisor.getProjList().size() == 2) {
-                        for (FYP fyp : FYPList.getSuperFypList(supervisor.getName())) {
+                SupervisorAccount supervisorAccount = AccountManager.getSupervisorAccount(fyp.getSupervisorName());
+                if (supervisorAccount.getProjList().size() < 2) {
+                    supervisorAccount.addProj(fyp.getTitle());
+                    if (supervisorAccount.getProjList().size() == 2) {
+                        for (FYP fyp : FYPList.getSuperFypList(supervisorAccount.getName())) {
                             if (fyp.getStatus().equals(FYPStatus.AVAILABLE)
                                     || fyp.getStatus().equals(FYPStatus.RESERVED)) {
                                 fyp.setStatus(FYPStatus.UNAVAILABLE);
-                                for (Request indivRequest : RequestHistory.getRequestList().get(2)) {
+                                for (Request indivRequest : RequestHistory.getRequestHistory().get(2)) {
                                     if (indivRequest.getFypID() == fyp.getProjectId()) {
                                         indivRequest.setStatus(RequestStatus.REJECTED);
                                         String setStudentStatus = indivRequest.getRequesterID();
@@ -80,26 +80,26 @@ public class AllocateProjectCommand implements Command {
                                 }
                             }
                         }
-                        System.out.println("Error: " + supervisor.getName() + " has reached the project limit.");
+                        System.out.println("Error: " + supervisorAccount.getName() + " has reached the project limit.");
                         System.out.println(
-                                "Rejecting all pending registration requests for " + supervisor.getName()
+                                "Rejecting all pending registration requests for " + supervisorAccount.getName()
                                         + "'s projects.");
-                        System.out.println("Setting all of " + supervisor.getName() + "'s projects to unavailable");
+                        System.out.println("Setting all of " + supervisorAccount.getName() + "'s projects to unavailable");
 
                     }
 
                 } else {
-                    System.out.println("Error: " + supervisor.getName() + " has reached the project limit.");
+                    System.out.println("Error: " + supervisorAccount.getName() + " has reached the project limit.");
                     return;
                 }
-                System.out.println("Allocated project " + project.getTitle() + " to " + StudentName);
+                System.out.println("Allocated project " + fyp.getTitle() + " to " + StudentName);
                 System.out.println("Press enter to continue...");
                 sc.nextLine();
                 break;
             case 2:
                 registerRequest.setStatus(RequestStatus.REJECTED);
                 AccountManager.setStudentStatus(registerRequest.getRequesterID(), StudentStatus.NO_PROJECT, 0);
-                System.out.println("Rejected " + registerRequest.getRequesterID() + " for " + project.getTitle());
+                System.out.println("Rejected " + registerRequest.getRequesterID() + " for " + fyp.getTitle());
                 System.out.println("Press enter to continue...");
                 sc.nextLine();
                 break;

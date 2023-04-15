@@ -8,18 +8,17 @@ public class StudentAccount extends Account {
     /**
      * Creates a new instance of StudentAccount
      *
-     * @param userId          The login ID of the student
+     * @param loginId         The login ID of the student
      * @param password        The password of the student
      * @param userType        The userType of the student
      * @param emailAddress    The email address of the student
      * @param name            The name of the student
      * @param assignedProject The ID of the project assigned to the student
-     * @param studentStatus   The status of the student (e.g. assigned to a project,
-     *                        not assigned to a project)
-     */
-    public StudentAccount(String userId, String password, UserType userType, String emailAddress, String name,
+     * @param studentStatus   The status of the student (e.g. assigned to a project, not assigned to a project)
+    */
+    public StudentAccount(String loginId, String password, UserType userType, String emailAddress, String name,
             int assignedProject, StudentStatus studentStatus) {
-        super(userId, password, userType, emailAddress, name);
+        super(loginId, password, userType, emailAddress, name);
         this.assignedProject = assignedProject;
         this.studentStatus = studentStatus;
     }
@@ -27,12 +26,12 @@ public class StudentAccount extends Account {
     /**
      * Authenticates login of StudentAccount
      * 
-     * @param userId   The login ID entered by the user
+     * @param loginId   The login ID entered by the user
      * @param password The password entered by the user
      * @return The userType if login successful, null if login failed
      */
-    public UserType login(String userId, String password) {
-        if (this.getLoginId().equals(userId) && this.getPassword().equals(password)) {
+    public UserType login(String loginId, String password) {
+        if (this.getLoginId().equals(loginId) && this.getPassword().equals(password)) {
             return this.getUserType();
         }
         return null;

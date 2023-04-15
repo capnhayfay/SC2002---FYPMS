@@ -34,20 +34,20 @@ import FYPMS.request.RequestTransferSupervisor;
  */
 public class FYPCoordinatorCLI implements Menu, Logout, GetCommand {
     /** The FYPCoordinator account of the user */
-    private FYPCoordinatorAccount FYPCoordinator;
+    private FYPCoordinatorAccount fypCoordinatorAccount;
     /** The user type of the user */
-    private String UserType;
+    private UserType userType;
 
     /**
      * Constructs a FYPCoordinatorCLI with the given FYPCoordinator account and user
      * type
      * 
-     * @param FYPCoordinator the FYPCoordinator account of the user
-     * @param UserType       the user type of the user
+     * @param fypCoordinatorAccount the FYPCoordinator account of the user
+     * @param userType       the user type of the user
      */
-    public FYPCoordinatorCLI(FYPCoordinatorAccount FYPCoordinator, String UserType) {
-        this.FYPCoordinator = FYPCoordinator;
-        this.UserType = UserType;
+    public FYPCoordinatorCLI(FYPCoordinatorAccount fypCoordinatorAccount, UserType userType) {
+        this.fypCoordinatorAccount = fypCoordinatorAccount;
+        this.userType = userType;
     }
 
     /**
@@ -60,10 +60,10 @@ public class FYPCoordinatorCLI implements Menu, Logout, GetCommand {
         System.out.println("           FYP Coordinator Menu          ");
         System.out.println("=========================================");
         System.out.println();
-        System.out.println("Logged in as FYP Coordinator: " + FYPCoordinator.getName());
+        System.out.println("Logged in as FYP Coordinator: " + fypCoordinatorAccount.getName());
         System.out.println();
         System.out.println("1. Create, update or view projects");
-        if (RequestHistory.CheckPendingRequests(FYPCoordinator.getLoginId()) == 1) {
+        if (RequestHistory.CheckPendingRequests(fypCoordinatorAccount.getLoginId()) == 1) {
             System.out.println("2. View pending requests (NEW)");
         } else {
             System.out.println("2. View pending requests");
@@ -123,25 +123,25 @@ public class FYPCoordinatorCLI implements Menu, Logout, GetCommand {
                     scanner.nextLine();
                     switch (selectedChoice) {
                         case 1:
-                            if (FYPCoordinator.getProjList().size() == 2) {
+                            if (fypCoordinatorAccount.getProjList().size() == 2) {
                                 System.out.println();
                                 System.out.println("You have reach the maximum allocated project capacity.");
                                 break;
                             } else {
-                                new CreateProjectCommand(FYPCoordinator).execute();
+                                new CreateProjectCommand(fypCoordinatorAccount).execute();
                             }
                             break;
                         case 2:
-                            new ModifyFYPTitle(FYPCoordinator).execute();
+                            new ModifyFYPTitle(fypCoordinatorAccount).execute();
                             break;
                         case 3:
-                            new ViewSubmittedFYPCommand(FYPCoordinator.getName()).execute();
+                            new ViewSubmittedFYPCommand(fypCoordinatorAccount.getName()).execute();
                             break;
                     }
                     break;
                 case 2:
                     ViewPendingStudentRequestsCommand ViewRequests = new ViewPendingStudentRequestsCommand(
-                            FYPCoordinator.getLoginId());
+                        fypCoordinatorAccount.getLoginId());
                     ViewRequests.execute();
                     if (ViewRequests.getRequestNumber() != 0) {
                         System.out.println("=========================================");
@@ -171,7 +171,7 @@ public class FYPCoordinatorCLI implements Menu, Logout, GetCommand {
                                 if (reqID / 1000 == 0) {
                                     // requestitlechange
                                     RequestChangeTitle titleRequest = RequestHistory.getRequestChangeTitle(reqID);
-                                    if (!titleRequest.getRequesteeID().equals(FYPCoordinator.getLoginId())) {
+                                    if (!titleRequest.getRequesteeID().equals(fypCoordinatorAccount.getLoginId())) {
                                         System.out.println("Invalid Input. Returning to Main Page...");
                                         break;
                                     }
@@ -208,7 +208,7 @@ public class FYPCoordinatorCLI implements Menu, Logout, GetCommand {
                     }
                     break;
                 case 3:
-                    new RequestTransfertoCoordCommand(FYPCoordinator).execute();
+                    new RequestTransfertoCoordCommand(fypCoordinatorAccount).execute();
                     break;
 
                 case 4:
@@ -228,13 +228,13 @@ public class FYPCoordinatorCLI implements Menu, Logout, GetCommand {
                     scanner.nextLine();
                     switch (requestChoice) {
                         case 1:
-                            new ViewIncomingRequestRecordsCommand(FYPCoordinator).execute();
+                            new ViewIncomingRequestRecordsCommand(fypCoordinatorAccount).execute();
                             break;
                         case 2:
-                            new ViewOutcomingRequestRecordsCommand(FYPCoordinator).execute();
+                            new ViewOutcomingRequestRecordsCommand(fypCoordinatorAccount).execute();
                             break;
                         case 3:
-                            new ViewAllRequestRecordsCommand(FYPCoordinator).execute();
+                            new ViewAllRequestRecordsCommand(fypCoordinatorAccount).execute();
                             break;
                         case 4:
                             System.out.println("Returning to Main Page...");
@@ -281,7 +281,7 @@ public class FYPCoordinatorCLI implements Menu, Logout, GetCommand {
                     }
                     break;
                 case 7:
-                    new ChangePassword(FYPCoordinator).execute();
+                    new ChangePassword(fypCoordinatorAccount).execute();
                     logout();
                     break;
                 case 8:
@@ -299,8 +299,8 @@ public class FYPCoordinatorCLI implements Menu, Logout, GetCommand {
      * Logout from account by setting FYP Coordinator Account to null
      */
     public void logout() {
-        this.FYPCoordinator = null;
-        this.UserType = "";
+        this.fypCoordinatorAccount = null;
+        this.userType = null;
     }
 
     /**
@@ -309,7 +309,7 @@ public class FYPCoordinatorCLI implements Menu, Logout, GetCommand {
      * @return Account
      */
     public Account getAccount() {
-        return FYPCoordinator;
+        return fypCoordinatorAccount;
     }
 
     /**
@@ -317,7 +317,7 @@ public class FYPCoordinatorCLI implements Menu, Logout, GetCommand {
      * 
      * @return UserType
      */
-    public String getUserType() {
-        return UserType;
+    public UserType getUserType() {
+        return userType;
     }
 }

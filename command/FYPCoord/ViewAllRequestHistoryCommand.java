@@ -22,14 +22,14 @@ public class ViewAllRequestHistoryCommand implements Command {
      * requests that were submitted to a coordinator.
      */
     public void execute() {
-        ArrayList<ArrayList<Request>> requests = RequestHistory.getRequestList();
+        ArrayList<ArrayList<Request>> requestHistory = RequestHistory.getRequestHistory();
         int empty = 1;
-        for (ArrayList<Request> request : requests) {
-            if (request.size() != 0) {
+        for (ArrayList<Request> requestList : requestHistory) {
+            if (requestList.size() != 0) {
                 empty = 0;
             }
-            for (Request indivRequest : request) {
-                indivRequest.printDetails();
+            for (Request Request : requestList) {
+                Request.printDetails();
             }
         }
         if (empty == 1) {

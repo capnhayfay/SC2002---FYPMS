@@ -25,7 +25,7 @@ public class FileUpdater {
     /**
      * Writes the FYP list to file
      *
-     * @param fileName the name of the CSV file to write to
+     * @param fileName the name of the file to write to
      */
     public static void writeFYPsToFile(String fileName) {
         ArrayList<FYP> fypList = FYPList.getFypList();
@@ -52,22 +52,22 @@ public class FileUpdater {
     /**
      * Writes the request list to file
      *
-     * @param fileName the name of the CSV file to write to
+     * @param fileName the name of the file to write to
      */
     public static void writeRequestsToFile(String fileName, String filename1, String filename2, String filename3) {
-        ArrayList<ArrayList<Request>> requestList = RequestHistory.getRequestList();
+        ArrayList<ArrayList<Request>> requestHistory = RequestHistory.getRequestHistory();
         Path pathToFile = Paths.get(fileName);
 
         try (BufferedWriter bw = Files.newBufferedWriter(pathToFile, StandardCharsets.UTF_8)) {
             // Write the header
             bw.write("requestID\trequesterID\trequesteeID\trequestStatus\tfypID\tnewTitle");
             // Write each request
-            for (Request indivrequest : requestList.get(0)) {
-                RequestChangeTitle indivCastedRequest = (RequestChangeTitle) indivrequest;
+            for (Request request : requestHistory.get(0)) {
+                RequestChangeTitle castedRequest = (RequestChangeTitle) request;
                 bw.write("\n");
-                bw.write(indivCastedRequest.getRequestID() + "\t" + indivCastedRequest.getRequesterID() + "\t"
-                        + indivCastedRequest.getRequesteeID() + '\t' + indivCastedRequest.getRequestStatus() + '\t'
-                        + indivCastedRequest.getFypID() + '\t' + indivCastedRequest.getNewTitle());
+                bw.write(castedRequest.getRequestID() + "\t" + castedRequest.getRequesterID() + "\t"
+                        + castedRequest.getRequesteeID() + '\t' + castedRequest.getRequestStatus() + '\t'
+                        + castedRequest.getFypID() + '\t' + castedRequest.getNewTitle());
             }
         } catch (IOException ioe) {
             ioe.printStackTrace();
@@ -79,11 +79,11 @@ public class FileUpdater {
             // Write the header
             bw.write("requestID\trequesterID\trequestStatus\tfypID");
             // Write each request
-            for (Request indivrequest : requestList.get(1)) {
-                RequestDeregister indivCastedRequest = (RequestDeregister) indivrequest;
+            for (Request request : requestHistory.get(1)) {
+                RequestDeregister castedRequest = (RequestDeregister) request;
                 bw.write("\n");
-                bw.write(indivCastedRequest.getRequestID() + "\t" + indivCastedRequest.getRequesterID() + "\t"
-                        + indivCastedRequest.getRequestStatus() + '\t' + indivCastedRequest.getFypID());
+                bw.write(castedRequest.getRequestID() + "\t" + castedRequest.getRequesterID() + "\t"
+                        + castedRequest.getRequestStatus() + '\t' + castedRequest.getFypID());
             }
         } catch (IOException ioe) {
             ioe.printStackTrace();
@@ -95,11 +95,11 @@ public class FileUpdater {
             // Write the header
             bw.write("requestID\trequesterID\trequestStatus\tfypID");
             // Write each request
-            for (Request indivrequest : requestList.get(2)) {
-                RequestRegister indivCastedRequest = (RequestRegister) indivrequest;
+            for (Request request : requestHistory.get(2)) {
+                RequestRegister castedRequest = (RequestRegister) request;
                 bw.write("\n");
-                bw.write(indivCastedRequest.getRequestID() + "\t" + indivCastedRequest.getRequesterID() + "\t"
-                        + indivCastedRequest.getRequestStatus() + '\t' + indivCastedRequest.getFypID());
+                bw.write(castedRequest.getRequestID() + "\t" + castedRequest.getRequesterID() + "\t"
+                        + castedRequest.getRequestStatus() + '\t' + castedRequest.getFypID());
             }
         } catch (IOException ioe) {
             ioe.printStackTrace();
@@ -111,12 +111,12 @@ public class FileUpdater {
             // Write the header
             bw.write("requestID\trequesterID\trequestStatus\tfypID\tnewSupervisorId");
             // Write each request
-            for (Request indivrequest : requestList.get(3)) {
-                RequestTransferSupervisor indivCastedRequest = (RequestTransferSupervisor) indivrequest;
+            for (Request request : requestHistory.get(3)) {
+                RequestTransferSupervisor castedRequest = (RequestTransferSupervisor) request;
                 bw.write("\n");
-                bw.write(indivCastedRequest.getRequestID() + "\t" + indivCastedRequest.getRequesterID() + "\t"
-                        + indivCastedRequest.getRequestStatus() + '\t' + indivCastedRequest.getFypID() + '\t'
-                        + indivCastedRequest.getNewSupervisorID());
+                bw.write(castedRequest.getRequestID() + "\t" + castedRequest.getRequesterID() + "\t"
+                        + castedRequest.getRequestStatus() + '\t' + castedRequest.getFypID() + '\t'
+                        + castedRequest.getNewSupervisorID());
             }
         } catch (IOException ioe) {
             ioe.printStackTrace();
@@ -126,7 +126,7 @@ public class FileUpdater {
     /**
      * Writes the supervisor list to file
      *
-     * @param fileName the name of the CSV file to write to
+     * @param fileName the name of the file to write to
      */
     public static void writeSupervisorToFile(String fileName) {
         ArrayList<SupervisorAccount> supervisorList = AccountManager.getSupervisorList();
@@ -146,7 +146,7 @@ public class FileUpdater {
     /**
      * Writes the FYP coordinator list to file
      *
-     * @param fileName the name of the CSV file to write to
+     * @param fileName the name of the file to write to
      */
     public static void writeCoordinatorToFile(String fileName) {
         ArrayList<FYPCoordinatorAccount> coordinatorList = AccountManager.getCoordinatorList();
@@ -167,7 +167,7 @@ public class FileUpdater {
     /**
      * Writes the Student list to file
      *
-     * @param fileName the name of the CSV file to write to
+     * @param fileName the name of the file to write to
      */
     public static void writeStudentToFile(String fileName) {
         Path pathToFile = Paths.get(fileName);

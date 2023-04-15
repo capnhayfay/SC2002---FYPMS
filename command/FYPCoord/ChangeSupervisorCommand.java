@@ -41,20 +41,20 @@ public class ChangeSupervisorCommand implements Command {
             case 1:
                 int FYPId = transferRequest.getFypID();
                 String newSupervisorName = transferRequest.getNewSupervisorID();
-                FYP project = FYPList.getFYPById(FYPId);
-                String currentSupervisorName = project.getSupervisorName();
-                ArrayList<SupervisorAccount> supervisors = AccountManager.getSupervisorList();
+                FYP fyp = FYPList.getFYPById(FYPId);
+                String currentSupervisorName = fyp.getSupervisorName();
+                ArrayList<SupervisorAccount> supervisorList = AccountManager.getSupervisorList();
                 SupervisorAccount currentSupervisor = null;
-                for (SupervisorAccount supervisor : supervisors) {
-                    if (supervisor.getName().equalsIgnoreCase(currentSupervisorName)) {
-                        currentSupervisor = supervisor;
+                for (SupervisorAccount supervisorAccount : supervisorList) {
+                    if (supervisorAccount.getName().equalsIgnoreCase(currentSupervisorName)) {
+                        currentSupervisor = supervisorAccount;
                         break;
                     }
                 }
                 int idx = 0;
-                for (SupervisorAccount nsupervisor : supervisors) {
-                    if (nsupervisor.getLoginId().equalsIgnoreCase(newSupervisorName)) {
-                        if (nsupervisor.getProjList().size() >= 2) {
+                for (SupervisorAccount newsupervisorAccount : supervisorList) {
+                    if (newsupervisorAccount.getLoginId().equalsIgnoreCase(newSupervisorName)) {
+                        if (newsupervisorAccount.getProjList().size() >= 2) {
                             System.out.println(
                                     "Warning: " + newSupervisorName + " is already in charge of at least 2 projects");
                             System.out.println("Do you wish to proceed? Y/N");
@@ -62,12 +62,12 @@ public class ChangeSupervisorCommand implements Command {
                             switch (choice) {
                                 case "Y":
                                 case "Yes":
-                                    nsupervisor.addProj(project.getTitle());
+                                    newsupervisorAccount.addProj(fyp.getTitle());
                                     transferRequest.setStatus(RequestStatus.APPROVED);
-                                    project.setSupervisorName(nsupervisor.getName());
-                                    project.setSupervisorEmail(nsupervisor.getEmail());
-                                    System.out.println(nsupervisor.getName() + " has a new project "
-                                            + nsupervisor.getProjList().get(idx));
+                                    fyp.setSupervisorName(newsupervisorAccount.getName());
+                                    fyp.setSupervisorEmail(newsupervisorAccount.getEmail());
+                                    System.out.println(newsupervisorAccount.getName() + " has a new project "
+                                            + newsupervisorAccount.getProjList().get(idx));
                                     break;
                                 case "N":
                                 case "No":
@@ -76,16 +76,16 @@ public class ChangeSupervisorCommand implements Command {
                                     return;
                             }
                         } else {
-                            nsupervisor.addProj(project.getTitle());
+                            newsupervisorAccount.addProj(fyp.getTitle());
                             transferRequest.setStatus(RequestStatus.APPROVED);
-                            project.setSupervisorName(nsupervisor.getName());
-                            project.setSupervisorEmail(nsupervisor.getEmail());
+                            fyp.setSupervisorName(newsupervisorAccount.getName());
+                            fyp.setSupervisorEmail(newsupervisorAccount.getEmail());
                             System.out.println(
-                                    nsupervisor.getName() + " has a new project " + nsupervisor.getProjList().get(idx));
-                            if (nsupervisor.getProjList().size() == 2) {
-                                for (FYP fyp : FYPList.getSuperFypList(nsupervisor.getName())) {
-                                    if (fyp.getStatus().equals(FYPStatus.AVAILABLE)) {
-                                        fyp.setStatus(FYPStatus.UNAVAILABLE);
+                                newsupervisorAccount.getName() + " has a new project " + newsupervisorAccount.getProjList().get(idx));
+                            if (newsupervisorAccount.getProjList().size() == 2) {
+                                for (FYP project : FYPList.getSuperFypList(newsupervisorAccount.getName())) {
+                                    if (project.getStatus().equals(FYPStatus.AVAILABLE)) {
+                                        project.setStatus(FYPStatus.UNAVAILABLE);
                                     }
 
                                 }
@@ -98,8 +98,8 @@ public class ChangeSupervisorCommand implements Command {
 
                 String temp = "";
                 for (String currSupProject : currentSupervisor.getProjList()) {
-                    if (currSupProject.equals(project.getTitle())) {
-                        temp = project.getTitle();
+                    if (currSupProject.equals(fyp.getTitle())) {
+                        temp = fyp.getTitle();
                         break;
                     }
 
@@ -113,12 +113,12 @@ public class ChangeSupervisorCommand implements Command {
                     return;
                 }
                 System.out.println();
-                System.out.println("Current Supervisor is: " + project.getSupervisorName());
+                System.out.println("Current Supervisor is: " + fyp.getSupervisorName());
                 System.out.println("Change in progress");
 
-                for (FYP fyp : FYPList.getSuperFypList(currentSupervisor.getName())) {
-                    if (fyp.getStatus().equals(FYPStatus.UNAVAILABLE)) {
-                        fyp.setStatus(FYPStatus.AVAILABLE);
+                for (FYP project : FYPList.getSuperFypList(currentSupervisor.getName())) {
+                    if (project.getStatus().equals(FYPStatus.UNAVAILABLE)) {
+                        project.setStatus(FYPStatus.AVAILABLE);
                     }
                 }
 

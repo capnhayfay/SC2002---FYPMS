@@ -18,18 +18,18 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class DeregisterStudentCommand implements Command {
-    private final FYP project;
+    private final FYP fyp;
     private final RequestDeregister requestDeregister;
 
     /**
      * Constructs a new DeregisterStudentCommand object with the specified project
      * and deregistration request.
      *
-     * @param project           the project to deregister the student from
+     * @param fyp           the project to deregister the student from
      * @param requestDeregister the deregistration request
      */
-    public DeregisterStudentCommand(FYP project, RequestDeregister requestDeregister) {
-        this.project = project;
+    public DeregisterStudentCommand(FYP fyp, RequestDeregister requestDeregister) {
+        this.fyp = fyp;
         this.requestDeregister = requestDeregister;
     }
 
@@ -51,38 +51,38 @@ public class DeregisterStudentCommand implements Command {
         switch (requestAction) {
             case 1:
                 String StudentName = AccountManager.getStudentName(requestDeregister.getRequesterID());
-                project.setStatus(FYPStatus.AVAILABLE);
-                project.setStudentID("");
-                project.setStudentEmail(null);
-                project.setStudentName(null);
+                fyp.setStatus(FYPStatus.AVAILABLE);
+                fyp.setStudentID("");
+                fyp.setStudentEmail(null);
+                fyp.setStudentName(null);
                 requestDeregister.setStatus(RequestStatus.APPROVED);
                 AccountManager.setStudentStatus(requestDeregister.getRequesterID(), StudentStatus.DEREGISTERED_PROJECT,
                         requestDeregister.getFypID());
-                for (ArrayList<Request> requests : RequestHistory.getRequestList())
-                    for (Request indivRequest : requests) {
+                for (ArrayList<Request> requestList : RequestHistory.getRequestHistory())
+                    for (Request indivRequest : requestList) {
                         if (indivRequest.getRequesterID().equals(requestDeregister.getRequesterID())
                                 && indivRequest.getRequestStatus().equals(RequestStatus.PENDING)) {
                                     indivRequest.setStatus(RequestStatus.REJECTED);
                         }
                     }
-                SupervisorAccount supervisor = AccountManager.getSupervisorAccount(project.getSupervisorName());
-                supervisor.getProjList().remove(project.getTitle());
-                if (supervisor.getProjList().size() < 2) {
-                    for (FYP fyp : FYPList.getSuperFypList(supervisor.getName())) {
+                SupervisorAccount supervisorAccount = AccountManager.getSupervisorAccount(fyp.getSupervisorName());
+                supervisorAccount.getProjList().remove(fyp.getTitle());
+                if (supervisorAccount.getProjList().size() < 2) {
+                    for (FYP fyp : FYPList.getSuperFypList(supervisorAccount.getName())) {
                         if (fyp.getStatus().equals(FYPStatus.UNAVAILABLE)) {
                             fyp.setStatus(FYPStatus.AVAILABLE);
                         }
                     }
                 }
 
-                System.out.println("Deregistered project " + project.getTitle() + " from " + StudentName);
+                System.out.println("Deregistered project " + fyp.getTitle() + " from " + StudentName);
                 System.out.println("Press enter to continue...");
                 sc.nextLine();
                 break;
             case 2:
                 requestDeregister.setStatus(RequestStatus.REJECTED);
                 AccountManager.setStudentStatus(requestDeregister.getRequesterID(), StudentStatus.ASSIGNED_PROJECT, 0);
-                System.out.println("Rejected " + requestDeregister.getRequesterID() + " for " + project.getTitle());
+                System.out.println("Rejected " + requestDeregister.getRequesterID() + " for " + fyp.getTitle());
                 System.out.println("Press enter to continue...");
                 sc.nextLine();
                 break;

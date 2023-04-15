@@ -14,7 +14,7 @@ import java.util.Scanner;
 import java.util.TreeMap;
 
 public class GenerateFilteredProjectDetailsCommand implements Command {
-    private FYPStatus filter;
+    private FYPStatus fypStatus;
     private final int filterType;
 
     /**
@@ -22,7 +22,7 @@ public class GenerateFilteredProjectDetailsCommand implements Command {
      * 
      * @param filterType the type of filter to be applied (1: Filter by status, 2:
      *                   Filter by supervisor)
-     */
+    */
     public GenerateFilteredProjectDetailsCommand(int filterType) {
         this.filterType = filterType;
     }
@@ -35,7 +35,7 @@ public class GenerateFilteredProjectDetailsCommand implements Command {
         int selection;
         Scanner sc = new Scanner(System.in);
         int fypCount = 1;
-        ArrayList<FYP> fyps = FYPList.getFypList();
+        ArrayList<FYP> fypList = FYPList.getFypList();
 
         switch (filterType) {
             // Filter by status
@@ -56,10 +56,10 @@ public class GenerateFilteredProjectDetailsCommand implements Command {
                         if (selection < 5 & selection >= 1) {
                             validInput = true;
                             switch (selection) {
-                                case 1 -> this.filter = FYPStatus.AVAILABLE;
-                                case 2 -> this.filter = FYPStatus.RESERVED;
-                                case 3 -> this.filter = FYPStatus.UNAVAILABLE;
-                                case 4 -> this.filter = FYPStatus.ALLOCATED;
+                                case 1 -> this.fypStatus = FYPStatus.AVAILABLE;
+                                case 2 -> this.fypStatus = FYPStatus.RESERVED;
+                                case 3 -> this.fypStatus = FYPStatus.UNAVAILABLE;
+                                case 4 -> this.fypStatus = FYPStatus.ALLOCATED;
                             }
                         }
                     } catch (InputMismatchException e) {
@@ -67,17 +67,17 @@ public class GenerateFilteredProjectDetailsCommand implements Command {
                     }
                 }
                 System.out.println();
-                System.out.println("List of " + this.filter.toString().toLowerCase() + " Final Year Projects");
+                System.out.println("List of " + this.fypStatus.toString().toLowerCase() + " Final Year Projects");
                 System.out.println();
-                for (FYP fyp : fyps) {
-                    if (fyp.getStatus() == this.filter) {
+                for (FYP fyp : fypList) {
+                    if (fyp.getStatus() == this.fypStatus) {
                         System.out.println("============= FYP No. " + fypCount++ + " ==============");
                         fyp.printFYPDetails();
                         System.out.println();
                     }
                 }
                 System.out.println("===== There are " + (fypCount - 1) + " Final Year Projects "
-                        + this.filter.toString().toLowerCase() + "! =====");
+                        + this.fypStatus.toString().toLowerCase() + "! =====");
             }
 
             // Filter by supervisor
@@ -89,7 +89,7 @@ public class GenerateFilteredProjectDetailsCommand implements Command {
                 System.out.println("Enter Supervisor's name:");
                 Map<Integer, String> supervisorMapIdx = new TreeMap<>();
                 // Map<String, Integer> supervisorMapIdx= new HashMap<>();
-                for (FYP fyp : fyps) {
+                for (FYP fyp : fypList) {
                     if (!supervisorMapIdx.containsValue(fyp.getSupervisorName())) {
                         supervisorMapIdx.put(i, fyp.getSupervisorName());
                         i++;
@@ -120,7 +120,7 @@ public class GenerateFilteredProjectDetailsCommand implements Command {
                 System.out.println();
                 System.out.println("List of all Final Year Projects");
                 System.out.println();
-                for (FYP filteredFyp : fyps) {
+                for (FYP filteredFyp : fypList) {
                     if (filteredFyp.getSupervisorName().equals(supervisorName)) {
                         System.out.println("============= FYP No. " + fypCount++ + " ==============");
                         filteredFyp.printFYPDetails();

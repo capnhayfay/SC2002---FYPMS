@@ -5,7 +5,7 @@ package account.student;
  * project request. Possible values are {@code NO_PROJECT},
  * {@code REQUESTED_PROJECT}, {@code ASSIGNED_PROJECT}, and
  * {@code DEREGISTERED_PROJECT}.
- */
+*/
 public enum StudentStatus {
     /**
      * Indicates that the student has not requested any projects yet.

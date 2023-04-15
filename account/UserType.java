@@ -7,7 +7,7 @@ package account;
  * the GUI they are shown.
  * Possible values are {@code Supervisor}, {@code FYPCoordinator}, and
  * {@code Student}.
- */
+*/
 public enum UserType {
     /**
      * Indicates that the account has supervisor privileges.

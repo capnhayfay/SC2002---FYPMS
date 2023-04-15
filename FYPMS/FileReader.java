@@ -185,7 +185,7 @@ public class FileReader {
 
     public static void readRequestsFromFile(String fileName, String fileName1, String fileName2, String fileName3) {
         Path pathToFile = Paths.get(fileName);
-        ArrayList<ArrayList<Request>> requests = RequestHistory.getRequestList();
+        ArrayList<ArrayList<Request>> requestHistory = RequestHistory.getRequestHistory();
 
         ArrayList<Request> requestChangeTitleList = new ArrayList<Request>();
         try (BufferedReader br = Files.newBufferedReader(pathToFile, StandardCharsets.UTF_8)) {
@@ -199,12 +199,12 @@ public class FileReader {
                 RequestStatus requestStatus = RequestStatus.StringtoRequestStatus(attributes[3]);
                 int fypID = Integer.parseInt(attributes[4]);
                 String newTitle = attributes[5];
-                RequestChangeTitle request = new RequestChangeTitle(requestId, requesterID, requesteeID, requestStatus,
+                RequestChangeTitle requestcChangeTitle = new RequestChangeTitle(requestId, requesterID, requesteeID, requestStatus,
                         fypID, newTitle);
-                requestChangeTitleList.add(request);
+                requestChangeTitleList.add(requestcChangeTitle);
                 line = br.readLine();
             }
-            requests.add(requestChangeTitleList);
+            requestHistory.add(requestChangeTitleList);
         } catch (IOException ioe) {
             ioe.printStackTrace();
         }
@@ -220,11 +220,11 @@ public class FileReader {
                 String requesterID = attributes[1];
                 RequestStatus requestStatus = RequestStatus.StringtoRequestStatus(attributes[2]);
                 int fypID = Integer.parseInt(attributes[3]);
-                RequestDeregister request = new RequestDeregister(requestId, requesterID, requestStatus, fypID);
-                requestDeregisterList.add(request);
+                RequestDeregister requestdDeregister = new RequestDeregister(requestId, requesterID, requestStatus, fypID);
+                requestDeregisterList.add(requestdDeregister);
                 line = br.readLine();
             }
-            requests.add(requestDeregisterList);
+            requestHistory.add(requestDeregisterList);
         } catch (IOException ioe) {
             ioe.printStackTrace();
         }
@@ -240,11 +240,11 @@ public class FileReader {
                 String requesterID = attributes[1];
                 RequestStatus requestStatus = RequestStatus.StringtoRequestStatus(attributes[2]);
                 int fypID = Integer.parseInt(attributes[3]);
-                RequestRegister request = new RequestRegister(requestId, requesterID, requestStatus, fypID);
-                requestRegisterList.add(request);
+                RequestRegister requestrRegister = new RequestRegister(requestId, requesterID, requestStatus, fypID);
+                requestRegisterList.add(requestrRegister);
                 line = br.readLine();
             }
-            requests.add(requestRegisterList);
+            requestHistory.add(requestRegisterList);
         } catch (IOException ioe) {
             ioe.printStackTrace();
         }
@@ -261,12 +261,12 @@ public class FileReader {
                 RequestStatus requestStatus = RequestStatus.StringtoRequestStatus(attributes[2]);
                 int fypID = Integer.parseInt(attributes[3]);
                 String newSupervisorId = attributes[4];
-                RequestTransferSupervisor request = new RequestTransferSupervisor(requestId, requesterID, requestStatus,
+                RequestTransferSupervisor requestTransferSupervisor = new RequestTransferSupervisor(requestId, requesterID, requestStatus,
                         fypID, newSupervisorId);
-                requestTransferSupervisorList.add(request);
+                requestTransferSupervisorList.add(requestTransferSupervisor);
                 line = br.readLine();
             }
-            requests.add(requestTransferSupervisorList);
+            requestHistory.add(requestTransferSupervisorList);
         } catch (IOException ioe) {
             ioe.printStackTrace();
         }
@@ -281,12 +281,12 @@ public class FileReader {
      *         to the specified supervisor
      */
     public static ArrayList<String> getSupervisorFYPs(String supervisorName) {
-        ArrayList<String> supervisorFYPs = new ArrayList<String>();
+        ArrayList<String> supervisorFYPList = new ArrayList<String>();
         for (FYP fyp : FYPList.getFypList()) {
             if (fyp.getSupervisorName().equals(supervisorName) && fyp.getStatus() == FYPStatus.ALLOCATED) {
-                supervisorFYPs.add(fyp.getTitle());
+                supervisorFYPList.add(fyp.getTitle());
             }
         }
-        return supervisorFYPs;
+        return supervisorFYPList;
     }
 }

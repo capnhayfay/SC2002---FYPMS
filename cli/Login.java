@@ -5,6 +5,7 @@
 package cli;
 
 import account.Account;
+import account.UserType;
 
 public interface Login {
     /**
@@ -24,4 +25,6 @@ public interface Login {
      *         or null if no account is currently logged in
      */
     Account getAccount();
+
+    UserType getUserType();
 }

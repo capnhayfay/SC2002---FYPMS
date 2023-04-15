@@ -13,6 +13,17 @@ public class FYP {
     private String projectTitle;
     private FYPStatus status;
 
+    /**
+     * FYP represents a Final Year Project with its respective attributes.
+     * @param projectId the ID of the project.
+     * @param supervisorName the name of the project supervisor.
+     * @param supervisorEmail the email of the project supervisor.
+     * @param studentID the ID of the student who is registered in this project.
+     * @param studentName the name of the student who is registered in this project.
+     * @param studentEmail the email of the student who is registered in this project.
+     * @param projectTitle the title of the project.
+     * @param status the status of the project.
+    */
     public FYP(int projectId, String supervisorName, String supervisorEmail, String studentID, String studentName, String studentEmail, String projectTitle, FYPStatus status) {
         this.projectId = projectId;
         this.projectTitle = projectTitle;

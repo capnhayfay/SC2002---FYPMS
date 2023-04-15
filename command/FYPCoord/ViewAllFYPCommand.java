@@ -22,11 +22,11 @@ public class ViewAllFYPCommand implements Command {
      */
     public void execute() {
         int fypCount = 0;
-        ArrayList<FYP> fyps = FYPList.getFypList();
+        ArrayList<FYP> fypList = FYPList.getFypList();
         System.out.println();
         System.out.println("List of All Final Year Projects");
         System.out.println();
-        for (FYP fyp : fyps) {
+        for (FYP fyp : fypList) {
             fypCount++;
             System.out.println("============= FYP ID " + fyp.getProjectId() + " ==============");
             fyp.printFYPDetails();

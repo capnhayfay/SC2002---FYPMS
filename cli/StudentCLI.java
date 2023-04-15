@@ -22,18 +22,18 @@ import java.util.Scanner;
  */
 
 public class StudentCLI implements Menu, Logout, GetCommand {
-    private StudentAccount student;
-    private String UserType;
+    private StudentAccount studentAccount;
+    private UserType userType;
 
     /**
      * Constructs a StudentCLI object with the given student account and user type.
      * 
-     * @param curAcc   the student account of the user
-     * @param UserType the user type of the student account
+     * @param studentAccount   the student account of the user
+     * @param userType the user type of the student account
      */
-    public StudentCLI(StudentAccount student, String UserType) {
-        this.student = student;
-        this.UserType = UserType;
+    public StudentCLI(StudentAccount studentAccount, UserType userType) {
+        this.studentAccount = studentAccount;
+        this.userType = userType;
     }
 
     /**
@@ -50,7 +50,7 @@ public class StudentCLI implements Menu, Logout, GetCommand {
         System.out.println("=========================================");
         System.out.println("         StudentAccount Menu             ");
         System.out.println("=========================================");
-        System.out.println("Logged in as User: " + student.getName());
+        System.out.println("Logged in as User: " + studentAccount.getName());
         System.out.println();
         System.out.println("1. View all available FYP");
         System.out.println("2. Register FYP");
@@ -99,26 +99,26 @@ public class StudentCLI implements Menu, Logout, GetCommand {
 
             switch (userCh) {
                 case 1:
-                    new ViewAllAvailableFYPCommand(student).execute();
+                    new ViewAllAvailableFYPCommand(studentAccount).execute();
                     break;
                 case 2:
-                    new RequestCoordFYPCommand(student).execute();
+                    new RequestCoordFYPCommand(studentAccount).execute();
                     break;
                 case 3:
-                    new ViewRegisteredFYPCommand(student).execute();
+                    new ViewRegisteredFYPCommand(studentAccount).execute();
                     break;
                 case 4:
-                    new RequestSuperTitleChangeCommand(student).execute();
+                    new RequestSuperTitleChangeCommand(studentAccount).execute();
                     break;
                 case 5:
-                    new RequestCoordDeregisterCommand(student).execute();
+                    new RequestCoordDeregisterCommand(studentAccount).execute();
                     break;
                 case 6:
-                    new ViewAllRequestRecordsCommand(student).execute();
+                    new ViewAllRequestRecordsCommand(studentAccount).execute();
                     break;
 
                 case 7:
-                    new ChangePassword(student).execute();
+                    new ChangePassword(studentAccount).execute();
                     logout();
                     break;
 
@@ -143,8 +143,8 @@ public class StudentCLI implements Menu, Logout, GetCommand {
      * null.
      */
     public void logout() {
-        this.student = null;
-        this.UserType = "";
+        this.studentAccount = null;
+        this.userType = null;
     }
 
     /**
@@ -153,7 +153,7 @@ public class StudentCLI implements Menu, Logout, GetCommand {
      * @return the current student account
      */
     public Account getAccount() {
-        return this.student;
+        return this.studentAccount;
     }
 
     /**
@@ -161,8 +161,8 @@ public class StudentCLI implements Menu, Logout, GetCommand {
      * 
      * @return the user type of the student account
      */
-    public String getUserType() {
-        return UserType;
+    public UserType getUserType() {
+        return userType;
     }
 
 }

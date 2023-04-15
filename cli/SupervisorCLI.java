@@ -18,17 +18,18 @@ import command.Supervisor.*;
  * GUI which is shown to the Supervisor Account
  */
 public class SupervisorCLI implements Menu, Logout, GetCommand {
-    private SupervisorAccount supervisor;
-    private String UserType;
+    private SupervisorAccount supervisorAccount;
+    private UserType userType;
 
     /**
      * Creates a SupervisorGui with the given Supervisor Account
      * 
-     * @param supervisor which is the Supervisor account
+     * @param supervisorAccount which is the Supervisor account
+     * @param userType which is the account user type
      */
-    public SupervisorCLI(SupervisorAccount supervisor, String UserType) {
-        this.supervisor = supervisor;
-        this.UserType = UserType;
+    public SupervisorCLI(SupervisorAccount supervisorAccount, UserType userType) {
+        this.supervisorAccount = supervisorAccount;
+        this.userType = userType;
     }
 
     /**
@@ -42,10 +43,10 @@ public class SupervisorCLI implements Menu, Logout, GetCommand {
         System.out.println("=========================================");
         // System.out.println("-----------------------------------------");
         System.out.println();
-        System.out.println("Logged in as Supervisor: " + supervisor.getName());
+        System.out.println("Logged in as Supervisor: " + supervisorAccount.getName());
         System.out.println();
         System.out.println("1. Create, update or view projects");
-        if (RequestHistory.CheckPendingRequests(supervisor.getLoginId()) == 1) {
+        if (RequestHistory.CheckPendingRequests(supervisorAccount.getLoginId()) == 1) {
             System.out.println("2. View pending requests (NEW)");
         } else {
             System.out.println("2. View pending requests");
@@ -105,19 +106,19 @@ public class SupervisorCLI implements Menu, Logout, GetCommand {
                     scanner.nextLine();
                     switch (selectedChoice) {
                         case 1:
-                            new CreateProjectCommand(supervisor).execute();
+                            new CreateProjectCommand(supervisorAccount).execute();
                             break;
                         case 2:
-                            new ModifyFYPTitle(supervisor).execute();
+                            new ModifyFYPTitle(supervisorAccount).execute();
                             break;
                         case 3:
-                            new ViewSubmittedFYPCommand(supervisor.getName()).execute();
+                            new ViewSubmittedFYPCommand(supervisorAccount.getName()).execute();
                             break;
                     }
                     break;
                 case 2:
                     ViewPendingStudentRequestsCommand ViewRequests = new ViewPendingStudentRequestsCommand(
-                            supervisor.getLoginId());
+                        supervisorAccount.getLoginId());
                     ViewRequests.execute();
                     if (ViewRequests.getRequestNumber() != 0) {
                         System.out.println("Please select your choice");
@@ -134,7 +135,7 @@ public class SupervisorCLI implements Menu, Logout, GetCommand {
                         scanner.nextLine();
                         int reqID;
                         int projID;
-                        FYP selectedProj;
+                        FYP fyp;
                         switch (choice2) {
                             case 1:
                                 System.out.println("Input request ID: ");
@@ -142,13 +143,13 @@ public class SupervisorCLI implements Menu, Logout, GetCommand {
                                 if (reqID / 1000 == 0) {
                                     // Request Title Change
                                     RequestChangeTitle titleRequest = RequestHistory.getRequestChangeTitle(reqID);
-                                    if (!titleRequest.getRequesteeID().equals(supervisor.getLoginId())) {
+                                    if (!titleRequest.getRequesteeID().equals(supervisorAccount.getLoginId())) {
                                         System.out.println("Invalid Input. Returning to Main Page...");
                                         break;
                                     }
                                     projID = titleRequest.getFypID();
-                                    selectedProj = FYPList.getFYPById(projID);
-                                    new ModifySubmittedFYPTitleCommand(selectedProj, titleRequest).execute();
+                                    fyp = FYPList.getFYPById(projID);
+                                    new ModifySubmittedFYPTitleCommand(fyp, titleRequest).execute();
                                 } else if (reqID / 1000 != 0) {
                                     System.out.println("Invalid Input. Returning to Main Page...");
                                 }
@@ -163,7 +164,7 @@ public class SupervisorCLI implements Menu, Logout, GetCommand {
                     }
                     break;
                 case 3:
-                    new RequestTransfertoCoordCommand(supervisor).execute();
+                    new RequestTransfertoCoordCommand(supervisorAccount).execute();
                     break;
                 case 4:
                     System.out.println("Please select your choice");
@@ -182,13 +183,13 @@ public class SupervisorCLI implements Menu, Logout, GetCommand {
                     scanner.nextLine();
                     switch (requestChoice) {
                         case 1:
-                            new ViewIncomingRequestRecordsCommand(supervisor).execute();
+                            new ViewIncomingRequestRecordsCommand(supervisorAccount).execute();
                             break;
                         case 2:
-                            new ViewOutcomingRequestRecordsCommand(supervisor).execute();
+                            new ViewOutcomingRequestRecordsCommand(supervisorAccount).execute();
                             break;
                         case 3:
-                            new ViewAllRequestRecordsCommand(supervisor).execute();
+                            new ViewAllRequestRecordsCommand(supervisorAccount).execute();
                             break;
                         case 4:
                             System.out.println("Returning to Main Page...");
@@ -199,7 +200,7 @@ public class SupervisorCLI implements Menu, Logout, GetCommand {
                     }
                     break;
                 case 5:
-                    new ChangePassword(supervisor).execute();
+                    new ChangePassword(supervisorAccount).execute();
                     logout();
                     break;
                 case 6:
@@ -221,8 +222,8 @@ public class SupervisorCLI implements Menu, Logout, GetCommand {
      * Logout from account by setting Supervisor Account to null
      */
     public void logout() {
-        this.supervisor = null;
-        this.UserType = "";
+        this.supervisorAccount = null;
+        this.userType = null;
     }
 
     /**
@@ -231,7 +232,7 @@ public class SupervisorCLI implements Menu, Logout, GetCommand {
      * @return Account
      */
     public Account getAccount() {
-        return this.supervisor;
+        return this.supervisorAccount;
     }
 
     /**
@@ -239,7 +240,7 @@ public class SupervisorCLI implements Menu, Logout, GetCommand {
      * 
      * @return String
      */
-    public String getUserType() {
-        return UserType;
+    public UserType getUserType() {
+        return userType;
     }
 }

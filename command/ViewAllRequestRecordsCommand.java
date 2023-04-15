@@ -29,15 +29,14 @@ public class ViewAllRequestRecordsCommand implements Command {
         System.out.println();
         System.out.println("Request History");
         System.out.println();
-        ArrayList<ArrayList<Request>> requests = RequestHistory.getRequestList();
-        for (ArrayList<Request> request : requests) {
-            for (Request indivRequest : request) {
-                Request indivCastedRequest = (Request) indivRequest;
-                if (indivCastedRequest.getRequesterID().equals(account.getLoginId())
-                        || indivCastedRequest.getRequesteeID().equals(account.getLoginId())) {
+        ArrayList<ArrayList<Request>> requestHistory = RequestHistory.getRequestHistory();
+        for (ArrayList<Request> requestList : requestHistory) {
+            for (Request request : requestList) {
+                if (request.getRequesterID().equals(account.getLoginId())
+                        || request.getRequesteeID().equals(account.getLoginId())) {
                     System.out.println(
-                            "============= Request ID " + indivCastedRequest.getRequestID() + " ==============");
-                    indivCastedRequest.printDetails();
+                            "============= Request ID " + request.getRequestID() + " ==============");
+                            request.printDetails();
                     System.out.println();
                     RequestCount++;
                 }

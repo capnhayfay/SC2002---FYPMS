@@ -19,6 +19,7 @@
 import account.supervisor.SupervisorAccount;
 import account.supervisor.FYPCoordinatorAccount;
 import account.AccountManager;
+import account.UserType;
 import account.student.StudentAccount;
 import cli.*;
 import FYPMS.*;
@@ -74,7 +75,7 @@ public class Application {
 		// // end of load in updatedCSV
 
 		Scanner scanner = new Scanner(System.in);
-		String loggedInUserType = "";
+		UserType loggedInUserType = null;
 		StudentAccount studentAccount = null;
 		SupervisorAccount supervisorAccount = null;
 		FYPCoordinatorAccount fypCoordinatorAccount = null;
@@ -83,7 +84,7 @@ public class Application {
 		new GreetUserMenu().display();
 		System.out.println();
 		while (true) {
-			if (loggedInUserType.equals("")) {
+			if (loggedInUserType.equals(null)) {
 				System.out.println("Which type of user are you? ");
 				System.out.println("1. Student");
 				System.out.println("2. Supervisor");
@@ -117,7 +118,7 @@ public class Application {
 						loginStudentUserMenu.display();
 						studentAccount = loginStudentUserMenu.getStudentAccount();
 						if (studentAccount != null) {
-							loggedInUserType = "StudentAccount";
+							loggedInUserType = UserType.Student;
 						}
 						break;
 					case 2:
@@ -125,7 +126,7 @@ public class Application {
 						loginSupervisorUserMenu.display();
 						supervisorAccount = loginSupervisorUserMenu.getSupervisorAccount();
 						if (supervisorAccount != null) {
-							loggedInUserType = "Supervisor";
+							loggedInUserType = UserType.Supervisor;
 						}
 						break;
 					case 3:
@@ -133,7 +134,7 @@ public class Application {
 						loginFYPCoordUserMenu.display();
 						fypCoordinatorAccount = loginFYPCoordUserMenu.getFYPCoordinatorAccount();
 						if (fypCoordinatorAccount != null) {
-							loggedInUserType = "FYP Coordinator";
+							loggedInUserType = UserType.FYPCoordinator;
 						}
 						break;
 					default:
@@ -144,30 +145,30 @@ public class Application {
 				if (logout == 1) {
 					break;
 				}
-			} else if (loggedInUserType.equals("StudentAccount")) {
+			} else if (loggedInUserType.equals(UserType.Student)) {
 				StudentCLI studentCLI = new StudentCLI(studentAccount, loggedInUserType);
 				studentCLI.display();
 				if (studentCLI.execute() == 0) {
-					loggedInUserType = "";
+					loggedInUserType = null;
 					break;
 				}
 				loggedInUserType = studentCLI.getUserType();
-			} else if (loggedInUserType.equals("Supervisor") &&
+			} else if (loggedInUserType.equals(UserType.Supervisor) &&
 					!supervisorAccount.getName().equalsIgnoreCase(AccountManager.getCoordinatorList().get(0).getName())) {
 				SupervisorCLI supervisorAccountGUI = new SupervisorCLI(supervisorAccount,
 						loggedInUserType);
 				supervisorAccountGUI.display();
 				if (supervisorAccountGUI.execute() == 0) {
-					loggedInUserType = "";
+					loggedInUserType = null;
 					break;
 				}
 				loggedInUserType = supervisorAccountGUI.getUserType();
-			} else if (loggedInUserType.equals("FYP Coordinator")) {
+			} else if (loggedInUserType.equals(UserType.FYPCoordinator)) {
 				FYPCoordinatorCLI fypCoordinatorGUI = new FYPCoordinatorCLI(fypCoordinatorAccount,
 						loggedInUserType);
 				fypCoordinatorGUI.display();
 				if (fypCoordinatorGUI.execute() == 0) {
-					loggedInUserType = "";
+					loggedInUserType = null;
 					break;
 				}
 				loggedInUserType = fypCoordinatorGUI.getUserType();
@@ -175,7 +176,7 @@ public class Application {
 				System.out.println();
 				System.out.println("Invalid user type, please try again");
 				System.out.println();
-				loggedInUserType = "";
+				loggedInUserType = null;
 			}
 		}
 

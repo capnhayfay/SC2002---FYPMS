@@ -13,17 +13,17 @@ import command.Command;
 
 public class ViewSubmittedFYPCommand implements Command {
     // The name of the Supervisor whose Final Year Projects will be displayed
-    private final String SupervisorName;
+    private final String supervisorName;
 
     /**
      * Constructs a ViewSubmittedFYPCommand object with the provided Supervisor
      * name.
      * 
-     * @param Supervisor - The name of the Supervisor whose Final Year Projects will
+     * @param supervisorName - The name of the Supervisor whose Final Year Projects will
      *                   be displayed.
      */
-    public ViewSubmittedFYPCommand(String SupervisorName) {
-        this.SupervisorName = SupervisorName;
+    public ViewSubmittedFYPCommand(String supervisorName) {
+        this.supervisorName = supervisorName;
     }
 
     /**
@@ -32,12 +32,12 @@ public class ViewSubmittedFYPCommand implements Command {
      */
     public void execute() {
         int fypCount = 1;
-        ArrayList<FYP> fyps = FYPList.getFypList();
+        ArrayList<FYP> fypList = FYPList.getFypList();
         System.out.println();
         System.out.println("List of all Final Year Projects");
         System.out.println();
-        for (FYP filteredFyp : fyps) {
-            if (filteredFyp.getSupervisorName().equals(SupervisorName)) {
+        for (FYP filteredFyp : fypList) {
+            if (filteredFyp.getSupervisorName().equals(supervisorName)) {
                 System.out.println("============= FYP No. " + fypCount++ + " ==============");
                 filteredFyp.printFYPDetails();
                 System.out.println();

@@ -18,10 +18,10 @@ import command.Command;
 
 public class ModifyFYPTitle implements Command {
 
-    private final SupervisorAccount supervisor;
+    private final SupervisorAccount supervisorAccount;
 
-    public ModifyFYPTitle(SupervisorAccount supervisor) {
-        this.supervisor = supervisor;
+    public ModifyFYPTitle(SupervisorAccount supervisorAccount) {
+        this.supervisorAccount = supervisorAccount;
     }
 
     ArrayList<FYP> fypList = FYPList.getFypList();
@@ -46,9 +46,9 @@ public class ModifyFYPTitle implements Command {
         for (FYP fyp : fypList) {
             if (fyp.getProjectId() == projectID) {
                 oldTitle = fyp.getTitle();
-                ArrayList<String> proj = supervisor.getProjList();
+                ArrayList<String> fypList = supervisorAccount.getProjList();
                 String temp = "";
-                for (String indiproj : proj) {
+                for (String indiproj : fypList) {
                     if (indiproj.equals(oldTitle)) {
                         System.out.println("Input new title: ");
                         String title = sc.next();
@@ -57,8 +57,8 @@ public class ModifyFYPTitle implements Command {
                     }
                 }
                 if (!temp.equals("")) {
-                    supervisor.getProjList().remove(oldTitle);
-                    supervisor.addProj(temp);
+                    supervisorAccount.getProjList().remove(oldTitle);
+                    supervisorAccount.addProj(temp);
                     System.out.println("Project title has been change to " + fyp.getTitle());
                 } else {
                     System.out.println("Error: You are not in charge of project " + oldTitle);

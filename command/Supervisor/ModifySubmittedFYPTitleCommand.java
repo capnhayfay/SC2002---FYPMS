@@ -14,17 +14,17 @@ import FYPMS.request.RequestStatus;
 
 public class ModifySubmittedFYPTitleCommand implements Command {
 
-    private final FYP project;
+    private final FYP fyp;
     private final RequestChangeTitle titleRequest;
 
     /**
      * Constructor for the ModifySubmittedFYPTitleCommand class.
      * 
-     * @param project      The FYP project to be modified.
+     * @param fyp      The FYP project to be modified.
      * @param titleRequest The request to change the title of the FYP project.
      */
-    public ModifySubmittedFYPTitleCommand(FYP project, RequestChangeTitle titleRequest) {
-        this.project = project;
+    public ModifySubmittedFYPTitleCommand(FYP fyp, RequestChangeTitle titleRequest) {
+        this.fyp = fyp;
         this.titleRequest = titleRequest;
     }
 
@@ -41,13 +41,13 @@ public class ModifySubmittedFYPTitleCommand implements Command {
         System.out.println("=========================================");
         switch (requestAction) {
             case 1:
-                project.setTitle(titleRequest.getNewTitle());
+                fyp.setTitle(titleRequest.getNewTitle());
                 titleRequest.setStatus(RequestStatus.APPROVED);
-                System.out.println("Project title has been change to" + project.getTitle());
+                System.out.println("Project title has been change to" + fyp.getTitle());
                 break;
             case 2:
                 titleRequest.setStatus(RequestStatus.REJECTED);
-                System.out.println("Rejected changing of title to" + project.getTitle());
+                System.out.println("Rejected changing of title to" + fyp.getTitle());
                 break;
             default:
                 System.out.println("Invalid option");

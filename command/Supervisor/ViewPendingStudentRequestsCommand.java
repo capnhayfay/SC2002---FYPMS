@@ -14,7 +14,7 @@ public class ViewPendingStudentRequestsCommand implements Command {
     /**
      * The supervisor's ID.
      */
-    private final String Supervisor;
+    private final String supervisorID;
 
     /**
      * The number of pending requests.
@@ -26,8 +26,8 @@ public class ViewPendingStudentRequestsCommand implements Command {
      * 
      * @param Supervisor The supervisor's ID.
      */
-    public ViewPendingStudentRequestsCommand(String Supervisor) {
-        this.Supervisor = Supervisor;
+    public ViewPendingStudentRequestsCommand(String supervisorID) {
+        this.supervisorID = supervisorID;
     }
 
     /**
@@ -53,18 +53,18 @@ public class ViewPendingStudentRequestsCommand implements Command {
             choice = scanner.nextInt();
         } while (choice != 1 && choice != 2);
 
-        ArrayList<ArrayList<Request>> requests = RequestHistory.getRequestList();
+        ArrayList<ArrayList<Request>> requestHistory = RequestHistory.getRequestHistory();
 
         switch (choice) {
             case 1:
-                for (ArrayList<Request> request : requests) {
-                    for (Request indivRequest : request) {
-                        if (indivRequest.getRequesteeID().equals(Supervisor)
-                                && indivRequest.getRequestStatus() == RequestStatus.PENDING) {
+                for (ArrayList<Request> requestList : requestHistory) {
+                    for (Request request : requestList) {
+                        if (request.getRequesteeID().equals(supervisorID)
+                                && request.getRequestStatus() == RequestStatus.PENDING) {
                             System.out.println(
-                                    "============= Request ID " + indivRequest.getRequestID()
+                                    "============= Request ID " + request.getRequestID()
                                             + " ==============");
-                            indivRequest.printDetails();
+                                    request.printDetails();
                             System.out.println();
                             requestCount++;
                         }
@@ -77,15 +77,15 @@ public class ViewPendingStudentRequestsCommand implements Command {
                 System.out.println("Enter Student ID: ");
                 String studentID = scanner.next();
 
-                for (ArrayList<Request> request : requests) {
-                    for (Request indivRequest : request) {
-                        if (indivRequest.getRequesteeID().equals(Supervisor)
-                                && indivRequest.getRequestStatus() == RequestStatus.PENDING &&
-                                indivRequest.getRequesterID().equalsIgnoreCase(studentID)) {
+                for (ArrayList<Request> requestList : requestHistory) {
+                    for (Request request : requestList) {
+                        if (request.getRequesteeID().equals(supervisorID)
+                                && request.getRequestStatus() == RequestStatus.PENDING &&
+                                request.getRequesterID().equalsIgnoreCase(studentID)) {
                             System.out.println(
-                                    "============= Request ID " + indivRequest.getRequestID()
+                                    "============= Request ID " + request.getRequestID()
                                             + " ==============");
-                            indivRequest.printDetails();
+                                    request.printDetails();
                             System.out.println();
                             requestCount++;
                         }

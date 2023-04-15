@@ -1,9 +1,3 @@
-package command;
-
-import java.util.Scanner;
-
-import account.Account;
-
 /**
  * 
  * This class represents the ChangePassword command that allows a user to change
@@ -14,17 +8,24 @@ import account.Account;
  * confirmation password,
  * the user's password will be changed. The maximum number of password attempts
  * is set to 5.
- */
+*/
+package command;
+
+import java.util.Scanner;
+
+import account.Account;
+
+
 public class ChangePassword implements Command {
-    private final Account user;
+    private final Account account;
 
     /**
      * Constructs a new ChangePassword command with the given user account.
      *
-     * @param user the user account to change the password for
-     */
-    public ChangePassword(Account user) {
-        this.user = user;
+     * @param account the user account to change the password for
+    */
+    public ChangePassword(Account account) {
+        this.account = account;
     }
 
     /**
@@ -34,27 +35,27 @@ public class ChangePassword implements Command {
      * user's password if the new
      * password matches the confirmation password. The maximum number of password
      * attempts is set to 5.
-     */
+    */
     public void execute() {
         int triesLeft = 5;
         Scanner sc = new Scanner(System.in);
         while (triesLeft != 0) {
             System.out.println("Enter current password:");
             String curPass = sc.next();
-            if (curPass.equals(user.getPassword())) {
+            if (curPass.equals(account.getPassword())) {
                 System.out.println("Enter new password:");
                 String newPass = sc.next();
                 System.out.println("Confirm new password:");
                 String finalPass = sc.next();
                 if (finalPass.equals(newPass)) {
-                    user.setPassword(newPass);
+                    account.setPassword(newPass);
                     break;
                 } else {
                     System.out.println("Password does not match!");
                     triesLeft--;
                 }
             } else {
-                System.out.println("Wrong password");
+                System.out.println("Wrong password!");
                 triesLeft--;
             }
         }

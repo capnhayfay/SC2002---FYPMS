@@ -2,29 +2,28 @@ package account;
 
 /**
  * 
- * Abstract class for creating an Account object which holds user's login
- * credentials, personal information and type of account.
+ * Abstract class for creating an Account object which holds user's login and  account.
  */
 
 public abstract class Account {
     private final String email; // email address of the user
     private final String name; // name of the user
-    private final String userId; // login ID of the user
+    private final String loginId; // login ID of the user
     private String password; // password of the user
     private final UserType userType; // type of account: Student, Supervisor and FYPCoordinator
 
     /**
      * Creates an Account Object with given parameters
      * 
-     * @param userId       the login ID of the user
+     * @param loginId      the login ID of the user
      * @param password     the password of the user
      * @param userType     the type of account (Student, Supervisor, FYPCoordinator)
      * @param emailAddress the email address of the user
      * @param name         the name of the user
      */
-    public Account(String userId, String password, UserType userType, String emailAddress, String name) {
+    public Account(String loginId, String password, UserType userType, String emailAddress, String name) {
 
-        this.userId = userId;
+        this.loginId = loginId;
         this.password = password;
         this.userType = userType;
         this.name = name;
@@ -37,7 +36,7 @@ public abstract class Account {
      * @return the login ID of the user
      */
     public final String getLoginId() {
-        return userId;
+        return loginId;
     }
 
     /**
@@ -93,4 +92,6 @@ public abstract class Account {
      * @return the UserType of the logged in user
      */
     public abstract UserType login(String userId, String password);
+
+    public abstract void printDetails();
 }

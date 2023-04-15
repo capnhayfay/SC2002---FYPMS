@@ -7,29 +7,29 @@ import java.util.ArrayList;
  * and are entitled to supervise
  */
 public class FYPList {
-    private static final ArrayList<FYP> fyps = new ArrayList<>();
+    private static final ArrayList<FYP> fypList = new ArrayList<>();
 
     /**
      * Adds a FYP to the list of FYPs the department can supervise
      *
-     * @param fyp FYP to be added
+     * @param fypList FYP to be added
      */
 
     public static ArrayList<FYP> getFypList() {
-        return fyps;
+        return fypList;
     }
     public void addFYP(FYP fyp) {
-        fyps.add(fyp);
+        fypList.add(fyp);
     }
 
     public static ArrayList<FYP> getSuperFypList(String supervisorName) {
-        ArrayList<FYP> superFyps = new ArrayList<FYP>();
-        for (FYP fyp : fyps) {
+        ArrayList<FYP> superfypList = new ArrayList<FYP>();
+        for (FYP fyp : fypList) {
             if (fyp.getSupervisorName().equals(supervisorName)) {
-                superFyps.add(fyp);
+                superfypList.add(fyp);
             }
         }
-        return superFyps;
+        return superfypList;
     }
 
     /**
@@ -40,7 +40,7 @@ public class FYPList {
         System.out.println();
         System.out.println("List of Available Final Year Projects");
         System.out.println();
-        for (FYP fyp : fyps) {
+        for (FYP fyp : fypList) {
             if (fyp.getStatus() == FYPStatus.AVAILABLE) {
                 System.out.println("============= FYP ID " + fyp.getProjectId() + " ==============");
                 fyp.printFYPDetails();
@@ -60,7 +60,7 @@ public class FYPList {
      *
      */
     public static FYP getFYPById(int FYPId) {
-        for (FYP fyp : fyps) {
+        for (FYP fyp : fypList) {
             if (fyp.getProjectId() == FYPId) {
                 return fyp;
             }

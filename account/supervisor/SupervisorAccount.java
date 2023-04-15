@@ -19,16 +19,16 @@ public class SupervisorAccount extends Account {
     /**
      * Creates a new {@code SupervisorAccount} with the given parameters.
      * 
-     * @param userId       the login ID of the supervisor account.
+     * @param loginId       the login ID of the supervisor account.
      * @param password     the password of the supervisor account.
      * @param userType     the user type of the supervisor account.
      * @param emailAddress the email address associated with the supervisor account.
      * @param name         the name of the supervisor account.
      * @param proj         the list of projects assigned to the supervisor.
      */
-    public SupervisorAccount(String userId, String password, UserType userType, String emailAddress, String name,
+    public SupervisorAccount(String loginId, String password, UserType userType, String emailAddress, String name,
             ArrayList<String> proj) {
-        super(userId, password, userType, emailAddress, name);
+        super(loginId, password, userType, emailAddress, name);
         this.proj = proj;
     }
 

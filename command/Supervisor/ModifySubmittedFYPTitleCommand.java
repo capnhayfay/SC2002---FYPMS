@@ -47,7 +47,7 @@ public class ModifySubmittedFYPTitleCommand implements Command {
                 break;
             case 2:
                 titleRequest.setStatus(RequestStatus.REJECTED);
-                System.out.println("Rejected changing of title to" + fyp.getTitle());
+                System.out.println("Rejected changing of title to " + fyp.getTitle());
                 break;
             default:
                 System.out.println("Invalid option");

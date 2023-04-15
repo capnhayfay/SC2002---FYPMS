@@ -1,2 +1,0 @@
-requestID	requesterID	requestStatus	fypID
-2000	KOH1	APPROVED	5

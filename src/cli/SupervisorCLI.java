@@ -52,7 +52,6 @@ public class SupervisorCLI implements Menu, Logout, GetCommand {
         } else {
             System.out.println("2. View pending requests");
         }
-        System.out.println("3. Request to transfer student");
         System.out.println("4. View Request History");
         System.out.println("5. Change Password");
         System.out.println("6. Logout");

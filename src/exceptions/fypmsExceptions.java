@@ -30,4 +30,8 @@ public class fypmsExceptions {
         }
     }
 
+    public static class noRegistererdProjectException extends Exception{
+
+    }
+
 }

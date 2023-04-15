@@ -18,7 +18,7 @@ public class AccountManager {
     private static final ArrayList<FYPCoordinatorAccount> FYPCoordinatorAccounts = new ArrayList<FYPCoordinatorAccount>();
     private static final ArrayList<SupervisorAccount> SupervisorAccounts = new ArrayList<SupervisorAccount>();
     /**
-     * Creates an instance of the src.account manager to manages the runtime memory versions of all accounts
+     * Creates an instance of the Account manager to manages the runtime memory versions of all accounts
      */
     public AccountManager() {
 
@@ -27,7 +27,7 @@ public class AccountManager {
     /**
      * Retrieves the SupervisorAccount object associated with the given name.
      *
-     * @param SuperName the name of the supervisor src.account to retrieve
+     * @param SuperName the name of the supervisor account to retrieve
      * @return the SupervisorAccount object associated with the given name, or null
      * if not found
      */
@@ -68,10 +68,10 @@ public class AccountManager {
     }
 
     /**
-     * Attempts to log in a student src.account with the given login ID and password.
+     * Attempts to log in a student account with the given login ID and password.
      *
-     * @param loginId  the login ID of the student src.account to log in
-     * @param password the password of the student src.account to log in
+     * @param loginId  the login ID of the student account to log in
+     * @param password the password of the student account to log in
      * @return the StudentAccount object associated with the given login ID and
      * password, or null if not found
      */
@@ -170,8 +170,8 @@ public class AccountManager {
     /**
      * Returns the email of the supervisor src.account with the given supervisor ID.
      *
-     * @param supervisorID the supervisor ID of the src.account
-     * @return the email of the supervisor src.account, or null if the src.account does not
+     * @param supervisorID the supervisor ID of the account
+     * @return the email of the supervisor account, or null if the account does not
      * exist
      */
     public static String getSupervisorEmail(String supervisorID) {
@@ -184,13 +184,12 @@ public class AccountManager {
     }
 
     /**
-     * Sets the status and assigned FYP project ID of the student src.account with the
+     * Sets the status and assigned FYP project ID of the student account with the
      * given student ID.
      *
-     * @param studentID     the student ID of the src.account
-     * @param studentStatus the new status of the student src.account
-     * @param fypID         the ID of the FYP project assigned to the student
-     *                      src.account
+     * @param studentID     the student ID of the account
+     * @param studentStatus the new status of the student account
+     * @param fypID         the ID of the FYP project assigned to the student account
      */
     public static void setStudentStatus(String studentID, StudentStatus studentStatus, int fypID) {
         for (StudentAccount account : StudentAccount) {

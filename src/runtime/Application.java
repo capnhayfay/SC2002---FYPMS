@@ -48,43 +48,15 @@ public class Application {
      * @throws IOException If there is an I/O error reading the CSV files.
      */
     public static void main(String[] args) throws IOException {
-        new Application().run();
-    }
-
-    /**
-     * The run method initializes the src.FYPMS system, loads data from CSV files,
-     * prompts the user to log in and
-     * displays the appropriate GUI depending on the user type (student, supervisor
-     * or FYP coordinator).
-     * Once the user is done interacting with the system, any changes made are saved
-     * to the data files.
-     *
-     * @throws IOException If there is an I/O error reading or writing the CSV
-     *                     files.
-     */
-    public void run() throws IOException {
-
         // load in CSV
-        FileReader.readFYPsFromFile("./database/Modified/rollover project.txt");
-        FileReader.readSupervisorsFromFile("./database/Modified/faculty_list.txt");
-        FileReader.readCoordinatorsFromFile("./database/Modified/FYP coordinator.txt");
-        FileReader.readStudentsFromFile("./database/Modified/student list.txt");
-        FileReader.readRequestsFromFile("./database/Modified/0requestChangeTitle.txt",
-                "./database/Modified/1requestDeregister.txt",
-                "./database/Modified/2requestRegister.txt",
-                "./database/Modified/3requestTransferSupervisor.txt");
-        // end of load in CSV
-
-        // // load in updatedCSV
-        // FileReader.readFYPsFromFile("./src.database/test/rollover project.txt");
-        // FileReader.readSupervisorsFromFile("./src.database/test/faculty_list.txt");
-        // FileReader.readCoordinatorsFromFile("./src.database/test/FYP coordinator.txt");
-        // FileReader.readStudentsFromFile("./src.database/test/student list.txt");
-        // FileReader.readRequestsFromFile("./src.database/test/0requestChangeTitle.txt",
-        // "./src.database/test/1requestDeregister.txt",
-        // "./src.database/test/2requestRegister.txt",
-        // "./src.database/test/3requestTransferSupervisor.txt");
-        // // end of load in updatedCSV
+        FileReader.readFYPsFromFile("src/database/Modified/rollover project.txt");
+        FileReader.readSupervisorsFromFile("src/database/Modified/faculty_list.txt");
+        FileReader.readCoordinatorsFromFile("src/database/Modified/FYP coordinator.txt");
+        FileReader.readStudentsFromFile("src/database/Modified/student list.txt");
+        FileReader.readRequestsFromFile("src/database/Modified/0requestChangeTitle.txt",
+                "src/database/Modified/1requestDeregister.txt",
+                "src/database/Modified/2requestRegister.txt",
+                "src/database/Modified/3requestTransferSupervisor.txt");
 
         Scanner scanner = new Scanner(System.in);
         UserType loggedInUserType = null;
@@ -122,37 +94,36 @@ public class Application {
 
                 } while (choice == -1);
                 switch (choice) {
-                    case 0:
-                        logout = 1;
-                        break;
-                    case 1:
+                    case 0 -> logout = 1;
+                    case 1 -> {
                         LoginUserMenu loginStudentUserMenu = new LoginUserMenu(studentAccount);
                         loginStudentUserMenu.display();
                         studentAccount = loginStudentUserMenu.getStudentAccount();
                         if (studentAccount != null) {
                             loggedInUserType = UserType.Student;
                         }
-                        break;
-                    case 2:
+                    }
+                    case 2 -> {
                         LoginUserMenu loginSupervisorUserMenu = new LoginUserMenu(supervisorAccount);
                         loginSupervisorUserMenu.display();
                         supervisorAccount = loginSupervisorUserMenu.getSupervisorAccount();
                         if (supervisorAccount != null) {
                             loggedInUserType = UserType.Supervisor;
                         }
-                        break;
-                    case 3:
+                    }
+                    case 3 -> {
                         LoginUserMenu loginFYPCoordUserMenu = new LoginUserMenu(fypCoordinatorAccount);
                         loginFYPCoordUserMenu.display();
                         fypCoordinatorAccount = loginFYPCoordUserMenu.getFYPCoordinatorAccount();
                         if (fypCoordinatorAccount != null) {
                             loggedInUserType = UserType.FYPCoordinator;
                         }
-                        break;
-                    default:
+                    }
+                    default -> {
                         System.out.println();
                         System.out.println("Invalid choice. Please try again.");
                         System.out.println();
+                    }
                 }
                 if (logout == 1) {
                     break;
@@ -194,13 +165,38 @@ public class Application {
 
         new EndProgramMenu().display();
 
-        FileUpdater.writeSupervisorToFile("./database/test/faculty_list.txt");
-        FileUpdater.writeCoordinatorToFile("./database/test/FYP coordinator.txt");
-        FileUpdater.writeStudentToFile("./database/test/student list.txt");
-        FileUpdater.writeFYPsToFile("./database/test/rollover project.txt");
-        FileUpdater.writeRequestsToFile("./database/test/0requestChangeTitle.txt",
-                "./database/test/1requestDeregister.txt", "./database/test/2requestRegister.txt",
-                "./database/test/3requestTransferSupervisor.txt");
+        FileUpdater.writeSupervisorToFile("src/database/test/faculty_list.txt");
+        FileUpdater.writeCoordinatorToFile("src/database/test/FYP coordinator.txt");
+        FileUpdater.writeStudentToFile("src/database/test/student list.txt");
+        FileUpdater.writeFYPsToFile("src/database/test/rollover project.txt");
+        FileUpdater.writeRequestsToFile("src/database/test/0requestChangeTitle.txt",
+                "src/database/test/1requestDeregister.txt", "src/database/test/2requestRegister.txt",
+                "src/database/test/3requestTransferSupervisor.txt");
     }
+
+    /**
+     * The run method initializes the src.FYPMS system, loads data from CSV files,
+     * prompts the user to log in and
+     * displays the appropriate GUI depending on the user type (student, supervisor
+     * or FYP coordinator).
+     * Once the user is done interacting with the system, any changes made are saved
+     * to the data files.
+     *
+     * @throws IOException If there is an I/O error reading or writing the CSV
+     *                     files.
+     */
+    //public void run() throws IOException {
+        // end of load in CSV
+        // load in updatedCSV
+        // FileReader.readFYPsFromFile("./src.database/test/rollover project.txt");
+        // FileReader.readSupervisorsFromFile("./src.database/test/faculty_list.txt");
+        // FileReader.readCoordinatorsFromFile("./src.database/test/FYP coordinator.txt");
+        // FileReader.readStudentsFromFile("./src.database/test/student list.txt");
+        // FileReader.readRequestsFromFile("./src.database/test/0requestChangeTitle.txt",
+        // "./src.database/test/1requestDeregister.txt",
+        // "./src.database/test/2requestRegister.txt",
+        // "./src.database/test/3requestTransferSupervisor.txt");
+        // end of load in updatedCSV
+    //}
 
 }

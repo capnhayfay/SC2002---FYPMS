@@ -6,6 +6,7 @@ import src.FYPMS.request.*;
 import src.account.Account;
 import src.account.UserType;
 import src.account.supervisor.FYPCoordinatorAccount;
+import src.account.supervisor.SupervisorAccount;
 import src.command.ChangePassword;
 import src.command.FYPCoord.*;
 import src.command.Supervisor.*;
@@ -29,10 +30,10 @@ public class FYPCoordinatorCLI implements Menu, Logout, GetCommand {
     private UserType userType;
 
     /**
-     * Constructs a FYPCoordinatorCLI with the given FYPCoordinator src.account and user
+     * Constructs a FYPCoordinatorCLI with the given FYPCoordinator account and user
      * type
      *
-     * @param fypCoordinatorAccount the FYPCoordinator src.account of the user
+     * @param fypCoordinatorAccount the FYPCoordinator account of the user
      * @param userType              the user type of the user
      */
     public FYPCoordinatorCLI(FYPCoordinatorAccount fypCoordinatorAccount, UserType userType) {
@@ -54,7 +55,7 @@ public class FYPCoordinatorCLI implements Menu, Logout, GetCommand {
         System.out.println();
         System.out.println("1. Create, update or view projects");
         if (RequestHistory.CheckPendingRequests(fypCoordinatorAccount.getLoginId()) == 1) {
-            System.out.println("2. View pending requests (NEW)");
+            System.out.println("2. View pending requests (NEW PENDING REQUEST)");
         } else {
             System.out.println("2. View pending requests");
         }
@@ -95,7 +96,7 @@ public class FYPCoordinatorCLI implements Menu, Logout, GetCommand {
                 return 0;
             }
             switch (userCh) {
-                case 1:
+                case 1 -> {
                     System.out.println("Please input a choice from Create, Update, and View Projects");
                     System.out.println("1. Create Project");
                     System.out.println("2. Update Project Title");
@@ -111,24 +112,19 @@ public class FYPCoordinatorCLI implements Menu, Logout, GetCommand {
                     int selectedChoice = scanner.nextInt();
                     scanner.nextLine();
                     switch (selectedChoice) {
-                        case 1:
+                        case 1 -> {
                             if (fypCoordinatorAccount.getProjList().size() == 2) {
                                 System.out.println();
                                 System.out.println("You have reach the maximum allocated project capacity.");
-                                break;
                             } else {
                                 new CreateProjectCommand(fypCoordinatorAccount).execute();
                             }
-                            break;
-                        case 2:
-                            new ModifyFYPTitle(fypCoordinatorAccount).execute();
-                            break;
-                        case 3:
-                            new ViewSubmittedFYPCommand(fypCoordinatorAccount.getName()).execute();
-                            break;
+                        }
+                        case 2 -> new ModifyFYPTitle(fypCoordinatorAccount).execute();
+                        case 3 -> new ViewSubmittedFYPCommand(fypCoordinatorAccount.getName()).execute();
                     }
-                    break;
-                case 2:
+                }
+                case 2 -> {
                     ViewPendingStudentRequestsCommand ViewRequests = new ViewPendingStudentRequestsCommand(
                             fypCoordinatorAccount.getLoginId());
                     ViewRequests.execute();
@@ -153,13 +149,14 @@ public class FYPCoordinatorCLI implements Menu, Logout, GetCommand {
                         int projID;
                         FYP selectedProj;
                         switch (choice2) {
-                            case 1:
+                            case 1 -> {
                                 System.out.println("Input request ID: ");
                                 reqID = scanner.nextInt();
                                 System.out.println("=========================================");
                                 if (reqID / 1000 == 0) {
                                     // requestitlechange
                                     RequestChangeTitle titleRequest = RequestHistory.getRequestChangeTitle(reqID);
+                                    assert titleRequest != null;
                                     if (!titleRequest.getRequesteeID().equals(fypCoordinatorAccount.getLoginId())) {
                                         System.out.println("Invalid Input. Returning to Main Page...");
                                         break;
@@ -169,11 +166,13 @@ public class FYPCoordinatorCLI implements Menu, Logout, GetCommand {
                                     new ModifySubmittedFYPTitleCommand(selectedProj, titleRequest).execute();
                                 } else if (reqID / 1000 == 1) {
                                     RequestDeregister deregistrationRequest = RequestHistory.getRequestDeregister(reqID);
+                                    assert deregistrationRequest != null;
                                     projID = deregistrationRequest.getFypID();
                                     selectedProj = FYPList.getFYPById(projID);
                                     new DeregisterStudentCommand(selectedProj, deregistrationRequest).execute();
                                 } else if (reqID / 1000 == 2) {
                                     RequestRegister registrationRequest = RequestHistory.getRequestRegister(reqID);
+                                    assert registrationRequest != null;
                                     projID = registrationRequest.getFypID();
                                     selectedProj = FYPList.getFYPById(projID);
                                     new AllocateProjectCommand(selectedProj, registrationRequest).execute();
@@ -185,22 +184,14 @@ public class FYPCoordinatorCLI implements Menu, Logout, GetCommand {
                                 } else {
                                     System.out.println("Invalid Input. Returning to Main Page...");
                                 }
-                                break;
-
-                            case 2:
-                                System.out.println("Returning to Main Page...");
-                                break;
-                            default:
-                                System.out.println("Invalid Input. Returning to Main Page...");
-                                break;
+                            }
+                            case 2 -> System.out.println("Returning to Main Page...");
+                            default -> System.out.println("Invalid Input. Returning to Main Page...");
                         }
                     }
-                    break;
-                case 3:
-                    new RequestTransfertoCoordCommand(fypCoordinatorAccount).execute();
-                    break;
-
-                case 4:
+                }
+                case 3 -> new RequestTransfertoCoordCommand(fypCoordinatorAccount).execute();
+                case 4 -> {
                     System.out.println("Please select your choice");
                     System.out.println("1. View all incoming requests");
                     System.out.println("2. View all outgoing requests");
@@ -216,27 +207,15 @@ public class FYPCoordinatorCLI implements Menu, Logout, GetCommand {
                     int requestChoice = scanner.nextInt();
                     scanner.nextLine();
                     switch (requestChoice) {
-                        case 1:
-                            new ViewIncomingRequestRecordsCommand(fypCoordinatorAccount).execute();
-                            break;
-                        case 2:
-                            new ViewOutcomingRequestRecordsCommand(fypCoordinatorAccount).execute();
-                            break;
-                        case 3:
-                            new ViewAllRequestRecordsCommand(fypCoordinatorAccount).execute();
-                            break;
-                        case 4:
-                            System.out.println("Returning to Main Page...");
-                            break;
-                        default:
-                            System.out.println("Invalid Input. Returning to Main Page...");
-                            break;
+                        case 1 -> new ViewIncomingRequestRecordsCommand(fypCoordinatorAccount).execute();
+                        case 2 -> new ViewOutcomingRequestRecordsCommand(fypCoordinatorAccount).execute();
+                        case 3 -> new ViewAllRequestRecordsCommand(fypCoordinatorAccount).execute();
+                        case 4 -> System.out.println("Returning to Main Page...");
+                        default -> System.out.println("Invalid Input. Returning to Main Page...");
                     }
-                    break;
-                case 5:
-                    new ViewAllRequestHistoryCommand().execute();
-                    break;
-                case 6:
+                }
+                case 5 -> new ViewAllRequestHistoryCommand().execute();
+                case 6 -> {
                     System.out.println("Please select your choice");
                     System.out.println("1. View all FYPs");
                     System.out.println("2. Filter by Supervisor");
@@ -252,32 +231,23 @@ public class FYPCoordinatorCLI implements Menu, Logout, GetCommand {
                     int FilterChoice = scanner.nextInt();
                     scanner.nextLine();
                     switch (FilterChoice) {
-                        case 1:
-                            new ViewAllFYPCommand().execute();
-                            break;
-                        case 2:
-                            new GenerateFilteredProjectDetailsCommand(2).execute(); // filter by status
-                            break;
-                        case 3:
-                            new GenerateFilteredProjectDetailsCommand(1).execute(); // filter by supervisor
-                            break;
-                        case 4:
-                            System.out.println("Returning to Main Page...");
-                            break;
-                        default:
-                            System.out.println("Invalid Input. Returning to Main Page...");
-                            break;
+                        case 1 -> new ViewAllFYPCommand().execute();
+                        case 2 -> new GenerateFilteredProjectDetailsCommand(2).execute(); // filter by status
+                        case 3 -> new GenerateFilteredProjectDetailsCommand(1).execute(); // filter by supervisor
+                        case 4 -> System.out.println("Returning to Main Page...");
+                        default -> System.out.println("Invalid Input. Returning to Main Page...");
                     }
-                    break;
-                case 7:
+                }
+                case 7 -> {
                     new ChangePassword(fypCoordinatorAccount).execute();
                     logout();
-                    break;
-                case 8:
+                }
+                case 8 -> {
                     logout();
                     return 1;
-                default:
-                    break;
+                }
+                default -> {
+                }
             }
             return 1;
         }

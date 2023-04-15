@@ -8,7 +8,6 @@ import command.FYPCoord.DeregisterStudentCommand;
 import command.FYPCoord.GenerateFilteredProjectDetailsCommand;
 import command.FYPCoord.ViewAllFYPCommand;
 import command.FYPCoord.ViewAllRequestHistoryCommand;
-import command.Supervisor.CheckPendingRequests;
 import command.Supervisor.CreateProjectCommand;
 import command.Supervisor.ModifyFYPTitle;
 import command.Supervisor.ModifySubmittedFYPTitleCommand;
@@ -64,7 +63,7 @@ public class FYPCoordinatorCLI implements Menu, Logout, GetCommand {
         System.out.println("Logged in as FYP Coordinator: " + FYPCoordinator.getName());
         System.out.println();
         System.out.println("1. Create, update or view projects");
-        if (new CheckPendingRequests(FYPCoordinator.getLoginId()).execute() == 1) {
+        if (RequestHistory.CheckPendingRequests(FYPCoordinator.getLoginId()) == 1) {
             System.out.println("2. View pending requests (NEW)");
         } else {
             System.out.println("2. View pending requests");

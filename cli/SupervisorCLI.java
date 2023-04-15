@@ -45,7 +45,7 @@ public class SupervisorCLI implements Menu, Logout, GetCommand {
         System.out.println("Logged in as Supervisor: " + supervisor.getName());
         System.out.println();
         System.out.println("1. Create, update or view projects");
-        if (new CheckPendingRequests(supervisor.getLoginId()).execute() == 1) {
+        if (RequestHistory.CheckPendingRequests(supervisor.getLoginId()) == 1) {
             System.out.println("2. View pending requests (NEW)");
         } else {
             System.out.println("2. View pending requests");

@@ -49,4 +49,17 @@ public class RequestHistory {
         }
         return null;
     }
+    public static int CheckPendingRequests(String Supervisor){
+        ArrayList<ArrayList<Object>> requests = RequestHistory.getRequestList();
+        for (ArrayList<Object> request : requests) {
+            for (Object indivRequest : request) {
+                Request indivCastedRequest = (Request) indivRequest;
+                if (indivCastedRequest.getRequesteeID().equals(Supervisor)
+                        && indivCastedRequest.getRequestStatus() == RequestStatus.PENDING) {
+                    return 1;
+                }
+            }
+        }
+        return 0;
+    }
 }

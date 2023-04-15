@@ -1,2 +1,0 @@
-requestID	requesterID	requesteeID	requestStatus	fypID	newTitle
-0	KOH1	BOAN	APPROVED	5	asd

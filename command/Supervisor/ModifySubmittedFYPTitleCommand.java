@@ -43,7 +43,7 @@ public class ModifySubmittedFYPTitleCommand implements Command {
             case 1:
                 fyp.setTitle(titleRequest.getNewTitle());
                 titleRequest.setStatus(RequestStatus.APPROVED);
-                System.out.println("Project title has been change to" + fyp.getTitle());
+                System.out.println("Project title has been change to " + fyp.getTitle());
                 break;
             case 2:
                 titleRequest.setStatus(RequestStatus.REJECTED);

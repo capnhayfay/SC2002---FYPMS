@@ -56,7 +56,6 @@ public class AllocateProjectCommand implements Command {
         int requestAction = 0;
         do {
             try {
-                sc.next();
                 System.out.println("Select option:");
                 System.out.println("1. Accept registration request");
                 System.out.println("2. Reject registration request");
@@ -76,6 +75,7 @@ public class AllocateProjectCommand implements Command {
                 }
             } catch (fypmsExceptions.invalidInputException badInput) {
                 System.out.println(badInput);
+                sc.nextLine();
             }
         }while(!(requestAction == 1 || requestAction == 2));
 

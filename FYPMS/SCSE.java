@@ -136,13 +136,6 @@ public class SCSE {
         return null; // account not found
     }
 
-    public void printStudentList() {
-        for (StudentAccount account : StudentAccount) {
-            System.out.println(account.getLoginId() + "+");
-            System.out.println(account.getPassword());
-        }
-    }
-
     public static String getStudentEmail(String studentID) {
         for (StudentAccount account : StudentAccount) {
             if (account.getLoginId().equals(studentID)) {

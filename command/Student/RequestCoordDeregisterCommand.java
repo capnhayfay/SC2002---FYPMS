@@ -25,7 +25,7 @@ public class RequestCoordDeregisterCommand implements Command {
     /**
      * The list of requests for the system.
      */
-    final ArrayList<ArrayList<Object>> requests = RequestHistory.getRequestList();
+    final ArrayList<ArrayList<Request>> requests = RequestHistory.getRequestList();
 
     /**
      * Executes the request for deregistration.
@@ -42,9 +42,8 @@ public class RequestCoordDeregisterCommand implements Command {
             return;
         }
         // Temporary requestID = 1
-        for (Object indivRequest : requests.get(1)) {
-            Request indivCastedRequest = (Request) indivRequest;
-            if (indivCastedRequest.getRequesterID().equals(studentAccount.getLoginId())) {
+        for (Request indivRequest : requests.get(1)) {
+            if (indivRequest.getRequesterID().equals(studentAccount.getLoginId())) {
                 System.out.println();
                 System.out.println("You have already requested to deregister.");
                 return;

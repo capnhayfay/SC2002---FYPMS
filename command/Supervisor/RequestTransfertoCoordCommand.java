@@ -46,7 +46,7 @@ public class RequestTransfertoCoordCommand implements Command {
     }
 
     /** The list of requests in the system */
-    final ArrayList<ArrayList<Object>> requests = RequestHistory.getRequestList();
+    final ArrayList<ArrayList<Request>> requests = RequestHistory.getRequestList();
 
     /**
      * Executes the command to transfer supervision of an FYP project from the

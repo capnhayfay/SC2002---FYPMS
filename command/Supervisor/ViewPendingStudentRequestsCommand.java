@@ -53,19 +53,18 @@ public class ViewPendingStudentRequestsCommand implements Command {
             choice = scanner.nextInt();
         } while (choice != 1 && choice != 2);
 
-        ArrayList<ArrayList<Object>> requests = RequestHistory.getRequestList();
+        ArrayList<ArrayList<Request>> requests = RequestHistory.getRequestList();
 
         switch (choice) {
             case 1:
-                for (ArrayList<Object> request : requests) {
-                    for (Object indivRequest : request) {
-                        Request indivCastedRequest = (Request) indivRequest;
-                        if (indivCastedRequest.getRequesteeID().equals(Supervisor)
-                                && indivCastedRequest.getRequestStatus() == RequestStatus.PENDING) {
+                for (ArrayList<Request> request : requests) {
+                    for (Request indivRequest : request) {
+                        if (indivRequest.getRequesteeID().equals(Supervisor)
+                                && indivRequest.getRequestStatus() == RequestStatus.PENDING) {
                             System.out.println(
-                                    "============= Request ID " + indivCastedRequest.getRequestID()
+                                    "============= Request ID " + indivRequest.getRequestID()
                                             + " ==============");
-                            indivCastedRequest.printDetails();
+                            indivRequest.printDetails();
                             System.out.println();
                             requestCount++;
                         }
@@ -78,16 +77,15 @@ public class ViewPendingStudentRequestsCommand implements Command {
                 System.out.println("Enter Student ID: ");
                 String studentID = scanner.next();
 
-                for (ArrayList<Object> request : requests) {
-                    for (Object indivRequest : request) {
-                        Request indivCastedRequest = (Request) indivRequest;
-                        if (indivCastedRequest.getRequesteeID().equals(Supervisor)
-                                && indivCastedRequest.getRequestStatus() == RequestStatus.PENDING &&
-                                indivCastedRequest.getRequesterID().equalsIgnoreCase(studentID)) {
+                for (ArrayList<Request> request : requests) {
+                    for (Request indivRequest : request) {
+                        if (indivRequest.getRequesteeID().equals(Supervisor)
+                                && indivRequest.getRequestStatus() == RequestStatus.PENDING &&
+                                indivRequest.getRequesterID().equalsIgnoreCase(studentID)) {
                             System.out.println(
-                                    "============= Request ID " + indivCastedRequest.getRequestID()
+                                    "============= Request ID " + indivRequest.getRequestID()
                                             + " ==============");
-                            indivCastedRequest.printDetails();
+                            indivRequest.printDetails();
                             System.out.println();
                             requestCount++;
                         }

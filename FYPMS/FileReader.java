@@ -185,9 +185,9 @@ public class FileReader {
 
     public static void readRequestsFromFile(String fileName, String fileName1, String fileName2, String fileName3) {
         Path pathToFile = Paths.get(fileName);
-        ArrayList<ArrayList<Object>> requests = RequestHistory.getRequestList();
+        ArrayList<ArrayList<Request>> requests = RequestHistory.getRequestList();
 
-        ArrayList<Object> requestChangeTitleList = new ArrayList<Object>();
+        ArrayList<Request> requestChangeTitleList = new ArrayList<Request>();
         try (BufferedReader br = Files.newBufferedReader(pathToFile, StandardCharsets.UTF_8)) {
             String line = br.readLine(); // skip header
             line = br.readLine();
@@ -210,7 +210,7 @@ public class FileReader {
         }
 
         pathToFile = Paths.get(fileName1);
-        ArrayList<Object> requestDeregisterList = new ArrayList<Object>();
+        ArrayList<Request> requestDeregisterList = new ArrayList<Request>();
         try (BufferedReader br = Files.newBufferedReader(pathToFile, StandardCharsets.UTF_8)) {
             String line = br.readLine(); // skip header
             line = br.readLine();
@@ -230,7 +230,7 @@ public class FileReader {
         }
 
         pathToFile = Paths.get(fileName2);
-        ArrayList<Object> requestRegisterList = new ArrayList<Object>();
+        ArrayList<Request> requestRegisterList = new ArrayList<Request>();
         try (BufferedReader br = Files.newBufferedReader(pathToFile, StandardCharsets.UTF_8)) {
             String line = br.readLine(); // skip header
             line = br.readLine();
@@ -250,7 +250,7 @@ public class FileReader {
         }
 
         pathToFile = Paths.get(fileName3);
-        ArrayList<Object> requestTransferSupervisorList = new ArrayList<Object>();
+        ArrayList<Request> requestTransferSupervisorList = new ArrayList<Request>();
         try (BufferedReader br = Files.newBufferedReader(pathToFile, StandardCharsets.UTF_8)) {
             String line = br.readLine(); // skip header
             line = br.readLine();

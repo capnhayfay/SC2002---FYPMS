@@ -22,7 +22,7 @@ import java.util.Scanner;
  */
 
 public class StudentCLI implements Menu, Logout, GetCommand {
-    private StudentAccount curAcc;
+    private StudentAccount student;
     private String UserType;
 
     /**
@@ -31,8 +31,8 @@ public class StudentCLI implements Menu, Logout, GetCommand {
      * @param curAcc   the student account of the user
      * @param UserType the user type of the student account
      */
-    public StudentCLI(StudentAccount curAcc, String UserType) {
-        this.curAcc = curAcc;
+    public StudentCLI(StudentAccount student, String UserType) {
+        this.student = student;
         this.UserType = UserType;
     }
 
@@ -50,7 +50,7 @@ public class StudentCLI implements Menu, Logout, GetCommand {
         System.out.println("=========================================");
         System.out.println("         StudentAccount Menu             ");
         System.out.println("=========================================");
-        System.out.println("Logged in as User: " + curAcc.getName());
+        System.out.println("Logged in as User: " + student.getName());
         System.out.println();
         System.out.println("1. View all available FYP");
         System.out.println("2. Register FYP");
@@ -99,26 +99,26 @@ public class StudentCLI implements Menu, Logout, GetCommand {
 
             switch (userCh) {
                 case 1:
-                    new ViewAllAvailableFYPCommand(curAcc).execute();
+                    new ViewAllAvailableFYPCommand(student).execute();
                     break;
                 case 2:
-                    new RequestCoordFYPCommand(curAcc).execute();
+                    new RequestCoordFYPCommand(student).execute();
                     break;
                 case 3:
-                    new ViewRegisteredFYPCommand(curAcc).execute();
+                    new ViewRegisteredFYPCommand(student).execute();
                     break;
                 case 4:
-                    new RequestSuperTitleChangeCommand(curAcc).execute();
+                    new RequestSuperTitleChangeCommand(student).execute();
                     break;
                 case 5:
-                    new RequestCoordDeregisterCommand(curAcc).execute();
+                    new RequestCoordDeregisterCommand(student).execute();
                     break;
                 case 6:
-                    new ViewAllRequestRecordsCommand(curAcc).execute();
+                    new ViewAllRequestRecordsCommand(student).execute();
                     break;
 
                 case 7:
-                    new ChangePassword(curAcc).execute();
+                    new ChangePassword(student).execute();
                     logout();
                     break;
 
@@ -143,7 +143,7 @@ public class StudentCLI implements Menu, Logout, GetCommand {
      * null.
      */
     public void logout() {
-        this.curAcc = null;
+        this.student = null;
         this.UserType = "";
     }
 
@@ -153,7 +153,7 @@ public class StudentCLI implements Menu, Logout, GetCommand {
      * @return the current student account
      */
     public Account getAccount() {
-        return this.curAcc;
+        return this.student;
     }
 
     /**

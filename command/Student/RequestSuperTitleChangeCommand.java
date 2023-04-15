@@ -29,7 +29,7 @@ public class RequestSuperTitleChangeCommand implements Command {
             System.out.println("Error: Your registration is still pending.");
             return;
         }
-        ArrayList<ArrayList<Object>> requests = RequestHistory.getRequestList();
+        ArrayList<ArrayList<Request>> requests = RequestHistory.getRequestList();
         ArrayList<FYP> fyps = FYPList.getFypList();
 
         for (FYP fyp : fyps) {

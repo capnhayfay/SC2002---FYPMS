@@ -14,6 +14,7 @@ import account.supervisor.FYPCoordinatorAccount;
 import account.supervisor.SupervisorAccount;
 import FYPMS.project.FYP;
 import FYPMS.project.FYPList;
+import FYPMS.request.Request;
 import FYPMS.request.RequestChangeTitle;
 import FYPMS.request.RequestDeregister;
 import FYPMS.request.RequestHistory;
@@ -54,15 +55,15 @@ public class FileUpdater {
      * @param fileName the name of the CSV file to write to
      */
     public static void writeRequestsToFile(String fileName, String filename1, String filename2, String filename3) {
-        ArrayList<ArrayList<Object>> requestList = RequestHistory.getRequestList();
+        ArrayList<ArrayList<Request>> requestList = RequestHistory.getRequestList();
         Path pathToFile = Paths.get(fileName);
 
         try (BufferedWriter bw = Files.newBufferedWriter(pathToFile, StandardCharsets.UTF_8)) {
             // Write the header
             bw.write("requestID\trequesterID\trequesteeID\trequestStatus\tfypID\tnewTitle");
             // Write each request
-            for (Object request : requestList.get(0)) {
-                RequestChangeTitle indivCastedRequest = (RequestChangeTitle) request;
+            for (Request indivrequest : requestList.get(0)) {
+                RequestChangeTitle indivCastedRequest = (RequestChangeTitle) indivrequest;
                 bw.write("\n");
                 bw.write(indivCastedRequest.getRequestID() + "\t" + indivCastedRequest.getRequesterID() + "\t"
                         + indivCastedRequest.getRequesteeID() + '\t' + indivCastedRequest.getRequestStatus() + '\t'
@@ -78,8 +79,8 @@ public class FileUpdater {
             // Write the header
             bw.write("requestID\trequesterID\trequestStatus\tfypID");
             // Write each request
-            for (Object request : requestList.get(1)) {
-                RequestDeregister indivCastedRequest = (RequestDeregister) request;
+            for (Request indivrequest : requestList.get(1)) {
+                RequestDeregister indivCastedRequest = (RequestDeregister) indivrequest;
                 bw.write("\n");
                 bw.write(indivCastedRequest.getRequestID() + "\t" + indivCastedRequest.getRequesterID() + "\t"
                         + indivCastedRequest.getRequestStatus() + '\t' + indivCastedRequest.getFypID());
@@ -94,8 +95,8 @@ public class FileUpdater {
             // Write the header
             bw.write("requestID\trequesterID\trequestStatus\tfypID");
             // Write each request
-            for (Object request : requestList.get(2)) {
-                RequestRegister indivCastedRequest = (RequestRegister) request;
+            for (Request indivrequest : requestList.get(2)) {
+                RequestRegister indivCastedRequest = (RequestRegister) indivrequest;
                 bw.write("\n");
                 bw.write(indivCastedRequest.getRequestID() + "\t" + indivCastedRequest.getRequesterID() + "\t"
                         + indivCastedRequest.getRequestStatus() + '\t' + indivCastedRequest.getFypID());
@@ -110,8 +111,8 @@ public class FileUpdater {
             // Write the header
             bw.write("requestID\trequesterID\trequestStatus\tfypID\tnewSupervisorId");
             // Write each request
-            for (Object request : requestList.get(3)) {
-                RequestTransferSupervisor indivCastedRequest = (RequestTransferSupervisor) request;
+            for (Request indivrequest : requestList.get(3)) {
+                RequestTransferSupervisor indivCastedRequest = (RequestTransferSupervisor) indivrequest;
                 bw.write("\n");
                 bw.write(indivCastedRequest.getRequestID() + "\t" + indivCastedRequest.getRequesterID() + "\t"
                         + indivCastedRequest.getRequestStatus() + '\t' + indivCastedRequest.getFypID() + '\t'

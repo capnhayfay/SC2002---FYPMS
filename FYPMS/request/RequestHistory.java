@@ -4,14 +4,15 @@ import java.util.ArrayList;
 
 public class RequestHistory {
 
-    static final ArrayList<ArrayList<Object>> requests = new ArrayList<ArrayList<Object>>();
+    static final ArrayList<ArrayList<Request>> requests = new ArrayList<ArrayList<Request>>();
 
-    public static ArrayList<ArrayList<Object>> getRequestList() {
+    public static ArrayList<ArrayList<Request>> getRequestList() {
         return requests;
     }
+    
 
     public static RequestChangeTitle getRequestChangeTitle(int requestID) {
-        for (Object indivRequest : requests.get(0)) {
+        for (Request indivRequest : requests.get(0)) {
             RequestChangeTitle indivCastedRequest = (RequestChangeTitle) indivRequest;
             if (indivCastedRequest.getRequestID() == requestID) {
                 return indivCastedRequest;
@@ -21,7 +22,7 @@ public class RequestHistory {
     }
 
     public static RequestDeregister getRequestDeregister(int requestID) {
-        for (Object indivRequest : requests.get(1)) {
+        for (Request indivRequest : requests.get(1)) {
             RequestDeregister indivCastedRequest = (RequestDeregister) indivRequest;
             if (indivCastedRequest.getRequestID() == requestID) {
                 return indivCastedRequest;
@@ -31,7 +32,7 @@ public class RequestHistory {
     }
 
     public static RequestRegister getRequestRegister(int requestID) {
-        for (Object indivRequest : requests.get(2)) {
+        for (Request indivRequest : requests.get(2)) {
             RequestRegister indivCastedRequest = (RequestRegister) indivRequest;
             if (indivCastedRequest.getRequestID() == requestID) {
                 return indivCastedRequest;
@@ -41,7 +42,7 @@ public class RequestHistory {
     }
 
     public static RequestTransferSupervisor getRequestTransferSupervisor(int requestID) {
-        for (Object indivRequest : requests.get(3)) {
+        for (Request indivRequest : requests.get(3)) {
             RequestTransferSupervisor indivCastedRequest = (RequestTransferSupervisor) indivRequest;
             if (indivCastedRequest.getRequestID() == requestID) {
                 return indivCastedRequest;
@@ -50,12 +51,10 @@ public class RequestHistory {
         return null;
     }
     public static int CheckPendingRequests(String Supervisor){
-        ArrayList<ArrayList<Object>> requests = RequestHistory.getRequestList();
-        for (ArrayList<Object> request : requests) {
-            for (Object indivRequest : request) {
-                Request indivCastedRequest = (Request) indivRequest;
-                if (indivCastedRequest.getRequesteeID().equals(Supervisor)
-                        && indivCastedRequest.getRequestStatus() == RequestStatus.PENDING) {
+        for (ArrayList<Request> request : requests) {
+            for (Request indivRequest : request) {
+                if (indivRequest.getRequesteeID().equals(Supervisor)
+                        && indivRequest.getRequestStatus() == RequestStatus.PENDING) {
                     return 1;
                 }
             }

@@ -20,12 +20,11 @@ public class ViewAllPendingRequestsCommand implements Command {
      */
 
     public void execute() {
-        ArrayList<ArrayList<Object>> requests = RequestHistory.getRequestList();
-        for (ArrayList<Object> request : requests) {
-            for (Object indivRequest : request) {
-                Request indivCastedRequest = (Request) indivRequest;
-                if (indivCastedRequest.getRequestStatus() == RequestStatus.PENDING) {
-                    indivCastedRequest.printDetails();
+        ArrayList<ArrayList<Request>> requests = RequestHistory.getRequestList();
+        for (ArrayList<Request> request : requests) {
+            for (Request indivRequest : request) {
+                if (indivRequest.getRequestStatus() == RequestStatus.PENDING) {
+                    indivRequest.printDetails();
                 }
             }
         }

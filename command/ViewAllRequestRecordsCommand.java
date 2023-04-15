@@ -29,9 +29,9 @@ public class ViewAllRequestRecordsCommand implements Command {
         System.out.println();
         System.out.println("Request History");
         System.out.println();
-        ArrayList<ArrayList<Object>> requests = RequestHistory.getRequestList();
-        for (ArrayList<Object> request : requests) {
-            for (Object indivRequest : request) {
+        ArrayList<ArrayList<Request>> requests = RequestHistory.getRequestList();
+        for (ArrayList<Request> request : requests) {
+            for (Request indivRequest : request) {
                 Request indivCastedRequest = (Request) indivRequest;
                 if (indivCastedRequest.getRequesterID().equals(account.getLoginId())
                         || indivCastedRequest.getRequesteeID().equals(account.getLoginId())) {

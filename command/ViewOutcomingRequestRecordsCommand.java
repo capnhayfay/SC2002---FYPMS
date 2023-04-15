@@ -17,14 +17,13 @@ public class ViewOutcomingRequestRecordsCommand implements Command {
         System.out.println();
         System.out.println("Request History");
         System.out.println();
-        ArrayList<ArrayList<Object>> requests = RequestHistory.getRequestList();
-        for (ArrayList<Object> request : requests) {
-            for (Object indivRequest : request) {
-                Request indivCastedRequest = (Request) indivRequest;
-                if (indivCastedRequest.getRequesterID().equals(account.getLoginId())) {
+        ArrayList<ArrayList<Request>> requests = RequestHistory.getRequestList();
+        for (ArrayList<Request> request : requests) {
+            for (Request indivRequest : request) {
+                if (indivRequest.getRequesterID().equals(account.getLoginId())) {
                     System.out.println(
-                            "============= Request ID " + indivCastedRequest.getRequestID() + " ==============");
-                    indivCastedRequest.printDetails();
+                            "============= Request ID " + indivRequest.getRequestID() + " ==============");
+                            indivRequest.printDetails();
                     System.out.println();
                     RequestCount++;
                 }

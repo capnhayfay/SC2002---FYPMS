@@ -70,13 +70,12 @@ public class AllocateProjectCommand implements Command {
                             if (fyp.getStatus().equals(FYPStatus.AVAILABLE)
                                     || fyp.getStatus().equals(FYPStatus.RESERVED)) {
                                 fyp.setStatus(FYPStatus.UNAVAILABLE);
-                                for (Object indivRequest : RequestHistory.getRequestList().get(2)) {
-                                    Request indivCastedRequest = (Request) indivRequest;
-                                    if (indivCastedRequest.getFypID() == fyp.getProjectId()) {
-                                        indivCastedRequest.setStatus(RequestStatus.REJECTED);
-                                        String setStudentStatus = indivCastedRequest.getRequesterID();
+                                for (Request indivRequest : RequestHistory.getRequestList().get(2)) {
+                                    if (indivRequest.getFypID() == fyp.getProjectId()) {
+                                        indivRequest.setStatus(RequestStatus.REJECTED);
+                                        String setStudentStatus = indivRequest.getRequesterID();
                                         AccountManager.setStudentStatus(setStudentStatus, StudentStatus.NO_PROJECT,
-                                                indivCastedRequest.getFypID());
+                                                indivRequest.getFypID());
                                     }
                                 }
                             }

@@ -58,12 +58,11 @@ public class DeregisterStudentCommand implements Command {
                 requestDeregister.setStatus(RequestStatus.APPROVED);
                 AccountManager.setStudentStatus(requestDeregister.getRequesterID(), StudentStatus.DEREGISTERED_PROJECT,
                         requestDeregister.getFypID());
-                for (ArrayList<Object> requests : RequestHistory.getRequestList())
-                    for (Object indivRequest : requests) {
-                        Request indivCastedRequest = (Request) indivRequest;
-                        if (indivCastedRequest.getRequesterID().equals(requestDeregister.getRequesterID())
-                                && indivCastedRequest.getRequestStatus().equals(RequestStatus.PENDING)) {
-                            indivCastedRequest.setStatus(RequestStatus.REJECTED);
+                for (ArrayList<Request> requests : RequestHistory.getRequestList())
+                    for (Request indivRequest : requests) {
+                        if (indivRequest.getRequesterID().equals(requestDeregister.getRequesterID())
+                                && indivRequest.getRequestStatus().equals(RequestStatus.PENDING)) {
+                                    indivRequest.setStatus(RequestStatus.REJECTED);
                         }
                     }
                 SupervisorAccount supervisor = AccountManager.getSupervisorAccount(project.getSupervisorName());

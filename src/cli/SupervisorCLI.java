@@ -12,7 +12,9 @@ import src.command.Supervisor.*;
 import src.command.ViewAllRequestRecordsCommand;
 import src.command.ViewIncomingRequestRecordsCommand;
 import src.command.ViewOutcomingRequestRecordsCommand;
+import src.exceptions.fypmsExceptions;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 /**
@@ -95,15 +97,29 @@ public class SupervisorCLI implements Menu, Logout, GetCommand {
                     System.out.println("1. Create Project");
                     System.out.println("2. Update Project Title");
                     System.out.println("3. View Projects");
-                    if (!scanner.hasNextInt()) {
+                    int selectedChoice = -1;
+                    do{
+                        try{
+                            selectedChoice = scanner.nextInt();
+                            if (!(selectedChoice == 1 || selectedChoice == 2 || selectedChoice == 3)){
+                                throw new fypmsExceptions.invalidInputException("Invalid option chosen. Please try again.");
+                            }
+                        }
+                        catch (InputMismatchException e){
+                            System.out.println("Only Numeric Input Allowed!");
+                            System.out.print("Please enter the option number or enter 0 to exit: ");
+                            System.out.println();
+                            scanner.nextLine();
+                        }
+                        catch (fypmsExceptions.invalidInputException e){
+                            System.out.println(e.toString().substring(e.toString().indexOf(":")));
+                            System.out.print("Please enter the option number or enter 0 to exit: ");
+                            System.out.println();
+                            scanner.nextLine();
+                        }
+                    } while(selectedChoice == -1);
+                    if (selectedChoice == 0) break;
 
-                        System.out.println("Invalid input format for option number. Please try again.");
-                        scanner.nextLine();
-                        System.out.println();
-                        System.out.print("Please enter the option number: ");
-                        continue;
-                    }
-                    int selectedChoice = scanner.nextInt();
                     scanner.nextLine();
                     switch (selectedChoice) {
                         case 1 -> new CreateProjectCommand(supervisorAccount).execute();

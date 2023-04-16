@@ -77,7 +77,8 @@ public class RequestCoordFYPCommand implements Command {
                     } catch (InputMismatchException e) {
                         sc.nextLine();
                         fypID = -2;
-                        System.out.println(new fypmsExceptions.invalidInputException("Only Numeric Input Allowed!").toString());
+                        System.out.println(new fypmsExceptions.invalidInputException("Only Numeric Input Allowed!")
+                                .toString().substring(e.toString().indexOf(":")));
                         System.out.println();
                         continue;
                     }

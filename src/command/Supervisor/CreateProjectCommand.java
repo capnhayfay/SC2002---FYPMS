@@ -49,7 +49,7 @@ public class CreateProjectCommand implements Command {
                 title = sc.nextLine();
             } catch (InputMismatchException e) {
                 System.out.println(new fypmsExceptions.invalidInputException("Invalid Input, please try again.").toString()
-                        .substring(e.toString().indexOf(":" + 2)));
+                        .substring(e.toString().indexOf(":")+2));
             }
         } while (title.equals("INVALIDTITLEWONTBEREPLACED"));
         FYP fyp;
@@ -58,7 +58,7 @@ public class CreateProjectCommand implements Command {
                 throw new fypmsExceptions.supervisorMaxProjectsReachedException();
 
             } catch (fypmsExceptions.supervisorMaxProjectsReachedException e) {
-                System.out.println(e.toString().substring(e.toString().indexOf(":")+2));
+                System.out.println(e.toString().subSequence(e.toString().indexOf(":")+2, e.toString().length()-1));
                 System.out.println("Proceeding to make new project unavailable...");
                 fyp = new FYP(FYPList.getFypList().size() + 1, supervisor.getName(), supervisor.getEmail(), "", "", "",
                         title,

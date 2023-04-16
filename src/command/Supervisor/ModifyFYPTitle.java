@@ -73,7 +73,7 @@ public class ModifyFYPTitle implements Command {
                     try{
                         throw new fypmsExceptions.notAuthorizedException();
                     } catch (Exception e){
-                        System.out.println(e.toString().substring(e.toString().indexOf(":")+2));
+                        System.out.println(e.toString().subSequence(e.toString().indexOf(":")+2, e.toString().length()-1));
                     }
                 }
             }

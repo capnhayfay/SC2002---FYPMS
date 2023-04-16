@@ -57,7 +57,7 @@ public class DeregisterStudentCommand implements Command {
                 requestAction = sc.nextInt();
                 throw new fypmsExceptions.invalidInputException("Wrong input");
             } catch (Exception e){
-                System.out.println(e.toString().substring(e.toString().indexOf(":")+2));
+                System.out.println(e.toString().subSequence(e.toString().indexOf(":")+2, e.toString().length()-1));
                 System.out.println("1. Accept deregistration request");
                 System.out.println("2. Reject deregistration request");
                 sc.nextLine();
@@ -105,7 +105,7 @@ public class DeregisterStudentCommand implements Command {
                     throw new fypmsExceptions.invalidInputException("Invalid input, please try again.");
                 }
                 catch(Exception e){
-                    System.out.println(e.toString().substring(e.toString().indexOf(":")+2));
+                    System.out.println(e.toString().subSequence(e.toString().indexOf(":")+2, e.toString().length()-1));
                 }
             }
         }

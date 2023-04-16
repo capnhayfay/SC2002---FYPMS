@@ -71,7 +71,7 @@ public class GenerateFilteredProjectDetailsCommand implements Command {
                     } catch (InputMismatchException e) {
                         System.out.print("Your selection can only be an integer!");
                     } catch (fypmsExceptions.invalidInputException e){
-                        System.out.print(e.toString().substring(e.toString().indexOf(":")+2));
+                        System.out.print(e.toString().subSequence(e.toString().indexOf(":")+2, e.toString().length()-1));
                     }
                 }
                 System.out.println();
@@ -127,7 +127,7 @@ public class GenerateFilteredProjectDetailsCommand implements Command {
                     } catch (InputMismatchException e) {
                         System.out.print("Your selection can only be an integer!");
                     } catch (fypmsExceptions.invalidInputException e) {
-                        System.out.print(e.toString().substring(e.toString().indexOf(":")+2));
+                        System.out.print(e.toString().subSequence(e.toString().indexOf(":")+2, e.toString().length()-1));
                     }
                 }
                 System.out.println();

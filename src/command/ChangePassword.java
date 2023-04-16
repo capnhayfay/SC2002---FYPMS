@@ -62,7 +62,7 @@ public class ChangePassword implements Command {
                     try{
                         throw new fypmsExceptions.passwordMismatchException();
                     } catch (Exception e){
-                        System.out.println(e.toString().substring(e.toString().indexOf(":")+2));
+                        System.out.println(e.toString().subSequence(e.toString().indexOf(":")+2, e.toString().length()-1));
                         triesLeft--;
                     }
                 }
@@ -70,7 +70,7 @@ public class ChangePassword implements Command {
                 try{
                     throw new fypmsExceptions.invalidLoginException();
                 } catch (Exception e){
-                    System.out.println(e.toString().substring(e.toString().indexOf(":")+2));
+                    System.out.println(e.toString().subSequence(e.toString().indexOf(":")+2, e.toString().length()-1));
                     triesLeft--;
                 }
             }

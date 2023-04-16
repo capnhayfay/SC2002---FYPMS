@@ -77,7 +77,6 @@ public class SupervisorCLI implements Menu, Logout, GetCommand {
         // Error handling for invalid input
         while (true) {
             int userCh = scannerValidation(scanner);
-            scanner.nextLine();
             System.out.println();
             System.out.println("=========================================");
 
@@ -92,7 +91,6 @@ public class SupervisorCLI implements Menu, Logout, GetCommand {
                     System.out.println("3. View Projects");
                     int selectedChoice = scannerValidation(scanner);
 
-                    scanner.nextLine();
                     switch (selectedChoice) {
                         case 1 -> new CreateProjectCommand(supervisorAccount).execute();
                         case 2 -> new ModifyFYPTitle(supervisorAccount).execute();

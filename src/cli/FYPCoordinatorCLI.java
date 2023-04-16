@@ -124,7 +124,7 @@ public class FYPCoordinatorCLI implements Menu, Logout, GetCommand {
                         switch (choice2) {
                             case 1 -> {
                                 System.out.println("Input request ID: ");
-                                reqID = scanner.nextInt();
+                                reqID = scannerValidation(scanner);
                                 System.out.println("=========================================");
                                 if (reqID / 1000 == 0) {
                                     // requestitlechange
@@ -187,7 +187,7 @@ public class FYPCoordinatorCLI implements Menu, Logout, GetCommand {
                     System.out.println("3. Filter by Status");
                     System.out.println("4. Return back to Main Page");
                     int FilterChoice = scannerValidation(scanner);
-                    scanner.nextLine();
+                    System.out.println();
                     switch (FilterChoice) {
                         case 1 -> new ViewAllFYPCommand().execute();
                         case 2 -> new GenerateFilteredProjectDetailsCommand(2).execute(); // filter by status

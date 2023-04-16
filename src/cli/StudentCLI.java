@@ -81,7 +81,6 @@ public class StudentCLI implements Menu, Logout, GetCommand {
         System.out.print("Please enter the option number: ");
         while (true) {
             int userCh = scannerValidation(scanner);
-            scanner.nextLine();
             System.out.println();
             System.out.println("=========================================");
 

@@ -17,6 +17,8 @@ import src.exceptions.fypmsExceptions;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+import static src.cli.InputValidation.scannerValidation;
+
 /**
  * GUI which is shown to the Supervisor Account
  */
@@ -74,16 +76,7 @@ public class SupervisorCLI implements Menu, Logout, GetCommand {
         Scanner scanner = new Scanner(System.in);
         // Error handling for invalid input
         while (true) {
-
-            if (!scanner.hasNextInt()) {
-
-                System.out.println("Invalid input format for option number. Please try again.");
-                scanner.nextLine();
-                System.out.println();
-                System.out.print("Please enter the option number: ");
-                continue;
-            }
-            int userCh = scanner.nextInt();
+            int userCh = scannerValidation(scanner);
             scanner.nextLine();
             System.out.println();
             System.out.println("=========================================");
@@ -97,32 +90,7 @@ public class SupervisorCLI implements Menu, Logout, GetCommand {
                     System.out.println("1. Create Project");
                     System.out.println("2. Update Project Title");
                     System.out.println("3. View Projects");
-                    int selectedChoice = -1;
-                    do{
-                        try{
-                            selectedChoice = scanner.nextInt();
-                            if (!(selectedChoice == 1 || selectedChoice == 2 || selectedChoice == 3)){
-                                throw new fypmsExceptions.invalidInputException("Invalid option chosen");
-                            }
-                        }
-                        catch (InputMismatchException e){
-                            selectedChoice = -1;
-                            System.out.println("Only Numeric Input Allowed!");
-                            System.out.print("Please enter the option number or enter 0 to exit: ");
-                            System.out.println();
-                            System.out.println();
-                            scanner.nextLine();
-                        }
-                        catch (fypmsExceptions.invalidInputException e){
-                            selectedChoice = -1;
-                            System.out.println(e.toString().substring(e.toString().indexOf(":") + 2));
-                            System.out.print("Please enter the option number or enter 0 to exit: ");
-                            System.out.println();
-                            System.out.println();
-                            scanner.nextLine();
-                        }
-                    } while(selectedChoice == -1);
-                    if (selectedChoice == 0) break;
+                    int selectedChoice = scannerValidation(scanner);
 
                     scanner.nextLine();
                     switch (selectedChoice) {
@@ -139,22 +107,14 @@ public class SupervisorCLI implements Menu, Logout, GetCommand {
                         System.out.println("Please select your choice");
                         System.out.println("1. Approve or Reject Request");
                         System.out.println("2. Return to Main Page");
-                        if (!scanner.hasNextInt()) {
-                            System.out.println("Invalid input format for option number. Please try again.");
-                            scanner.nextLine();
-                            System.out.println();
-                            System.out.print("Please enter the option number: ");
-                            continue;
-                        }
-                        int choice2 = scanner.nextInt();
-                        scanner.nextLine();
+                        int choice2 = scannerValidation(scanner);
                         int reqID;
                         int projID;
                         FYP fyp;
                         switch (choice2) {
                             case 1 -> {
                                 System.out.println("Input request ID: ");
-                                reqID = scanner.nextInt();
+                                reqID = scannerValidation(scanner);
                                 if (reqID / 1000 == 0) {
                                     // Request Title Change
                                     RequestChangeTitle titleRequest = RequestHistory.getRequestChangeTitle(reqID);
@@ -182,15 +142,7 @@ public class SupervisorCLI implements Menu, Logout, GetCommand {
                     System.out.println("2. View all outgoing requests");
                     System.out.println("3. View all requests");
                     System.out.println("4. Return to main page");
-                    if (!scanner.hasNextInt()) {
-                        System.out.println("Invalid input format for option number. Please try again.");
-                        scanner.nextLine();
-                        System.out.println();
-                        System.out.print("Please enter the option number: ");
-                        continue;
-                    }
-                    int requestChoice = scanner.nextInt();
-                    scanner.nextLine();
+                    int requestChoice = scannerValidation(scanner);
                     switch (requestChoice) {
                         case 1 -> new ViewIncomingRequestRecordsCommand(supervisorAccount).execute();
                         case 2 -> new ViewOutcomingRequestRecordsCommand(supervisorAccount).execute();

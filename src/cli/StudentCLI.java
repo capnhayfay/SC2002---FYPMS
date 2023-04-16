@@ -9,6 +9,8 @@ import src.command.ViewAllRequestRecordsCommand;
 
 import java.util.Scanner;
 
+import static src.cli.InputValidation.scannerValidation;
+
 /**
  * The StudentCLI class represents the graphical user interface shown to the
  * student account.
@@ -78,16 +80,7 @@ public class StudentCLI implements Menu, Logout, GetCommand {
 
         System.out.print("Please enter the option number: ");
         while (true) {
-            if (!scanner.hasNextInt()) {
-
-                System.out.println("Invalid input format for option number. Please try again.");
-                System.out.println();
-                System.out.print("Please enter option number again: ");
-                scanner.nextLine();
-                continue;
-            }
-
-            int userCh = scanner.nextInt();
+            int userCh = scannerValidation(scanner);
             scanner.nextLine();
             System.out.println();
             System.out.println("=========================================");

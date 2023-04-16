@@ -12,8 +12,11 @@ import src.command.Supervisor.*;
 import src.command.ViewAllRequestRecordsCommand;
 import src.command.ViewIncomingRequestRecordsCommand;
 import src.command.ViewOutcomingRequestRecordsCommand;
+import src.cli.InputValidation;
 
 import java.util.Scanner;
+
+import static src.cli.InputValidation.scannerValidation;
 
 /**
  * GUI which is shown to FYP Coordinator
@@ -77,18 +80,7 @@ public class FYPCoordinatorCLI implements Menu, Logout, GetCommand {
         // Error handling for invalid input
         while (true) {
             System.out.print("Please enter the option number: ");
-            if (!scanner.hasNextInt()) {
-
-                System.out.println("Invalid input format for option number. Please try again.");
-                scanner.nextLine();
-                System.out.println();
-                System.out.print("Please enter the option number: ");
-                continue;
-            }
-
-            int userCh = scanner.nextInt();
-            scanner.nextLine();
-            System.out.println();
+            int userCh = scannerValidation(scanner);
             System.out.println("=========================================");
 
             if (userCh == 9) {
@@ -100,16 +92,7 @@ public class FYPCoordinatorCLI implements Menu, Logout, GetCommand {
                     System.out.println("1. Create Project");
                     System.out.println("2. Update Project Title");
                     System.out.println("3. View Projects");
-                    if (!scanner.hasNextInt()) {
-
-                        System.out.println("Invalid input format for option number. Please try again.");
-                        scanner.nextLine();
-                        System.out.println();
-                        System.out.print("Please enter the option number: ");
-                        continue;
-                    }
-                    int selectedChoice = scanner.nextInt();
-                    scanner.nextLine();
+                    int selectedChoice = scannerValidation(scanner);
                     switch (selectedChoice) {
                         case 1 -> {
                             if (fypCoordinatorAccount.getProjList().size() == 2) {
@@ -134,16 +117,7 @@ public class FYPCoordinatorCLI implements Menu, Logout, GetCommand {
                         System.out.println("1. Approve or Reject Request");
                         System.out.println("2. Return to Main Page");
                         System.out.println();
-                        if (!scanner.hasNextInt()) {
-                            System.out.println("Invalid input format for option number. Please try again.");
-                            scanner.nextLine();
-                            System.out.println();
-                            System.out.print("Please enter the option number: ");
-                            continue;
-                        }
-                        int choice2 = scanner.nextInt();
-                        scanner.nextLine();
-                        System.out.println();
+                        int choice2 = scannerValidation(scanner);
                         int reqID;
                         int projID;
                         FYP selectedProj;
@@ -196,15 +170,7 @@ public class FYPCoordinatorCLI implements Menu, Logout, GetCommand {
                     System.out.println("2. View all outgoing requests");
                     System.out.println("3. View all incoming and outgoing requests");
                     System.out.println("4. Return to main page");
-                    if (!scanner.hasNextInt()) {
-                        System.out.println("Invalid input format for option number. Please try again.");
-                        scanner.nextLine();
-                        System.out.println();
-                        System.out.print("Please enter the option number: ");
-                        continue;
-                    }
-                    int requestChoice = scanner.nextInt();
-                    scanner.nextLine();
+                    int requestChoice = scannerValidation(scanner);
                     switch (requestChoice) {
                         case 1 -> new ViewIncomingRequestRecordsCommand(fypCoordinatorAccount).execute();
                         case 2 -> new ViewOutcomingRequestRecordsCommand(fypCoordinatorAccount).execute();
@@ -220,14 +186,7 @@ public class FYPCoordinatorCLI implements Menu, Logout, GetCommand {
                     System.out.println("2. Filter by Supervisor");
                     System.out.println("3. Filter by Status");
                     System.out.println("4. Return back to Main Page");
-                    if (!scanner.hasNextInt()) {
-                        System.out.println("Invalid input format for option number. Please try again.");
-                        scanner.nextLine();
-                        System.out.println();
-                        System.out.print("Please enter the option number: ");
-                        continue;
-                    }
-                    int FilterChoice = scanner.nextInt();
+                    int FilterChoice = scannerValidation(scanner);
                     scanner.nextLine();
                     switch (FilterChoice) {
                         case 1 -> new ViewAllFYPCommand().execute();
@@ -252,6 +211,8 @@ public class FYPCoordinatorCLI implements Menu, Logout, GetCommand {
         }
 
     }
+
+
 
     /**
      * Logout from account by setting FYP Coordinator Account to null

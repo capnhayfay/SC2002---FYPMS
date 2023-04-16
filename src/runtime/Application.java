@@ -30,6 +30,8 @@ import java.util.InputMismatchException;
 import java.util.Objects;
 import java.util.Scanner;
 
+import static src.cli.InputValidation.scannerValidation;
+
 /**
  * The main application class which connects all the functionality of the src.FYPMS application
  */
@@ -91,7 +93,7 @@ public class Application {
                 int choice = -1;
                 do {
                     try {
-                        choice = scanner.nextInt();
+                        choice = scannerValidation(scanner);
                     } catch (InputMismatchException e) {
                         System.out.println("Please enter only numeric values!");
                         scanner.next();

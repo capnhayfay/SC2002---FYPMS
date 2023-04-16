@@ -17,6 +17,8 @@ import src.exceptions.fypmsExceptions;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import static src.cli.InputValidation.scannerValidation;
+
 /**
  * Command for modifying fyp title
  */
@@ -48,7 +50,7 @@ public class ModifyFYPTitle implements Command {
     public void execute() {
         Scanner sc = new Scanner(System.in);
         System.out.println("Input projectID to change title: ");
-        int projectID = sc.nextInt();
+        int projectID = scannerValidation(sc);
         String oldTitle = "";
         for (FYP fyp : fypList) {
             if (fyp.getProjectId() == projectID) {

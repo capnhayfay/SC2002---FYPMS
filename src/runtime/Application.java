@@ -73,14 +73,6 @@ public class Application {
                 "src/database/2requestRegister.txt",
                 "src/database/3requestTransferSupervisor.txt");
 
-//        FileReader.readFYPsFromFile("src/database/test/rollover project.txt");
-//        FileReader.readSupervisorsFromFile("src/database/test/faculty_list.txt");
-//        FileReader.readCoordinatorsFromFile("src/database/test/FYP coordinator.txt");
-//        FileReader.readStudentsFromFile("src/database/test/student list.txt");
-//        FileReader.readRequestsFromFile("src/database/test/0requestChangeTitle.txt",
-//                "src/database/test/1requestDeregister.txt",
-//                "src/database/test/2requestRegister.txt",
-//                "src/database/test/3requestTransferSupervisor.txt");
 
         Scanner scanner = new Scanner(System.in);
         UserType loggedInUserType = null;

@@ -13,6 +13,9 @@ import java.util.ArrayList;
  * the ability to add and retrieve assigned projects.
  */
 public class SupervisorAccount extends Account {
+    /**
+     * Array list holding all projects
+     */
     private final ArrayList<String> proj;
 
     /**

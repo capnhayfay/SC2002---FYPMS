@@ -1,121 +1,169 @@
+/**
+ * Class for containing all FYPMS exceptions.
+ */
 package src.exceptions;
 
 import src.account.student.StudentAccount;
 import src.account.student.StudentStatus;
-
 import java.util.Scanner;
 
-/**
- * Class for containing all src.FYPMS exceptions
- */
 public class fypmsExceptions {
-    /**
-     * Default constructor for Exceptions Class for src.FYPMS
-     */
-    public fypmsExceptions() {
-    }
 
     /**
-     * Exception for invalidInputs by user
+     * Default constructor for Exceptions Class for FYPMS.
+     */
+    public fypmsExceptions() {}
+
+    /**
+     * Exception for invalid inputs by user.
      */
     @SuppressWarnings("serial")
-    /**
-     * Inner static class for invalidInput Exceptions
-     */
     public static class invalidInputException extends Exception {
+
         /**
-         * Constructor for invalidInputException
+         * Constructor for invalidInputException.
          *
-         * @param x: String of where the error was found
+         * @param x: String of where the error was found.
          */
         public invalidInputException(String x) {
             super(x + ". Please try again.");
         }
     }
 
-
-
+    /**
+     * Exception for supervisor not found.
+     */
     public static class supervisorNotFoundException extends Exception {
         public supervisorNotFoundException() {
             super("Supervisor Entered Not Found!");
         }
     }
 
-    public static class noSuchProjectException extends Exception{
+    /**
+     * Exception for project ID not found.
+     */
+    public static class noSuchProjectException extends Exception {
+        /**
+         * Constructor
+         */
         public noSuchProjectException() {
             super("Project ID Does Not Exist!");
         }
     }
 
+    /**
+     * Exception for project not being available.
+     */
     public static class projectNotAvailableException extends Exception {
+        /**
+         * Constructor
+         */
         public projectNotAvailableException() {
             super("Project is not available!");
         }
     }
 
-    public static class supervisorMaxProjectsReachedException extends Exception{
-        public supervisorMaxProjectsReachedException(){
+    /**
+     * Exception for supervisor reaching maximum projects limit.
+     */
+    public static class supervisorMaxProjectsReachedException extends Exception {
+        /**
+         * Default Constructor
+         */
+        public supervisorMaxProjectsReachedException() {
             super("Warning: You have already reached the maximum number of projects you can manage.");
         }
-        public supervisorMaxProjectsReachedException(String supervisorName){
+
+        /**
+         * Non Default Constructor
+         */
+        public supervisorMaxProjectsReachedException(String supervisorName) {
             super(("Warning: " + supervisorName + " has reached the project limit."));
         }
     }
 
-    public static class supervisorMaxProjectsReachedButStillAcceptedException extends supervisorMaxProjectsReachedException{
-        public supervisorMaxProjectsReachedButStillAcceptedException(String supervisorName){
+    /**
+     * Exception for supervisor reaching maximum projects limit but still accepting the request.
+     */
+    public static class supervisorMaxProjectsReachedButStillAcceptedException extends supervisorMaxProjectsReachedException {
+        public supervisorMaxProjectsReachedButStillAcceptedException(String supervisorName) {
             super(supervisorName);
             System.out.println("Rejecting all pending registration requests for " + supervisorName + "'s projects.");
             System.out.println("Setting all of " + supervisorName + "'s projects to unavailable");
         }
     }
 
-    public static class invalidLoginException extends Exception{
-        public invalidLoginException(){
+    /**
+     * Exception for invalid login details.
+     */
+    public static class invalidLoginException extends Exception {
+        /**
+         * Constructor
+         */
+        public invalidLoginException() {
             super("Invalid Login Details! Try again.");
-            try{
+            try {
                 Thread.sleep(100);
-            } catch (Exception e){
+            } catch (Exception e) {
                 System.out.println(e.getMessage());
             }
         }
     }
 
-    public static class passwordMismatchException extends Exception{
-        public passwordMismatchException(){
+    /**
+     * Exception for password mismatch.
+     */
+    public static class passwordMismatchException extends Exception {
+        /**
+         * Constructor
+         */
+        public passwordMismatchException() {
             super("Passwords do not match! Try again.");
-            try{
+            try {
                 Thread.sleep(100);
-            } catch (Exception e){
+            } catch (Exception e) {
                 System.out.println(e.getMessage());
             }
         }
     }
 
-    public static class pendingRequestException extends Exception{
-        public pendingRequestException(){
+    /**
+     * Exception for having a pending request.
+     */
+    public static class pendingRequestException extends Exception {
+        /**
+         * Constructor
+         */
+        public pendingRequestException() {
             super("Error: You have a pending registration.");
-            try{
+            try {
                 Thread.sleep(100);
-            } catch (Exception ignored){
-
-            }
+            } catch (Exception ignored) {}
         }
-
     }
 
-    public static class notRegisteredException extends Exception{
-        public notRegisteredException(){
+    /**
+     * Exception for not being registered.
+     */
+    public static class notRegisteredException extends Exception {
+        /**
+         * Constructor
+         */
+        public notRegisteredException() {
             super("Error: You are not registered for an FYP.");
-            try{
+            try {
                 Thread.sleep(100);
-            } catch (Exception ignored){
-
-            }
+            } catch (Exception ignored) {}
         }
     }
 
-    public static class deregisteredException extends Exception{
+    /**
+     * Exception for being deregistered.
+     */
+    public static class deregisteredException extends Exception {
+        /**
+         * Constructor for deregisteredException class type
+         */
         public deregisteredException(){
             super("Error: You have deregistered for an FYP.");
             try{
@@ -126,7 +174,14 @@ public class fypmsExceptions {
         }
 
     }
+
+    /**
+     * Class for student status already registered
+     */
     public static class alreadyRegisteredException extends Exception{
+        /**
+         * Constructor for alreadyRegisteredException
+         */
         public alreadyRegisteredException(){
             super("Error: You are already registered for an FYP.");
             try{
@@ -137,7 +192,13 @@ public class fypmsExceptions {
         }
     }
 
+    /**
+     * Authorization access exception
+     */
     public static class notAuthorizedException extends Exception{
+        /**
+         * Constructor for notAuthorizedException
+         */
         public notAuthorizedException(){
             super("Error: You are not authorized to perform this function.");
             try{
@@ -148,6 +209,12 @@ public class fypmsExceptions {
         }
     }
 
+    /**
+     * Function to provide error checking based on Student Status and throw exceptions
+     * @param studentAccount Account of student
+     * @param cases the specific case of the item
+     * @return returns boolean true if exceptions were present, false otherwise
+     */
     public static boolean checkStudentStatusExceptionFunction(StudentAccount studentAccount, int cases){
         try {
             if (studentAccount.getStatus() == StudentStatus.ASSIGNED_PROJECT && cases == 1) {
@@ -168,6 +235,13 @@ public class fypmsExceptions {
         return false;
     }
 
+    /**
+     * Function to repeatedly ask user for input for two option choices
+     * @param Title First line printed
+     * @param optionOne Option 1
+     * @param optionTwo Option 2
+     * @return valid Integer output
+     */
     public static int validateRequestActionFunction(String Title, String optionOne, String optionTwo){
         Scanner sc = new Scanner(System.in);
         int requestAction = 0;

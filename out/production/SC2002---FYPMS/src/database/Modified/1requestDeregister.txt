@@ -1,2 +1,0 @@
-requestID	requesterID	requestStatus	fypID
-1000	YCHERN	APPROVED	5

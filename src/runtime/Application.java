@@ -54,7 +54,7 @@ public class Application {
         /*
           The run method initializes the src.FYPMS system, loads data from CSV files,
           prompts the user to log in and
-          displays the appropriate GUI depending on the user type (student, supervisor
+          displays the appropriate CLI depending on the user type (student, supervisor
           or FYP coordinator).
           Once the user is done interacting with the system, any changes made are saved
           to the data files.
@@ -64,14 +64,14 @@ public class Application {
          */
 
         // load in CSV
-        FileReader.readFYPsFromFile("src/database/Modified/rollover project.txt");
-        FileReader.readSupervisorsFromFile("src/database/Modified/faculty_list.txt");
-        FileReader.readCoordinatorsFromFile("src/database/Modified/FYP coordinator.txt");
-        FileReader.readStudentsFromFile("src/database/Modified/student list.txt");
-        FileReader.readRequestsFromFile("src/database/Modified/0requestChangeTitle.txt",
-                "src/database/Modified/1requestDeregister.txt",
-                "src/database/Modified/2requestRegister.txt",
-                "src/database/Modified/3requestTransferSupervisor.txt");
+        FileReader.readFYPsFromFile("src/database/rollover project.txt");
+        FileReader.readSupervisorsFromFile("src/database/faculty_list.txt");
+        FileReader.readCoordinatorsFromFile("src/database/FYP coordinator.txt");
+        FileReader.readStudentsFromFile("src/database/student list.txt");
+        FileReader.readRequestsFromFile("src/database/0requestChangeTitle.txt",
+                "src/database/1requestDeregister.txt",
+                "src/database/2requestRegister.txt",
+                "src/database/3requestTransferSupervisor.txt");
 
 //        FileReader.readFYPsFromFile("src/database/test/rollover project.txt");
 //        FileReader.readSupervisorsFromFile("src/database/test/faculty_list.txt");
@@ -189,35 +189,14 @@ public class Application {
 
         new EndProgramMenu().display();
 
-        FileUpdater.writeSupervisorToFile("src/database/test/faculty_list.txt");
-        FileUpdater.writeCoordinatorToFile("src/database/test/FYP coordinator.txt");
-        FileUpdater.writeStudentToFile("src/database/test/student list.txt");
-        FileUpdater.writeFYPsToFile("src/database/test/rollover project.txt");
-        FileUpdater.writeRequestsToFile("src/database/test/0requestChangeTitle.txt",
-                "src/database/test/1requestDeregister.txt", "src/database/test/2requestRegister.txt",
-                "src/database/test/3requestTransferSupervisor.txt");
-//        FileUpdater.writeSupervisorToFile("src/database/Modified/faculty_list.txt");
-//        FileUpdater.writeCoordinatorToFile("src/database/Modified/FYP coordinator.txt");
-//        FileUpdater.writeStudentToFile("src/database/Modified/student list.txt");
-//        FileUpdater.writeFYPsToFile("src/database/Modified/rollover project.txt");
-//        FileUpdater.writeRequestsToFile("src/database/Modified/0requestChangeTitle.txt",
-//                "src/database/Modified/1requestDeregister.txt", "src/database/Modified/2requestRegister.txt",
-//                "src/database/Modified/3requestTransferSupervisor.txt");
+        FileUpdater.writeSupervisorToFile("src/database/faculty_list.txt");
+        FileUpdater.writeCoordinatorToFile("src/database/FYP coordinator.txt");
+        FileUpdater.writeStudentToFile("src/database/student list.txt");
+        FileUpdater.writeFYPsToFile("src/database/rollover project.txt");
+        FileUpdater.writeRequestsToFile("src/database/0requestChangeTitle.txt",
+                "src/database/1requestDeregister.txt", "src/database/2requestRegister.txt",
+                "src/database/3requestTransferSupervisor.txt");
+
     }
-
-
-    //public void run() throws IOException {
-        // end of load in CSV
-        // load in updatedCSV
-        // FileReader.readFYPsFromFile("./src.database/test/rollover project.txt");
-        // FileReader.readSupervisorsFromFile("./src.database/test/faculty_list.txt");
-        // FileReader.readCoordinatorsFromFile("./src.database/test/FYP coordinator.txt");
-        // FileReader.readStudentsFromFile("./src.database/test/student list.txt");
-        // FileReader.readRequestsFromFile("./src.database/test/0requestChangeTitle.txt",
-        // "./src.database/test/1requestDeregister.txt",
-        // "./src.database/test/2requestRegister.txt",
-        // "./src.database/test/3requestTransferSupervisor.txt");
-        // end of load in updatedCSV
-    //}
 
 }

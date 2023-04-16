@@ -1,3 +1,0 @@
-requestID	requesterID	requestStatus	fypID	newSupervisorId
-3000	BOAN	APPROVED	5	DNIYATO
-3001	BOAN	APPROVED	6	ASFLI

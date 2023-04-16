@@ -1,2 +1,0 @@
-Name	Email	Password	Project 1	Project 2
-Li Fang	ASFLI@NTU.EDU.SG	password

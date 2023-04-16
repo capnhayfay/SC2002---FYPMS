@@ -1,0 +1,13 @@
+src.account
+src.account.student
+src.account.supervisor
+src.cli
+src.command
+src.command.FYPCoord
+src.command.Student
+src.command.Supervisor
+src.exceptions
+src.FYPMS
+src.FYPMS.project
+src.FYPMS.request
+src.runtime

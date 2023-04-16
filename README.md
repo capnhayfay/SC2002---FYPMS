@@ -87,5 +87,6 @@ The java class `src/test/HardReload.java` is used to hard reload the database.
 
 ## UML Class Diagram
 
-[![UML Class Diagram](A25-grp2 (uml).svg)](A25-grp2 (uml).svg)
+<img src="A25-grp2 (uml).svg">
+
 

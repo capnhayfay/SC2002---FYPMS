@@ -102,18 +102,22 @@ public class SupervisorCLI implements Menu, Logout, GetCommand {
                         try{
                             selectedChoice = scanner.nextInt();
                             if (!(selectedChoice == 1 || selectedChoice == 2 || selectedChoice == 3)){
-                                throw new fypmsExceptions.invalidInputException("Invalid option chosen. Please try again.");
+                                throw new fypmsExceptions.invalidInputException("Invalid option chosen");
                             }
                         }
                         catch (InputMismatchException e){
+                            selectedChoice = -1;
                             System.out.println("Only Numeric Input Allowed!");
                             System.out.print("Please enter the option number or enter 0 to exit: ");
+                            System.out.println();
                             System.out.println();
                             scanner.nextLine();
                         }
                         catch (fypmsExceptions.invalidInputException e){
-                            System.out.println(e.toString().substring(e.toString().indexOf(":")));
+                            selectedChoice = -1;
+                            System.out.println(e.toString().substring(e.toString().indexOf(":") + 2));
                             System.out.print("Please enter the option number or enter 0 to exit: ");
+                            System.out.println();
                             System.out.println();
                             scanner.nextLine();
                         }

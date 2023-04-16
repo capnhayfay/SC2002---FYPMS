@@ -129,7 +129,7 @@ public class LoginUserMenu implements Menu, Login {
     }
 
     /**
-     * login which returns src.account/null
+     * login which returns account/null
      *
      * @param username which is username entered by user
      * @param password which is password entered by user
@@ -149,7 +149,7 @@ public class LoginUserMenu implements Menu, Login {
     }
 
     /**
-     * Gets student src.account
+     * Gets student account
      *
      * @return StudentAccount in LoginUserMenu
      */
@@ -158,7 +158,7 @@ public class LoginUserMenu implements Menu, Login {
     }
 
     /**
-     * Gets supervisor src.account
+     * Gets supervisor account
      *
      * @return SupervisorAccount in LoginUserMenu
      */
@@ -167,7 +167,7 @@ public class LoginUserMenu implements Menu, Login {
     }
 
     /**
-     * get FYP coordinator src.account
+     * get FYP coordinator account
      *
      * @return FYPCoordinatorAccount in LoginUserMenu
      */

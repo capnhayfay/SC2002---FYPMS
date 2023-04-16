@@ -13,16 +13,16 @@ public interface Logout {
     void logout();
 
     /**
-     * Gets the src.account instance
+     * Gets the account instance
      *
-     * @return src.account instance: Account
+     * @return account instance: Account
      */
     Account getAccount();
 
     /**
      * Gets the user type of the Account
      *
-     * @return src.account user type: UserType
+     * @return account user type: UserType
      */
     UserType getUserType();
 

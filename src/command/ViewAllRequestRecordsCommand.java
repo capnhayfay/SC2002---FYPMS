@@ -15,7 +15,7 @@ public class ViewAllRequestRecordsCommand implements Command {
     /**
      * Constructor for the ViewAllRequestRecordsCommand class.
      *
-     * @param account the src.account whose request records will be viewed
+     * @param account the account whose request records will be viewed
      */
     public ViewAllRequestRecordsCommand(Account account) {
         this.account = account;

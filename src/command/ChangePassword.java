@@ -11,6 +11,7 @@
 package src.command;
 
 import src.account.Account;
+import src.exceptions.fypmsExceptions;
 
 import java.util.Scanner;
 
@@ -22,9 +23,9 @@ public class ChangePassword implements Command {
     private final Account account;
 
     /**
-     * Constructs a new ChangePassword src.command with the given user src.account.
+     * Constructs a new ChangePassword src.command with the given user account.
      *
-     * @param account the user src.account to change the password for
+     * @param account the user account to change the password for
      */
     public ChangePassword(Account account) {
         this.account = account;
@@ -58,12 +59,20 @@ public class ChangePassword implements Command {
                     System.out.println();
                     break;
                 } else {
-                    System.out.println("Password does not match!");
-                    triesLeft--;
+                    try{
+                        throw new fypmsExceptions.passwordMismatchException();
+                    } catch (Exception e){
+                        System.out.println(e.toString().substring(e.toString().indexOf(":")+2));
+                        triesLeft--;
+                    }
                 }
             } else {
-                System.out.println("Wrong password!");
-                triesLeft--;
+                try{
+                    throw new fypmsExceptions.invalidLoginException();
+                } catch (Exception e){
+                    System.out.println(e.toString().substring(e.toString().indexOf(":")+2));
+                    triesLeft--;
+                }
             }
         }
         if (triesLeft == 0) {

@@ -10,7 +10,7 @@ import java.util.ArrayList;
 /**
  * The AccountManager class is responsible for managing the various types of
  * accounts in the system.
- * It provides methods for logging in and retrieving src.account information.
+ * It provides methods for logging in and retrieving account information.
  */
 public class AccountManager {
     // ArrayLists to hold different types of accounts
@@ -37,7 +37,7 @@ public class AccountManager {
                 return account;
             }
         }
-        return null; // src.account not found
+        return null; // account not found
     }
 
     /**
@@ -81,14 +81,14 @@ public class AccountManager {
                 return account;
             }
         }
-        return null; // src.account not found
+        return null; // account not found
     }
 
     /**
-     * Attempts to log in a supervisor src.account with the given login ID and password.
+     * Attempts to log in a supervisor account with the given login ID and password.
      *
-     * @param loginId  the login ID of the supervisor src.account to log in
-     * @param password the password of the supervisor src.account to log in
+     * @param loginId  the login ID of the supervisor account to log in
+     * @param password the password of the supervisor account to log in
      * @return the SupervisorAccount object associated with the given login ID and
      * password, or null if not found
      */
@@ -98,16 +98,16 @@ public class AccountManager {
                 return account;
             }
         }
-        return null; // src.account not found
+        return null; // account not found
     }
 
     /**
-     * Attempts to log in a FYP Coordinator src.account with the given login ID and
+     * Attempts to log in a FYP Coordinator account with the given login ID and
      * password.
      *
-     * @param loginId  the login ID of the src.account
-     * @param password the password of the src.account
-     * @return the logged in FYP Coordinator src.account, or null if the src.account does
+     * @param loginId  the login ID of the account
+     * @param password the password of the account
+     * @return the logged in FYP Coordinator account, or null if the account does
      * not exist or the password is incorrect
      */
     public static FYPCoordinatorAccount loginFypCoordinatorAccount(String loginId, String password) {
@@ -116,14 +116,14 @@ public class AccountManager {
                 return account;
             }
         }
-        return null; // src.account not found
+        return null; // account not found
     }
 
     /**
-     * Returns the email of the student src.account with the given student ID.
+     * Returns the email of the student account with the given student ID.
      *
-     * @param studentID the student ID of the src.account
-     * @return the email of the student src.account, or null if the src.account does not
+     * @param studentID the student ID of the account
+     * @return the email of the student account, or null if the account does not
      * exist
      */
     public static String getStudentEmail(String studentID) {
@@ -136,10 +136,10 @@ public class AccountManager {
     }
 
     /**
-     * Returns the name of the student src.account with the given student ID.
+     * Returns the name of the student account with the given student ID.
      *
-     * @param studentID the student ID of the src.account
-     * @return the name of the student src.account, or null if the src.account does not
+     * @param studentID the student ID of the account
+     * @return the name of the student account, or null if the account does not
      * exist
      */
     public static String getStudentName(String studentID) {
@@ -152,10 +152,10 @@ public class AccountManager {
     }
 
     /**
-     * Returns the name of the supervisor src.account with the given supervisor ID.
+     * Returns the name of the supervisor account with the given supervisor ID.
      *
-     * @param supervisorID the supervisor ID of the src.account
-     * @return the name of the supervisor src.account, or null if the src.account does not
+     * @param supervisorID the supervisor ID of the account
+     * @return the name of the supervisor account, or null if the account does not
      * exist
      */
     public static String getSupervisorName(String supervisorID) {
@@ -168,7 +168,7 @@ public class AccountManager {
     }
 
     /**
-     * Returns the email of the supervisor src.account with the given supervisor ID.
+     * Returns the email of the supervisor account with the given supervisor ID.
      *
      * @param supervisorID the supervisor ID of the account
      * @return the email of the supervisor account, or null if the account does not

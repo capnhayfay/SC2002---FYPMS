@@ -6,7 +6,7 @@ import src.account.UserType;
 import java.util.ArrayList;
 
 /**
- * The {@code SupervisorAccount} class represents the src.account of a supervisor in
+ * The {@code SupervisorAccount} class represents the account of a supervisor in
  * the FYP system.
  * It extends the {@code Account} class and adds functionality specific to
  * supervisors, such as
@@ -18,11 +18,11 @@ public class SupervisorAccount extends Account {
     /**
      * Creates a new {@code SupervisorAccount} with the given parameters.
      *
-     * @param loginId      the login ID of the supervisor src.account.
-     * @param password     the password of the supervisor src.account.
-     * @param userType     the user type of the supervisor src.account.
-     * @param emailAddress the email address associated with the supervisor src.account.
-     * @param name         the name of the supervisor src.account.
+     * @param loginId      the login ID of the supervisor account.
+     * @param password     the password of the supervisor account.
+     * @param userType     the user type of the supervisor account.
+     * @param emailAddress the email address associated with the supervisor account.
+     * @param name         the name of the supervisor account.
      * @param proj         the list of projects assigned to the supervisor.
      */
     public SupervisorAccount(String loginId, String password, UserType userType, String emailAddress, String name,
@@ -55,7 +55,7 @@ public class SupervisorAccount extends Account {
      *
      * @param loginId  the login ID entered by the user.
      * @param password the password entered by the user.
-     * @return UserType the user type of the supervisor src.account if login is
+     * @return UserType the user type of the supervisor account if login is
      * successful, null otherwise.
      */
     public UserType login(String loginId, String password) {
@@ -66,7 +66,7 @@ public class SupervisorAccount extends Account {
     }
 
     /**
-     * Prints the details of this instance of the supervisor src.account.
+     * Prints the details of this instance of the supervisor account.
      * The method displays the name and email of the supervisor, as well as a list
      * of assigned projects.
      * If the supervisor has no assigned projects, a message indicating so will be

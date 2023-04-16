@@ -40,7 +40,7 @@ public class RequestCoordFYPCommand implements Command {
     /**
      * Constructor for the RequestCoordFYPCommand class.
      *
-     * @param studentAccount the student src.account associated with this src.command
+     * @param studentAccount the student account associated with this src.command
      */
     public RequestCoordFYPCommand(StudentAccount studentAccount) {
         this.studentAccount = studentAccount;

@@ -1,7 +1,7 @@
 /**
- * Represents a src.command that allows an src.account to view all incoming request records for that src.account.
+ * Represents a src.command that allows an account to view all incoming request records for that account.
  * This class implements the Command interface. It loops through all requests in the system and prints out the details
- * of each request if the requestee ID matches the login ID of the src.account.
+ * of each request if the requestee ID matches the login ID of the account.
  */
 
 package src.command;
@@ -19,15 +19,15 @@ public class ViewIncomingRequestRecordsCommand implements Command {
     private final Account account;
 
     /**
-     * Constructs a ViewIncomingRequestRecordsCommand object with the specified src.account.
-     * @param account the src.account for which the incoming request records need to be displayed.
+     * Constructs a ViewIncomingRequestRecordsCommand object with the specified account.
+     * @param account the account for which the incoming request records need to be displayed.
      */
     public ViewIncomingRequestRecordsCommand(Account account) {
         this.account = account;
     }
 
     /**
-     * Displays the incoming request records for the logged in src.account.
+     * Displays the incoming request records for the logged in account.
      */
     public void execute() {
         int RequestCount = 0;

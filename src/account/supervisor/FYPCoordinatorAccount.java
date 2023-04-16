@@ -5,10 +5,10 @@ import src.account.UserType;
 import java.util.ArrayList;
 
 /**
- * The {@code FYPCoordinatorAccount} class represents the src.account of a
+ * The {@code FYPCoordinatorAccount} class represents the account of a
  * Final Year Project (FYP) Coordinator.
  * <p>
- * This src.account inherits from the {@link SupervisorAccount} class and adds
+ * This account inherits from the {@link SupervisorAccount} class and adds
  * additional functionality specific to FYP Coordinators.
  */
 public class FYPCoordinatorAccount extends SupervisorAccount {
@@ -17,13 +17,13 @@ public class FYPCoordinatorAccount extends SupervisorAccount {
      * Creates a new {@code FYPCoordinatorAccount} instance with the given
      * parameters.
      *
-     * @param loginId      the login ID of the coordinator src.account
-     * @param password     the password of the coordinator src.account
-     * @param userType     the user type of the coordinator src.account
-     * @param emailAddress the email address associated with the coordinator src.account
-     * @param name         the name of the coordinator src.account
+     * @param loginId      the login ID of the coordinator account
+     * @param password     the password of the coordinator account
+     * @param userType     the user type of the coordinator account
+     * @param emailAddress the email address associated with the coordinator account
+     * @param name         the name of the coordinator account
      * @param proj         a list of project IDs associated with the coordinator
-     *                     src.account
+     *                     account
      */
     public FYPCoordinatorAccount(String loginId, String password, UserType userType, String emailAddress, String name,
                                  ArrayList<String> proj) {
@@ -31,13 +31,13 @@ public class FYPCoordinatorAccount extends SupervisorAccount {
     }
 
     /**
-     * Authenticates the login of a coordinator src.account. This method provides an
+     * Authenticates the login of a coordinator account. This method provides an
      * extra layer of security by implementing a two-factor authentication (2FA)
      * process.
      *
      * @param loginId  the login ID entered by the user
      * @param password the password entered by the user
-     * @return the user type of the coordinator src.account if the login is successful,
+     * @return the user type of the coordinator account if the login is successful,
      * or {@code null} if the login fails
      */
     public UserType login(String loginId, String password) {
@@ -48,9 +48,9 @@ public class FYPCoordinatorAccount extends SupervisorAccount {
     }
 
     /**
-     * Prints the details of this instance of the coordinator src.account.
+     * Prints the details of this instance of the coordinator account.
      * Specifically, this method prints the name and email address associated with
-     * the src.account.
+     * the account.
      */
     public void printDetails() {
         System.out.println("Coordinator name: " + getName());

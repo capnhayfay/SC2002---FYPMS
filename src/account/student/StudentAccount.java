@@ -44,7 +44,7 @@ public class StudentAccount extends Account {
     }
 
     /**
-     * Prints the details of this instance of the student src.account
+     * Prints the details of this instance of the student account
      */
     public void printDetails() {
         System.out.println("StudentAccount name: " + getName());

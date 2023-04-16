@@ -1,10 +1,10 @@
 package src.runtime;/*
-     The src.runtime.Application class represents the main entry point of the src.FYPMS application.
+     The src.Application class represents the main entry point of the src.FYPMS application.
      It initializes the system, loads data from CSV files, and starts the user interface by prompting the user to select their userType.
      Then, it prompts the user to log in.
      After the user logs in, the appropriate GUI (StudentCLI, SupervisorCLI or FYPCoordinatorCLI) is displayed and the user can interact with the system.
      Once the user is done, they can log out and the application will save any changes made to the data files.
-     This class contains a main method that initializes a new instance of the src.runtime.Application class and invokes the run method.
+     This class contains a main method that initializes a new instance of the src.Application class and invokes the run method.
      The run method initializes the src.FYPMS system, loads data from CSV files, prompts the user to log in and displays the appropriate GUI depending on the user type (student, supervisor or FYP coordinator).
     @see StudentCLI
     @see SupervisorCLI
@@ -35,14 +35,14 @@ import java.util.Scanner;
  */
 public class Application {
     /**
-     * Default constructor for src.runtime.Application object
+     * Default constructor for src.Application object
      */
     public Application() {
 
     }
 
     /**
-     * The main method initializes a new instance of the src.runtime.Application class and
+     * The main method initializes a new instance of the src.Application class and
      * invokes the run method.
      *
      * @param args All src.command line arguments which can be entered into main

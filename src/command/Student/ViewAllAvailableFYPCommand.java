@@ -19,8 +19,8 @@ public class ViewAllAvailableFYPCommand implements Command {
     private final StudentAccount studentAccount;
 
     /**
-     * Constructs a new src.command to view all available FYPs for a given student src.account.
-     * @param currentAcc the student src.account executing the src.command.
+     * Constructs a new src.command to view all available FYPs for a given student account.
+     * @param currentAcc the student account executing the src.command.
      */
     public ViewAllAvailableFYPCommand(StudentAccount currentAcc) {
         this.studentAccount = currentAcc;

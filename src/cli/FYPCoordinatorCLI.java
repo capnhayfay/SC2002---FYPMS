@@ -254,7 +254,7 @@ public class FYPCoordinatorCLI implements Menu, Logout, GetCommand {
     }
 
     /**
-     * Logout from src.account by setting FYP Coordinator Account to null
+     * Logout from account by setting FYP Coordinator Account to null
      */
     public void logout() {
         this.fypCoordinatorAccount = null;

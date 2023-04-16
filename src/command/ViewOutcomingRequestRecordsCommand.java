@@ -1,5 +1,5 @@
 /**
- * A src.command to view outgoing request records for a given src.account.
+ * A src.command to view outgoing request records for a given account.
  */
 package src.command;
 
@@ -10,23 +10,23 @@ import src.account.Account;
 import java.util.ArrayList;
 
 /**
- * Class for viewing and src.account's outgoing requests
+ * Class for viewing and account's outgoing requests
  */
 public class ViewOutcomingRequestRecordsCommand implements Command {
 
     private final Account account;
 
     /**
-     * Constructs a ViewOutcomingRequestRecordsCommand with the given src.account.
+     * Constructs a ViewOutcomingRequestRecordsCommand with the given account.
      *
-     * @param account the src.account whose outgoing requests will be displayed
+     * @param account the account whose outgoing requests will be displayed
      */
     public ViewOutcomingRequestRecordsCommand(Account account) {
         this.account = account;
     }
 
     /**
-     * Executes the src.command to display the outgoing request records for the given src.account.
+     * Executes the src.command to display the outgoing request records for the given account.
      * Displays the request ID, request details and request status for each outgoing request.
      */
     public void execute() {

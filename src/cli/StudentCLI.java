@@ -11,13 +11,13 @@ import java.util.Scanner;
 
 /**
  * The StudentCLI class represents the graphical user interface shown to the
- * student src.account.
+ * student account.
  * It implements the Menu, Logout, and GetCommand interfaces. The class displays
  * a list of actions
- * that can be performed by the student src.account, and executes the chosen action
+ * that can be performed by the student account, and executes the chosen action
  * based on the user's
- * input. The class also allows the student src.account to logout and get their
- * src.account details.
+ * input. The class also allows the student account to logout and get their
+ * account details.
  */
 
 public class StudentCLI implements Menu, Logout, GetCommand {
@@ -25,10 +25,10 @@ public class StudentCLI implements Menu, Logout, GetCommand {
     private UserType userType;
 
     /**
-     * Constructs a StudentCLI object with the given student src.account and user type.
+     * Constructs a StudentCLI object with the given student account and user type.
      *
-     * @param studentAccount the student src.account of the user
-     * @param userType       the user type of the student src.account
+     * @param studentAccount the student account of the user
+     * @param userType       the user type of the student account
      */
     public StudentCLI(StudentAccount studentAccount, UserType userType) {
         this.studentAccount = studentAccount;
@@ -36,7 +36,7 @@ public class StudentCLI implements Menu, Logout, GetCommand {
     }
 
     /**
-     * Displays a list of actions that can be performed by the student src.account,
+     * Displays a list of actions that can be performed by the student account,
      * including
      * viewing available FYPs, registering FYPs, viewing registered FYPs, requesting
      * to
@@ -124,7 +124,7 @@ public class StudentCLI implements Menu, Logout, GetCommand {
     }
 
     /**
-     * Logs out from the student src.account by setting the src.account and user type to
+     * Logs out from the student account by setting the account and user type to
      * null.
      */
     public void logout() {
@@ -133,18 +133,18 @@ public class StudentCLI implements Menu, Logout, GetCommand {
     }
 
     /**
-     * Returns the current student src.account.
+     * Returns the current student account.
      *
-     * @return the current student src.account
+     * @return the current student account
      */
     public Account getAccount() {
         return this.studentAccount;
     }
 
     /**
-     * Returns the user type of the student src.account.
+     * Returns the user type of the student account.
      *
-     * @return the user type of the student src.account
+     * @return the user type of the student account
      */
     public UserType getUserType() {
         return userType;

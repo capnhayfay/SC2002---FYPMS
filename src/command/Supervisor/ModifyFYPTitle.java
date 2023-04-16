@@ -27,7 +27,7 @@ public class ModifyFYPTitle implements Command {
 
     /**
      * Constructor for ModifyFYPTitle src.command
-     * @param supervisorAccount src.account of the user
+     * @param supervisorAccount account of the user
      */
     public ModifyFYPTitle(SupervisorAccount supervisorAccount) {
         this.supervisorAccount = supervisorAccount;

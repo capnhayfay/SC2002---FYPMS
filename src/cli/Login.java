@@ -1,5 +1,5 @@
 /**
- * Represents an interface for logging into an src.account.
+ * Represents an interface for logging into an account.
  */
 package src.cli;
 
@@ -11,26 +11,26 @@ import src.account.UserType;
  */
 public interface Login {
     /**
-     * Attempts to log into an src.account with the given username and password.
+     * Attempts to log into an account with the given username and password.
      *
-     * @param username the username of the src.account
-     * @param password the password of the src.account
-     * @return the Account object associated with the logged in src.account, or null if
+     * @param username the username of the account
+     * @param password the password of the account
+     * @return the Account object associated with the logged in account, or null if
      *         login was unsuccessful
      */
     Account login(String username, String password);
 
     /**
-     * Gets the Account object associated with the currently logged in src.account.
+     * Gets the Account object associated with the currently logged in account.
      *
-     * @return the Account object associated with the currently logged in src.account,
-     *         or null if no src.account is currently logged in
+     * @return the Account object associated with the currently logged in account,
+     *         or null if no account is currently logged in
      */
     Account getAccount();
 
     /**
-     * get UserType of the login src.account
-     * @return the UserType of the src.account: UserType
+     * get UserType of the login account
+     * @return the UserType of the account: UserType
      */
     UserType getUserType();
 }

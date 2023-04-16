@@ -1,14 +1,14 @@
 package src.account;
 
 /**
- * Abstract class for creating an Account object which holds user's login and  src.account.
+ * Abstract class for creating an Account object which holds user's login and  account.
  */
 
 public abstract class Account {
     private final String email; // email address of the user
     private final String name; // name of the user
     private final String loginId; // login ID of the user
-    private final UserType userType; // type of src.account: Student, Supervisor and FYPCoordinator
+    private final UserType userType; // type of account: Student, Supervisor and FYPCoordinator
     private String password; // password of the user
 
     /**
@@ -16,7 +16,7 @@ public abstract class Account {
      *
      * @param loginId      the login ID of the user
      * @param password     the password of the user
-     * @param userType     the type of src.account (Student, Supervisor, FYPCoordinator)
+     * @param userType     the type of account (Student, Supervisor, FYPCoordinator)
      * @param emailAddress the email address of the user
      * @param name         the name of the user
      */
@@ -57,9 +57,9 @@ public abstract class Account {
     }
 
     /**
-     * Returns the type of src.account of the user.
+     * Returns the type of account of the user.
      *
-     * @return the type of src.account of the user
+     * @return the type of account of the user
      */
     public final UserType getUserType() {
         return userType;

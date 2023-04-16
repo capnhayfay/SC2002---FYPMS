@@ -27,7 +27,7 @@ public class ViewRegisteredFYPCommand implements Command {
     private final StudentAccount studentAccount;
 
     /**
-     * Constructs a ViewRegisteredFYPCommand with the given student src.account.
+     * Constructs a ViewRegisteredFYPCommand with the given student account.
      *
      * @param studentAccount the student account
      */

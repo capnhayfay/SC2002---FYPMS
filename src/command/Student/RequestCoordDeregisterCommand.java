@@ -27,7 +27,7 @@ public class RequestCoordDeregisterCommand implements Command {
     private final StudentAccount studentAccount;
 
     /**
-     * The studentAccount object to hold student src.account information.
+     * The studentAccount object to hold student account information.
      * @param studentAccount Account of student
      */
     public RequestCoordDeregisterCommand(StudentAccount studentAccount) {

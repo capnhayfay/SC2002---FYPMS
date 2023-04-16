@@ -70,9 +70,9 @@ public class fypmsExceptions {
         }
     }
 
-    public static class invalidLogin extends Exception{
-        public invalidLogin(){
-            super("Invalid Login Details! Returning to Login Page");
+    public static class invalidLoginException extends Exception{
+        public invalidLoginException(){
+            super("Invalid Login Details! Try again.");
             try{
                 Thread.sleep(100);
             } catch (Exception e){
@@ -80,6 +80,18 @@ public class fypmsExceptions {
             }
         }
     }
+
+    public static class passwordMismatchException extends Exception{
+        public passwordMismatchException(){
+            super("Passwords do not match! Try again.");
+            try{
+                Thread.sleep(100);
+            } catch (Exception e){
+                System.out.println(e.getMessage());
+            }
+        }
+    }
+
     public static class pendingRequestException extends Exception{
         public pendingRequestException(){
             super("Error: You have a pending registration.");

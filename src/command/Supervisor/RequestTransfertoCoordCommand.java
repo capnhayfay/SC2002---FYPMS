@@ -1,7 +1,7 @@
 /**
  * The RequestTransfertoCoordCommand class is a src.command class that handles the transfer of an FYP project from one
  * supervisor to another. It implements the Command interface.
- * The class contains a supervisorAccount instance variable to store the current supervisor src.account, and a requests
+ * The class contains a supervisorAccount instance variable to store the current supervisor account, and a requests
  * ArrayList to store the list of requests made in the system.
  * When the execute method is called, the user is prompted to input the ID of the FYP project to be transferred. If
  * the project is already assigned to a supervisor, the user is prompted to input the ID of the new supervisor. If

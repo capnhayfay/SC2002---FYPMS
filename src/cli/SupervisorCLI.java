@@ -25,8 +25,8 @@ public class SupervisorCLI implements Menu, Logout, GetCommand {
     /**
      * Creates a SupervisorGui with the given Supervisor Account
      *
-     * @param supervisorAccount which is the Supervisor src.account
-     * @param userType          which is the src.account user type
+     * @param supervisorAccount which is the Supervisor account
+     * @param userType          which is the account user type
      */
     public SupervisorCLI(SupervisorAccount supervisorAccount, UserType userType) {
         this.supervisorAccount = supervisorAccount;
@@ -200,7 +200,7 @@ public class SupervisorCLI implements Menu, Logout, GetCommand {
     }
 
     /**
-     * Logout from src.account by setting Supervisor Account to null
+     * Logout from account by setting Supervisor Account to null
      */
     public void logout() {
         this.supervisorAccount = null;

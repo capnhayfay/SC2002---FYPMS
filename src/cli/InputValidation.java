@@ -9,8 +9,9 @@ public class InputValidation {
             scanner.nextLine();
             System.out.println();
             System.out.print("Please enter the option number: ");
+            continue;
         }
-        int choice2 = scannerValidation(scanner);
+        int choice2 = scanner.nextInt();
         scanner.nextLine();
         System.out.println();
         return choice2;

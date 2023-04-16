@@ -12,8 +12,10 @@ import src.FYPMS.project.FYPList;
 import src.FYPMS.project.FYPStatus;
 import src.account.supervisor.SupervisorAccount;
 import src.command.Command;
+import src.exceptions.fypmsExceptions;
 
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 /**
@@ -36,20 +38,34 @@ public class CreateProjectCommand implements Command {
      * creates a new FYP object
      * with the given title, supervisor's name and email, and an initial status of
      * AVAILABLE. The FYP object
-     * is then added to the FYP list in the src.FYPMS system.
+     * is then added to the FYP list in the FYPMS system.
      */
     public void execute() {
         Scanner sc = new Scanner(System.in);
         System.out.println("Input Title of FYP: ");
-        String title = sc.nextLine();
+        String title = "INVALIDTITLEWONTBEREPLACED";
+        do {
+            try {
+                title = sc.nextLine();
+            } catch (InputMismatchException e) {
+                System.out.println(new fypmsExceptions.invalidInputException("Invalid Input, please try again.").toString()
+                        .substring(e.toString().indexOf(":" + 2)));
+            }
+        } while (!title.equals("INVALIDTITLEWONTBEREPLACED"));
         FYP fyp;
         if (supervisor.getProjList().size() >= 2) {
-            System.out.println("Warning! You are already in charge of at least 2 projects");
-            System.out.println("Proceeding to make new project unavailable...");
-            fyp = new FYP(FYPList.getFypList().size() + 1, supervisor.getName(), supervisor.getEmail(), "", "", "",
-                    title,
-                    FYPStatus.UNAVAILABLE);
-            fypList.add(fyp);
+            try {
+                throw new fypmsExceptions.supervisorMaxProjectsReachedException();
+
+            } catch (fypmsExceptions.supervisorMaxProjectsReachedException e) {
+                System.out.println(e.toString().substring(e.toString().indexOf(":")+2));
+                System.out.println("Proceeding to make new project unavailable...");
+                fyp = new FYP(FYPList.getFypList().size() + 1, supervisor.getName(), supervisor.getEmail(), "", "", "",
+                        title,
+                        FYPStatus.UNAVAILABLE);
+                fypList.add(fyp);
+                return;
+            }
         } else {
             fyp = new FYP(FYPList.getFypList().size() + 1, supervisor.getName(), supervisor.getEmail(), "", "", "",
                     title,

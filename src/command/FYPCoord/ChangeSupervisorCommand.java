@@ -12,6 +12,7 @@ import src.FYPMS.request.RequestTransferSupervisor;
 import src.account.AccountManager;
 import src.account.supervisor.SupervisorAccount;
 import src.command.Command;
+import src.exceptions.fypmsExceptions;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -62,9 +63,9 @@ public class ChangeSupervisorCommand implements Command {
                             System.out.println(
                                     "Warning: " + newSupervisorName + " is already in charge of at least 2 projects");
                             System.out.println("Do you wish to proceed? Y/N");
-                            String choice = sc.next();
+                            String choice = sc.next().toLowerCase();
                             switch (choice) {
-                                case "Y", "Yes" -> {
+                                case "y", "yes" -> {
                                     newsupervisorAccount.addProj(fyp.getTitle());
                                     transferRequest.setStatus(RequestStatus.APPROVED);
                                     fyp.setSupervisorName(newsupervisorAccount.getName());
@@ -72,10 +73,18 @@ public class ChangeSupervisorCommand implements Command {
                                     System.out.println(newsupervisorAccount.getName() + " has a new project "
                                             + newsupervisorAccount.getProjList().get(idx));
                                 }
-                                case "N", "No" -> {
+                                case "n", "no" -> {
                                     transferRequest.setStatus(RequestStatus.REJECTED);
                                     System.out.println("Successfully rejected request.");
                                     return;
+                                }
+                                default -> {
+                                        try {
+                                            throw new fypmsExceptions.invalidInputException("Incorrect input, please try again or press 0 to exit");
+                                        } catch (Exception e) {
+                                            System.out.println(e.toString().subSequence(e.toString().indexOf(":") + 2, e.toString().length() - 1));
+
+                                        }
                                 }
                             }
                         } else {

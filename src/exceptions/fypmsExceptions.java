@@ -1,7 +1,12 @@
 package src.exceptions;
 
+import src.account.student.StudentAccount;
+import src.account.student.StudentStatus;
+
+import java.util.Scanner;
+
 /**
- * Class for containing all src.FYPMS src.exceptions
+ * Class for containing all src.FYPMS exceptions
  */
 public class fypmsExceptions {
     /**
@@ -37,19 +42,8 @@ public class fypmsExceptions {
     }
 
     public static class noSuchProjectException extends Exception{
-        /**
-         * Constructs a new exception with {@code null} as its detail message.
-         * The cause is not initialized, and may subsequently be initialized by a
-         * call to {@link #initCause}.
-         */
         public noSuchProjectException() {
             super("Project ID Does Not Exist!");
-        }
-    }
-
-    public static class noRegistererdProjectException extends Exception{
-        public noRegistererdProjectException(){
-            super("No projects registered!");
         }
     }
 
@@ -61,7 +55,18 @@ public class fypmsExceptions {
 
     public static class supervisorMaxProjectsReachedException extends Exception{
         public supervisorMaxProjectsReachedException(){
-            super("Supervisor has reached maximum number of projects they can manage!");
+            super("Warning: You have already reached the maximum number of projects you can manage.");
+        }
+        public supervisorMaxProjectsReachedException(String supervisorName){
+            super(("Warning: " + supervisorName + " has reached the project limit."));
+        }
+    }
+
+    public static class supervisorMaxProjectsReachedButStillAcceptedException extends supervisorMaxProjectsReachedException{
+        public supervisorMaxProjectsReachedButStillAcceptedException(String supervisorName){
+            super(supervisorName);
+            System.out.println("Rejecting all pending registration requests for " + supervisorName + "'s projects.");
+            System.out.println("Setting all of " + supervisorName + "'s projects to unavailable");
         }
     }
 
@@ -74,5 +79,107 @@ public class fypmsExceptions {
                 System.out.println(e.getMessage());
             }
         }
+    }
+    public static class pendingRequestException extends Exception{
+        public pendingRequestException(){
+            super("Error: You have a pending registration.");
+            try{
+                Thread.sleep(100);
+            } catch (Exception ignored){
+
+            }
+        }
+
+    }
+
+    public static class notRegisteredException extends Exception{
+        public notRegisteredException(){
+            super("Error: You are not registered for an FYP.");
+            try{
+                Thread.sleep(100);
+            } catch (Exception ignored){
+
+            }
+        }
+    }
+
+    public static class deregisteredException extends Exception{
+        public deregisteredException(){
+            super("Error: You have deregistered for an FYP.");
+            try{
+                Thread.sleep(100);
+            } catch (Exception ignored){
+
+            }
+        }
+
+    }
+    public static class alreadyRegisteredException extends Exception{
+        public alreadyRegisteredException(){
+            super("Error: You are already registered for an FYP.");
+            try{
+                Thread.sleep(100);
+            } catch (Exception ignored){
+
+            }
+        }
+    }
+
+    public static class notAuthorizedException extends Exception{
+        public notAuthorizedException(){
+            super("Error: You are not authorized to perform this function.");
+            try{
+                Thread.sleep(100);
+            } catch (Exception ignored){
+
+            }
+        }
+    }
+
+    public static boolean checkStudentStatusExceptionFunction(StudentAccount studentAccount){
+        try {
+            if (studentAccount.getStatus() == StudentStatus.NO_PROJECT) {
+                throw new fypmsExceptions.notRegisteredException();
+            } else if (studentAccount.getStatus() == StudentStatus.DEREGISTERED_PROJECT) {
+                throw new fypmsExceptions.deregisteredException();
+            } else if (studentAccount.getStatus() == StudentStatus.REQUESTED_PROJECT) {
+                throw new fypmsExceptions.pendingRequestException();
+            }
+        } catch(Exception e){
+            System.out.println(e.toString().subSequence(e.toString().indexOf(":")+2, e.toString().length()-1));
+            return true;
+        }
+        return false;
+    }
+
+    public static int validateRequestActionFunction(){
+        Scanner sc = new Scanner(System.in);
+        int requestAction = 0;
+        do {
+            try {
+                System.out.println("Select option:");
+                System.out.println("1. Accept registration request");
+                System.out.println("2. Reject registration request");
+                System.out.println();
+                do {
+                    try {
+                        requestAction = sc.nextInt();
+                    } catch (Exception e) {
+                        requestAction = -1;
+                        System.out.println(new fypmsExceptions.invalidInputException("Invalid input, please try again").toString());
+                        sc.nextLine();
+                        continue;
+                    }
+                } while (requestAction == -1);
+                if (!(requestAction == 1 || requestAction==2)){
+                    throw new fypmsExceptions.invalidInputException("Please enter only 1 or 2");
+                }
+            } catch (fypmsExceptions.invalidInputException badInput) {
+                System.out.println(badInput.toString().subSequence(badInput.toString().indexOf(":")+2, badInput.toString().length()-1));
+                sc.nextLine();
+            }
+        }while(requestAction != 1 && requestAction != 2);
+        return requestAction;
+
     }
 }

@@ -8,7 +8,7 @@ import src.FYPMS.request.Request;
 import src.FYPMS.request.RequestHistory;
 import src.FYPMS.request.RequestStatus;
 import src.command.Command;
-
+import src.exceptions.fypmsExceptions;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -49,19 +49,12 @@ public class ViewPendingStudentRequestsCommand implements Command {
         System.out.println("1. View All Pending Requests");
         System.out.println("2. View Pending Requests by Student ID");
 
-        int choice = -1;
-        System.out.println("Enter your choice: ");
-        do {
-            if (choice != -1) {
-                System.out.println("Wrong choice, please reselect: ");
-            }
-            choice = scanner.nextInt();
-        } while (choice != 1 && choice != 2);
+        int choice = fypmsExceptions.validateRequestActionFunction();
 
         ArrayList<ArrayList<Request>> requestHistory = RequestHistory.getRequestHistory();
 
         switch (choice) {
-            case 1:
+            case 1 -> {
                 for (ArrayList<Request> requestList : requestHistory) {
                     for (Request request : requestList) {
                         if (request.getRequesteeID().equals(supervisorID)
@@ -76,12 +69,10 @@ public class ViewPendingStudentRequestsCommand implements Command {
                     }
 
                 }
-                break;
-
-            case 2:
+            }
+            case 2 -> {
                 System.out.println("Enter Student ID: ");
                 String studentID = scanner.next();
-
                 for (ArrayList<Request> requestList : requestHistory) {
                     for (Request request : requestList) {
                         if (request.getRequesteeID().equals(supervisorID)
@@ -97,8 +88,7 @@ public class ViewPendingStudentRequestsCommand implements Command {
                     }
 
                 }
-
-                break;
+            }
         }
 
         if (requestCount == 0) {

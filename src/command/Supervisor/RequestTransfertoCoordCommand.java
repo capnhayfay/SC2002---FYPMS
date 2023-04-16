@@ -24,6 +24,7 @@ import src.account.supervisor.SupervisorAccount;
 import src.command.Command;
 
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.Scanner;
 
 /**
@@ -70,12 +71,12 @@ public class RequestTransfertoCoordCommand implements Command {
         System.out.println("Input project ID to transfer: ");
         Scanner sc = new Scanner(System.in);
         int fypId = sc.nextInt();
-        if (!supervisorAccount.getName().equals(FYPList.getFYPById(fypId).getSupervisorName())) {
+        if (!supervisorAccount.getName().equals(Objects.requireNonNull(FYPList.getFYPById(fypId)).getSupervisorName())) {
             System.out.println();
             System.out.println("Invalid project ID entered");
             return;
         }
-        if (FYPList.getFYPById(fypId).getStatus().equals(FYPStatus.ALLOCATED)) {
+        if (Objects.requireNonNull(FYPList.getFYPById(fypId)).getStatus().equals(FYPStatus.ALLOCATED)) {
             System.out.println("Input new supervisor ID: ");
             String newSupervisorID = sc.next();
 

@@ -12,6 +12,7 @@ import src.FYPMS.project.FYPList;
 import src.account.student.StudentAccount;
 import src.account.student.StudentStatus;
 import src.command.Command;
+import src.exceptions.fypmsExceptions;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -28,38 +29,37 @@ public class ViewRegisteredFYPCommand implements Command {
     /**
      * Constructs a ViewRegisteredFYPCommand with the given student src.account.
      *
-     * @param studentAccount the student src.account
+     * @param studentAccount the student account
      */
     public ViewRegisteredFYPCommand(StudentAccount studentAccount) {
         this.studentAccount = studentAccount;
     }
 
     /**
-     * Executes the src.command to view the details of the student's registered FYP.
+     * Executes the command to view the details of the student's registered FYP.
      */
     public void execute() {
         Scanner sc = new Scanner(System.in);
         ArrayList<FYP> fypList = FYPList.getFypList();
         System.out.println();
 
-        if (studentAccount.getStatus() == StudentStatus.NO_PROJECT ||
-                studentAccount.getStatus() == StudentStatus.DEREGISTERED_PROJECT) {
-            System.out.println("You have not registered for any FYP.");
-            System.out.println("Press enter to continue...");
-            sc.nextLine();
-            return;
-        } else if (studentAccount.getStatus() == StudentStatus.REQUESTED_PROJECT) {
-            System.out.println("Error: Your registration is still pending.");
-            System.out.println("Press enter to continue...");
-            sc.nextLine();
+        try{
+            if (studentAccount.getStatus() == StudentStatus.NO_PROJECT){
+                throw new fypmsExceptions.notRegisteredException();
+            }
+            else if(studentAccount.getStatus() == StudentStatus.DEREGISTERED_PROJECT) {
+                throw new fypmsExceptions.deregisteredException();
+            } else if (studentAccount.getStatus() == StudentStatus.REQUESTED_PROJECT) {
+                throw new fypmsExceptions.pendingRequestException();
+            }
+        } catch (Exception e){
+            System.out.println((e.toString().subSequence(e.toString().indexOf(":")+2, e.toString().length()-1)));
             return;
         }
 
         for (FYP fyp : fypList) {
             if (fyp.getStudentID() != null && fyp.getStudentID().equals(studentAccount.getLoginId())) {
                 fyp.printFYPDetails();
-                System.out.println("Press enter to continue...");
-                sc.nextLine();
                 return;
             }
         }

@@ -3,9 +3,9 @@ ProjectID	SupervisorName	SupervisorEmail	Title	Status	StudentID	StudentName	Stud
 2	A S Madhukumar	ASMADHUKUMAR@NTU.EDU.SG	Deep Learning-Driven Edge Caching for 5G-and-Beyond Industrial IoT Networks	AVAILABLE	null	null	null
 3	Alexei Sourin	ASSOURIN@ntu.edu.sg	Sonification of geometry 1	AVAILABLE	null	null	null
 4	Arvind Easwaran	ARVINDE@NTU.EDU.SG	Edge/Cloud Resource Management for Time-Sensitive Applications (2)	AVAILABLE	null	null	null
-5	Bo An	BOAN@NTU.EDU.SG	Deep Reinforcement Learning for Complex Environment	AVAILABLE	null	null	null
-6	Bo An	BOAN@NTU.EDU.SG	Build Software Agents for Power Trading Agent Competition	AVAILABLE	null	null	null
-7	Bo An	BOAN@NTU.EDU.SG	Designing Negotiation Agents to Parcitipate in International Competition	AVAILABLE	null	null	null
+5	Bo An	BOAN@NTU.EDU.SG	Deep Reinforcement Learning for Complex Environment	ALLOCATED	KOH1	KOH	KOH1@e.ntu.edu.sg;
+6	Bo An	BOAN@NTU.EDU.SG	Build Software Agents for Power Trading Agent Competition	ALLOCATED	BR015	BRANDON	BR015@e.ntu.edu.sg;
+7	Bo An	BOAN@NTU.EDU.SG	Designing Negotiation Agents to Parcitipate in International Competition	ALLOCATED	YCHERN	CHERN	YCHERN@e.ntu.edu.sg;
 8	Cai Wentong	ASWTCAI@ntu.edu.sg	Creation of Meta-model for Agent-based Simulation Using Machine Learning Approach	AVAILABLE	null	null	null
 9	Chen Change Loy	CCLOY@NTU.EDU.SG	Encoding Images to Text Prompts with CLIP	AVAILABLE	null	null	null
 10	Chia Liang Tien	ASLTCHIA@ntu.edu.sg	Smart Monitor for Studio Photographer	AVAILABLE	null	null	null

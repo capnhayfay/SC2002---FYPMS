@@ -14,6 +14,7 @@ import src.account.AccountManager;
 import src.account.student.StudentStatus;
 import src.account.supervisor.SupervisorAccount;
 import src.command.Command;
+import src.exceptions.fypmsExceptions;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -38,7 +39,7 @@ public class DeregisterStudentCommand implements Command {
     }
 
     /**
-     * Executes the src.command to deregister the student from the project.
+     * Executes the command to deregister the student from the project.
      * Prompts the user to accept or reject the deregistration request, and updates
      * the project and student status accordingly.
      */
@@ -50,10 +51,21 @@ public class DeregisterStudentCommand implements Command {
         System.out.println("Select option:");
         System.out.println("1. Accept deregistration request");
         System.out.println("2. Reject deregistration request");
-        int requestAction = sc.nextInt();
+        int requestAction = -1;
+        do {
+            try {
+                requestAction = sc.nextInt();
+                throw new fypmsExceptions.invalidInputException("Wrong input");
+            } catch (Exception e){
+                System.out.println(e.toString().substring(e.toString().indexOf(":")+2));
+                System.out.println("1. Accept deregistration request");
+                System.out.println("2. Reject deregistration request");
+                sc.nextLine();
+            }
+        } while (requestAction == -1);
         System.out.println("=========================================");
         switch (requestAction) {
-            case 1:
+            case 1 -> {
                 String StudentName = AccountManager.getStudentName(requestDeregister.getRequesterID());
                 fyp.setStatus(FYPStatus.AVAILABLE);
                 fyp.setStudentID("");
@@ -70,6 +82,7 @@ public class DeregisterStudentCommand implements Command {
                         }
                     }
                 SupervisorAccount supervisorAccount = AccountManager.getSupervisorAccount(fyp.getSupervisorName());
+                assert supervisorAccount != null;
                 supervisorAccount.getProjList().remove(fyp.getTitle());
                 if (supervisorAccount.getProjList().size() < 2) {
                     for (FYP fyp : FYPList.getSuperFypList(supervisorAccount.getName())) {
@@ -78,21 +91,23 @@ public class DeregisterStudentCommand implements Command {
                         }
                     }
                 }
-
                 System.out.println("Deregistered project " + fyp.getTitle() + " from " + StudentName);
-                System.out.println("Press enter to continue...");
-                sc.nextLine();
-                break;
-            case 2:
+            }
+            case 2 -> {
                 requestDeregister.setStatus(RequestStatus.REJECTED);
                 AccountManager.setStudentStatus(requestDeregister.getRequesterID(), StudentStatus.ASSIGNED_PROJECT, 0);
                 System.out.println("Rejected " + requestDeregister.getRequesterID() + " for " + fyp.getTitle());
                 System.out.println("Press enter to continue...");
                 sc.nextLine();
-                break;
-            default:
-                System.out.println("Invalid option");
-                break;
+            }
+            default -> {
+                try{
+                    throw new fypmsExceptions.invalidInputException("Invalid input, please try again.");
+                }
+                catch(Exception e){
+                    System.out.println(e.toString().substring(e.toString().indexOf(":")+2));
+                }
+            }
         }
     }
 

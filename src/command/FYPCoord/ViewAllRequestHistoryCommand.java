@@ -37,7 +37,7 @@ public class ViewAllRequestHistoryCommand implements Command {
         }
         if (empty == 1) {
             System.out.println();
-            System.out.println("There is no requests.");
+            System.out.println("There are no requests.");
         }
     }
 }

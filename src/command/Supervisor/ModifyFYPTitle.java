@@ -12,6 +12,7 @@ import src.FYPMS.project.FYP;
 import src.FYPMS.project.FYPList;
 import src.account.supervisor.SupervisorAccount;
 import src.command.Command;
+import src.exceptions.fypmsExceptions;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -41,8 +42,8 @@ public class ModifyFYPTitle implements Command {
      * removed from their project list
      * and the new title is set for the project in the FYP list. The supervisor's
      * project list is then updated
-     * with the new title. If the supervisor is not authorized to modify the
-     * project, an error message is displayed.
+     * with the new title.
+     * Error message displayed for uauthorized Supervisor.
      */
     public void execute() {
         Scanner sc = new Scanner(System.in);
@@ -67,7 +68,11 @@ public class ModifyFYPTitle implements Command {
                     supervisorAccount.addProj(temp);
                     System.out.println("Project title has been change to " + fyp.getTitle());
                 } else {
-                    System.out.println("Error: You are not in charge of project " + oldTitle);
+                    try{
+                        throw new fypmsExceptions.notAuthorizedException();
+                    } catch (Exception e){
+                        System.out.println(e.toString().substring(e.toString().indexOf(":")+2));
+                    }
                 }
             }
         }

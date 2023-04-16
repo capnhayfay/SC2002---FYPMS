@@ -31,7 +31,7 @@ public class ChangePassword implements Command {
     }
 
     /**
-     * Executes the ChangePassword src.command, prompting the user to enter their
+     * Executes the ChangePassword command, prompting the user to enter their
      * current password, new password,
      * and confirmation password. The method will validate the input and change the
      * user's password if the new
@@ -68,7 +68,7 @@ public class ChangePassword implements Command {
         }
         if (triesLeft == 0) {
             System.out.println("Exceeded number of tries possible");
-            System.out.println("Exiting src.runtime.Application ...");
+            System.out.println("Exiting Application ...");
         }
 
     }

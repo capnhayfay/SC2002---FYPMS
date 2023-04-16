@@ -97,41 +97,27 @@ public class StudentCLI implements Menu, Logout, GetCommand {
             }
 
             switch (userCh) {
-                case 1:
-                    new ViewAllAvailableFYPCommand(studentAccount).execute();
-                    break;
-                case 2:
-                    new RequestCoordFYPCommand(studentAccount).execute();
-                    break;
-                case 3:
-                    new ViewRegisteredFYPCommand(studentAccount).execute();
-                    break;
-                case 4:
-                    new RequestSuperTitleChangeCommand(studentAccount).execute();
-                    break;
-                case 5:
-                    new RequestCoordDeregisterCommand(studentAccount).execute();
-                    break;
-                case 6:
-                    new ViewAllRequestRecordsCommand(studentAccount).execute();
-                    break;
-
-                case 7:
+                case 1 -> new ViewAllAvailableFYPCommand(studentAccount).execute();
+                case 2 -> new RequestCoordFYPCommand(studentAccount).execute();
+                case 3 -> new ViewRegisteredFYPCommand(studentAccount).execute();
+                case 4 -> new RequestSuperTitleChangeCommand(studentAccount).execute();
+                case 5 -> new RequestCoordDeregisterCommand(studentAccount).execute();
+                case 6 -> new ViewAllRequestRecordsCommand(studentAccount).execute();
+                case 7 -> {
                     new ChangePassword(studentAccount).execute();
                     logout();
-                    break;
-
-                case 8:
+                }
+                case 8 -> {
                     logout();
                     System.out.println();
                     System.out.println("Logged out successfully.");
                     System.out.println();
                     return 1;
-
-                default:
+                }
+                default -> {
                     System.out.println();
                     System.out.println("Option number out of range. Please try again.");
-                    break;
+                }
             }
             return 1;
         }

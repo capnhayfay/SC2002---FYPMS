@@ -32,7 +32,7 @@ public class ViewSubmittedFYPCommand implements Command {
     }
 
     /**
-     * Executes the src.command to retrieve and display all Final Year Projects assigned
+     * Executes the command to retrieve and display all Final Year Projects assigned
      * to the Supervisor.
      */
     public void execute() {

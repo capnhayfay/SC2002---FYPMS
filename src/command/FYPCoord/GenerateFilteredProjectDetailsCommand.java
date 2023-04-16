@@ -8,6 +8,7 @@ import src.FYPMS.project.FYP;
 import src.FYPMS.project.FYPList;
 import src.FYPMS.project.FYPStatus;
 import src.command.Command;
+import src.exceptions.fypmsExceptions;
 
 import java.util.*;
 
@@ -29,7 +30,7 @@ public class GenerateFilteredProjectDetailsCommand implements Command {
     }
 
     /**
-     * Executes the src.command to generate filtered details from the src.FYPMS.
+     * Executes the src to generate filtered details from the src.FYPMS.
      */
     public void execute() {
         boolean validInput = false;
@@ -54,7 +55,11 @@ public class GenerateFilteredProjectDetailsCommand implements Command {
                 while (!validInput) {
                     try {
                         selection = sc.nextInt();
-                        if (selection < 5 & selection >= 1) {
+                        if (!(selection < 5 & selection >= 1))
+                        {
+                            throw new fypmsExceptions.invalidInputException("Invalid input, please try again.");
+                        }
+                        else{
                             validInput = true;
                             switch (selection) {
                                 case 1 -> this.fypStatus = FYPStatus.AVAILABLE;
@@ -65,6 +70,8 @@ public class GenerateFilteredProjectDetailsCommand implements Command {
                         }
                     } catch (InputMismatchException e) {
                         System.out.print("Your selection can only be an integer!");
+                    } catch (fypmsExceptions.invalidInputException e){
+                        System.out.print(e.toString().substring(e.toString().indexOf(":")+2));
                     }
                 }
                 System.out.println();
@@ -106,7 +113,10 @@ public class GenerateFilteredProjectDetailsCommand implements Command {
                 while (!validInput) {
                     try {
                         selection = sc.nextInt();
-                        if (selection < i & selection >= 1) {
+                        if (!(selection < i & selection >= 1)) {
+                            throw new fypmsExceptions.invalidInputException("Invalid input, please try again.");
+                        }
+                        else{
                             validInput = true;
                             for (Map.Entry<Integer, String> pair : supervisorMapIdx.entrySet()) {
                                 if (pair.getKey() == selection) {
@@ -116,6 +126,8 @@ public class GenerateFilteredProjectDetailsCommand implements Command {
                         }
                     } catch (InputMismatchException e) {
                         System.out.print("Your selection can only be an integer!");
+                    } catch (fypmsExceptions.invalidInputException e) {
+                        System.out.print(e.toString().substring(e.toString().indexOf(":")+2));
                     }
                 }
                 System.out.println();

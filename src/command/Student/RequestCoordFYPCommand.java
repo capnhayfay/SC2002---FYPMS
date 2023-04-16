@@ -52,17 +52,18 @@ public class RequestCoordFYPCommand implements Command {
      * if the project is available.
      */
     public void execute() {
-        if (studentAccount.getStatus() == StudentStatus.ASSIGNED_PROJECT) {
-            System.out.println("Error: You are already registered for an FYP.");
-            return;
-        } else if (studentAccount.getStatus() == StudentStatus.DEREGISTERED_PROJECT) {
-            System.out.println("Error: You have deregistered for an FYP.");
-            return;
-        } else if (studentAccount.getStatus() == StudentStatus.REQUESTED_PROJECT) {
-            System.out.println("Error: You have a pending registration.");
+        try {
+            if (studentAccount.getStatus() == StudentStatus.ASSIGNED_PROJECT) {
+                throw new fypmsExceptions.alreadyRegisteredException();
+            } else if (studentAccount.getStatus() == StudentStatus.DEREGISTERED_PROJECT) {
+                throw new fypmsExceptions.deregisteredException();
+            } else if (studentAccount.getStatus() == StudentStatus.REQUESTED_PROJECT) {
+                throw new fypmsExceptions.pendingRequestException();
+            }
+        } catch (Exception e){
+            System.out.println(e.toString().subSequence(e.toString().indexOf(":")+2, e.toString().length()-1));
             return;
         }
-
         Scanner sc = new Scanner(System.in);
         Optional<FYP> checker = Optional.empty();
         int fypID = -1;

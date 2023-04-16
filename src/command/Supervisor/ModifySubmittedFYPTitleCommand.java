@@ -8,6 +8,7 @@ import src.FYPMS.project.FYP;
 import src.FYPMS.request.RequestChangeTitle;
 import src.FYPMS.request.RequestStatus;
 import src.command.Command;
+import src.exceptions.fypmsExceptions;
 
 import java.util.Scanner;
 
@@ -31,7 +32,7 @@ public class ModifySubmittedFYPTitleCommand implements Command {
     }
 
     /**
-     * Executes the src.command to modify the title of a submitted FYP project.
+     * Executes the command to modify the title of a submitted FYP project.
      */
     public void execute() {
         Scanner sc = new Scanner(System.in);
@@ -39,21 +40,20 @@ public class ModifySubmittedFYPTitleCommand implements Command {
         System.out.println("Select option:");
         System.out.println("1. Accept Title request");
         System.out.println("2. Reject Title request");
-        int requestAction = sc.nextInt();
+        int requestAction = fypmsExceptions.validateRequestActionFunction();
+
         System.out.println("=========================================");
         switch (requestAction) {
-            case 1:
+            case 1 -> {
                 fyp.setTitle(titleRequest.getNewTitle());
                 titleRequest.setStatus(RequestStatus.APPROVED);
                 System.out.println("Project title has been change to " + fyp.getTitle());
-                break;
-            case 2:
+            }
+            case 2 -> {
                 titleRequest.setStatus(RequestStatus.REJECTED);
                 System.out.println("Rejected changing of title to " + fyp.getTitle());
-                break;
-            default:
-                System.out.println("Invalid option");
-                break;
+            }
+            default -> System.out.println("Invalid option");
         }
 
     }

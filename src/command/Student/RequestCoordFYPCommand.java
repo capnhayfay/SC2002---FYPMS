@@ -29,6 +29,8 @@ import java.util.InputMismatchException;
 import java.util.Optional;
 import java.util.Scanner;
 
+import static src.cli.InputValidation.scannerValidation;
+
 
 /**
  * Request FYP from Coordinator Command Class
@@ -73,12 +75,11 @@ public class RequestCoordFYPCommand implements Command {
                 do{
                     try {
                         System.out.println("Input project ID, or enter 0 to return to menu: ");
-                        fypID = sc.nextInt();
+                        fypID = scannerValidation(sc);
                     } catch (InputMismatchException e) {
                         sc.nextLine();
                         fypID = -2;
-                        System.out.println(new fypmsExceptions.invalidInputException("Only Numeric Input Allowed!")
-                                .toString().substring(e.toString().indexOf(":")));
+                        System.out.println("Only Numeric Input Allowed!");
                         System.out.println();
                         continue;
                     }

@@ -164,14 +164,14 @@ public class fypmsExceptions {
         return false;
     }
 
-    public static int validateRequestActionFunction(){
+    public static int validateRequestActionFunction(String Title, String optionOne, String optionTwo){
         Scanner sc = new Scanner(System.in);
         int requestAction = 0;
         do {
             try {
-                System.out.println("Select option:");
-                System.out.println("1. Accept registration request");
-                System.out.println("2. Reject registration request");
+                System.out.println(Title);
+                System.out.println(optionOne);
+                System.out.println(optionTwo);
                 System.out.println();
                 do {
                     try {

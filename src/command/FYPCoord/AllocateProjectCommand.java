@@ -51,7 +51,7 @@ public class AllocateProjectCommand implements Command {
         System.out.println();
         registerRequest.printDetails();
         System.out.println();
-        int requestAction = fypmsExceptions.validateRequestActionFunction();
+        int requestAction = fypmsExceptions.validateRequestActionFunction("Select Option:","1. Accept registration request", "2. Reject registration request" );
 
         System.out.println("=========================================");
 

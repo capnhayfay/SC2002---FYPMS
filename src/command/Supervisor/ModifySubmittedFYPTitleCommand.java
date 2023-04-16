@@ -37,10 +37,9 @@ public class ModifySubmittedFYPTitleCommand implements Command {
     public void execute() {
         Scanner sc = new Scanner(System.in);
         System.out.println();
-        System.out.println("Select option:");
-        System.out.println("1. Accept Title request");
-        System.out.println("2. Reject Title request");
-        int requestAction = fypmsExceptions.validateRequestActionFunction();
+
+        int requestAction = fypmsExceptions.validateRequestActionFunction("Select option:",
+                "1. Accept Title request", "2. Reject Title request");
 
         System.out.println("=========================================");
         switch (requestAction) {

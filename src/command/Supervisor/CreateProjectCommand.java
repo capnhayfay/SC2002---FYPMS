@@ -51,7 +51,7 @@ public class CreateProjectCommand implements Command {
                 System.out.println(new fypmsExceptions.invalidInputException("Invalid Input, please try again.").toString()
                         .substring(e.toString().indexOf(":" + 2)));
             }
-        } while (!title.equals("INVALIDTITLEWONTBEREPLACED"));
+        } while (title.equals("INVALIDTITLEWONTBEREPLACED"));
         FYP fyp;
         if (supervisor.getProjList().size() >= 2) {
             try {

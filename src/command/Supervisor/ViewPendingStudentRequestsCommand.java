@@ -42,14 +42,10 @@ public class ViewPendingStudentRequestsCommand implements Command {
      */
     public void execute() {
         Scanner scanner = new Scanner(System.in);
-
         System.out.println();
-        System.out.println("Pending Request");
-        System.out.println();
-        System.out.println("1. View All Pending Requests");
-        System.out.println("2. View Pending Requests by Student ID");
 
-        int choice = fypmsExceptions.validateRequestActionFunction();
+        int choice = fypmsExceptions.validateRequestActionFunction("Pending Request",
+                "1. View All Pending Requests", "2. View Pending Requests by Student ID");
 
         ArrayList<ArrayList<Request>> requestHistory = RequestHistory.getRequestHistory();
 

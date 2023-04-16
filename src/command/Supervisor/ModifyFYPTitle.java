@@ -15,6 +15,8 @@ import src.command.Command;
 import src.exceptions.fypmsExceptions;
 
 import java.util.ArrayList;
+import java.util.InputMismatchException;
+import java.util.Optional;
 import java.util.Scanner;
 
 import static src.cli.InputValidation.scannerValidation;
@@ -50,7 +52,26 @@ public class ModifyFYPTitle implements Command {
     public void execute() {
         Scanner sc = new Scanner(System.in);
         System.out.println("Input projectID to change title: ");
-        int projectID = scannerValidation(sc);
+        int projectID = -1;
+        Optional<FYP> checker = Optional.empty();
+
+        do{
+            try{
+                projectID = scannerValidation(sc);
+                checker = FYPList.fypIdExists(projectID);
+                if (checker.isEmpty()) {
+                    throw new fypmsExceptions.noSuchProjectException();
+                }
+            } catch (fypmsExceptions.noSuchProjectException noSuchProject) {
+                System.out.println(noSuchProject.toString().
+                        subSequence(noSuchProject.toString().indexOf(":")+2, noSuchProject.toString().length()-1));
+                System.out.println("If you do not wish to retry, press 0");
+            }
+
+        } while(checker.isEmpty() && projectID != 0);
+
+        if (projectID == 0) return;
+
         String oldTitle = "";
         for (FYP fyp : fypList) {
             if (fyp.getProjectId() == projectID) {

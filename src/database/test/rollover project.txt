@@ -1,6 +1,6 @@
 ProjectID	SupervisorName	SupervisorEmail	Title	Status	StudentID	StudentName	StudentEmail
 1	A S Madhukumar	ASMADHUKUMAR@NTU.EDU.SG	Machine Learning-based Interference Mitigation in a Multi-tier Networks	AVAILABLE	null	null	null
-2	A S Madhukumar	ASMADHUKUMAR@NTU.EDU.SG	Deep Learning-Driven Edge Caching for 5G-and-Beyond Industrial IoT Networks	AVAILABLE	null	null	null
+2	A S Madhukumar	ASMADHUKUMAR@NTU.EDU.SG	Deep Learning-Driven Edge Caching for 5G-and-Beyond Industrial IoT Networks	RESERVED	null	null	null
 3	Alexei Sourin	ASSOURIN@ntu.edu.sg	Sonification of geometry 1	AVAILABLE	null	null	null
 4	Arvind Easwaran	ARVINDE@NTU.EDU.SG	Edge/Cloud Resource Management for Time-Sensitive Applications (2)	AVAILABLE	null	null	null
 5	Bo An	BOAN@NTU.EDU.SG	Deep Reinforcement Learning for Complex Environment	AVAILABLE	null	null	null

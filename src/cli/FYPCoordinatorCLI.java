@@ -120,7 +120,7 @@ public class FYPCoordinatorCLI implements Menu, Logout, GetCommand {
                         int choice2 = scannerValidation(scanner);
                         int reqID;
                         int projID;
-                        FYP selectedProj;
+                        FYP selectedProj = null;
                         switch (choice2) {
                             case 1 -> {
                                 System.out.println("Input request ID: ");
@@ -144,10 +144,23 @@ public class FYPCoordinatorCLI implements Menu, Logout, GetCommand {
                                     selectedProj = FYPList.getFYPById(projID);
                                     new DeregisterStudentCommand(selectedProj, deregistrationRequest).execute();
                                 } else if (reqID / 1000 == 2) {
-                                    RequestRegister registrationRequest = RequestHistory.getRequestRegister(reqID);
-                                    assert registrationRequest != null;
-                                    projID = registrationRequest.getFypID();
-                                    selectedProj = FYPList.getFYPById(projID);
+                                    RequestRegister registrationRequest = null;
+                                    do{
+                                        try {
+                                            registrationRequest = RequestHistory.getRequestRegister(reqID);
+                                            projID = registrationRequest.getFypID();
+                                            selectedProj = FYPList.getFYPById(projID);
+                                        } catch (Exception e){
+                                            System.out.println("Incorrect request ID entered");
+                                            System.out.println();
+                                            System.out.println("Please Reenter Input");
+                                            reqID = scannerValidation(scanner);
+
+                                        }
+
+                                    } while(selectedProj == null);
+                                    
+                                    
                                     new AllocateProjectCommand(selectedProj, registrationRequest).execute();
                                 } else if (reqID / 1000 == 3) {
                                     RequestTransferSupervisor transferSupervisorRequest = RequestHistory

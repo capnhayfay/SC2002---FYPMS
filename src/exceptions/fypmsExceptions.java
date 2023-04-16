@@ -148,11 +148,15 @@ public class fypmsExceptions {
         }
     }
 
-    public static boolean checkStudentStatusExceptionFunction(StudentAccount studentAccount){
+    public static boolean checkStudentStatusExceptionFunction(StudentAccount studentAccount, int cases){
         try {
-            if (studentAccount.getStatus() == StudentStatus.NO_PROJECT) {
+            if (studentAccount.getStatus() == StudentStatus.ASSIGNED_PROJECT && cases == 1) {
+                throw new fypmsExceptions.alreadyRegisteredException();
+            }
+            else if (studentAccount.getStatus() == StudentStatus.NO_PROJECT && cases == 2) {
                 throw new fypmsExceptions.notRegisteredException();
-            } else if (studentAccount.getStatus() == StudentStatus.DEREGISTERED_PROJECT) {
+            }
+            else if (studentAccount.getStatus() == StudentStatus.DEREGISTERED_PROJECT) {
                 throw new fypmsExceptions.deregisteredException();
             } else if (studentAccount.getStatus() == StudentStatus.REQUESTED_PROJECT) {
                 throw new fypmsExceptions.pendingRequestException();

@@ -43,7 +43,7 @@ public class RequestSuperTitleChangeCommand implements Command {
      * If the student is registered for a project, prompts them to input a new project title and submits a request for title change.
      */
     public void execute() {
-        if(fypmsExceptions.checkStudentStatusExceptionFunction(studentAccount)){
+        if(fypmsExceptions.checkStudentStatusExceptionFunction(studentAccount, 2)){
             return;
         }
         ArrayList<ArrayList<Request>> requestHistory = RequestHistory.getRequestHistory();

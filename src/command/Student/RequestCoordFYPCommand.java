@@ -98,9 +98,10 @@ public class RequestCoordFYPCommand implements Command {
                     throw new fypmsExceptions.noSuchProjectException();
                 }
             } catch (fypmsExceptions.noSuchProjectException noSuchProject) {
-                sc.nextLine();
                 System.out.println(noSuchProject.toString().
                         subSequence(noSuchProject.toString().indexOf(":")+2, noSuchProject.toString().length()-1));
+                sc.nextLine();
+                System.out.println();
                 System.out.println("If you do not wish to retry, press 0");
             }
         } while (checker.isEmpty() && fypID != 0);
@@ -114,7 +115,7 @@ public class RequestCoordFYPCommand implements Command {
                 throw new fypmsExceptions.projectNotAvailableException();
             }
         } catch(fypmsExceptions.projectNotAvailableException projectNotAvailableException){
-            System.out.println(projectNotAvailableException.toString());
+            System.out.println(projectNotAvailableException.toString().substring(projectNotAvailableException.toString().indexOf(":")+2));
             return;
         }
         checker.get().setStatus(FYPStatus.RESERVED);

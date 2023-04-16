@@ -33,7 +33,7 @@ public class ViewAllAvailableFYPCommand implements Command {
     public void execute() { // View available FYP from csv
         Scanner sc = new Scanner(System.in);
 
-        if (!fypmsExceptions.checkStudentStatusExceptionFunction(studentAccount)){
+        if (!fypmsExceptions.checkStudentStatusExceptionFunction(studentAccount, 1)){
             FYPList.listAvailableFYPsForStudents();
         }
     }

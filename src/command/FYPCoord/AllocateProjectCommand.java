@@ -8,6 +8,7 @@ package src.command.FYPCoord;
 import src.FYPMS.project.FYP;
 import src.FYPMS.project.FYPList;
 import src.FYPMS.project.FYPStatus;
+import src.FYPMS.request.Request;
 import src.FYPMS.request.RequestHistory;
 import src.FYPMS.request.RequestRegister;
 import src.FYPMS.request.RequestStatus;
@@ -56,69 +57,65 @@ public class AllocateProjectCommand implements Command {
         System.out.println("=========================================");
 
         try {
-            String studentId, studentName, studentEmail;
-            SupervisorAccount supervisorAccount;
             switch (requestAction) {
                 case 1 -> {
-                    studentId = registerRequest.getRequesterID();
-                    studentName = AccountManager.getStudentName(studentId);
-                    studentEmail = AccountManager.getStudentEmail(studentId);
-
+                    String StudentName = AccountManager.getStudentName(registerRequest.getRequesterID());
+                    String StudentEmail = AccountManager.getStudentEmail(registerRequest.getRequesterID());
                     fyp.setStatus(FYPStatus.ALLOCATED);
-                    fyp.setStudentID(studentId);
-                    fyp.setStudentEmail(studentEmail);
-                    fyp.setStudentName(studentName);
-
+                    fyp.setStudentID(registerRequest.getRequesterID());
+                    fyp.setStudentEmail(StudentEmail);
+                    fyp.setStudentName(StudentName);
                     registerRequest.setStatus(RequestStatus.APPROVED);
-                    AccountManager.setStudentStatus(studentId, StudentStatus.ASSIGNED_PROJECT, registerRequest.getFypID());
-
-                    supervisorAccount = AccountManager.getSupervisorAccount(fyp.getSupervisorName());
-
-                    if (supervisorAccount == null) {
-                        throw new fypmsExceptions.invalidInputException("Supervisor account not found");
-                    }
-
-                    if (supervisorAccount.getProjList().size() == 2) {
-                        for (FYP proj : FYPList.getSuperFypList(supervisorAccount.getName())) {
-                            if (proj.getStatus() == FYPStatus.AVAILABLE || proj.getStatus() == FYPStatus.RESERVED) {
-                                proj.setStatus(FYPStatus.UNAVAILABLE);
-                                RequestHistory.getRequestHistory().get(2).stream()
-                                        .filter(request -> request.getFypID() == proj.getProjectId())
-                                        .forEach(request -> {
-                                            request.setStatus(RequestStatus.REJECTED);
-                                            String studentIdToSetStatus = request.getRequesterID();
-                                            AccountManager.setStudentStatus(studentIdToSetStatus, StudentStatus.NO_PROJECT, proj.getProjectId());
-                                        });
+                    AccountManager.setStudentStatus(registerRequest.getRequesterID(), StudentStatus.ASSIGNED_PROJECT,
+                            registerRequest.getFypID());
+                    SupervisorAccount supervisorAccount = AccountManager.getSupervisorAccount(fyp.getSupervisorName());
+                    assert supervisorAccount != null;
+                    if (supervisorAccount.getProjList().size() < 2) {
+                        supervisorAccount.addProj(fyp.getTitle());
+                        if (supervisorAccount.getProjList().size() == 2) {
+                            for (FYP fyp : FYPList.getSuperFypList(supervisorAccount.getName())) {
+                                if (fyp.getStatus().equals(FYPStatus.AVAILABLE)
+                                        || fyp.getStatus().equals(FYPStatus.RESERVED)) {
+                                    fyp.setStatus(FYPStatus.UNAVAILABLE);
+                                    for (Request indivRequest : RequestHistory.getRequestHistory().get(2)) {
+                                        if (indivRequest.getFypID() == fyp.getProjectId()) {
+                                            indivRequest.setStatus(RequestStatus.REJECTED);
+                                            String setStudentStatus = indivRequest.getRequesterID();
+                                            AccountManager.setStudentStatus(setStudentStatus, StudentStatus.NO_PROJECT,
+                                                    indivRequest.getFypID());
+                                        }
+                                    }
+                                }
                             }
+                            System.out.println("Error: " + supervisorAccount.getName() + " has reached the project limit.");
+                            System.out.println(
+                                    "Rejecting all pending registration requests for " + supervisorAccount.getName()
+                                            + "'s projects.");
+                            System.out.println("Setting all of " + supervisorAccount.getName() + "'s projects to unavailable");
+
                         }
 
-                        supervisorAccount.addProj(fyp.getTitle());
-                        throw new fypmsExceptions.supervisorMaxProjectsReachedButStillAcceptedException(supervisorAccount.getName());
-
-                    } else if (supervisorAccount.getProjList().size() < 2) {
-                        supervisorAccount.addProj(fyp.getTitle());
+                    } else {
+                        System.out.println("Error: " + supervisorAccount.getName() + " has reached the project limit.");
+                        return;
                     }
-                    else {
-                        throw new fypmsExceptions.supervisorMaxProjectsReachedException(supervisorAccount.getName());
-                    }
-                    System.out.println("Allocated project " + fyp.getTitle() + " to " + studentName);
+                    System.out.println("Allocated project " + fyp.getTitle() + " to " + StudentName);
                     System.out.println("Press enter to continue...");
                     sc.nextLine();
                 }
-
                 case 2 -> {
                     registerRequest.setStatus(RequestStatus.REJECTED);
                     AccountManager.setStudentStatus(registerRequest.getRequesterID(), StudentStatus.NO_PROJECT, 0);
                     System.out.println("Rejected " + registerRequest.getRequesterID() + " for " + fyp.getTitle());
-                    break;
+                    System.out.println("Press enter to continue...");
+                    sc.nextLine();
                 }
-
                 default -> {
                     throw new fypmsExceptions.invalidInputException("Invalid choice");
                 }
             }
-        } catch (Exception e) {
-            System.out.println(e.toString().subSequence(e.toString().indexOf(":")+2, e.toString().length()-1));
+        } catch (fypmsExceptions.invalidInputException e) {
+            System.out.println(e.toString().toUpperCase());
         }
 
     }

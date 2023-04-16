@@ -4,6 +4,7 @@ import src.FYPMS.project.FYP;
 import src.FYPMS.project.FYPList;
 import src.FYPMS.request.RequestChangeTitle;
 import src.FYPMS.request.RequestHistory;
+import src.FYPMS.request.RequestStatus;
 import src.account.Account;
 import src.account.UserType;
 import src.account.supervisor.SupervisorAccount;
@@ -108,19 +109,38 @@ public class SupervisorCLI implements Menu, Logout, GetCommand {
                         int choice2 = scannerValidation(scanner);
                         int reqID;
                         int projID;
-                        FYP fyp;
+                        FYP fyp = null;
                         switch (choice2) {
                             case 1 -> {
                                 System.out.println("Input request ID: ");
                                 reqID = scannerValidation(scanner);
                                 if (reqID / 1000 == 0) {
                                     // Request Title Change
-                                    RequestChangeTitle titleRequest = RequestHistory.getRequestChangeTitle(reqID);
-                                    assert titleRequest != null;
+                                    RequestChangeTitle titleRequest = null;
+                                    titleRequest = RequestHistory.getRequestChangeTitle(reqID);
+                                    do{
+                                        try {
+                                            titleRequest = RequestHistory.getRequestChangeTitle(reqID);
+                                            projID = titleRequest.getFypID();
+                                            fyp = FYPList.getFYPById(projID);
+                                        } catch (Exception e){
+                                            System.out.println("Incorrect request ID entered");
+                                            System.out.println();
+                                            System.out.println("Please Reenter Input");
+                                            reqID = scannerValidation(scanner);
+
+                                        }
+
+                                    } while(fyp == null);
                                     if (!titleRequest.getRequesteeID().equals(supervisorAccount.getLoginId())) {
                                         System.out.println("Invalid Input. Returning to Main Page...");
                                         break;
                                     }
+                                    if(!titleRequest.getRequestStatus().equals(RequestStatus.PENDING)) {
+                                        System.out.println("Error: Request has already been handled.");
+                                        break;
+                                    }
+                                    new ModifySubmittedFYPTitleCommand(fyp, titleRequest).execute();
                                     projID = titleRequest.getFypID();
                                     fyp = FYPList.getFYPById(projID);
                                     new ModifySubmittedFYPTitleCommand(fyp, titleRequest).execute();

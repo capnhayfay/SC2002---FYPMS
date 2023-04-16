@@ -2,6 +2,7 @@ package src.cli;
 
 import src.FYPMS.project.FYP;
 import src.FYPMS.project.FYPList;
+import src.FYPMS.project.FYPStatus;
 import src.FYPMS.request.*;
 import src.account.Account;
 import src.account.UserType;
@@ -128,20 +129,50 @@ public class FYPCoordinatorCLI implements Menu, Logout, GetCommand {
                                 System.out.println("=========================================");
                                 if (reqID / 1000 == 0) {
                                     // requestitlechange
-                                    RequestChangeTitle titleRequest = RequestHistory.getRequestChangeTitle(reqID);
-                                    assert titleRequest != null;
+                                    RequestChangeTitle titleRequest = null;
+                                    titleRequest = RequestHistory.getRequestChangeTitle(reqID);
+                                    do{
+                                        try {
+                                            titleRequest = RequestHistory.getRequestChangeTitle(reqID);
+                                            projID = titleRequest.getFypID();
+                                            selectedProj = FYPList.getFYPById(projID);
+                                        } catch (Exception e){
+                                            System.out.println("Incorrect request ID entered");
+                                            System.out.println();
+                                            System.out.println("Please Reenter Input");
+                                            reqID = scannerValidation(scanner);
+
+                                        }
+
+                                    } while(selectedProj == null);
                                     if (!titleRequest.getRequesteeID().equals(fypCoordinatorAccount.getLoginId())) {
                                         System.out.println("Invalid Input. Returning to Main Page...");
                                         break;
                                     }
-                                    projID = titleRequest.getFypID();
-                                    selectedProj = FYPList.getFYPById(projID);
+                                    if(!titleRequest.getRequestStatus().equals(RequestStatus.PENDING)) {
+                                        System.out.println("Error: Request has already been handled.");
+                                        break;
+                                    }
                                     new ModifySubmittedFYPTitleCommand(selectedProj, titleRequest).execute();
                                 } else if (reqID / 1000 == 1) {
-                                    RequestDeregister deregistrationRequest = RequestHistory.getRequestDeregister(reqID);
-                                    assert deregistrationRequest != null;
-                                    projID = deregistrationRequest.getFypID();
-                                    selectedProj = FYPList.getFYPById(projID);
+                                    RequestDeregister deregistrationRequest = null;
+                                    do{
+                                        try {
+                                            deregistrationRequest = RequestHistory.getRequestDeregister(reqID);
+                                            projID = deregistrationRequest.getFypID();
+                                            selectedProj = FYPList.getFYPById(projID);
+                                        } catch (Exception e){
+                                            System.out.println("Incorrect request ID entered");
+                                            System.out.println();
+                                            System.out.println("Please Reenter Input");
+                                            reqID = scannerValidation(scanner);
+                                        }
+
+                                    } while(selectedProj == null);
+                                    if(!deregistrationRequest.getRequestStatus().equals(RequestStatus.PENDING)) {
+                                        System.out.println("Error: Request has already been handled.");
+                                        break;
+                                    }
                                     new DeregisterStudentCommand(selectedProj, deregistrationRequest).execute();
                                 } else if (reqID / 1000 == 2) {
                                     RequestRegister registrationRequest = null;
@@ -159,12 +190,34 @@ public class FYPCoordinatorCLI implements Menu, Logout, GetCommand {
                                         }
 
                                     } while(selectedProj == null);
-                                    
-                                    
+
+                                    if(!registrationRequest.getRequestStatus().equals(RequestStatus.PENDING)) {
+                                        System.out.println("Error: Request has already been handled.");
+                                        break;
+                                    }
                                     new AllocateProjectCommand(selectedProj, registrationRequest).execute();
                                 } else if (reqID / 1000 == 3) {
-                                    RequestTransferSupervisor transferSupervisorRequest = RequestHistory
-                                            .getRequestTransferSupervisor(reqID);
+                                    RequestTransferSupervisor transferSupervisorRequest = null;
+
+                                    do{
+                                        try {
+                                            transferSupervisorRequest = RequestHistory.getRequestTransferSupervisor(reqID);
+                                            projID = transferSupervisorRequest.getFypID();
+                                            selectedProj = FYPList.getFYPById(projID);
+                                        } catch (Exception e){
+                                            System.out.println("Incorrect request ID entered");
+                                            System.out.println();
+                                            System.out.println("Please Reenter Input");
+                                            reqID = scannerValidation(scanner);
+
+                                        }
+
+                                    } while(selectedProj == null);
+
+                                    if(!transferSupervisorRequest.getRequestStatus().equals(RequestStatus.PENDING)) {
+                                        System.out.println("Error: Request has already been handled.");
+                                        break;
+                                    }
                                     new ChangeSupervisorCommand(transferSupervisorRequest)
                                             .execute();
                                 } else {

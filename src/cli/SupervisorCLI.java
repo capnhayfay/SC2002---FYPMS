@@ -140,7 +140,6 @@ public class SupervisorCLI implements Menu, Logout, GetCommand {
                                         System.out.println("Error: Request has already been handled.");
                                         break;
                                     }
-                                    new ModifySubmittedFYPTitleCommand(fyp, titleRequest).execute();
                                     projID = titleRequest.getFypID();
                                     fyp = FYPList.getFYPById(projID);
                                     new ModifySubmittedFYPTitleCommand(fyp, titleRequest).execute();

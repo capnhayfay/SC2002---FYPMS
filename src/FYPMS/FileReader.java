@@ -164,7 +164,7 @@ public class FileReader {
                 String studentID = null;
                 String studentName = null;
                 String studentEmail = null;
-                if (attributes[5].length() > 3) {
+                if (attributes.length >= 6 && attributes[5].length() > 3) {
                     studentID = attributes[5];
                     studentName = attributes[6];
                     studentEmail = attributes[7];

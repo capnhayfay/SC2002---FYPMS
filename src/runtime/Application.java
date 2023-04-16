@@ -64,23 +64,23 @@ public class Application {
          */
 
         // load in CSV
-        //FileReader.readFYPsFromFile("src/database/Modified/rollover project.txt");
-        //FileReader.readSupervisorsFromFile("src/database/Modified/faculty_list.txt");
-        //FileReader.readCoordinatorsFromFile("src/database/Modified/FYP coordinator.txt");
-        //FileReader.readStudentsFromFile("src/database/Modified/student list.txt");
-        //FileReader.readRequestsFromFile("src/database/Modified/0requestChangeTitle.txt",
-        //        "src/database/Modified/1requestDeregister.txt",
-        //        "src/database/Modified/2requestRegister.txt",
-        //        "src/database/Modified/3requestTransferSupervisor.txt");
+        FileReader.readFYPsFromFile("src/database/Modified/rollover project.txt");
+        FileReader.readSupervisorsFromFile("src/database/Modified/faculty_list.txt");
+        FileReader.readCoordinatorsFromFile("src/database/Modified/FYP coordinator.txt");
+        FileReader.readStudentsFromFile("src/database/Modified/student list.txt");
+        FileReader.readRequestsFromFile("src/database/Modified/0requestChangeTitle.txt",
+                "src/database/Modified/1requestDeregister.txt",
+                "src/database/Modified/2requestRegister.txt",
+                "src/database/Modified/3requestTransferSupervisor.txt");
 
-        FileReader.readFYPsFromFile("src/database/test/rollover project.txt");
-        FileReader.readSupervisorsFromFile("src/database/test/faculty_list.txt");
-        FileReader.readCoordinatorsFromFile("src/database/test/FYP coordinator.txt");
-        FileReader.readStudentsFromFile("src/database/test/student list.txt");
-        FileReader.readRequestsFromFile("src/database/test/0requestChangeTitle.txt",
-                "src/database/test/1requestDeregister.txt",
-                "src/database/test/2requestRegister.txt",
-                "src/database/test/3requestTransferSupervisor.txt");
+//        FileReader.readFYPsFromFile("src/database/test/rollover project.txt");
+//        FileReader.readSupervisorsFromFile("src/database/test/faculty_list.txt");
+//        FileReader.readCoordinatorsFromFile("src/database/test/FYP coordinator.txt");
+//        FileReader.readStudentsFromFile("src/database/test/student list.txt");
+//        FileReader.readRequestsFromFile("src/database/test/0requestChangeTitle.txt",
+//                "src/database/test/1requestDeregister.txt",
+//                "src/database/test/2requestRegister.txt",
+//                "src/database/test/3requestTransferSupervisor.txt");
 
         Scanner scanner = new Scanner(System.in);
         UserType loggedInUserType = null;
@@ -189,20 +189,20 @@ public class Application {
 
         new EndProgramMenu().display();
 
-        //FileUpdater.writeSupervisorToFile("src/database/test/faculty_list.txt");
-        //FileUpdater.writeCoordinatorToFile("src/database/test/FYP coordinator.txt");
-        //FileUpdater.writeStudentToFile("src/database/test/student list.txt");
-        //FileUpdater.writeFYPsToFile("src/database/test/rollover project.txt");
-        //FileUpdater.writeRequestsToFile("src/database/test/0requestChangeTitle.txt",
-        //        "src/database/test/1requestDeregister.txt", "src/database/test/2requestRegister.txt",
-        //        "src/database/test/3requestTransferSupervisor.txt");
-        FileUpdater.writeSupervisorToFile("src/database/Modified/faculty_list.txt");
-        FileUpdater.writeCoordinatorToFile("src/database/Modified/FYP coordinator.txt");
-        FileUpdater.writeStudentToFile("src/database/Modified/student list.txt");
-        FileUpdater.writeFYPsToFile("src/database/Modified/rollover project.txt");
-        FileUpdater.writeRequestsToFile("src/database/Modified/0requestChangeTitle.txt",
-                "src/database/Modified/1requestDeregister.txt", "src/database/Modified/2requestRegister.txt",
-                "src/database/Modified/3requestTransferSupervisor.txt");
+        FileUpdater.writeSupervisorToFile("src/database/test/faculty_list.txt");
+        FileUpdater.writeCoordinatorToFile("src/database/test/FYP coordinator.txt");
+        FileUpdater.writeStudentToFile("src/database/test/student list.txt");
+        FileUpdater.writeFYPsToFile("src/database/test/rollover project.txt");
+        FileUpdater.writeRequestsToFile("src/database/test/0requestChangeTitle.txt",
+                "src/database/test/1requestDeregister.txt", "src/database/test/2requestRegister.txt",
+                "src/database/test/3requestTransferSupervisor.txt");
+//        FileUpdater.writeSupervisorToFile("src/database/Modified/faculty_list.txt");
+//        FileUpdater.writeCoordinatorToFile("src/database/Modified/FYP coordinator.txt");
+//        FileUpdater.writeStudentToFile("src/database/Modified/student list.txt");
+//        FileUpdater.writeFYPsToFile("src/database/Modified/rollover project.txt");
+//        FileUpdater.writeRequestsToFile("src/database/Modified/0requestChangeTitle.txt",
+//                "src/database/Modified/1requestDeregister.txt", "src/database/Modified/2requestRegister.txt",
+//                "src/database/Modified/3requestTransferSupervisor.txt");
     }
 
 

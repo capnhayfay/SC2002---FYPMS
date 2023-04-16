@@ -80,8 +80,9 @@ public class ModifyFYPTitle implements Command {
                 String temp = "";
                 for (String indiproj : fypList) {
                     if (indiproj.equals(oldTitle)) {
+                        System.out.println("Current Project Title is: "+ oldTitle);
                         System.out.println("Input new title: ");
-                        String title = sc.next();
+                        String title = sc.nextLine();
                         fyp.setTitle(title);
                         temp = title;
                     }
@@ -89,10 +90,21 @@ public class ModifyFYPTitle implements Command {
                 if (!temp.equals("")) {
                     supervisorAccount.getProjList().remove(oldTitle);
                     supervisorAccount.addProj(temp);
-                    System.out.println("Project title has been change to " + fyp.getTitle());
+                    System.out.println("Project title has been changed to " + fyp.getTitle());
+                    return;
                 } else {
                     try{
-                        throw new fypmsExceptions.notAuthorizedException();
+                        if(!fyp.getSupervisorName().equals(supervisorAccount.getName())){
+                            throw new fypmsExceptions.notAuthorizedException();
+                        }
+                        System.out.println("Current Project Title is: "+ oldTitle);
+                        System.out.println("Input new title: ");
+                        String title = sc.nextLine();
+                        fyp.setTitle(title);
+                        temp = title;
+                        supervisorAccount.getProjList().remove(oldTitle);
+                        supervisorAccount.addProj(temp);
+                        System.out.println("Project title has been changed to " + fyp.getTitle());
                     } catch (Exception e){
                         System.out.println(e.toString().subSequence(e.toString().indexOf(":")+2, e.toString().length()-1));
                     }

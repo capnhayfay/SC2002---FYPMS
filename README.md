@@ -7,8 +7,8 @@ Final Year Project Management System (FYPMS) is a Java console application that 
 ## Links
 
 - [GitHub Repository](https://github.com/capnhayfay/SC2002---FYPMS)
-- [Report](https://github.com/capnhayfay/SC2002---FYPMS/report/A25-grp2-report.pdf)
-- [Presentation Video](https://youtu.be/8FikWzfHlLA)
+- [Report](https://github.com/capnhayfay/SC2002---FYPMS/blob/main/A25-grp2%20(Report).pdf)
+- [Presentation Video](https://www.youtube.com/watch?v=R3C6lqhsuCY&feature=youtu.be)
 
 ## Team Members
 
